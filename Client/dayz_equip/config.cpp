@@ -1034,6 +1034,7 @@ class CfgMagazines {
 		scope = private;
 		count = 1;
 		type = 256;
+        mass = 10;
 		displayName = "Clothes";
 		model = "\dayz_equip\models\cloth_parcel.p3d";
 		picture = "\dayz_equip\textures\equip_cloth_parcel_ca.paa";
@@ -1075,6 +1076,7 @@ class CfgMagazines {
 		scope = public;
 		count = 1;
 		type = 16;
+        mass = 3;
 		displayName = $STR_EQUIP_NAME_7;
 		model = "\dayz_equip\models\fad.p3d";
 		picture = "\dayz_equip\textures\equip_fad_ca.paa";
@@ -1092,6 +1094,7 @@ class CfgMagazines {
 		scope = public;
 		count = 1;
 		type = (256 * 4);
+        mass = 15;
 		displayName = $STR_EQUIP_NAME_8;
 		model = "\dayz_equip\models\fueltank.p3d";
 		picture = "\dayz_equip\textures\equip_fueltank_ca.paa";
@@ -1102,6 +1105,7 @@ class CfgMagazines {
 		scope = public;
 		count = 1;
 		type = (256 * 6);
+        mass = 15;
 		displayName = $STR_EQUIP_NAME_9;
 		model = "\dayz_equip\models\wheel.p3d";
 		picture = "\dayz_equip\textures\equip_wheel_ca.paa";
@@ -1112,6 +1116,7 @@ class CfgMagazines {
 		scope = public;
 		count = 1;
 		type = (256 * 3);
+        mass = 10;
 		displayName = $STR_EQUIP_NAME_10;
 		model = "\dayz_equip\models\genericparts.p3d";
 		picture = "\dayz_equip\textures\equip_genericparts_ca.paa";
@@ -1122,6 +1127,7 @@ class CfgMagazines {
 		scope = public;
 		count = 1;
 		type = (256 * 6);
+        mass = 15;
 		displayName = $STR_EQUIP_NAME_11;
 		model = "\dayz_equip\models\engine.p3d";
 		picture = "\dayz_equip\textures\equip_engine_ca.paa";
@@ -1132,6 +1138,7 @@ class CfgMagazines {
 		scope = public;
 		count = 1;
 		type = (256 * 2);
+        mass = 10;
 		displayName = $STR_EQUIP_NAME_40;
 		model = "\dayz_equip\models\woodPile.p3d";
 		picture = "\dayz_equip\textures\equip_woodPile_ca.paa";
@@ -1142,6 +1149,7 @@ class CfgMagazines {
 		scope = public;
 		count = 1;
 		type = (256 * 6);
+        mass = 30;
 		displayName = $STR_EQUIP_NAME_32;
 		model = "\dayz_equip\models\vrotor.p3d";
 		picture = "\dayz_equip\textures\equip_vrotor_ca.paa";
@@ -1152,6 +1160,7 @@ class CfgMagazines {
 		scope = public;
 		count = 1;
 		type = (256 * 2);
+        mass = 10;
 		displayName = $STR_EQUIP_NAME_30;
 		model = "\dayz_equip\models\carglass.p3d";
 		picture = "\dayz_equip\textures\equip_carglass_ca.paa";
@@ -1162,6 +1171,7 @@ class CfgMagazines {
 		scope = public;
 		count = 1;
 		type = 256;
+        mass = 15;
 		displayName = "Bear Trap";
 		model = "\dayz_equip\models\bear_trap_gear.p3d";
 		picture = "\dayz_equip\textures\equip_bear_trap_ca.paa";
@@ -1180,6 +1190,7 @@ class CfgMagazines {
 		isWater = 1;
 		count = 1;
 		type = 256;
+        mass = 3;
 		
 		class ItemActions {
 			class Drink {
@@ -1203,6 +1214,7 @@ class CfgMagazines {
 		scope = public;
 		count = 1;
 		type = 256;
+        mass = 5;
 		displayName = $STR_EQUIP_NAME_13;
 		model = "\dayz_equip\models\waterbottle_gear.p3d";
 		picture = "\dayz_equip\textures\equip_waterbottle_empty_ca.paa";
@@ -1243,6 +1255,7 @@ class CfgMagazines {
 		scope = public;
 		count = 1;
 		type = 256;
+        mass = 1;
 		displayName = $STR_EQUIP_NAME_14;
 		model = "\dayz_equip\models\epi.p3d";
 		picture = "\dayz_equip\textures\equip_epi_ca.paa";
@@ -1253,6 +1266,7 @@ class CfgMagazines {
 		scope = public;
 		count = 1;
 		type = 256;
+        mass = 1;
 		displayName = $STR_EQUIP_NAME_15;
 		model = "\dayz_equip\models\morphine.p3d";
 		picture = "\dayz_equip\textures\equip_morphine_ca.paa";
@@ -1270,6 +1284,7 @@ class CfgMagazines {
 		scope = public;
 		count = 1;
 		type = 256;
+        mass = 3;
 		displayName = $STR_EQUIP_NAME_42;
 		model = "\dayz_equip\models\Heat_pack.p3d";
 		picture = "\dayz_equip\textures\equip_heat_pack_ca.paa";
@@ -1287,6 +1302,7 @@ class CfgMagazines {
 		scope = public;
 		count = 1;
 		type = 256;
+        mass = 7;
 		displayName = $STR_EQUIP_NAME_16;
 		model = "\dayz_equip\models\bloodbag.p3d";
 		picture = "\dayz_equip\textures\equip_bloodbag_ca.paa";
@@ -1297,6 +1313,7 @@ class CfgMagazines {
 		scope = public;
 		count = 1;
 		type = 256;
+        mass = 3;
 		displayName = $STR_EQUIP_NAME_17;
 		model = "\dayz_equip\models\med_antibiotic_gear.p3d";
 		picture = "\dayz_equip\textures\equip_antibiotics_ca.paa";
@@ -1314,6 +1331,7 @@ class CfgMagazines {
 		scope = public;
 		count = 1;
 		type = 256;
+        mass = 3;
 		displayName = $STR_EQUIP_NAME_18;
 		model = "\dayz_equip\models\med_painkiller_gear.p3d";
 		picture = "\dayz_equip\textures\equip_painkiller_ca.paa";
@@ -1332,6 +1350,7 @@ class CfgMagazines {
 		count = 1;
 		fuelQuantity = 20;
 		type = (256 * 3);
+        mass = 12;
 		displayName = $STR_EQUIP_NAME_19;
 		model = "\dayz_equip\models\jerrycan.p3d";
 		picture = "\dayz_equip\textures\equip_jerrycan_ca.paa";
@@ -1341,6 +1360,7 @@ class CfgMagazines {
 	class ItemJerrycanEmpty : ItemJerrycan {
 		fuelQuantity = 0;
 		type = (256 * 3);
+        mass = 12;
 		displayName = $STR_EQUIP_NAME_39;
 		picture = "\dayz_equip\textures\equip_jerrycan_e_ca.paa";
 		descriptionShort = $STR_EQUIP_DESC_39;
@@ -1350,6 +1370,7 @@ class CfgMagazines {
 		scope = public;
 		count = 1;
 		type = (256 * 6);
+        mass = 20;
 		displayName = $STR_EQUIP_NAME_31;
 		model = "\dayz_equip\models\generator_gear.p3d";
 		picture = "\dayz_equip\textures\equip_generator_ca.paa";
@@ -1360,6 +1381,7 @@ class CfgMagazines {
 		scope = public;
 		count = 1;
 		type = (256 * 3);
+        mass = 20;
 		displayName = $STR_EQUIP_NAME_20;
 		model = "\dayz_equip\models\tentbag_gear.p3d";
 		picture = "\dayz_equip\textures\equip_tentbag_ca.paa";
@@ -1377,6 +1399,7 @@ class CfgMagazines {
 		scope = public;
 		count = 1;
 		type = 256;
+        mass = 15;
 		displayName = $STR_EQUIP_NAME_21;
 		model = "\dayz_equip\models\sandbags.p3d";
 		picture = "\dayz_equip\textures\equip_sandbag_ca.paa";
@@ -1396,6 +1419,7 @@ class CfgMagazines {
 		scope = public;
 		count = 1;
 		type = 256;
+        mass = 15;
 		displayName = $STR_EQUIP_NAME_22;
 		model = "\dayz_equip\models\tank_trap_kit.p3d";
 		picture = "\dayz_equip\textures\equip_tanktrap_kit_CA.paa";
@@ -1415,6 +1439,7 @@ class CfgMagazines {
 		scope = public;
 		count = 1;
 		type = 256;
+        mass = 15;
 		displayName = $STR_EQUIP_NAME_23;
 		model = "\dayz_equip\models\Fence_wire_kit.p3d";
 		picture = "\dayz_equip\textures\equip_fencewire_kit_CA.paa";

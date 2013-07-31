@@ -41,6 +41,7 @@ if (_finished) then {
             player enableFatigue false;
             rushCounter = rushCounter + 1;
             playSound 'heartbeat_1';
+    if ((!r_player_tearGasOn) and (player distance (nearestObject [player,"SmokeShellTear"]) > 35)) then {
             addCamShake [2, 1, 25];
             0 fadeSound 2.5;
             'dynamicBlur' ppEffectEnable true; 'dynamicBlur' ppEffectAdjust [2]; 'dynamicBlur' ppEffectCommit 0.2;
@@ -55,9 +56,11 @@ if (_finished) then {
             'dynamicBlur' ppEffectEnable true; 'dynamicBlur' ppEffectAdjust [0]; 'dynamicBlur' ppEffectCommit 0.1;
             playSound 'breath_1';
             10 fadeSound 1;
+            };
             sleep 1;
         };
         r_player_adren = false;
+        r_player_clear = true;
     };
 } else {
 	r_interrupt = false;

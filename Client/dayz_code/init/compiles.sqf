@@ -226,8 +226,8 @@ if (!isDedicated) then {
                 canRoll = false;
                 if ( animationState player in ["amovpercmrunsraswrfldf","amovpknlmevasraswrfldf","amovpercmrunslowwrfldf"] ) exitWith {
                     if (DoRE) then {
-                        player switchMove 'AovrPercMrunSrasWrflDf';
-                        [[[player], { (_this select 0) switchMove 'AovrPercMrunSrasWrflDf'; }], "BIS_fnc_spawn", true, false] call BIS_fnc_MP;
+                                [[[player, name player], { if (name player != (_this select 1)) then { (_this select 0) switchMove 'AovrPercMrunSrasWrflDf'; }; }], "BIS_fnc_spawn", true, false] call BIS_fnc_MP;
+                                player switchMove 'AovrPercMrunSrasWrflDf';
                     } else {
                         player switchMove 'AovrPercMrunSrasWrflDf';
                     };
@@ -236,8 +236,8 @@ if (!isDedicated) then {
                 };
                 if ( animationState player in ["amovpercmevasraswrfldf","amovpercmevaslowwrfldf"] ) exitWith {
                     if (DoRE) then {
-                        player switchMove 'ActsPercMrunSlowWrflDf_FlipFlopPara';
-                        [[[player], { (_this select 0) switchMove 'ActsPercMrunSlowWrflDf_FlipFlopPara'; }], "BIS_fnc_spawn", true, false] call BIS_fnc_MP;
+                                [[[player, name player], { if (name player != (_this select 1)) then { (_this select 0) switchMove 'ActsPercMrunSlowWrflDf_FlipFlopPara'; }; }], "BIS_fnc_spawn", true, false] call BIS_fnc_MP;
+                                player switchMove 'ActsPercMrunSlowWrflDf_FlipFlopPara';
                     } else {
                         player switchMove 'ActsPercMrunSlowWrflDf_FlipFlopPara';
                     };

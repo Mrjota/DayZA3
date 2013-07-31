@@ -215,6 +215,7 @@ class RscStructuredTextGUI: RscStructuredText
 #include "cfgMoves.hpp"
 #include "rscTitles.hpp"
 #include "CfgVehicles.hpp"
+#include "CfgGlasses.hpp"
 #include "CfgWeapons.hpp"
 #include "CfgMagazines.hpp"
 #include "cfgLoot.hpp"
@@ -229,6 +230,7 @@ class CfgSurvival {
 			weapons[] = {"ItemCompass","ItemWatch"};
 			//backpackWeapon = "";
 			backpack = "DZ_Patrol_Pack_A3";
+            vest = "V_PlateCarrier1_rgr_AiA";
 			//backpack = "";
 		};
 	};
@@ -281,7 +283,7 @@ class CfgBuildingLoot {
 		zombieChance = 0.2;
 		minRoaming = 0;
 		maxRoaming = 2;
-		zombieClass[] = {"zZombie_Base","z_hunter","z_teacher","z_suit1","z_suit2","z_worker1","z_worker2","z_worker3","z_villager1","z_villager2","z_villager3"};
+		zombieClass[] = {"zZombie_Base","z_hunter","z_teacher","z_suit1","z_suit2","z_worker1","z_worker2","z_worker3","z_villager1","z_villager2","z_villager3","z_survivor","z_hero"};
 		lootChance = 0;
 		lootPos[] = {};
 		itemType[] = {};
@@ -300,7 +302,7 @@ class CfgBuildingLoot {
 	class Residential: Default {
 		zombieChance = 0.3;
 		maxRoaming = 2;
-		zombieClass[] = {"zZombie_Base","z_hunter","z_teacher","z_villager1","z_villager2","z_villager3"};
+		zombieClass[] = {"zZombie_Base","z_hunter","z_teacher","z_villager1","z_villager2","z_villager3","z_survivor","z_hero"};
 		lootChance = 0.4;
 		lootPos[] = {};
 		itemType[] =	{
@@ -451,7 +453,7 @@ class CfgBuildingLoot {
 		minRoaming = 2;
 		maxRoaming = 6;
 		zombieChance = 0.3;
-		zombieClass[] = {"zZombie_Base","zZombie_Base","z_teacher","z_suit1","z_suit2"};
+		zombieClass[] = {"zZombie_Base","zZombie_Base","z_teacher","z_suit1","z_suit2","z_survivor","z_hero"};
 		itemType[] = {
 			{"ItemWatch","vest"},
 			{"ItemCompass","vest"},
@@ -630,7 +632,7 @@ class CfgBuildingLoot {
 		zombieChance = 0.4;
 		minRoaming = 2;
 		maxRoaming = 6;
-		zombieClass[] = {"z_doctor","z_doctor","z_doctor"};
+		zombieClass[] = {"z_doctor","z_doctor","z_doctor","z_survivor","z_hero"};
 		lootChance = 1;
 		lootPos[] = {};
 		itemType[] =	{
@@ -1365,7 +1367,7 @@ class CfgBuildingLoot {
     };
 
     class Land_Barrack2_EP1: Military {
-		zombieClass[] = {"zZombie_Base","z_hunter","z_teacher","z_villager1","z_villager2","z_villager3","z_soldier","z_policeman"};
+		zombieClass[] = {"zZombie_Base","z_hunter","z_teacher","z_villager1","z_villager2","z_villager3","z_soldier","z_policeman","z_survivor","z_hero"};
 		maxRoaming = 8;
         minRoaming = 6;
 		lootChance = 0.6;

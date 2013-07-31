@@ -517,20 +517,20 @@ class cfgWeapons {
 	
 	class M24_DZ : M24 {
 		type = "1";
-        mass = 50;
+        mass = 30;
         class WeaponSlotsInfo {
             allowedslots[] = {901};
-            mass = 50;
+            mass = 30;
         };
 	};
     class M40A3;
     
     class M40A3_DZ : M40A3 {
 		type = "1";
-        mass = 50;
+        mass = 30;
         class WeaponSlotsInfo {
             allowedslots[] = {901};
-            mass = 50;
+            mass = 30;
         };
     };
     
@@ -538,10 +538,10 @@ class cfgWeapons {
 	
 	class M24_des_DZ : M24_des_EP1 {
 		type = "1";
-        mass = 50;
+        mass = 30;
         class WeaponSlotsInfo {
             allowedslots[] = {901};
-            mass = 50;
+            mass = 30;
         };
 	};
 	class M4SPR;	// External class reference
@@ -569,10 +569,10 @@ class cfgWeapons {
 	
 	class DMR_DZ : DMR {
 		type = "1";
-        mass = 40;
+        mass = 30;
         class WeaponSlotsInfo {
             allowedslots[] = {901};
-            mass = 40;
+            mass = 30;
         };
 	};
 	class huntingrifle;	// External class reference
@@ -1441,12 +1441,13 @@ class CfgVehicles {
         scope = 2;
 		identityTypes[] = {"Language_BAF","Language_EN_EP1","USMC_Glasses","PMC_Glasses_PMC"};
 		faceType = "Man";
+        linkeditems[] = {};
 		displayName = $STR_CHAR_1;
 		side = TWest;
-		weapons[] = {"Throw", "Put"};
+		weapons[] = {"Throw","Put","Throw_DZ"};
 		model = "\dayz\objects\proxy_man";
 		magazines[] = {};
-		respawnWeapons[] = {"Throw", "Put"};
+		respawnWeapons[] = {"Throw","Put","Throw_DZ"};
 		respawnMagazines[] = {};
 		weaponSlots = 1	 + 	4	 + 12*		256	 + 2*	4096	 + 	2	 + 8*	16  + 12*131072;
 		canHideBodies = true;
@@ -1456,12 +1457,13 @@ class CfgVehicles {
         scope = 2;
 		identityTypes[] = {"Language_BAF","Language_EN_EP1","USMC_Glasses","PMC_Glasses_PMC"};
 		faceType = "Man";
+        linkeditems[] = {};
 		displayName = $STR_CHAR_1;
 		side = TWest;
-		weapons[] = {"Throw", "Put"};
+		weapons[] = {"Throw","Put","Throw_DZ"};
 		magazines[] = {};
 		model = "\dayz\characters\man_survivor";
-		respawnWeapons[] = {"Throw", "Put"};
+		respawnWeapons[] = {"Throw", "Put","Throw_DZ"};
 		respawnMagazines[] = {};
 		weaponSlots = 1	 + 	4	 + 12*		256	 + 2*	4096	 + 	2	 + 8*	16  + 12*131072;
 		canHideBodies = true;
@@ -1472,6 +1474,7 @@ class CfgVehicles {
 		identityTypes[] = {"Language_BAF","Language_EN_EP1","USMC_Glasses","PMC_Glasses_PMC"};
 		faceType = "Man";
 		displayName = "Hero";
+        linkeditems[] = {};
 		model = "\dayz\characters\man_hero";
 		HiddenSelections[] = {"camo1", "camo2", "camo3"};
 		HiddenSelectionsTextures[] = {"ca\characters_pmc\pmc_soldier\data\bauer_co.paa", "ca\characters_pmc\pmc_soldier\data\bauer_gear_co.paa", "ca\characters_pmc\pmc_soldier\data\headgear_co.paa"};

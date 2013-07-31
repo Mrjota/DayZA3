@@ -30,6 +30,17 @@ player setDir (180 + getDir r_player_currentCar);
 [[[player,"AcrgPknlMstpSnonWnonDnon_AmovPercMstpSrasWrflDnon_GetOutHigh"], { if (player != (_this select 0)) then {(_this select 0) switchMove (_this select 1);}; }], "BIS_fnc_spawn", true, false] call BIS_fnc_MP;
 player switchMove "AcrgPknlMstpSnonWnonDnon_AmovPercMstpSrasWrflDnon_GetOutHigh";
 player setPosATL _pos;
+ 
+if (r_player_carPosition == 0) then {
+    r_player_currentCar setVariable ["leftOpen", true, true];
+};
+if (r_player_carPosition == 1) then {
+    r_player_currentCar setVariable ["rightOpen", true, true];
+};
+if (r_player_carPosition == 2) then {
+    r_player_currentCar setVariable ["centerOpen", true, true];
+};
 
 r_player_currentCar = nil;
+r_player_carPosition = 0;
 r_player_onVehicleC = false;

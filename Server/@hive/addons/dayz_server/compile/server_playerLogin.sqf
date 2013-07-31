@@ -94,10 +94,11 @@ if (!_isNew) then {
 	_mags = getArray (_config >> "magazines");
 	_wpns = getArray (_config >> "weapons");
 	_bcpk = getText (_config >> "backpack");
+	_vest = getText (_config >> "vest");
 	_randomSpot = true;
 	
 	//Wait for HIVE to be free
-	_key = format["CHILD:203:%1:%2:%3:",_charID,[_wpns,_mags],[_bcpk,[],[]]];
+	_key = format["CHILD:203:%1:%2:%3:",_charID,[[_vest] + _wpns,_mags],[_bcpk,[],[]]];
 	_key call server_hiveWrite;
 };
 diag_log ("LOGIN LOADED: " + str(_playerObj) + " Type: " + (typeOf _playerObj));

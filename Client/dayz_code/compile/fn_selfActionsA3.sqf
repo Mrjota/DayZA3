@@ -87,8 +87,13 @@ if (!isNull _nearLightR) then {
 //End of Code
 _hasKnife = 	"ItemKnife" in magazines player;
 _hasToolbox = 	"ItemToolbox" in magazines player;
+_hasToolbox = 	"ItemToolbox" in magazines player;
 _hasTent = 		"ItemTent" in magazines player;
 _hasATent = 	"ItemATent" in magazines player;
+_hasSand = 	    "ItemSandbag" in magazines player;
+_hasWire =  	"ItemWire" in magazines player;
+_hasTTrap = 	"ItemTankTrap" in magazines player;
+_hasBTrap = 	"BearTrap" in magazines player;
 _onLadder =		(getNumber (configFile >> "CfgMovesMaleSdr" >> "States" >> (animationState player) >> "onLadder")) == 1;
 
 _isWater = 		(surfaceIsWater getPosATL player) or dayz_isSwimming;
@@ -345,7 +350,7 @@ if (_canPickLightR and !dayz_hasLight) then {
 	};
 	
 	//Allow placing of tents
-	if(_vehicle == player and _hasTent) then {
+	if(_vehicle == player and _hasTent and _canDo and !r_isBuilding) then {
 		if(s_doTent < 0) then {
 			s_doTent = player addAction [format["<t color='#FF0000'>Pitch Tent%1</t>"], "z\addons\dayz_code\actions\tent_pitch.sqf"];
 		};
@@ -355,7 +360,7 @@ if (_canPickLightR and !dayz_hasLight) then {
 	};
 	
 	//Allow placing of tents
-	if(_vehicle == player and _hasATent) then {
+	if(_vehicle == player and _hasATent and _canDo and !r_isBuilding) then {
 		if(s_doATent < 0) then {
 			s_doATent = player addAction [format["<t color='#FF0000'>Pitch Tent (Large)%1</t>"], "z\addons\dayz_code\actions\atent_pitch.sqf"];
 		};
@@ -363,9 +368,46 @@ if (_canPickLightR and !dayz_hasLight) then {
 		player removeAction s_doATent;
 		s_doATent = -1;
 	};
+	
+	//Allow placing of objects
+	if(_vehicle == player and _hasSand and _canDo and !r_isBuilding) then {
+		if(s_doSand < 0) then {
+			s_doSand = player addAction [format["<t color='#FF0000'>Stack Sandbags%1</t>"], "z\addons\dayz_code\actions\build.sqf", "ItemSandbag"];
+		};
+	} else	{
+		player removeAction s_doSand;
+		s_doSand = -1;
+	};
+    
+	if(_vehicle == player and _hasWire and _canDo and !r_isBuilding) then {
+		if(s_doWire < 0) then {
+			s_doWire = player addAction [format["<t color='#FF0000'>Build Wire Fence%1</t>"], "z\addons\dayz_code\actions\build.sqf", "ItemWire"];
+		};
+	} else	{
+		player removeAction s_doWire;
+		s_doWire = -1;
+	};
+    
+	if(_vehicle == player and _hasTTrap and _canDo and !r_isBuilding) then {
+		if(s_doTTrap < 0) then {
+			s_doTTrap = player addAction [format["<t color='#FF0000'>Set Tank Trap%1</t>"], "z\addons\dayz_code\actions\build.sqf", "ItemTankTrap"];
+		};
+	} else	{
+		player removeAction s_doTTrap;
+		s_doTTrap = -1;
+	};
+    
+	if(_vehicle == player and _hasBTrap and _canDo and !r_isBuilding) then {
+		if(s_doBTrap < 0) then {
+			s_doBTrap = player addAction [format["<t color='#FF0000'>Set Bear Trap%1</t>"], "z\addons\dayz_code\actions\build.sqf", "BearTrap"];
+		};
+	} else	{
+		player removeAction s_doBTrap;
+		s_doBTrap = -1;
+	};
 		
 	//Allow changing of clothes
-	if(_vehicle == player and (_hasClothes1 or _hasClothes2 or _hasClothes3)) then {
+	if(_vehicle == player and (_hasClothes1 or _hasClothes2 or _hasClothes3) and _canDo) then {
 		if((s_doClothes1 < 0) and (_hasClothes1)) then {
 			s_doClothes1 = player addAction [format["<t color='#FF0000'>Wear Ghillie Suit</t>"], "z\addons\dayz_code\actions\player_wearClothes.sqf", ["Skin_Sniper1_DZ"]];
 		};

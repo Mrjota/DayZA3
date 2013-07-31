@@ -124,19 +124,42 @@ class CfgWeapons {
 			};          
 		};
 	}; 
-		class ThrowMuzzle;
-    class ChemlightGreenMuzzle_DZ: ThrowMuzzle {
-        displayname = "Chemlight";
-        magazines[] = {"Chemlight_green_DZ"};
-    };
-    class ChemlightRedMuzzle_DZ: ChemlightGreenMuzzle_DZ {
-        magazines[] = {"Chemlight_red_DZ"};
-    };
-    class ChemlightYellowMuzzle_DZ: ChemlightGreenMuzzle_DZ {
-        magazines[] = {"Chemlight_yellow_DZ"};
-    };
-    class ChemlightBlueMuzzle_DZ: ChemlightGreenMuzzle_DZ {
-        magazines[] = {"Chemlight_blue_DZ"};
+    class Throw_DZ: GrenadeLauncher {
+        autoaimenabled = 0;
+        candrop = 0;
+        cursor = "EmptyCursor";
+        cursoraim = "throw";
+        displayname = "Throw";
+        muzzles[] = {"TearGasMuzzle"};
+        scope = 1;
+        texturetype = "semi";
+        type = 0;
+        value = 0;
+        class ThrowMuzzle: GrenadeLauncher {
+            aidispersioncoefx = 6;
+            aidispersioncoefy = 6;
+            autoreload = 1;
+            cursor = "EmptyCursor";
+            cursoraim = "throw";
+            enableattack = 0;
+            keepininventory = 1;
+            magazinereloadtime = 0;
+            maxrange = 60;
+            maxrangeprobab = 0.03;
+            midrange = 45;
+            midrangeprobab = 0.9;
+            minrange = 10;
+            minrangeprobab = 0.2;
+            modeloptics = "";
+            reloadsound[] = {"", 0.000316228, 1};
+            reloadtime = 0;
+            showempty = 0;
+            sound[] = {"", 0.000316228, 1};
+        };
+        class TearGasMuzzle: ThrowMuzzle {
+            displayname = "Smoke Grenade (Tear Gas)";
+            magazines[] = {"SmokeShellTear"};
+        };
     };
     class M9SD;
     class UZI_SD_EP1;

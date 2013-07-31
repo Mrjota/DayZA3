@@ -54,7 +54,7 @@ class CfgMagazines {
 		scope = public;
 		count = 1;
 		type = 256;
-        mass = 30;
+        mass = 15;
 		displayName = $STR_EQUIP_NAME_22;
 		model = "\dayz_equip\models\tank_trap_kit.p3d";
 		picture = "\dayz_equip\textures\equip_tanktrap_kit_CA.paa";
@@ -74,7 +74,7 @@ class CfgMagazines {
 		scope = public;
 		count = 1;
 		type = 256;
-        mass = 30;
+        mass = 15;
 		displayName = "Bear Trap";
 		model = "\dayz_equip\models\bear_trap_gear.p3d";
 		picture = "\dayz_equip\textures\equip_bear_trap_ca.paa";
@@ -94,7 +94,7 @@ class CfgMagazines {
 		scope = public;
 		count = 1;
 		type = 256;
-        mass = 30;
+        mass = 15;
 		displayName = $STR_EQUIP_NAME_23;
 		model = "\dayz_equip\models\Fence_wire_kit.p3d";
 		picture = "\dayz_equip\textures\equip_fencewire_kit_CA.paa";
@@ -894,5 +894,14 @@ class Chemlight_yellow_DZ: Chemlight_green {
 	displaynameshort = "Yellow Light";
 	model = "\A3\Weapons_f\chemlight\chemlight_yellow";
 	picture = "\A3\Weapons_F\Data\UI\M_chemlight_yellow_CA.paa";
+};
+class SmokeShell;
+class SmokeShellTear: SmokeShell {
+	ammo = "SmokeShellTear";
+	descriptionshort = "Type: Smoke Grenade - Tear Gas<br />Rounds: 1<br />Used in: Hand";
+	displayname = "Smoke Grenade (Tear Gas)";
+	displaynameshort = "Tear Gas";
+	model = "\A3\Weapons_f\ammo\smokegrenade_yellow";
+	picture = "\A3\Weapons_f\data\ui\gear_smokegrenade_yellow_ca.paa";
 };
 };

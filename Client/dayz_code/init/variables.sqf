@@ -230,6 +230,10 @@ dayz_resetSelfActions = {
 	s_getDrink =			-1;
 	s_doTent = 				-1;
 	s_doATent = 				-1;
+    s_doBTrap =                 -1;
+    s_doTTrap =                 -1;
+    s_doSand =                 -1;
+    s_doWire =                 -1;
 	s_doClothes1 = 				-1;
 	s_doClothes2 = 				-1;
 	s_doClothes3 = 				-1;
@@ -258,6 +262,9 @@ r_player_handler = 		false;
 r_player_handler1 = 	false;
 r_player_unconscious = 	false;
 r_player_infected =		false;
+r_player_tearGasOn =    false;
+r_player_clear =        true;
+r_player_tearGasCount = 0;
 r_player_injured = 		false;
 r_player_inpain = 		false;
 r_player_loaded = 		false;
@@ -267,7 +274,8 @@ r_player_dead =         false;
 r_player_isDead =       false;
 r_fracture_arms =		false;
 r_player_vehicle =		player;
-r_player_currentCar =	player;
+r_player_currentCar =	nil;
+r_player_carPosition =  0;
 r_player_blood = 		12000;
 r_player_lowblood = 	false;
 r_player_onVehicleC =   false;
@@ -282,6 +290,7 @@ r_action_repair = 		false;
 r_action_targets = 		[];
 r_pitchWhine = 			false;
 r_isBandit =			false;
+r_isBuilding =          false;
 
 //ammo routine
 r_player_actions2 = [];
@@ -336,7 +345,7 @@ USEC_MinorWounds 	= [
 ];
 USEC_woundPoint	= [
 	["Pelvis","aimpoint"],
-	["aimpoint"], //,"RightShoulder","LeftShoulder"
+	["aimpoint"],
 	["lelbow","relbow"],
 	["RightFoot","LeftFoot"],
 	["neck","pilot"]

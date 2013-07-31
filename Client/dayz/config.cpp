@@ -52869,6 +52869,18 @@ class CfgVehicles {
 		};
 	};
 	
+	class z_survivor : zZombie_Base {
+		displayName = "Zombie Survivor";
+		model = "\dayz\characters\man_survivor";
+		zombieLoot = "military";
+	};
+	
+	class z_hero : zZombie_Base {
+		displayName = "Zombie Survivor";
+		model = "\dayz\characters\man_hero";
+		zombieLoot = "military";
+	};
+	
 	class z_soldier : zZombie_Base {
 		displayName = "Zombie Soldier";
 		model = "\ca\characters2\Blufor\Soldier_Light";

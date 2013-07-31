@@ -109,7 +109,7 @@
                 _required = ({_x == _input} count ((vestItems player) + (backpackItems player)));
                 _amount = ({_x == _input} count ((vestItems player) + (backpackItems player))) * 2;
                 
-                [_result, _amounst, _input, _required] call _createPile;
+                [_result, _amount, _input, _required] call _createPile;
             };
             case "7Rnd_45ACP_1911":
             {
@@ -120,7 +120,7 @@
                 _amount = ({_x == _input} count ((vestItems player) + (backpackItems player))) * 2;
                 };
                 
-                [_result, _amounst, _input, _required] call _createPile;
+                [_result, _amount, _input, _required] call _createPile;
             };
             case "15Rnd_9x19_M9SD":
             {

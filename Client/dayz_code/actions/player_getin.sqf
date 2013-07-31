@@ -4,6 +4,7 @@ _player = player;
 _carrier = nil;
 _sitPosture = "sitUnarm_L_idleLoop_inUH1Y";
 _position = _this select 3;
+_isOk = true;
 _modelArray = [0,0,0];
 _dir = 0;
 
@@ -71,17 +72,41 @@ _dir = 0;
     
 if (isNil "_carrier") exitWith { };
  
+if (_position == 0) then {
+    _isOk = _carrier getVariable["leftOpen", true];
+};
+if (_position == 1) then {
+    _isOk = _carrier getVariable["rightOpen", true];
+};
+if (_position == 2) then {
+    _isOk = _carrier getVariable["centerOpen", true];
+};
+if (!_isOk) exitWith {
+	2 cutText ["Someone is already sitting there!", "PLAIN DOWN"];
+};
 [[[_player,"AmovPercMstpSnonWnonDnon_AcrgPknlMstpSnonWnonDnon_getInLow"], { (_this select 0) switchMove (_this select 1); }], "BIS_fnc_spawn", true, false] call BIS_fnc_MP;
 
 sleep 0.55;
 
-[[[_player,_sitPosture], { (_this select 0) switchMove (_this select 1); }], "BIS_fnc_spawn", true, false] call BIS_fnc_MP;
+[[[_player,_sitPosture,name player], { if(name player != (_this select 2) then { (_this select 0) switchMove (_this select 1); }; }], "BIS_fnc_spawn", true, false] call BIS_fnc_MP;
+player switchMove _sitPosture;
 
 _player attachTo [_carrier,_modelArray];
 _player setDir _dir;
 r_player_onVehicleC = true;
 r_player_currentCar = _carrier;
+r_player_carPosition = _position;
 _carrier switchCamera "EXTERNAL"; 
+ 
+if (_position == 0) then {
+    _carrier setVariable ["leftOpen", false, true];
+};
+if (_position == 1) then {
+    _carrier setVariable ["rightOpen", false, true];
+};
+if (_position == 2) then {
+    _carrier setVariable ["centerOpen", false, true];
+};
 hintSilent parseText "<t size='1.20' font='Bitstream' color='#F20C0C'>[SYSTEM]</t><br/><t size='1' font='Bitstream'>Hit 'Backspace' to eject!</t><br/>";
 player removeAction s_player_getin1;
 s_player_getin1 = -1;
@@ -119,6 +144,9 @@ while { r_player_onVehicleC } do
         player switchCamera "INTERNAL";
     };
     if ((r_player_OnVehicleC) and (cameraOn == player) and (cameraView == "EXTERNAL")) then {
+        _carrier switchCamera "EXTERNAL";
+    };
+    if ((r_player_OnVehicleC) and (cameraOn != player) and (cameraOn != _carrier)) then {
         _carrier switchCamera "EXTERNAL";
     };
     

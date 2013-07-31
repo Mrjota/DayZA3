@@ -73,8 +73,12 @@ private ["_currentmag","_secmag","_magArray","_vestClass","_magazines","_otherit
     if (_currentmag != "") then {
     _magArray = _magArray + [_currentmag];
     };
+    if (!isNil "_secmag") then {
+    if (_secmag > 0) then {
     if (_secmag != "") then {
     _magArray = _magArray + [_secmag];
+    };
+    };
     };
     if ((_secmag == _currentMag) and (_currentMag != "")) then {
         _magArray = [_currentmag];

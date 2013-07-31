@@ -613,13 +613,14 @@ class CfgVehicles {
 		faceType = "Man";
 		hiddenSelections[] = {"_middlearm", "_lowerroll", "_middleroll"};
 		displayName = "$STR_CHAR_2";
+        linkeditems[] = {};
 		side = 1;
-		weapons[] = {"Throw","Put"};
+		weapons[] = {"Throw","Put","Throw_DZ"};
 		model = "\dayz\characters\man_bandit";
 		portrait = "\Ca\characters_E\data\portraits\ger_soldier_CA";
 		magazines[] = {};
 		backpack = "";
-		respawnWeapons[] = {"Throw","Put"};
+		respawnWeapons[] = {"Throw","Put","Throw_DZ"};
 		respawnMagazines[] = {};
 		weaponSlots = "1	 + 	4	 + 12*		256	 + 2*	4096	 + 	2	 + 8*	16  + 12*131072";
 		canHideBodies = 1;
@@ -633,10 +634,10 @@ class CfgVehicles {
 		hiddenSelections[] = {"_middlearm", "_lowerroll", "_middleroll"};
 		displayName = "Rocket";
 		side = 1;
-		weapons[] = {"Throw","Put"};
+		weapons[] = {"Throw","Put","Throw_DZ"};
 		backpack = "";
 		magazines[] = {};
-		respawnWeapons[] = {"Throw","Put"};
+		respawnWeapons[] = {"Throw","Put","Throw_DZ"};
 		respawnMagazines[] = {};
 		weaponSlots = "1	 + 	4	 + 12*		256	 + 2*	4096	 + 	2	 + 8*	16  + 12*131072";
 		canHideBodies = 1;
@@ -645,10 +646,10 @@ class CfgVehicles {
 	class Soldier1_DZ: BAF_Soldier_W {
 		displayName = "Soldier";
 		side = 1;
-		weapons[] = {"Throw","Put"};
+		weapons[] = {"Throw","Put","Throw_DZ"};
 		backpack = "";
 		magazines[] = {};
-		respawnWeapons[] = {"Throw","Put"};
+		respawnWeapons[] = {"Throw","Put","Throw_DZ"};
 		respawnMagazines[] = {};
 		weaponSlots = "1	 + 	4	 + 12*		256	 + 2*	4096	 + 	2	 + 8*	16  + 12*131072";
 		canHideBodies = 1;
@@ -662,6 +663,7 @@ class CfgVehicles {
         hiddenselections[] = {"Camo"};
         hiddenselectionstextures[] = {"\ca\characters_W_baf\data\Ghillie_Overall2_co.paa","\ca\characters_W_baf\data\armour_dpm_co.paa","\ca\characters_W_baf\data\equip_dpm_co.paa"};
         vehicleclass = "MenW";
+        linkeditems[] = {};
         
         model = "\ca\characters_e\Ghillie\Ghillie_Overall";
         picture = "\Ca\characters\data\Ico\i_null_CA.paa";
@@ -674,10 +676,10 @@ class CfgVehicles {
         faction = "BIS_BAF";
         
 		side = 1;
-		weapons[] = {"Throw","Put"};
+		weapons[] = {"Throw","Put","Throw_DZ"};
 		backpack = "";
 		magazines[] = {};
-		respawnWeapons[] = {"Throw","Put"};
+		respawnWeapons[] = {"Throw","Put","Throw_DZ"};
 		respawnMagazines[] = {};
 		weaponSlots = "1	 + 	4	 + 12*		256	 + 2*	4096	 + 	2	 + 8*	16  + 12*131072";
 		canHideBodies = 1;
@@ -694,6 +696,7 @@ class CfgVehicles {
         hiddenselections[] = {"Camo","Camo2","Camo3"};
         hiddenselectionstextures[] = {"\ca\characters_W_baf\data\camo_dpm_co.paa","\ca\characters_W_baf\data\armour_dpm_co.paa","\ca\characters_W_baf\data\equip_dpm_co.paa"};
         vehicleclass = "MenW";
+        linkeditems[] = {};
         
         icon = "\Ca\characters2\data\icon\i_soldier_CA.paa";
         model = "\ca\characters_d_BAF\BAF_Soldier_light_BAF";
@@ -707,10 +710,10 @@ class CfgVehicles {
         
 		displayName = "Survivor";
 		side = 1;
-		weapons[] = {"Throw","Put"};
+		weapons[] = {"Throw","Put","Throw_DZ"};
 		backpack = "";
 		magazines[] = {};
-		respawnWeapons[] = {"Throw","Put"};
+		respawnWeapons[] = {"Throw","Put","Throw_DZ"};
 		respawnMagazines[] = {};
 		weaponSlots = "1	 + 	4	 + 12*		256	 + 2*	4096	 + 	2	 + 8*	16  + 12*131072";
 		canHideBodies = 1;
@@ -731,7 +734,7 @@ class CfgVehicles {
 		model = "\ca\weapons_e\AmmoBoxes\backpack_us_assault_Coyote.p3d";
 		transportMaxWeapons = 1;
 		transportMaxMagazines = 8;
-        mass = 40;
+        mass = 28;
         maximumload = 28;
     };
 	class DZ_Assault_Pack_A3: Bag_Base
@@ -755,7 +758,7 @@ class CfgVehicles {
 		picture = "\ca\weapons_e\data\icons\backpack_ACR_small_CA.paa";
 		transportMaxWeapons = 0;
 		transportMaxMagazines = 12;
-        mass = 40;
+        mass = 30;
         maximumload = 30;
 	};
 	class DZ_ALICE_Pack_A3: Bag_Base
@@ -767,8 +770,8 @@ class CfgVehicles {
 		model = "\ca\weapons_e\AmmoBoxes\backpack_tk_alice.p3d";
 		transportMaxWeapons = 2;
 		transportMaxMagazines = 16;
-        mass = 40;
-        maximumload = 57;
+        mass = 57;
+        maximumload = 74;
 	};
 	class DZ_TK_Assault_Pack_A3 : Bag_Base
 	{
@@ -779,8 +782,8 @@ class CfgVehicles {
 		model = "\ca\weapons_e\AmmoBoxes\backpack_civil_assault.p3d";
 		transportMaxWeapons = 2;
 		transportMaxMagazines = 16;
-        mass = 40;
-        maximumload = 57;
+        mass = 57;
+        maximumload = 74;
 	};
 	class DZ_British_ACU_A3 : Bag_Base
 	{
@@ -791,8 +794,8 @@ class CfgVehicles {
 		icon = "\ca\weapons_e\data\icons\mapIcon_backpack_CA.paa";
 		transportMaxWeapons = 3;
 		transportMaxMagazines = 18;
-        mass = 40;
-        maximumload = 70;
+        mass = 70;
+        maximumload = 86;
 	};
 	class DZ_CivilBackpack_A3: Bag_Base 
 	{
@@ -803,8 +806,8 @@ class CfgVehicles {
 		model = "\ca\weapons_e\AmmoBoxes\backpack_acr.p3d";
 		transportMaxWeapons = 4;
 		transportMaxMagazines = 24;
-        mass = 40;
-        maximumload = 70;
+        mass = 70;
+        maximumload = 111;
 	};
 	class DZ_Backpack_A3: Bag_Base
 	{
@@ -815,7 +818,7 @@ class CfgVehicles {
 		model = "\ca\weapons_e\AmmoBoxes\backpack_us.p3d";
 		transportMaxWeapons = 6;
 		transportMaxMagazines = 24;
-        mass = 40;
+        mass = 100;
         maximumload = 160;
 	};
 	class DZ_DJ_Pack_A3: Bag_Base
@@ -828,7 +831,7 @@ class CfgVehicles {
         model = "\A3\weapons_f\Ammoboxes\bags\Backpack_Tortila";
 		transportMaxWeapons = 2;
 		transportMaxMagazines = 20;
-        mass = 40;
+        mass = 100;
         maximumload = 320;
 	};
     

@@ -47,4 +47,9 @@ class CfgAmmo {
         model = "\A3\Weapons_f\chemlight\chemlight_blue_lit";
 		timeToLive = 240;
 	};
+    
+    class SmokeShellTear: SmokeShell {
+        model = "\A3\Weapons_f\ammo\smokegrenade_yellow";
+        smokecolor[] = {0.9883, 0.8606, 0.5882, 0.4};
+    };
 };

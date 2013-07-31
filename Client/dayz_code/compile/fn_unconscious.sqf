@@ -11,8 +11,10 @@ if ((!r_player_handler1) and (r_handlerCount == 0)) then {
 	r_handlerCount = r_handlerCount + 1;
 	r_player_handler1 = true;
 	player playAction "CanNotMove";
+    if ((!r_player_tearGasOn) and (player distance (nearestObject [player,"SmokeShellTear"]) > 35)) then {
 	"dynamicBlur" ppEffectEnable true;"dynamicBlur" ppEffectAdjust [2]; "dynamicBlur" ppEffectCommit 0;
 	"colorCorrections" ppEffectEnable true;"colorCorrections" ppEffectEnable true;"colorCorrections" ppEffectAdjust [1, 1, 0, [1, 1, 1, 0.0], [1, 1, 1, 0.1],  [1, 1, 1, 0.0]];"colorCorrections" ppEffectCommit 0;
+    };
 	0 fadeSound 0.05;
 	disableUserInput true;
 	//waitUntil{USEC_MotherInbox == ""};
@@ -25,7 +27,7 @@ if ((!r_player_handler1) and (r_handlerCount == 0)) then {
 		sleep 1;
 		_isOnDeck = false; //getPos player in LHA_Deck;
 		_isInLocation = false; //getPos player in LHA_Location;
-		_inVehicle = (vehicle _unit != _unit);
+		_inVehicle = (vehicle player != player);
 		_bloodLow = ((r_player_blood/r_player_bloodTotal) < 0.5);
 		if ((surfaceIsWater (getPosASL player)) and !_isOnDeck and !_inVehicle) then {
 			player setpos [(getPosASL player select 0),(getPosASL player select 1),0.3];
@@ -92,8 +94,11 @@ if ((!r_player_handler1) and (r_handlerCount == 0)) then {
 	//["MED001",0,"Conscious"] call fnc_usec_recordEventClient;
 	if (!r_player_injured and ((r_player_blood/r_player_bloodTotal) >= 0.5)) then {
 		10 fadeSound 1;
+    if ((!r_player_tearGasOn) and (player distance (nearestObject [player,"SmokeShellTear"]) > 35)) then {
 		"dynamicBlur" ppEffectAdjust [0]; "dynamicBlur" ppEffectCommit 5;
 		"colorCorrections" ppEffectAdjust [1, 1, 0, [1, 1, 1, 0.0], [1, 1, 1, 1],  [1, 1, 1, 1]];"colorCorrections" ppEffectCommit 5;
+        };
+        r_player_clear = true;
 	};
 	r_handlerCount = r_handlerCount - 1;
 };

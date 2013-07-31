@@ -72,12 +72,16 @@ while {true} do {
 			addCamShake [2, 0.5, 25];
 			if (r_player_lowblood) then {
 				0 fadeSound ((r_player_blood/r_player_bloodTotal) + 0.5);
+    if ((!r_player_tearGasOn) and (player distance (nearestObject [player,"SmokeShellTear"]) > 35)) then {
 				"dynamicBlur" ppEffectEnable true;"dynamicBlur" ppEffectAdjust [4]; "dynamicBlur" ppEffectCommit 0.2;
+                };
 			};
 			sleep 0.2;
+    if ((!r_player_tearGasOn) and (player distance (nearestObject [player,"SmokeShellTear"]) > 35)) then {
 			if (r_player_lowblood) then {
 				"dynamicBlur" ppEffectEnable true;"dynamicBlur" ppEffectAdjust [1]; "dynamicBlur" ppEffectCommit 0.5;
 			};
+            };
 			sleep 0.2;
 			_lowBlood =	player getVariable ["USEC_lowBlood", false];
 			if ((r_player_blood < r_player_bloodTotal) and !_lowBlood) then {

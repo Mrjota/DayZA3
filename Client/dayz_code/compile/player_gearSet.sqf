@@ -9,12 +9,14 @@ if (count _inventory > 0) then {
 		if (_x == "Crossbow") then { _x = "Crossbow_DZ" }; // Convert Crossbow to Crossbow_DZ
         if (_x in ["V_PlateCarrier1_rgr_AiA","V_PlateCarrier2_rgr","V_PlateCarrierGL_rgr","V_HarnessO_brn","V_HarnessOGL_brn"]) then {
             player addVest _x;
+                    diag_log("Adding Vest (gearSet): " + _x);
         } else {
             if (_x != "NVGoggles") then {                                                                                                       
                 //Is item legal?
                 _isOK = 	isClass(configFile >> "CfgWeapons" >> _x);
                 if (_isOK) then {
                     player addWeapon _x;
+                    diag_log("Adding Weapon (gearSet): " + _x);
                 };
             } else {
                 player addItem _x;

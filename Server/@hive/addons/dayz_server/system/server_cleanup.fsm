@@ -292,6 +292,9 @@ class FSM
        "_outcome = _result select 0;" \n
        "if(_outcome == ""PASS"") then {" \n
        "	_date = _result select 1;" \n
+       "    if (isNil ""dayz_cycleCounter"") then {" \n
+       "        dayz_cycleCounter = 0;" \n
+       "    };" \n
        "" \n
        "	//date setup" \n
        "	_year = _date select 0;" \n
@@ -299,9 +302,29 @@ class FSM
        "	_day = _date select 2;" \n
        "	_hour = _date select 3;" \n
        "	_minute = _date select 4;" \n
+       "    if (isNil ""dayz_firstHour"") then {" \n
+       "        dayz_firstHour = _hour;" \n
+       "    };" \n
        "" \n
        "	//Force full moon nights" \n
        "	_date = [2012,6,6,_hour,_minute];" \n
+       "    if (dayz_customCycle == 1) then {" \n
+       "        dayz_cycleCounter = dayz_cycleCounter + 1;" \n
+       "        if (dayz_cycleCounter == 35) then {" \n
+       "            dayzSendWeather = [];" \n
+       "        };" \n
+       "        if ((dayz_cycleCounter >= 36) and (dayz_cycleCounter < 48)) then {" \n
+       "	        _date = [2012,6,6,22,_minute];" \n
+       "        };" \n
+       "        if (dayz_cycleCounter == 47) then {" \n
+       "            dayzSendWeather = [];" \n
+       "        };" \n
+       "        if (dayz_cycleCounter >= 48) then {" \n
+       "            dayz_cycleCounter = 0;" \n
+       "	        _date = [2012,6,6,dayz_firstHour,_minute];" \n
+       "        };" \n
+       "    " \n
+       "    };" \n
        "" \n
        "	setDate _date;" \n
        "	dayzSetDate = _date;" \n

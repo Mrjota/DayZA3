@@ -67,22 +67,22 @@ if (_unitIsPlayer) then {
 
 //PVP Damage
 _scale = 200;
-if (_damage > 0.4) then {
+if (_damage > 0.2) then {
 	if (_ammo != "zombie") then {
-		_scale = _scale + 50;
+		_scale = _scale + 1000;
 	};
 	if (_isHeadHit) then {
-		_scale = _scale + 500;
+		_scale = _scale + 1400;
 	};
 	if ((isPlayer _source) and !(player == _source)) then {
-		_scale = _scale + 800;
+		_scale = _scale + 1000;
 		if (_isHeadHit) then {
-			_scale = _scale + 500;
+			_scale = _scale + 1400;
 		};
 	};
 	switch (_type) do {
-		case 1: {_scale = _scale + 200};
-		case 2: {_scale = _scale + 200};
+		case 1: {_scale = _scale + 900};
+		case 2: {_scale = _scale + 1400};
 	};
 	if (_unitIsPlayer) then {
 		//Cause blood loss
@@ -124,11 +124,22 @@ if (_damage > 0.1) then {
 		_unit setVariable["medForceUpdate",true,true];
 	};
 };
-if (_damage > 0.4) then {	//0.25
+if (_damage > 0.05) then {	//0.25
 	/*
 		BLEEDING
 	*/		
 	_wound = _hit call fnc_usec_damageGetWound;
+    if (!isNil "_wound") then {
+        if (typeName _wound != "STRING") then {
+            _wound = "body";
+        } else {
+            if !(_wound in USEC_woundHit) then {
+                _wound = "body";
+            };
+        }
+    } else {
+        _wound = "body";
+    };
 	_isHit = _unit getVariable[_wound,false];
 	if (_unitIsPlayer) then {	
 		_rndPain = 		(random 10);

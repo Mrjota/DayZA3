@@ -2,6 +2,10 @@
 
 dayz_versionNo = 		getText(configFile >> "CfgMods" >> "DayZ" >> "version");
 dayz_hiveVersionNo = 	getNumber(configFile >> "CfgMods" >> "DayZ" >> "hiveVersion");
+
+//Set to 1 for a 3 hour day, 1 hour night cycle
+dayz_customCycle = 0;
+
 _script = getText(missionConfigFile >> "onPauseScript");
 
 if ((count playableUnits == 0) and !isDedicated) then {

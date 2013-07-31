@@ -565,10 +565,12 @@ class FSM
        "if (_x == 'Crossbow') then { _x = 'Crossbow_DZ' };" \n
        "if (_x in ['V_PlateCarrier1_rgr_AiA','V_PlateCarrier2_rgr','V_PlateCarrierGL_rgr','V_HarnessO_brn','V_HarnessOGL_brn']) then {" \n
        "player addVest _x;" \n
+       "diag_log(""Adding Vest (player_monitor): "" + _x);" \n
        "} else {" \n
        "_isOK = 	isClass(configFile >> 'CfgWeapons' >> _x);" \n
        "if (_isOK) then {" \n
        "player addWeapon _x;" \n
+       "diag_log(""Adding Weapon (player_monitor): "" + _x);" \n
        "};" \n
        "};" \n
        "} forEach _wpns;" \n
@@ -597,10 +599,10 @@ class FSM
        "};" \n
        "};" \n
        "_inventory call player_gearSet;" \n
+       "diag_log(""inventory Value (player_monitor): "" + _inventory);" \n
        "" \n
        "//player addMagazine ""7Rnd_45ACP_1911"";" \n
        "" \n
-       "//Assess in backpack" \n
        "if (count _backpack > 0) then {" \n
        "	//Populate" \n
        "	_backpackType = 	_backpack select 0;" \n
@@ -729,6 +731,7 @@ class FSM
        "	_mags = getArray (_config >> ""magazines"");" \n
        "	_wpns = getArray (_config >> ""weapons"");" \n
        "	_bcpk = getText (_config >> ""backpack"");" \n
+       "	_vest = getText (_config >> ""vest"");" \n
        "	_bcpkWpn = getText (_config >> ""backpackWeapon"");" \n
        "	" \n
        "	//Add inventory" \n
@@ -746,6 +749,7 @@ class FSM
        "	} forEach _wpns;" \n
        "	" \n
        "	player addBackpack _bcpk; " \n
+       "    player addVest _vest; " \n
        "	dayz_myBackpack =	unitBackpack player;" \n
        "" \n
        "	if (_bcpkWpn != """") then {" \n
@@ -1176,6 +1180,7 @@ class FSM
       name = "Finish";
       init = /*%FSM<STATEINIT""">*/"dayzGearSave = true;" \n
        "dayz_myPosition = getPosATL player;" \n
+       "dayz_finishedLoading = true;" \n
        "" \n
        "//[""dayzLoginRecord"",[_playerUID,_charID,0]] call callRpcProcedure;" \n
        "" \n

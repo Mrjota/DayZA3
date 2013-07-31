@@ -16,6 +16,7 @@ class CfgVehicles {
 		sensitivity = 2;	// sensor sensitivity
 		faction = PMC_BAF;
 		identityTypes[] = {"Language_BAF","USMC_Glasses"};
+        linkeditems[] = {};
 		faceType = "Man";
 		
 		class HitHead {
@@ -47,8 +48,8 @@ class CfgVehicles {
 		};
 		hiddenSelections[] = {"_middlearm", "_lowerroll", "_middleroll"};
 		model = "\sbe_sotg\sotg_secco.p3d";
-		weapons[] = {"Throw", "Put"};
-		respawnWeapons[] = {"Throw","Put"};
+		weapons[] = {"Throw","Put","Throw_DZ"};
+		respawnWeapons[] = {"Throw","Put","Throw_DZ"};
 		respawnMagazines[] = {};
 		backpack = "";
 		magazines[] = {};
@@ -65,13 +66,14 @@ class CfgVehicles {
 		faceType = "Man";
 		hiddenSelections[] = {"_middlearm", "_lowerroll", "_middleroll"};
 		displayName = "Assassin";
+        linkeditems[] = {};
 		side = 1;
-		weapons[] = {"Throw","Put"};
+		weapons[] = {"Throw","Put","Throw_DZ"};
 		model = "\ca\characters_E\GER\GER_rifleman";
 		portrait = "\Ca\characters_E\data\portraits\ger_soldier_CA";
 		magazines[] = {};
 		backpack = "";
-		respawnWeapons[] = {"Throw","Put"};
+		respawnWeapons[] = {"Throw","Put","Throw_DZ"};
 		respawnMagazines[] = {};
 		canHideBodies = 1;
 	};

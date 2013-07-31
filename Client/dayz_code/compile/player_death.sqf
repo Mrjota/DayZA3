@@ -84,13 +84,13 @@ terminate dayz_spawnCheck;
 //deleteVehicle dayz_playerTrigger;
 disableUserInput false;
 r_player_dead = true;
-
+    if ((!r_player_tearGasOn) and (player distance (nearestObject [player,"SmokeShellTear"]) > 35)) then {
 "dynamicBlur" ppEffectEnable true;"dynamicBlur" ppEffectAdjust [4]; "dynamicBlur" ppEffectCommit 0.2;
 
 "colorCorrections" ppEffectEnable true;
 "colorCorrections" ppEffectAdjust [1, 1, 0, [1, 1, 1, 0.0], [1, 1, 1, 0.01],  [1, 1, 1, 0.0]];
 "colorCorrections" ppEffectCommit 1;
-
+};
 //Player is Dead!
 3 fadeSound 0;
 0 cutText ["", "BLACK",10];
@@ -126,5 +126,8 @@ sleep 2;
 
 playMusic "dayz_track_death_1";
 
+    if ((!r_player_tearGasOn) and (player distance (nearestObject [player,"SmokeShellTear"]) > 35)) then {
 "dynamicBlur" ppEffectAdjust [0]; "dynamicBlur" ppEffectCommit 5;
 "colorCorrections" ppEffectAdjust [1, 1, 0, [1, 1, 1, 0.0], [1, 1, 1, 1],  [1, 1, 1, 1]];"colorCorrections" ppEffectCommit 5;
+};
+r_player_clear = true;

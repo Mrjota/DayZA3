@@ -9,7 +9,7 @@ if(_onLadder) exitWith {cutText [localize "str_player_21", "PLAIN DOWN"];};
 
 if (vehicle player != player) exitWith {cutText ["You may not build while in a vehicle", "PLAIN DOWN"]};
 
-_item =			_this;
+_item =			_this select 3;
 _classname = 	getText (configFile >> "CfgMagazines" >> _item >> "ItemActions" >> "Build" >> "create");
 _text = 		getText (configFile >> "CfgVehicles" >> _classname >> "displayName");
 
@@ -21,6 +21,24 @@ _dir = getDir player;
 player removeMagazine _item;
 
 player playActionNow "Medic";
+r_isBuilding = true;
+if (_item == "BearTrap") then {
+    player removeAction s_doBTrap;
+    s_doBTrap = -1;
+};
+if (_item == "ItemTankTrap") then {
+    player removeAction s_doTTrap;
+    s_doTTrap = -1;
+};
+if (_item == "ItemWire") then {
+    player removeAction s_doWire;
+    s_doWire = -1;
+};
+if (_item == "ItemSandbag") then {
+    player removeAction s_doSand;
+    s_doSand = -1;
+};
+
 sleep 1;
 
 _dis=20;
@@ -40,6 +58,7 @@ cutText [format[localize "str_build_01",_text], "PLAIN DOWN"];
 //["dayzPublishObj",[dayz_characterID,_object,[_dir,_location],_classname]] call callRpcProcedure;
 dayzPublishObj = [dayz_characterID,_object,[_dir,_location],_classname];
 publicVariable "dayzPublishObj";
+r_isBuilding = false;
 
 sleep 2;
 player allowDamage true;

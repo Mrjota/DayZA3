@@ -157,10 +157,10 @@ while {true} do {
 	};
 
 	//Hunger
-	if (_refObj == player) then {
-	_hunger = +((((r_player_bloodTotal - r_player_blood) / r_player_bloodTotal) * 5) + _speed + dayz_myLoad) * 3;
+	if ((_refObj == player) and (!r_player_onVehicleC)) then {
+	_hunger = +((((r_player_bloodTotal - r_player_blood) / r_player_bloodTotal) * 5) + _speed + dayz_myLoad);
     } else {
-	_hunger = +((((r_player_bloodTotal - r_player_blood) / r_player_bloodTotal) * 5)) * 3;
+	_hunger = +((((r_player_bloodTotal - r_player_blood) / r_player_bloodTotal) * 5));
     };
 	if (time - dayz_panicCooldown < 120) then {
 		_hunger = _hunger * 2;
@@ -169,7 +169,7 @@ while {true} do {
 
 	//Thirst
 	_thirst = 27;
-	if (_refObj == player) then {
+	if ((_refObj == player) and (!r_player_onVehicleC)) then {
 		_thirst = (_speed + 4) * 3;
 	};
 	dayz_thirst = dayz_thirst + (_thirst / 60) * (dayz_temperatur / dayz_temperaturnormal);	//TeeChange Temperatur effects added Max Effects: -25% and + 16.6% waterloss
@@ -404,4 +404,98 @@ while {true} do {
     };
     } forEach currentInvites;
     
+    {
+        if (damage _x >= 1) then {
+            _typeOf = "ItemTent";
+            if (typeOf _x == "ACampStorage") then {
+                _typeOf = "ItemATent";
+            };
+            _bag = createVehicle ["WeaponHolder",getPosATL _x,[], 0, "CAN_COLLIDE"];
+            _bag addMagazineCargoGlobal [_typeOf, 1];
+            
+            _objectID 	= _x getVariable["ObjectID","0"];
+            _objectUID	= _x getVariable["ObjectUID","0"];
+            
+            _weapons = 	getWeaponCargo _x;
+            _magazines = 	getMagazineCargo _x;
+            _backpacks = 	getBackpackCargo _x;
+            
+            dayzDeleteObj = [_objectID,_objectUID];
+            publicVariable "dayzDeleteObj";
+            if (isServer) then {
+                dayzDeleteObj call server_deleteObj;
+            };
+            deleteVehicle _x;
+            
+            _objWpnTypes = 	_weapons select 0;
+            _objWpnQty = 	_weapons select 1;
+            _countr = 0;
+            {
+                _bag addweaponcargoGlobal [_x,(_objWpnQty select _countr)];
+                _countr = _countr + 1;
+            } forEach _objWpnTypes;
+            
+            _objWpnTypes = _magazines select 0;
+            _objWpnQty = _magazines select 1;
+            _countr = 0;
+            {
+                _bag addmagazinecargoGlobal [_x,(_objWpnQty select _countr)];
+                _countr = _countr + 1;
+            } forEach _objWpnTypes;
+
+            _objWpnTypes = _backpacks select 0;
+            _objWpnQty = _backpacks select 1;
+            _countr = 0;
+            {
+                _bag addbackpackcargoGlobal [_x,(_objWpnQty select _countr)];
+                _countr = _countr + 1;
+            } forEach _objWpnTypes;
+            player reveal _bag;
+        };
+    } forEach nearestObjects [getPosATL player, ["TentStorage","ACampStorage"], 35];
+    
+    if (player distance (nearestObject [player,"SmokeShellTear"]) <= 35) then {
+        _nearest = nearestObject [player,"SmokeShellTear"];
+        _dist = player distance _nearest;
+        if (goggles player != "G_Combat_DZ") then {
+            if ((_dist < 35) and (_dist >= 25) and (!r_player_tearGasOn)) then {
+                "dynamicBlur" ppEffectEnable true; "dynamicBlur" ppEffectAdjust [1]; "dynamicBlur" ppEffectCommit 3; 
+                "colorCorrections" ppEffectAdjust [1, 1, 0, [1, 1, 1, 0.0], [1, 1, 0.2, 1],  [1, 1, 1, 0.0]];"colorCorrections" ppEffectCommit 3;
+            };
+            if ((_dist < 25) and (_dist >= 15) and (!r_player_tearGasOn)) then {
+                "dynamicBlur" ppEffectEnable true; "dynamicBlur" ppEffectAdjust [2]; "dynamicBlur" ppEffectCommit 3; 
+                "colorCorrections" ppEffectAdjust [1, 1, 0, [1, 1, 1, 0.0], [1, 1, 0.2, 0.95],  [1, 1, 1, 0.0]];"colorCorrections" ppEffectCommit 3;
+            };
+            if ((_dist < 15) and (_dist >= 10) and (!r_player_tearGasOn)) then {
+                "dynamicBlur" ppEffectEnable true; "dynamicBlur" ppEffectAdjust [4]; "dynamicBlur" ppEffectCommit 3;    
+                "colorCorrections" ppEffectAdjust [1, 1, 0, [1, 1, 1, 0.0], [1, 1, 0.2, 0.9],  [1, 1, 1, 0.0]];"colorCorrections" ppEffectCommit 3;
+            };
+            if ((_dist < 10)) then {
+                if (!r_player_tearGasOn) then {
+                    r_player_tearGasOn = true;
+                    [] spawn {
+                        while { r_player_tearGasOn } do {
+                            if (r_player_tearGasCount >= 30) exitWith {
+                                r_player_tearGasCount = 0;
+                                r_player_tearGasOn = false;
+                            };
+                            "dynamicBlur" ppEffectEnable true; "dynamicBlur" ppEffectAdjust [8]; "dynamicBlur" ppEffectCommit 2; 
+                            "colorCorrections" ppEffectAdjust [1, 1, 0, [1, 1, 1, 0.0], [1, 1, 0.2, 0.8],  [1, 1, 1, 0.0]];"colorCorrections" ppEffectCommit 2;
+                            addCamShake [5, 0.5, 25];
+                            r_player_tearGasCount = r_player_tearGasCount + 1;
+                            sleep 2;
+                        };
+                    };
+                };
+            };
+        } else {
+            "dynamicBlur" ppEffectEnable true; "dynamicBlur" ppEffectAdjust [0.5]; "dynamicBlur" ppEffectCommit 1; 
+        };
+    } else {
+        if (r_player_clear) then {
+            "dynamicBlur" ppEffectAdjust [0]; "dynamicBlur" ppEffectCommit 5;
+            "colorCorrections" ppEffectAdjust [1, 1, 0, [1, 1, 1, 0.0], [1, 1, 1, 1],  [1, 1, 1, 1]];"colorCorrections" ppEffectCommit 5;
+            r_player_clear = false;
+        };
+    };
 };

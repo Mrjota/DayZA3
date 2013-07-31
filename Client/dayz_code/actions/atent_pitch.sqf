@@ -24,6 +24,7 @@ _objectsPond = 		nearestObjects [_playerPos, [], 10];
 	
 	player removeMagazine "ItemATent";
 	player playActionNow "Medic";
+    r_isBuilding = true;
 	sleep 1;
 	
 	_dis=20;
@@ -43,3 +44,4 @@ _objectsPond = 		nearestObjects [_playerPos, [], 10];
 	publicVariable "dayzPublishObj";
 	
 	cutText [localize "str_success_tent_pitch", "PLAIN DOWN"];
+    r_isBuilding = false;

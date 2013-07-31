@@ -7,7 +7,7 @@
     #define c2_list 2504
     disableSerialization;
     
-	fnc_inString = 				compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\fn_inString.sqf";
+	fnc_inString = compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\fn_inString.sqf";
     _cbArray = ["5Rnd_762x51_M24","30Rnd_556x45_Stanag","6Rnd_45ACP","17Rnd_9x19_glock17","WoodenArrow","2Rnd_shotgun_74Slug","2Rnd_shotgun_74Pellets","15Rnd_9x19_M9SD","15Rnd_9x19_M9","9Rnd_45ACP_Mag","7Rnd_45ACP_1911","16Rnd_9x21_Mag","30Rnd_556x45_StanagSD"];
     _cbArray2 = ["20Rnd_762x51_DMR","20Rnd_762x51_FNFAL","7Rnd_45ACP_1911","200Rnd_556x45_M249","30Rnd_9x19_UZI","Quiver","8Rnd_B_Beneli_Pellets","8Rnd_B_Beneli_74Slug","30Rnd_9x19_MP5","30Rnd_9x19_MP5SD","64Rnd_9x19_SD_Bizon","16Rnd_9x21_Mag","17Rnd_9x19_glock17","9Rnd_45ACP_Mag","15Rnd_9x19_M9SD","30Rnd_556x45_G36","30Rnd_556x45_G36SD","30Rnd_556x45_StanagSD"];
 
@@ -53,6 +53,8 @@
                 _required = 1;
                 _amount = 6;
                 if (_input == "30Rnd_556x45_StanagSD") then { _amount = 1; };
+                if (_input == "30Rnd_556x45_G36SD") then { _amount = 1; };
+                if (_input == "30Rnd_556x45_G36") then { _amount = 1; };
                 
                 [_result, _amount, _input, _required] call _createPile;
             };

@@ -69,8 +69,11 @@ player setVariable["USEC_infected",false,true];
 	_unit setVariable["USEC_lowBlood",false,true];
 	r_player_lowblood = 	false;	
 	10 fadeSound 1;
+    if ((!r_player_tearGasOn) and (player distance (nearestObject [player,"SmokeShellTear"]) > 35)) then {
 	"dynamicBlur" ppEffectAdjust [0]; "dynamicBlur" ppEffectCommit 5;
 	"colorCorrections" ppEffectAdjust [1, 1, 0, [1, 1, 1, 0.0], [1, 1, 1, 1],  [1, 1, 1, 1]];"colorCorrections" ppEffectCommit 5;
+    };
+    r_player_clear = true;
     [] spawn {
         cutText ["[Medic] Blood will slowly restore...", "PLAIN DOWN",10];
         r_isHealing = true;
