@@ -1048,11 +1048,29 @@ class CfgMagazines {
 		};
 	};
 	
+	class Skin_SurvivorR_DZ : SkinBase {
+		scope = public;
+		displayName = "Veteran Clothing (Red)";
+		descriptionShort = "Dark clothing with a red shirt worn by a veteran survivor.";
+	};
+	
+	class Skin_SurvivorB_DZ : SkinBase {
+		scope = public;
+		displayName = "Veteran Clothing (Blue)";
+		descriptionShort = "Dark clothing with a blue shirt worn by a veteran survivor.";
+	};
+	
 	class Skin_Sniper1_DZ : SkinBase {
 		scope = public;
 		displayName = $STR_EQUIP_NAME_43;
 		descriptionShort = $STR_EQUIP_DESC_43;
 	};
+    
+    class Skin_Ranger_DZ : SkinBase {
+		scope = public;
+		displayName = "Ranger Outfit";
+		descriptionShort = "Camouflage jacket and dark jeans with a cowboy hat and handkerchief.";
+    };
 	
 	class Skin_Camo1_DZ : SkinBase {
 		scope = public;

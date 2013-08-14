@@ -66,7 +66,7 @@ private ["_newBackpackType","_backpackWpn","_backpackMag"];
 	};
 
 //Get Current Ammo
-private ["_currentmag","_secmag","_magArray","_vestClass","_magazines","_otheritems"];
+private ["_currentmag","_secmag","_magArray","_vestClass","_magazines","_otheritems","_goggles"];
     _currentmag = currentMagazine player;
     _secmag = (handgunMagazine player) select 0;
     _magArray = [];
@@ -74,14 +74,14 @@ private ["_currentmag","_secmag","_magArray","_vestClass","_magazines","_otherit
     _magArray = _magArray + [_currentmag];
     };
     if (!isNil "_secmag") then {
-    if (_secmag > 0) then {
-    if (_secmag != "") then {
-    _magArray = _magArray + [_secmag];
-    };
-    };
-    };
-    if ((_secmag == _currentMag) and (_currentMag != "")) then {
-        _magArray = [_currentmag];
+        if (_secmag > 0) then {
+            if (_secmag != "") then {
+                _magArray = _magArray + [_secmag];
+                if ((_secmag == _currentMag) and (_currentMag != "")) then {
+                    _magArray = [_currentmag];
+                };
+            };
+        };
     };
     
 //Get Vest and magazines
@@ -90,6 +90,9 @@ private ["_currentmag","_secmag","_magArray","_vestClass","_magazines","_otherit
     
 //Get Utilities
     _otheritems = assignedItems player;
+    
+//Get Goggles
+    _goggles = goggles player;
     
 //Debug Message
 	diag_log "Attempting to switch model";
@@ -225,3 +228,5 @@ private ["_currentmag","_secmag","_magArray","_vestClass","_magazines","_otherit
         _newUnit addItem _x;
         _newUnit assignItem _x;
     } forEach _otheritems;
+    removeGoggles _newUnit;
+    _newUnit addGoggles _goggles;

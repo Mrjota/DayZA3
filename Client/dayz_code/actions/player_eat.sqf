@@ -9,13 +9,20 @@ if (vehicle player != player) exitWith {cutText ["You may not eat while in a veh
 //Force players to wait 3 mins to eat again
 //if (dayz_lastMeal < 180) exitWith {cutText ["You may not eat, you're already full", "PLAIN DOWN"]};
 
-_itemorignal2 = ["FoodPistachio", "FoodNutmix"] +food_with_output + meatcooked + meatraw;
-_itemorignal = "FoodCanBakedBeans";
+_itemorignal2 = ["FoodPistachio", "FoodNutmix"] +food_with_output + meatcooked;
+_itemorignal = "";
 {
-if (_x in _itemorignal2) then {
-_itemorignal = _x;
-};
+    if (_x in _itemorignal2) then {
+        _itemorignal = _x;
+    };
 } forEach (magazines player);
+if (_itemoriginal == "") then {
+    {
+        if (_x in meatraw) then {
+            _itemorignal = _x;
+        };
+    } forEach (magazines player);
+};
 _hasfooditem = _itemorignal in magazines player;
 
 _rawfood = _itemorignal in meatraw;

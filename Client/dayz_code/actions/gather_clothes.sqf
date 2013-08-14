@@ -3,7 +3,7 @@ _item = _this select 3;
 _type = typeOf _item;
 _isTaken = _item getVariable["clothesTaken",false];
 _isPlayer = typeOf _item in AllPlayers_A3;
-_hasClothes = typeOf cursorTarget in ["Camo1_DZ","Sniper1_DZ","Bandit1_DZ","Survivor2_DZ","Survivor3_DZ"];
+_hasClothes = typeOf cursorTarget in ["Camo1_DZ","Sniper1_DZ","Bandit1_DZ","Survivor2_DZ","Survivor3_DZ","Survivor4_DZ","Survivor5_DZ","Bandit2_DZ","Bandit3_DZ"];
 
 player removeAction s_player_stealclothes;
 s_player_stealclothes = -1;
@@ -20,7 +20,6 @@ if (!_isTaken) then {
 
 	_item setVariable ["clothesTaken",true,true];
     
-	sleep 6;
 	_string = format["You've taken the %1's clothing.",_text];
 	cutText [_string, "PLAIN DOWN"];
     _itemDrop = createVehicle ["WeaponHolder", position player, [], 0, "CAN_COLLIDE"];

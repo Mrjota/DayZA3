@@ -12,7 +12,7 @@ if (_unit == player) then {
 	r_player_blood = r_player_bloodTotal;
 	r_player_lowblood = 	false;	
 	10 fadeSound 1;
-    if ((!r_player_tearGasOn) and (player distance (nearestObject [player,"SmokeShellTear"]) > 35)) then {
+    if ((!r_player_tearGasOn) and (player distance (nearestObject [player,"SmokeShellTear"]) > 35) and (!r_player_tranq)) then {
 	"dynamicBlur" ppEffectAdjust [0]; "dynamicBlur" ppEffectCommit 5;
 	"colorCorrections" ppEffectAdjust [1, 1, 0, [1, 1, 1, 0.0], [1, 1, 1, 1],  [1, 1, 1, 1]];"colorCorrections" ppEffectCommit 5;
 	};

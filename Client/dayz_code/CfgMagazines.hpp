@@ -904,4 +904,12 @@ class SmokeShellTear: SmokeShell {
 	model = "\A3\Weapons_f\ammo\smokegrenade_yellow";
 	picture = "\A3\Weapons_f\data\ui\gear_smokegrenade_yellow_ca.paa";
 };
+class 8Rnd_9x18_MakarovSD;
+class 2Rnd_9x18_Tranq: 8Rnd_9x18_MakarovSD {
+	descriptionshort = "Rounds: 2 <br/>Used in: Tranquilizing Makarov";
+	displayname = "Tranquilizer Pellets";
+	displaynameshort = "Pellets";
+	initspeed = 200;
+	count = 2;
+};
 };

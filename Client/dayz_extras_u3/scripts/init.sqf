@@ -1,0 +1,1 @@
+[] execVM "bb_oa_mercs\scripts\setHolsterTexture.sqf";

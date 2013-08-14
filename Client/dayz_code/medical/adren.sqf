@@ -41,7 +41,7 @@ if (_finished) then {
             player enableFatigue false;
             rushCounter = rushCounter + 1;
             playSound 'heartbeat_1';
-    if ((!r_player_tearGasOn) and (player distance (nearestObject [player,"SmokeShellTear"]) > 35)) then {
+    if ((!r_player_tearGasOn) and (player distance (nearestObject [player,"SmokeShellTear"]) > 35) and (!r_player_tranq)) then {
             addCamShake [2, 1, 25];
             0 fadeSound 2.5;
             'dynamicBlur' ppEffectEnable true; 'dynamicBlur' ppEffectAdjust [2]; 'dynamicBlur' ppEffectCommit 0.2;

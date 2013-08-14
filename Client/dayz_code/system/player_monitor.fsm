@@ -443,6 +443,8 @@ class FSM
       init = /*%FSM<STATEINIT""">*/"progressLoadingScreen 0.6;" \n
        "_charID		= _msg select 0;" \n
        "_inventory	= _msg select 1;" \n
+       "diag_log(""(1) inventory Value (player_monitor): "" + str _inventory);" \n
+       "dayz_loginInventory = _inventory;" \n
        "_backpack	= _msg select 2;" \n
        "_survival 	= _msg select 3;" \n
        "_isNew 		= _msg select 4;" \n
@@ -478,6 +480,7 @@ class FSM
        "if (_model == ""Survivor1_DZ"") then {" \n
        "	_model = ""Survivor2_DZ"";" \n
        "};" \n
+       "dayz_hasOkHive = true;" \n
        "" \n
        "_isHack = false;" \n
        "if (_model == ""hacker"") then {" \n
@@ -517,7 +520,7 @@ class FSM
        "selectNoPlayer;" \n
        "" \n
        "_myTime = time;" \n
-       "1 cutText [""This server is running an incorrect version of the server side application. You cannot play on this server. If you are the server admin please contact Zoombies staff."", ""PLAIN"",5];"/*%FSM</STATEINIT""">*/;
+       "1 cutText [""Something went wrong when retreiving your hive data! Please reconnect or contact this server's staff for a hive reset."", ""PLAIN"",5];"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
       {
@@ -540,6 +543,7 @@ class FSM
       name = "Phase_One";
       init = /*%FSM<STATEINIT""">*/"//_model = ""BanditW1_DZ"";" \n
        "" \n
+       "waitUntil{!isNil ""dayz_hasOkHive""};" \n
        "dayz_playerName = name player;" \n
        "_model call player_switchModel;" \n
        "" \n
@@ -554,6 +558,7 @@ class FSM
        "" \n
        "dayzGearSave = false;" \n
        "removeAllAssignedItems player;" \n
+       "_inventory = dayz_loginInventory;" \n
        "if (isNil 'player_gearSet') then {" \n
        "player_gearSet = {" \n
        "private['_inventory','_wpns','_mags','_idc','_isOK','_val','_item','_x','_vest1'];" \n
@@ -599,7 +604,7 @@ class FSM
        "};" \n
        "};" \n
        "_inventory call player_gearSet;" \n
-       "diag_log(""inventory Value (player_monitor): "" + _inventory);" \n
+       "diag_log(""(2) inventory Value (player_monitor): "" + str _inventory);" \n
        "" \n
        "//player addMagazine ""7Rnd_45ACP_1911"";" \n
        "" \n

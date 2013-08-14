@@ -68,15 +68,12 @@ _agent setVariable ["newDest",_newDest];
 _agent removeWeapon "ItemMap";
 _agent removeWeapon "ItemWatch";
 _agent removeWeapon "ItemCompass";
-removeAllWeapons _agent;
-removeAllItems _agent;
 removeUniform _agent;
 removeAllAssignedItems _agent;
 //End A3 items fix
 
+_agent addVest "V_PlateCarrier1_rgr_AiA";
 //Add some loot
-_rnd = random 1;
-if (_rnd > 0.3) then {
 	_lootType = 		configFile >> "CfgVehicles" >> _type >> "zombieLoot";
 	if (isText _lootType) then {
 		_array = []+ getArray (configFile >> "cfgLoot" >> getText(_lootType));
@@ -87,7 +84,6 @@ if (_rnd > 0.3) then {
 			};
 		};
 	};
-};
 
 
 //Start behavior

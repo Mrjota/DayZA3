@@ -1,0 +1,41 @@
+Units:
+Models:
+Ardvarkdb (base unit, vest, helmets, etc.)
+JeffersPang (Fast Helmet Base)
+NodUnit (CT5 PTT)
+BI (Various equipment pouches)
+
+Textures:
+Sabre
+BI
+
+Weapons:
+Twinkie Masta - M4 base and M203.
+Snark - M4 modern buttstock.
+SoulSlayer - RIS Model / RIS covers.
+B0T and El Maestro De Graffiti - Pmag.
+Stoke , Thanez and FxDarkloki - Acog.
+Vilas - SpecterDR.
+Da12thMonkey - Grippod, AFG anim.
+RedRogueXIII - Magpul MOE, Magpul BAD, Surefire X300, Surefire M952V.
+Dasquade - Magpul stock, S&B Shortdot and peq15.
+Shortez - Magpul AFG and XTM.
+Zealotlee - Troy battle sight.
+Schmung - M249 Model.
+Geno and Acid Snake - M249 Textures.
+Lennard - M249 Buttstock model and textures, various other models, Weapon compiling, animations etc.
+Twinke Masta and SureShot - USP model.
+ChrisART, LOOM, The_Tub and SureShot - USP Texture.
+RobertHammer - Base model compiles, texture compiles, configs.
+
+
+Thanks:
+Great thanks goes out to RobertHammer for providing us the above named models etc.
+Thanks to Bohemia Interactive for a great game and there continued support of it.
+CTB Rhodesy & Ari for a last check for bugs & issues.
+
+Special Thanks (Sabre):
+ArdvarkDB - I would like to personally thank Ardvarkdb for taking on the modelling side of this project, as people would have seen I had been working on retextures of various models in the past to somewhat represent Australian Special Forces, however I was never quite happy with the models and other parts. I think what he achieved was more than I expected and seeing his skills improve over the course of the project has been great fun, thanks mate.
+
+NOTE:
+None of the models were made by me, MistaD. I only modified the PBO file to be suitable for DayZA3 (Zoombies). 

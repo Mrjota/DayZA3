@@ -1,0 +1,2 @@
+Credits go to gms @ ArmAHolic for this great set of materials!
+Credits go to MistaD @ Zoombies for replacing gun sounds, ammo count, and compacting pbo size.

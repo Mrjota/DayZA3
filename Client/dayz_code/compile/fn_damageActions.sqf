@@ -145,7 +145,7 @@ if (_hasPatient and !r_drag_sqf and !r_action and !_inVehicle and !r_player_unco
         
 		if ((fuel _unit > 0) and _hasJerryE) then {
 			r_action = true;
-			_action = _unit addAction [format["Siphon %1",_typeVeh]], "\z\addons\dayz_code\actions\siphon.sqf",[_unit], 0, true, true, "", "'ItemJerrycanEmpty' in magazines player"];
+			_action = _unit addAction [format["Siphon %1",_typeVeh], "\z\addons\dayz_code\actions\siphon.sqf",[_unit], 0, true, true, "", "'ItemJerrycanEmpty' in magazines player"];
 			r_player_actions set [count r_player_actions,_action];
 		};
         

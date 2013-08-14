@@ -52,4 +52,5 @@ if (!isDedicated) then {
 	"dayzSwitch"		addPublicVariableEventHandler {(_this select 1) call server_switchPlayer};
 	"dayzFire"			addPublicVariableEventHandler {nul=(_this select 1) spawn BIS_Effects_Burn};
     "r_player_sendDead" addPublicVariableEventHandler {if (name player in (_this select 1)) then { r_player_isDead = true; };};
+    "dayzSwitchMove"    addPublicVariableEventHandler {[(_this select 1)] call fnc_usec_switchMove;};
 };

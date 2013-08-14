@@ -52,7 +52,7 @@ while{gActive} do
     };
     
     //Enables Invite Button
-    if ((typeOf cursorTarget in ["SurvivorW2_DZ","Survivor2_DZ","Sniper1_DZ","Camo1_DZ","BanditW1_DZ","Bandit1_DZ","Bandit2_DZ","Survivor3_DZ","Survivor4_DZ"]) and (player distance cursorTarget <= 5)) then {
+    if ((typeOf cursorTarget in ["SurvivorW2_DZ","Survivor2_DZ","Sniper1_DZ","Camo1_DZ","BanditW1_DZ","Bandit1_DZ","Bandit2_DZ","Survivor3_DZ","Survivor4_DZ","Survivor5_DZ","Bandit3_DZ","SurvivorR_DZ","SurvivorB_DZ","Ranger_DZ"]) and (player distance cursorTarget <= 5)) then {
         _groupInvite ctrlShow true;
     } else {
         _groupInvite ctrlShow false;

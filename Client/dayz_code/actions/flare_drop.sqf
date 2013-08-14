@@ -1,8 +1,15 @@
 private["_flare"];
 _flare = _this select 3;
 player removeAction s_player_dropflare;
+s_player_dropflare = -1;
 detach _flare;
-s_player_grabflare = -1;
-s_player_removeflare = -1;
+	s_player_grabflare = -1;
+	s_player_removeflare = -1;
+	s_player_grabflare2 = -1;
+	s_player_removeflare2 = -1;
+	s_player_grabflare3 = -1;
+	s_player_removeflare3 = -1;
+	s_player_grabflare4 = -1;
+	s_player_removeflare4 = -1;
 _flare setVariable ["owner",objNull,true];
 dayz_hasLight = false;

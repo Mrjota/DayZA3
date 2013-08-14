@@ -9,6 +9,8 @@ _isBandit = false;
 _isHero = false;
 _isAssassin = false;
 _isGuardian = false;
+_isSaint = false;
+_isReaper = false;
 
 player setVariable ["temperature",dayz_temperatur,true];
 
@@ -84,56 +86,94 @@ while {true} do {
 		};
 	};
 	
-	if (_humanity < -12000 and !_isAssassin) then {
+	if (_humanity <= -12000 and _humanity > -30000 and !_isAssassin) then {
 		_isBandit = false;
         _isHero = false;
         _isGuardian = false;
         _isAssassin = true;
+        _isSaint = false;
+        _isReaper = false;
 		_model = typeOf player;
-		if ((_model == "Survivor2_DZ") or (_model == "Bandit1_DZ") or (_model == "Survivor3_DZ") or (_model == "Survivor4_DZ")) then {
+		if ((_model == "Survivor2_DZ") or (_model == "Survivor4_DZ") or (_model == "Bandit1_DZ") or (_model == "Bandit3_DZ") or (_model == "Survivor3_DZ") or (_model == "Survivor5_DZ")) then {
 			[dayz_playerUID,dayz_characterID,"Bandit2_DZ"] spawn player_humanityMorph;
 		};
 	};
 	
-	if (_humanity > -12000 and _humanity < -2000 and !_isBandit) then {
+	if (_humanity > -12000 and _humanity <= -2000 and !_isBandit) then {
 		_isBandit = true;
         _isHero = false;
         _isGuardian = false;
         _isAssassin = false;
+        _isSaint = false;
+        _isReaper = false;
 		_model = typeOf player;
-		if ((_model == "Survivor2_DZ") or (_model == "Bandit2_DZ") or (_model == "Survivor3_DZ") or (_model == "Survivor4_DZ")) then {
+		if ((_model == "Survivor2_DZ") or (_model == "Survivor4_DZ") or (_model == "Bandit2_DZ") or (_model == "Bandit3_DZ") or (_model == "Survivor3_DZ") or (_model == "Survivor5_DZ")) then {
 			[dayz_playerUID,dayz_characterID,"Bandit1_DZ"] spawn player_humanityMorph;
 		};
 	};
 	
-	if (_humanity > 0 and (_isBandit or _isAssassin)) then {
+	if (_humanity > -2000 and _humanity < 5000 and (_isBandit or _isAssassin or _isReaper or _isSaint or _isGuardian or _isHero)) then {
 		_isBandit = false;
         _isAssassin = false;
+        _isReaper = false;
+        _isSaint = false;
+        _isHero = true;
+        _isGuardian = false;
 		_model = typeOf player;
-		if ((_model == "Bandit1_DZ") or (_model == "Bandit2_DZ")) then {
+		if ((_model == "Survivor4_DZ") or (_model == "Bandit1_DZ") or (_model == "Bandit2_DZ") or (_model == "Bandit3_DZ") or (_model == "Survivor3_DZ") or (_model == "Survivor5_DZ")) then {
 			[dayz_playerUID,dayz_characterID,"Survivor2_DZ"] spawn player_humanityMorph;
 		};
 	};
 	
-	if (_humanity < 15000 and _humanity > 5000 and !_isHero) then {
+	if (_humanity < 15000 and _humanity >= 5000 and !_isHero) then {
 		_isBandit = false;
         _isHero = true;
         _isGuardian = false;
         _isAssassin = false;
+        _isSaint = false;
+        _isReaper = false;
 		_model = typeOf player;
-		if ((_model == "Survivor2_DZ") or (_model == "Bandit1_DZ") or (_model == "Bandit2_DZ") or (_model == "Survivor4_DZ")) then {
+		if ((_model == "Survivor2_DZ") or (_model == "Bandit1_DZ") or (_model == "Bandit2_DZ") or (_model == "Bandit3_DZ") or (_model == "Survivor4_DZ") or (_model == "Survivor5_DZ")) then {
 			[dayz_playerUID,dayz_characterID,"Survivor3_DZ"] spawn player_humanityMorph;
 		};
 	};
 	
-	if (_humanity > 15000 and !_isGuardian) then {
+	if (_humanity >= 15000 and _humanity < 30000 and !_isGuardian) then {
 		_isBandit = false;
         _isHero = false;
         _isGuardian = true;
         _isAssassin = false;
+        _isSaint = false;
+        _isReaper = false;
 		_model = typeOf player;
-		if ((_model == "Survivor2_DZ") or (_model == "Bandit1_DZ") or (_model == "Bandit2_DZ") or (_model == "Survivor3_DZ")) then {
+		if ((_model == "Survivor2_DZ") or (_model == "Bandit1_DZ") or (_model == "Bandit2_DZ") or (_model == "Bandit3_DZ") or (_model == "Survivor3_DZ") or (_model == "Survivor5_DZ")) then {
 			[dayz_playerUID,dayz_characterID,"Survivor4_DZ"] spawn player_humanityMorph;
+		};
+	};
+	
+	if (_humanity >= 30000 and !_isSaint) then {
+		_isBandit = false;
+        _isHero = false;
+        _isGuardian = false;
+        _isAssassin = false;
+        _isSaint = true;
+        _isReaper = false;
+		_model = typeOf player;
+		if ((_model == "Survivor2_DZ") or (_model == "Bandit1_DZ") or (_model == "Bandit2_DZ") or (_model == "Bandit3_DZ") or (_model == "Survivor3_DZ") or (_model == "Survivor4_DZ")) then {
+			[dayz_playerUID,dayz_characterID,"Survivor5_DZ"] spawn player_humanityMorph;
+		};
+	};
+    
+	if (_humanity <= -30000 and !_isReaper) then {
+		_isBandit = false;
+        _isHero = false;
+        _isGuardian = false;
+        _isAssassin = false;
+        _isSaint = false;
+        _isReaper = true;
+		_model = typeOf player;
+		if ((_model == "Survivor2_DZ") or (_model == "Survivor4_DZ") or (_model == "Bandit1_DZ") or (_model == "Bandit2_DZ") or (_model == "Survivor3_DZ") or (_model == "Survivor5_DZ")) then {
+			[dayz_playerUID,dayz_characterID,"Bandit3_DZ"] spawn player_humanityMorph;
 		};
 	};
 	
@@ -347,7 +387,9 @@ while {true} do {
 	setGroupIconsVisible [false,false];
 	clearGroupIcons group player;
 	*/
-	"colorCorrections" ppEffectAdjust [1, 1, 0, [1, 1, 1, 0.0], [1, 1, 1, (r_player_blood/r_player_bloodTotal)],  [1, 1, 1, 0.0]];
+    _bloodVal = (r_player_blood/r_player_bloodTotal) * 2;
+    if (_bloodVal > 1) then { _bloodVal = 1; };
+	"colorCorrections" ppEffectAdjust [1, 1, 0, [1, 1, 1, 0.0], [1, 1, 1, _bloodVal],  [1, 1, 1, 0.0]];
 	"colorCorrections" ppEffectCommit 0;
 	sleep 1;
 	
@@ -458,17 +500,14 @@ while {true} do {
         _nearest = nearestObject [player,"SmokeShellTear"];
         _dist = player distance _nearest;
         if (goggles player != "G_Combat_DZ") then {
-            if ((_dist < 35) and (_dist >= 25) and (!r_player_tearGasOn)) then {
+            if ((_dist < 35) and (_dist >= 25) and (!r_player_tearGasOn) and (!r_player_tranq)) then {
                 "dynamicBlur" ppEffectEnable true; "dynamicBlur" ppEffectAdjust [1]; "dynamicBlur" ppEffectCommit 3; 
-                "colorCorrections" ppEffectAdjust [1, 1, 0, [1, 1, 1, 0.0], [1, 1, 0.2, 1],  [1, 1, 1, 0.0]];"colorCorrections" ppEffectCommit 3;
             };
-            if ((_dist < 25) and (_dist >= 15) and (!r_player_tearGasOn)) then {
+            if ((_dist < 25) and (_dist >= 15) and (!r_player_tearGasOn) and (!r_player_tranq)) then {
                 "dynamicBlur" ppEffectEnable true; "dynamicBlur" ppEffectAdjust [2]; "dynamicBlur" ppEffectCommit 3; 
-                "colorCorrections" ppEffectAdjust [1, 1, 0, [1, 1, 1, 0.0], [1, 1, 0.2, 0.95],  [1, 1, 1, 0.0]];"colorCorrections" ppEffectCommit 3;
             };
-            if ((_dist < 15) and (_dist >= 10) and (!r_player_tearGasOn)) then {
+            if ((_dist < 15) and (_dist >= 10) and (!r_player_tearGasOn) and (!r_player_tranq)) then {
                 "dynamicBlur" ppEffectEnable true; "dynamicBlur" ppEffectAdjust [4]; "dynamicBlur" ppEffectCommit 3;    
-                "colorCorrections" ppEffectAdjust [1, 1, 0, [1, 1, 1, 0.0], [1, 1, 0.2, 0.9],  [1, 1, 1, 0.0]];"colorCorrections" ppEffectCommit 3;
             };
             if ((_dist < 10)) then {
                 if (!r_player_tearGasOn) then {
@@ -478,23 +517,28 @@ while {true} do {
                             if (r_player_tearGasCount >= 30) exitWith {
                                 r_player_tearGasCount = 0;
                                 r_player_tearGasOn = false;
+                                if (!r_player_tranq) then {
+                                "dynamicBlur" ppEffectEnable true; "dynamicBlur" ppEffectAdjust [0]; "dynamicBlur" ppEffectCommit 5;
+                                };
                             };
-                            "dynamicBlur" ppEffectEnable true; "dynamicBlur" ppEffectAdjust [8]; "dynamicBlur" ppEffectCommit 2; 
-                            "colorCorrections" ppEffectAdjust [1, 1, 0, [1, 1, 1, 0.0], [1, 1, 0.2, 0.8],  [1, 1, 1, 0.0]];"colorCorrections" ppEffectCommit 2;
-                            addCamShake [5, 0.5, 25];
-                            r_player_tearGasCount = r_player_tearGasCount + 1;
+                            if (!r_player_tranq) then {
+                                "dynamicBlur" ppEffectEnable true; "dynamicBlur" ppEffectAdjust [10]; "dynamicBlur" ppEffectCommit 2; 
+                                addCamShake [5, 0.5, 25];
+                                r_player_tearGasCount = r_player_tearGasCount + 1;
+                            };
                             sleep 2;
                         };
                     };
                 };
             };
         } else {
-            "dynamicBlur" ppEffectEnable true; "dynamicBlur" ppEffectAdjust [0.5]; "dynamicBlur" ppEffectCommit 1; 
+            if ((!r_player_tearGasOn) and (!r_player_tranq)) then {
+                "dynamicBlur" ppEffectEnable true; "dynamicBlur" ppEffectAdjust [0.5]; "dynamicBlur" ppEffectCommit 1; 
+            };
         };
     } else {
-        if (r_player_clear) then {
-            "dynamicBlur" ppEffectAdjust [0]; "dynamicBlur" ppEffectCommit 5;
-            "colorCorrections" ppEffectAdjust [1, 1, 0, [1, 1, 1, 0.0], [1, 1, 1, 1],  [1, 1, 1, 1]];"colorCorrections" ppEffectCommit 5;
+        if (r_player_clear and !r_player_tranq) then {
+            "dynamicBlur" ppEffectEnable true; "dynamicBlur" ppEffectAdjust [0]; "dynamicBlur" ppEffectCommit 5;
             r_player_clear = false;
         };
     };

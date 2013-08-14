@@ -8,6 +8,7 @@ private["_unit","_humanityHit","_myKills","_isBandit","_hit","_damage","_isPlaye
 _unit = _this select 0;
 _hit = _this select 1;
 _damage = _this select 2;
+if (isNil "_damage") then { _damage = 0.1; };
 _unconscious = _unit getVariable ["NORRN_unconscious", false];
 _source = _this select 3;
 _ammo = _this select 4;
@@ -43,7 +44,7 @@ if (_isPlayer) then {
 	};
 };
 */
-
+if (_type != 3) then {
 if (_unitIsPlayer) then {
 	if (_hit == "") then {
 		if ((_source != player) and _isPlayer) then {			
@@ -67,7 +68,7 @@ if (_unitIsPlayer) then {
 
 //PVP Damage
 _scale = 200;
-if (_damage > 0.2) then {
+if (_damage > 0.1) then {
 	if (_ammo != "zombie") then {
 		_scale = _scale + 1000;
 	};
@@ -83,12 +84,16 @@ if (_damage > 0.2) then {
 	switch (_type) do {
 		case 1: {_scale = _scale + 900};
 		case 2: {_scale = _scale + 1400};
+		case 3: {_scale = 0};
 	};
 	if (_unitIsPlayer) then {
 		//Cause blood loss
 		//Log Damage
 		//diag_log ("DAMAGE: player hit by " + typeOf _source + " in " + _hit + " with " + _ammo + " for " + str(_damage) + " scaled " + str(_damage * _scale));
 		r_player_blood = r_player_blood - (_damage * _scale);
+        if (_type == 3) then {
+            [player] spawn fnc_usec_tranqvictim;
+        };
 	};
 };
 
@@ -124,7 +129,7 @@ if (_damage > 0.1) then {
 		_unit setVariable["medForceUpdate",true,true];
 	};
 };
-if (_damage > 0.05) then {	//0.25
+if (_damage > 0.1) then {	//0.25
 	/*
 		BLEEDING
 	*/		
@@ -248,4 +253,7 @@ if (_type == 2) then {
 if (!_unconscious and !_isMinor and ((_damage > 2) or ((_damage > 0.5) and _isHeadHit))) then {
 	//set unconsious
 	[_unit,_damage] call fnc_usec_damageUnconscious;
+};
+} else {
+    [_victim] spawn fnc_usec_tranqvictim;
 };

@@ -226,8 +226,9 @@ if (!isDedicated) then {
                 canRoll = false;
                 if ( animationState player in ["amovpercmrunsraswrfldf","amovpknlmevasraswrfldf","amovpercmrunslowwrfldf"] ) exitWith {
                     if (DoRE) then {
-                                [[[player, name player], { if (name player != (_this select 1)) then { (_this select 0) switchMove 'AovrPercMrunSrasWrflDf'; }; }], "BIS_fnc_spawn", true, false] call BIS_fnc_MP;
-                                player switchMove 'AovrPercMrunSrasWrflDf';
+                        player switchMove 'AovrPercMrunSrasWrflDf';
+                        dayzSwitchMove = [player,"AovrPercMrunSrasWrflDf"];
+                        publicVariable "dayzSwitchMove";
                     } else {
                         player switchMove 'AovrPercMrunSrasWrflDf';
                     };
@@ -236,8 +237,9 @@ if (!isDedicated) then {
                 };
                 if ( animationState player in ["amovpercmevasraswrfldf","amovpercmevaslowwrfldf"] ) exitWith {
                     if (DoRE) then {
-                                [[[player, name player], { if (name player != (_this select 1)) then { (_this select 0) switchMove 'ActsPercMrunSlowWrflDf_FlipFlopPara'; }; }], "BIS_fnc_spawn", true, false] call BIS_fnc_MP;
-                                player switchMove 'ActsPercMrunSlowWrflDf_FlipFlopPara';
+                        player switchMove 'ActsPercMrunSlowWrflDf_FlipFlopPara';
+                        dayzSwitchMove = [player,"ActsPercMrunSlowWrflDf_FlipFlopPara"];
+                        publicVariable "dayzSwitchMove";
                     } else {
                         player switchMove 'ActsPercMrunSlowWrflDf_FlipFlopPara';
                     };
@@ -309,6 +311,22 @@ if (!isDedicated) then {
 		_handled
 	};
 	
+    unit_dropWeapon = {
+        _array = _this select 0;
+        _unit = _array select 0;
+        
+        _currentGun = currentWeapon _unit;
+        _currentMag = currentMagazine _unit;
+        
+        if (_currentGun != "") then {
+            _item = createVehicle ["WeaponHolder", getPos player, [], 1, "CAN_COLLIDE"];
+            _item addWeaponCargoGlobal [_currentGun,1];
+            if (_currentMag != "") then {
+                _item addMagazineCargoGlobal [_currentMag,1];
+            };
+            _unit removeWeapon _currentGun;
+        };
+    };
 	
 	player_serverModelChange = {
 		private["_object","_model"];
@@ -417,6 +435,8 @@ if (!isDedicated) then {
 	object_delLocal =			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\object_delLocal.sqf";
 	object_cargoCheck =			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\object_cargoCheck.sqf";		//Run by the player or server to monitor changes in cargo contents
 	fnc_usec_damageHandler =	compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\fn_damageHandler.sqf";		//Event handler run on damage
+    fnc_usec_tranqvictim =      compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\fn_dropvictim.sqf";          //Knocks the victim of a tranquilizer out
+    fnc_usec_switchMove =       compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\fn_switchMove.sqf";
 	// Vehicle damage fix
 	vehicle_handleDamage    = compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\vehicle_handleDamage.sqf";
 	vehicle_handleKilled    = compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\vehicle_handleKilled.sqf";

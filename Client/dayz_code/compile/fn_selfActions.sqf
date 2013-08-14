@@ -143,7 +143,7 @@ if (!isNull cursorTarget and !_inVehicle and (player distance cursorTarget < 4))
 	_isDog =  (cursorTarget isKindOf "DZ_Pastor" || cursorTarget isKindOf "DZ_Fin");
 	_isZombie = cursorTarget isKindOf "zZombie_base";
 	_isPlayer = typeOf cursorTarget in AllPlayers_A3;
-	_hasClothes = typeOf cursorTarget in ["Camo1_DZ","Sniper1_DZ","Bandit1_DZ","Survivor2_DZ","Survivor3_DZ","Survivor4_DZ","Bandit2_DZ"];
+	_hasClothes = typeOf cursorTarget in ["Camo1_DZ","Sniper1_DZ","Bandit1_DZ","Survivor2_DZ","Survivor3_DZ","Survivor4_DZ","Bandit2_DZ","Bandit3_DZ","Survivor5_DZ","SurvivorR_DZ","SurvivorB_DZ","Ranger_DZ"];
 	_isDestructable = cursorTarget isKindOf "BuiltItems";
 	_isTent = cursorTarget isKindOf "TentStorage";
 	_isFuel = false;

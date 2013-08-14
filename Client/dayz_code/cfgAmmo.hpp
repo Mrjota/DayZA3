@@ -52,4 +52,6 @@ class CfgAmmo {
         model = "\A3\Weapons_f\ammo\smokegrenade_yellow";
         smokecolor[] = {0.9883, 0.8606, 0.5882, 0.4};
     };
+    class B_9x18_SD;
+    class B_9x18_Tranq: B_9x18_SD {};
 };

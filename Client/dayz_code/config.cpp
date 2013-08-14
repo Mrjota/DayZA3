@@ -41,7 +41,7 @@ class CfgMods
 		hidePicture = 0;
 		hideName = 0;
 		action = "http://www.zoombiesmod.com";
-		version = "0.1.6.1";
+		version = "0.1.6.2";
 		hiveVersion = 0.96; //0.93
 	};
 	class DZ_InitWorld
@@ -334,7 +334,11 @@ class CfgBuildingLoot {
 			{"DZ_Czech_Vest_Pouch_A3","backpack"},
 			{"DZ_ALICE_Pack_A3","backpack"},
 			{"DZ_TK_Assault_Pack_A3","backpack"},
-			{"ItemATent","magazine"}
+			{"ItemATent","magazine"},
+			{"k98scope_DZ","weapon"},
+			{"k98_DZ","weapon"},
+			{"Skin_SurvivorR_DZ","magazine"},
+			{"Skin_Ranger_DZ","magazine"}
 		};
 		itemChance[] =	{
 			0.01,
@@ -348,7 +352,7 @@ class CfgBuildingLoot {
 			0.08,
 			0.06,
 			2,
-			0.06,
+			0.09,
 			0.04,
 			0.01,
 			0.04,
@@ -365,6 +369,10 @@ class CfgBuildingLoot {
             0.05,
             0.02,
             0.02,
+            0.01,
+			0.04,
+			0.05,
+            0.03,
             0.01
 		};		
 	};
@@ -431,13 +439,16 @@ class CfgBuildingLoot {
 			{"MeleeHatchet","weaponNA"},
 			{"MR43","weapon"},
 			{"MeleeMachete","weaponNA"},
-			{"hgun_ACPC2_F","weapon"}
+			{"hgun_ACPC2_F","weapon"},
+			{"k98scope_DZ","weapon"},
+			{"k98_DZ","weapon"},
+			{"Skin_SurvivorR_DZ","magazine"}
 		};
 		itemChance[] =	{
 			0.06,
 			0.28,
 			0.01,
-			0.04,
+			0.06,
 			0.03,
 			0.22,
 			0.03,
@@ -445,7 +456,10 @@ class CfgBuildingLoot {
 			0.17,
 			0.06,
 			0.1,
-            0.05
+            0.05,
+			0.02,
+			0.03,
+            0.01
 		};
 	};
 	class Supermarket: Default {
@@ -481,7 +495,11 @@ class CfgBuildingLoot {
 			{"DZ_Czech_Vest_Pouch_A3","backpack"},
 			{"DZ_ALICE_Pack_A3","backpack"},
 			{"DZ_TK_Assault_Pack_A3","backpack"},
-			{"ItemATent","magazine"}
+			{"ItemATent","magazine"},
+			{"k98scope_DZ","weapon"},
+			{"k98_DZ","weapon"},
+			{"Skin_SurvivorB_DZ","magazine"},
+			{"Skin_Ranger_DZ","magazine"}
 		};
 		itemChance[] =	{
 			0.15,
@@ -510,7 +528,11 @@ class CfgBuildingLoot {
             0.05,
             0.025,
             0.025,
-            0.05
+            0.05,
+			0.01,
+			0.01,
+            0.05,
+            0.04
 		};
 	};
 	class HeliCrash: Default {
@@ -937,7 +959,8 @@ class CfgBuildingLoot {
 			{"huntingrifle_DZ","weapon"},
 			{"","hunter"},
 			{"DZ_DJ_Pack_A3","backpack"}, // 24
-			{"hgun_ACPC2_F","weapon"}
+			{"hgun_ACPC2_F","weapon"},
+			{"Skin_Ranger_DZ","magazine"}
 		};
 		itemChance[] =	{
 			0.08,
@@ -950,7 +973,8 @@ class CfgBuildingLoot {
 			0.04,
 			3.00,
             0.004,
-            0.05
+            0.05,
+            0.02
 		};
 	};	
 	class Church: Residential {

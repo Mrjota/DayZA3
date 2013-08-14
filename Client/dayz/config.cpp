@@ -52667,10 +52667,16 @@ class CfgVehicles {
 		moves = "CfgMovesZombie";
 		isMan = false;
 		weapons[] = {};
-		magazines[] = {};
 		sensitivity = 4;	// sensor sensitivity
 		sensitivityEar = 2;
 		identityTypes[] = {"zombie1", "zombie2"};
+        
+		Items[] = {};
+		RespawnItems[] = {};
+		magazines[] = {};
+		respawnMagazines[] = {};
+		linkedItems[] = {"V_PlateCarrier1_rgr_AiA"};
+		respawnLinkedItems[] = {};
 		
 		class TalkTopics {};
 		languages[] = {};
@@ -52832,7 +52838,8 @@ class CfgVehicles {
 	class z_hunter : zZombie_Base {
 		model = "\ca\characters2\civil\Woodlander\Woodlander";
 		zombieLoot = "hunter";
-		hiddenSelections[] = {"Camo"};
+		hiddenSelections[] = {};
+		hiddenSelectionsTextures[] = {};
 		
 		class Wounds {
 			tex[] = {};
@@ -52843,8 +52850,8 @@ class CfgVehicles {
 	class z_villager1 : zZombie_Base {
 		zombieLoot = "civilian";
 		model = "\ca\characters2\civil\Villager\Villager";
-		hiddenSelections[] = {"Camo"};
-		hiddenSelectionsTextures[] = {"\ca\characters2\civil\villager\data\villager_co.paa"};
+		hiddenSelections[] = {};
+		hiddenSelectionsTextures[] = {};
 		
 		class Wounds {
 			tex[] = {};
@@ -52873,12 +52880,17 @@ class CfgVehicles {
 		displayName = "Zombie Survivor";
 		model = "\dayz\characters\man_survivor";
 		zombieLoot = "military";
+	hiddenselections[] = {"Camo"};
+	hiddenselectionstextures[] = {"ca\characters_pmc\frost\data\frost_co.paa"};
+		
 	};
 	
 	class z_hero : zZombie_Base {
 		displayName = "Zombie Survivor";
 		model = "\dayz\characters\man_hero";
 		zombieLoot = "military";
+		hiddenSelections[] = {};
+		hiddenSelectionsTextures[] = {};
 	};
 	
 	class z_soldier : zZombie_Base {

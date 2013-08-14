@@ -11,7 +11,6 @@ class CfgVehicles {
 		moves = "CfgMovesZombie";
 		isMan = false;
 		weapons[] = {};
-		magazines[] = {};
 		sensitivity = 4;	// sensor sensitivity
 		sensitivityEar = 2;
 		identityTypes[] = {"zombie1","zombie2"};
@@ -21,6 +20,13 @@ class CfgVehicles {
 		faceType = "Man";
 		class TalkTopics {};
 		languages[] = {};
+        
+		Items[] = {};
+		RespawnItems[] = {};
+		magazines[] = {};
+		respawnMagazines[] = {};
+		linkedItems[] = {"V_PlateCarrier1_rgr_AiA"};
+		respawnLinkedItems[] = {};
 		
 		class Eventhandlers {
 			init = "_this call zombie_initialize;";
@@ -613,7 +619,12 @@ class CfgVehicles {
 		faceType = "Man";
 		hiddenSelections[] = {"_middlearm", "_lowerroll", "_middleroll"};
 		displayName = "$STR_CHAR_2";
-        linkeditems[] = {};
+        
+		Items[] = {};
+		RespawnItems[] = {};
+		linkedItems[] = {};
+		respawnLinkedItems[] = {};
+        
 		side = 1;
 		weapons[] = {"Throw","Put","Throw_DZ"};
 		model = "\dayz\characters\man_bandit";
@@ -639,6 +650,12 @@ class CfgVehicles {
 		magazines[] = {};
 		respawnWeapons[] = {"Throw","Put","Throw_DZ"};
 		respawnMagazines[] = {};
+        
+		Items[] = {};
+		RespawnItems[] = {};
+		linkedItems[] = {};
+		respawnLinkedItems[] = {};
+        
 		weaponSlots = "1	 + 	4	 + 12*		256	 + 2*	4096	 + 	2	 + 8*	16  + 12*131072";
 		canHideBodies = 1;
 	};
@@ -651,8 +668,53 @@ class CfgVehicles {
 		magazines[] = {};
 		respawnWeapons[] = {"Throw","Put","Throw_DZ"};
 		respawnMagazines[] = {};
+        
+		Items[] = {};
+		RespawnItems[] = {};
+		linkedItems[] = {};
+		respawnLinkedItems[] = {};
+        
 		weaponSlots = "1	 + 	4	 + 12*		256	 + 2*	4096	 + 	2	 + 8*	16  + 12*131072";
 		canHideBodies = 1;
+	};
+    class US_Soldier_SniperH_EP1;
+	class Sniper2_DZ: US_Soldier_SniperH_EP1 {
+        scope = 2;
+		identityTypes[] = {"Language_BAF","Language_EN_EP1","USMC_Glasses","PMC_Glasses_PMC"};
+		faceType = "Man";
+		displayName = "Sniper";
+        hiddenselections[] = {"Camo"};
+        hiddenselectionstextures[] = {"\ca\characters_E\Ghillie\Data\ghillie_overall1_desert_co.paa"};
+        vehicleclass = "Men";
+        
+		Items[] = {};
+		RespawnItems[] = {};
+		linkedItems[] = {};
+		respawnLinkedItems[] = {};
+        
+        
+        model = "\ca\characters_E\Ghillie\Ghillie_Overall";
+        picture = "\Ca\characters\data\Ico\i_null_CA.paa";
+        portrait = "\Ca\characters\data\portraits\comBarHead_common_sniper_ca";
+        accuracy = 3.9;
+        camouflage = 0.5;
+        textplural = "Snipers";
+        textsingular = "Sniper";
+        cancarrybackpack = 1;
+        faction = PMC_BAF;
+        
+		side = 1;
+		weapons[] = {"Throw","Put","Throw_DZ"};
+		backpack = "";
+		magazines[] = {};
+		respawnWeapons[] = {"Throw","Put","Throw_DZ"};
+		respawnMagazines[] = {};
+		weaponSlots = "1	 + 	4	 + 12*		256	 + 2*	4096	 + 	2	 + 8*	16  + 12*131072";
+		canHideBodies = 1;
+        class Wounds {
+            mat[] = {"ca\characters\data\us_hhl.rvmat", "ca\characters\data\us_hhl_wound1.rvmat", "ca\characters\data\us_hhl_wound2.rvmat"};
+            tex[] = {};
+        };
 	};
 	class BAF_Soldier_SniperH_W;
 	class Sniper1_DZ: BAF_Soldier_SniperH_W {
@@ -663,7 +725,12 @@ class CfgVehicles {
         hiddenselections[] = {"Camo"};
         hiddenselectionstextures[] = {"\ca\characters_W_baf\data\Ghillie_Overall2_co.paa","\ca\characters_W_baf\data\armour_dpm_co.paa","\ca\characters_W_baf\data\equip_dpm_co.paa"};
         vehicleclass = "MenW";
-        linkeditems[] = {};
+        
+		Items[] = {};
+		RespawnItems[] = {};
+		linkedItems[] = {};
+		respawnLinkedItems[] = {};
+        
         
         model = "\ca\characters_e\Ghillie\Ghillie_Overall";
         picture = "\Ca\characters\data\Ico\i_null_CA.paa";
@@ -696,7 +763,11 @@ class CfgVehicles {
         hiddenselections[] = {"Camo","Camo2","Camo3"};
         hiddenselectionstextures[] = {"\ca\characters_W_baf\data\camo_dpm_co.paa","\ca\characters_W_baf\data\armour_dpm_co.paa","\ca\characters_W_baf\data\equip_dpm_co.paa"};
         vehicleclass = "MenW";
-        linkeditems[] = {};
+        
+		Items[] = {};
+		RespawnItems[] = {};
+		linkedItems[] = {};
+		respawnLinkedItems[] = {};
         
         icon = "\Ca\characters2\data\icon\i_soldier_CA.paa";
         model = "\ca\characters_d_BAF\BAF_Soldier_light_BAF";
@@ -719,6 +790,43 @@ class CfgVehicles {
 		canHideBodies = 1;
         class Wounds {
             mat[] = {"ca\characters_d_baf\Data\armour.rvmat","ca\characters_d_baf\Data\W1_armour.rvmat","ca\characters_d_baf\Data\W2_armour.rvmat","ca\characters_d_baf\Data\camo.rvmat","ca\characters_d_baf\Data\W1_camo.rvmat", "ca\characters_d_baf\Data\W2_camo.rvmat"};
+            tex[] = {};
+        };
+	};	
+    class GUE_Commander;
+	class Ranger_DZ: GUE_Commander {
+        scope = 2;
+        displayName = "Ranger";
+        languages[] = {};
+		identityTypes[] = {"Head_GUE"};
+		faceType = "Man";
+        vehicleclass = "Men";
+        
+		Items[] = {};
+		RespawnItems[] = {};
+		linkedItems[] = {};
+		respawnLinkedItems[] = {};
+        
+        icon = "\Ca\characters2\data\icon\i_officer_CA.paa";
+        model = "\ca\characters2\IndepIns\Prizrak";
+        picture = "\Ca\characters\data\Ico\i_off_CA.paa";
+        portrait = "\Ca\characters\data\portraits\comBarHead_opFor_ca";
+        accuracy = 2;
+        camouflage = 1.4;
+        cancarrybackpack = 1;
+        expansion = 2;
+        faction = PMC_BAF;
+        
+		side = 1;
+		weapons[] = {"Throw","Put","Throw_DZ"};
+		backpack = "";
+		magazines[] = {};
+		respawnWeapons[] = {"Throw","Put","Throw_DZ"};
+		respawnMagazines[] = {};
+		weaponSlots = "1	 + 	4	 + 12*		256	 + 2*	4096	 + 	2	 + 8*	16  + 12*131072";
+		canHideBodies = 1;
+        class Wounds {
+            mat[] = {"ca\characters2\IndepIns\Data\soldier_khaki.RVmat", "ca\characters2\IndepIns\Data\soldier_khaki_W1.RVmat", "ca\characters2\IndepIns\Data\soldier_khaki_W2.RVmat", "ca\characters2\IndepIns\Data\soldier_flecktarn.RVmat", "ca\characters2\IndepIns\Data\soldier_flecktarn_W1.RVmat", "ca\characters2\IndepIns\Data\soldier_flecktarn_W2.RVmat", "ca\characters2\IndepIns\Data\soldier2_khaki.RVmat", "ca\characters2\IndepIns\Data\soldier2_khaki_W1.RVmat", "ca\characters2\IndepIns\Data\soldier2_khaki_W2.RVmat", "ca\characters2\IndepIns\Data\soldier2_woodland.RVmat", "ca\characters2\IndepIns\Data\soldier2_woodland_W1.RVmat", "ca\characters2\IndepIns\Data\soldier2_woodland_W2.RVmat", "ca\characters2\IndepIns\Data\soldier_mg_khaki.RVmat", "ca\characters2\IndepIns\Data\soldier_mg_khaki_W1.RVmat", "ca\characters2\IndepIns\Data\soldier_mg_khaki_W2.RVmat", "ca\characters2\IndepIns\Data\soldier_mg_flecktarn.RVmat", "ca\characters2\IndepIns\Data\soldier_mg_flecktarn_W1.RVmat", "ca\characters2\IndepIns\Data\soldier_mg_flecktarn_W2.RVmat", "ca\characters2\civil\worker\data\worker.rvmat", "ca\characters2\civil\worker\data\W1_worker.rvmat", "ca\characters2\civil\worker\data\W2_worker.rvmat", "ca\characters2\civil\Woodlander\data\Woodlander.rvmat", "ca\characters2\civil\Woodlander\data\W1_Woodlander.rvmat", "ca\characters2\civil\Woodlander\data\W2_Woodlander.rvmat", "ca\characters2\Civil\Villager\Data\villager.RVmat", "ca\characters2\Civil\Villager\Data\villager_w1.RVmat", "ca\characters2\Civil\Villager\Data\villager_w2.RVmat", "ca\characters2\IndepIns\Data\prizrak.rvmat", "ca\characters2\IndepIns\Data\W1_prizrak.rvmat", "ca\characters2\IndepIns\Data\W2_prizrak.rvmat", "ca\characters2\IndepIns\Data\soldier_back_khaki.RVmat", "ca\characters2\IndepIns\Data\soldier_back_khaki_W1.RVmat", "ca\characters2\IndepIns\Data\soldier_back_khaki_W2.RVmat", "ca\characters2\IndepIns\Data\soldier_back_woodland.RVmat", "ca\characters2\IndepIns\Data\soldier_back_woodland_W1.RVmat", "ca\characters2\IndepIns\Data\soldier_back_woodland_W2.RVmat", "ca\characters2\Data\ghillie.rvmat", "ca\characters2\Data\w1_ghillie.rvmat", "ca\characters2\Data\w2_ghillie.rvmat", "ca\characters2\IndepIns\Data\soldier_com_flecktarn.RVmat", "ca\characters2\IndepIns\Data\soldier_com_flecktarn_W1.RVmat", "ca\characters2\IndepIns\Data\soldier_com_flecktarn_W2.RVmat", "ca\characters2\IndepIns\Data\soldier_com_khaki.RVmat", "ca\characters2\IndepIns\Data\soldier_com_khaki_W1.RVmat", "ca\characters2\IndepIns\Data\soldier_com_khaki_W2.RVmat"};
             tex[] = {};
         };
 	};	

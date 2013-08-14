@@ -67,7 +67,7 @@ fnc_usec_bulletHit = {
 	private["_commit"];
 	_commit = _this;
 	if (!r_player_unconscious) then {
-    if ((!r_player_tearGasOn) and (player distance (nearestObject [player,"SmokeShellTear"]) > 35)) then {
+    if ((!r_player_tearGasOn) and (player distance (nearestObject [player,"SmokeShellTear"]) > 35) and (!r_player_tranq)) then {
 		"colorCorrections" ppEffectEnable true;"colorCorrections" ppEffectAdjust [1, 1, 0, [1, 1, 1, 0.0], [1, 1, 1, 0.1],  [1, 1, 1, 0.0]];"colorCorrections" ppEffectCommit 0;
 		"dynamicBlur" ppEffectEnable true;"dynamicBlur" ppEffectAdjust [2]; "dynamicBlur" ppEffectCommit 0;
 		addCamShake [5, 0.5, 25];
@@ -89,6 +89,9 @@ fnc_usec_damageType = {
 	if ((_ammo isKindof "B_127x107_Ball") or (_ammo isKindof "B_127x99_Ball")) then {
 		_type = 2;
 	};
+    if (_ammo isKindOf "B_9x18_Tranq") then {
+        _type = 3;
+    };
 	_type;
 };
 

@@ -414,14 +414,6 @@ class FSM
        "" \n
        " _id = _agent addeventhandler [""HandleDamage"",{_this call local_zombieDamage}];" \n
        "" \n
-       "_agent removeWeapon ""ItemMap"";" \n
-       "_agent removeWeapon ""ItemWatch"";" \n
-       "_agent removeWeapon ""ItemCompass"";" \n
-       "removeAllWeapons _agent;" \n
-       "removeAllItems _agent;" \n
-       "removeUniform _agent;" \n
-       "removeAllAssignedItems _agent;" \n
-       "" \n
        "//hint ""run local zombie"";" \n
        "_isSomeone = true;" \n
        "" \n

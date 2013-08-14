@@ -19,6 +19,7 @@ private ["_characterID","_temp","_currentWpn","_magazines","_currentmag","_force
 
 _character = 	_this select 0;
 _backy = backpackItems _character;
+_goggles = goggles _character;
 _otheritems = assignedItems _character;
 _magazines = vestItems _character;
 _currentmag = currentMagazine _character;
@@ -116,7 +117,7 @@ if (_characterID != "0") then {
         _vestMags = vestItems _character;
         waitUntil{!isnil "_vestMags"};
         _arrayM = _magazines + _magArray;
-		_playerGear = [[vest _character] + _weapons + _otheritems ,_arrayM];		
+		_playerGear = [[vest _character] + _weapons + _otheritems + _goggles,_arrayM];		
 		diag_log ("playerGear: " +str(_playerGear) + "_backy gear: " +str(_backy));
 		_backpack = unitBackpack _character;
 		_playerBackp = [typeOf _backpack,getWeaponCargo _backpack,getMagazineCargo _backpack];
@@ -125,7 +126,7 @@ if (_characterID != "0") then {
         _vestMags = vestItems _character;
         waitUntil{!isnil "_vestMags"};
         _arrayM = _magazines + _magArray;
-		_playerGear = [[vest _character] + _weapons + _otheritems ,_arrayM];		
+		_playerGear = [[vest _character] + _weapons + _otheritems + _goggles,_arrayM];		
 		diag_log ("playerGear: " +str(_playerGear) + "_backy gear: " +str(_backy));
 		_backpack = unitBackpack _character;
 		_playerBackp = [typeOf _backpack,getWeaponCargo _backpack,getMagazineCargo _backpack];
@@ -169,7 +170,7 @@ if (_characterID != "0") then {
 		*/
 		_currentWpn = 	currentMuzzle _character;
 		_currentAnim =	animationState _character;
-        if ((animationState player == "sitUnarm_L_idleLoop_inUH1Y") or (animationState player == "amovpsitmstpsnonwnondnon_ground") or (animationState player == "amovpercmstpsnonwnondnon")) then {
+        if ((animationState player == "situnarm_l_idleloop_inuh1y") or (animationState player == "amovpsitmstpsnonwnondnon_ground") or (animationState player == "amovpercmstpsnonwnondnon")) then {
             _currentAnim = "amovpercmstpsnonwnondnon";
         };
 		_config = 		configFile >> "CfgMovesMaleSdr" >> "States" >> _currentAnim;

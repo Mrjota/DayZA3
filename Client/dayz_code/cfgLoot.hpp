@@ -33,7 +33,8 @@ class CfgLoot {
 			"ItemBandage",
 			"ItemPainkiller",
             "SurvivalPack",
-            "9Rnd_45ACP_Mag"
+            "9Rnd_45ACP_Mag",
+            "gms_k98"
 		},
 		{
 			0.09,
@@ -51,6 +52,7 @@ class CfgLoot {
 			0.05,
 			0.06,
 			0.06,
+            0.01,
             0.01,
             0.01
 		}
@@ -122,7 +124,8 @@ food[] = {
                         "Chemlight_red",
                         "Chemlight_green",
 			"ItemHeatPack",
-            "9Rnd_45ACP_Mag"
+            "9Rnd_45ACP_Mag",
+            "gms_k98"
 		},
 		{
 			0.06,
@@ -153,7 +156,8 @@ food[] = {
 			0.01,
             0.01,
 			0.04,
-            0.03
+            0.03,
+            0.02
 		}
 	};
 	medical[] = {
@@ -246,7 +250,8 @@ food[] = {
             "75Rnd_545x39_RPK",
             "9Rnd_45ACP_Mag",
             "16Rnd_9x21_Mag",
-            "30Rnd_65x39_caseless_mag"
+            "30Rnd_65x39_caseless_mag",
+            "gms_k98"
 		},
 		{
 			0.18,
@@ -294,7 +299,8 @@ food[] = {
             0.01,
             0.05,
             0.01,
-            0.03
+            0.03,
+            0.05
 		}
 	};
 	policeman[] = {
@@ -310,7 +316,8 @@ food[] = {
                         "Chemlight_red",
                         "Chemlight_green",
                         "SurvivalPack",
-            "9Rnd_45ACP_Mag"
+            "9Rnd_45ACP_Mag",
+            "gms_k98"
 		},
 		{
 			1,
@@ -323,7 +330,8 @@ food[] = {
 			0.01,
             0.01,
             0.01,
-            0.03
+            0.03,
+            0.02
 		}
 	};
 	hunter[] = {
@@ -337,7 +345,8 @@ food[] = {
 			"ItemHeatPack",
 			"FoodMRE",
 			"FoodNutmix",
-            "9Rnd_45ACP_Mag"
+            "9Rnd_45ACP_Mag",
+            "gms_k98"
 		},
 		{
 			1,
@@ -349,7 +358,8 @@ food[] = {
 			0.2,
 			0.04,
 			0.1,
-            0.02
+            0.02,
+            0.05
 		}
 	};
 };

@@ -124,6 +124,12 @@ class CfgWeapons {
 			};          
 		};
 	}; 
+    class MakarovSD;
+    class TranqSD: MakarovSD {
+        displayname = "Tranquilizing Makarov";
+        magazines[] = {"2Rnd_9x18_Tranq"};
+    };
+    
     class Throw_DZ: GrenadeLauncher {
         autoaimenabled = 0;
         candrop = 0;

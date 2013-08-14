@@ -41,6 +41,9 @@ _hasAntibiotic =	"ItemAntibiotic" in magazines player;
 _hasClothes1 = 		"Skin_Sniper1_DZ" in magazines player; //Ghillie
 _hasClothes2 = 		"Skin_Camo1_DZ" in magazines player; //Camo
 _hasClothes3 = 		"Skin_Survivor2_DZ" in magazines player; //Survivor
+_hasClothes4 = 		"Skin_SurvivorR_DZ" in magazines player; //Survivor
+_hasClothes5 = 		"Skin_SurvivorB_DZ" in magazines player; //Survivor
+_hasClothes6 = 		"Skin_Ranger_DZ" in magazines player; //Ranger
 _hasHatchet =       "MeleeHatchet" in weapons player;
 _hasMRE =		"FoodMRE" in magazines player;
 //FOOD
@@ -335,11 +338,12 @@ if (_canPickLightR and !dayz_hasLight) then {
 		dayz_mre = -1;
 		dayz_mre2 = player addAction [format["<t color='#FF0000'>Use MRE%1</t>"], "\z\addons\dayz_code\actions\player_mre.sqf",[], 1, false, true, "", "player == player"];
 		
-		}; if ((r_player_blood >= 10000) and (dayz_mre < 0)) then {
+		};
+        if ((r_player_blood >= 10000) and (dayz_mre < 0)) then {
 		player removeAction dayz_mre2;
 		dayz_mre2 = -1;
 		if((dayz_hunger >= 270) or (dayz_thirst >= 180)) then {
-			dayz_mre2 = player addAction [format["<t color='#FF0000'>Use MRE%1</t>"], "\z\addons\dayz_code\actions\player_mre.sqf",[], 1, false, true, "", "player == player"];
+			dayz_mre = player addAction [format["<t color='#FF0000'>Use MRE%1</t>"], "\z\addons\dayz_code\actions\player_mre.sqf",[], 1, false, true, "", "player == player"];
 		};
 		};
 	} else {
@@ -407,7 +411,7 @@ if (_canPickLightR and !dayz_hasLight) then {
 	};
 		
 	//Allow changing of clothes
-	if(_vehicle == player and (_hasClothes1 or _hasClothes2 or _hasClothes3) and _canDo) then {
+	if(_vehicle == player and (_hasClothes1 or _hasClothes2 or _hasClothes3 or _hasClothes4 or _hasClothes5 or _hasClothes6) and _canDo) then {
 		if((s_doClothes1 < 0) and (_hasClothes1)) then {
 			s_doClothes1 = player addAction [format["<t color='#FF0000'>Wear Ghillie Suit</t>"], "z\addons\dayz_code\actions\player_wearClothes.sqf", ["Skin_Sniper1_DZ"]];
 		};
@@ -417,6 +421,15 @@ if (_canPickLightR and !dayz_hasLight) then {
 		if((s_doClothes3 < 0) and (_hasClothes3)) then {
 			s_doClothes3 = player addAction [format["<t color='#FF0000'>Wear Civilian Clothing</t>"], "z\addons\dayz_code\actions\player_wearClothes.sqf", ["Skin_Survivor2_DZ"]];
 		};
+		if((s_doClothes4 < 0) and (_hasClothes4)) then {
+			s_doClothes4 = player addAction [format["<t color='#FF0000'>Wear Veteran Clothing (Red)</t>"], "z\addons\dayz_code\actions\player_wearClothes.sqf", ["Skin_SurvivorR_DZ"]];
+		};
+		if((s_doClothes5 < 0) and (_hasClothes5)) then {
+			s_doClothes5 = player addAction [format["<t color='#FF0000'>Wear Veteran Clothing (Blue)</t>"], "z\addons\dayz_code\actions\player_wearClothes.sqf", ["Skin_SurvivorB_DZ"]];
+		};
+		if((s_doClothes6 < 0) and (_hasClothes6)) then {
+			s_doClothes6 = player addAction [format["<t color='#FF0000'>Wear Ranger Outfit</t>"], "z\addons\dayz_code\actions\player_wearClothes.sqf", ["Skin_Ranger_DZ"]];
+		};
 	} else	{
 		player removeAction s_doClothes1;
 		s_doClothes1 = -1;
@@ -424,6 +437,12 @@ if (_canPickLightR and !dayz_hasLight) then {
 		s_doClothes2 = -1;
 		player removeAction s_doClothes3;
 		s_doClothes3 = -1;
+		player removeAction s_doClothes4;
+		s_doClothes4 = -1;
+		player removeAction s_doClothes5;
+		s_doClothes5 = -1;
+		player removeAction s_doClothes6;
+		s_doClothes6 = -1;
 	};
 	_hasEpi = 		"ItemEpinephrine" in magazines player;
 	//Allow epi adrenaline
