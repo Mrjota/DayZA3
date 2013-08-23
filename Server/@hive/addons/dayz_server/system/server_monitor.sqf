@@ -122,6 +122,7 @@ diag_log "HIVE: Starting";
 				
 				clearWeaponCargoGlobal  _object;
 				clearMagazineCargoGlobal  _object;
+                clearItemCargoGlobal _object;
 				
 				if (_object isKindOf "TentStorage") then {
 					_pos set [2,0];
