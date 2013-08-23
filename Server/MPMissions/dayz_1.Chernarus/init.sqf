@@ -42,6 +42,7 @@ if ((!isServer) && (player != player)) then
 
 if (isServer) then {
 	_serverMonitor = 	[] execVM "\z\addons\dayz_code\system\server_monitor.sqf";
+    dayz_preloadFinished = true;
 };
 
 if (!isDedicated) then {
@@ -53,4 +54,6 @@ if (!isDedicated) then {
 	//Run the player monitor
 	_id = player addEventHandler ["Respawn", {_id = [] spawn player_death;}];
 	_playerMonitor = 	[] execVM "\z\addons\dayz_code\system\player_monitor.sqf";
+    dayz_preloadFinished = true;
 };
+dayz_preloadFinished = true;

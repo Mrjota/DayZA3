@@ -15,7 +15,7 @@ _hasInvite = false;
 _check = 0;
 
 //Check selected data is valid   			
-if ((typeOf cursorTarget in ["Survivor3_DZ","Survivor4_DZ","Bandit2_DZ","SurvivorW2_DZ","Survivor2_DZ","Sniper1_DZ","Camo1_DZ","BanditW1_DZ","Bandit1_DZ","Bandit3_DZ","Survivor5_DZ","SurvivorB_DZ","SurvivorR_DZ","Ranger_DZ"]) and (player distance cursorTarget <= 5)) then { _target = cursorTarget;_check = 1;_distance = 1; };
+if ((typeOf cursorTarget in ["Survivor3_DZ","Survivor4_DZ","Bandit2_DZ","SurvivorW2_DZ","Survivor2_DZ","Sniper1_DZ","Sniper2_DZ","Camo1_DZ","BanditW1_DZ","Bandit1_DZ","Bandit3_DZ","Survivor5_DZ","Survivor_B","Survivor_R","Ranger_DZ"]) and (player distance cursorTarget <= 5)) then { _target = cursorTarget;_check = 1;_distance = 1; };
 
 //Checks
 if(_check == 0) exitWith{

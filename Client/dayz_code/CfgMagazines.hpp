@@ -174,16 +174,22 @@ class CfgMagazines {
         mass = 1;
 		model = "\dayz_equip\models\soda_coke_e.p3d";
 		picture = "\dayz_equip\textures\equip_soda_empty_ca.paa";
+		descriptionShort = "Empty Can";
+		ammo = "SodaCan";
 	};
 	class ItemSodaPepsiEmpty : ItemSodaEmpty{
         mass = 1;
 		model = "\dayz_equip\models\soda_pepsi_e.p3d";
 		picture = "\dayz_equip\textures\equip_soda_empty_ca.paa";
+		descriptionShort = "Empty Can";
+		ammo = "SodaCan";
 	};
 	class ItemSodaMdewEmpty : ItemSodaEmpty{
         mass = 1;
 		model = "\dayz_equip\models\soda_mdew_e.p3d";
 		picture = "\dayz_equip\textures\equip_soda_empty_ca.paa";
+		descriptionShort = "Empty Can";
+		ammo = "SodaCan";
 	};
 
 	class ItemSodaMtngreen : ItemSodaCoke {
@@ -279,7 +285,8 @@ class CfgMagazines {
         mass = 1;
 		model = "z\addons\dayz_communityassets\models\soda_lemonade_clean_empty.p3d";
 		picture = "\z\addons\dayz_communityassets\pictures\equip_soda_lemonade_clean_empty_ca.paa";
-		//ammo = "SodaCanMtngreen";
+		descriptionShort = "Empty Can";
+		ammo = "SodaCan";
 	};
 /*
 	class ItemSodaLirik : ItemSodaCoke {
@@ -487,7 +494,7 @@ class CfgMagazines {
 		model = "z\addons\dayz_communityassets\models\buiscits_box.p3d";
 		picture = "z\addons\dayz_communityassets\pictures\i_buiscit_ca.paa";
 		descriptionShort = $STR_FOODCOOKED_EQUIP_CODE_DESC_5;
-		bloodRegen = 2000;
+		bloodRegen = 6000;
 	};
 	class FoodMRE : FoodEdible {
         mass = 10;
@@ -904,11 +911,20 @@ class SmokeShellTear: SmokeShell {
 	model = "\A3\Weapons_f\ammo\smokegrenade_yellow";
 	picture = "\A3\Weapons_f\data\ui\gear_smokegrenade_yellow_ca.paa";
 };
+class SmokeShellBio: SmokeShell {
+	ammo = "SmokeShellBio";
+	descriptionshort = "Type: Smoke Grenade - Anti-Bio Hydroflouricidic Gas<br />Deathly acid that's been vaporized<br />and chemically altered to deteriorate<br />dead tissue and organisms while keeping<br />living organisms immune.<br />Rounds: 1<br />Used in: Hand";
+	displayname = "Smoke Grenade (ABHG)";
+	displaynameshort = "ABHGas";
+	model = "\A3\Weapons_f\ammo\smokegrenade_white";
+	picture = "\A3\Weapons_f\data\ui\gear_smokegrenade_white_ca.paa";
+};
 class 8Rnd_9x18_MakarovSD;
 class 2Rnd_9x18_Tranq: 8Rnd_9x18_MakarovSD {
 	descriptionshort = "Rounds: 2 <br/>Used in: Tranquilizing Makarov";
 	displayname = "Tranquilizer Pellets";
 	displaynameshort = "Pellets";
+    ammo = "B_9x18_Tranq";
 	initspeed = 200;
 	count = 2;
 };

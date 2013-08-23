@@ -1,5 +1,6 @@
 // bleed.sqf
 _unit = (_this select 3) select 0;
+_isDead = false;
 if (_unit != player) then {
 _isDead = _unit getVariable["USEC_isDead",false];
 };

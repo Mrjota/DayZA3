@@ -543,7 +543,7 @@ BEGIN
 			AND Classname != 'Hedgehog_DZ'
 			AND Classname != 'Wire_cat1'
 			AND Classname != 'Sandbag1_DZ'
-			AND Classname != 'TrapBear';
+			AND Classname != 'BearTrap_DZ';
 
 #remove tents whose owner has been dead for four days
 	DELETE
@@ -588,7 +588,7 @@ BEGIN
 #remove Bear Traps older than five days
 	DELETE
 		FROM object_data
-		WHERE Classname = 'TrapBear'
+		WHERE Classname = 'BearTrap_DZ'
 			AND DATE(last_updated) < CURDATE() - INTERVAL 5 DAY;
 
 END
@@ -688,8 +688,9 @@ BEGIN
 			AND Classname != 'Hedgehog_DZ'			#exclude hedgehog
 			AND Classname != 'Wire_cat1'				#exclude wirecat
 			AND Classname != 'Sandbag1_DZ'			#exclude Sanbag
-			AND Classname != 'TrapBear'			#exclude trap
-			AND Classname != 'TentStorage';		#exclude TentStorage
+			AND Classname != 'BearTrap_DZ'			#exclude trap
+			AND Classname != 'TentStorage'		#exclude TentStorage
+			AND Classname != 'ACampStorage';		#exclude ACampStorage
 
 		WHILE (iNumVehExisting < iVehSpawnMax) DO		#loop until maximum amount of vehicles is reached
 
@@ -725,8 +726,9 @@ BEGIN
 							AND Classname != 'Hedgehog_DZ'			#exclude hedgehog
 							AND Classname != 'Wire_cat1'				#exclude wirecat
 							AND Classname != 'Sandbag1_DZ'			#exclude Sanbag
-							AND Classname != 'TrapBear'			#exclude trap
-							AND Classname != 'TentStorage';		#exclude TentStorage
+							AND Classname != 'BearTrap_DZ'			#exclude trap
+							AND Classname != 'TentStorage'		#exclude TentStorage
+							AND Classname != 'ACampStorage';		#exclude ACampStorage
 		
 					#update number of same class already spawned
 					SELECT COUNT(*) 

@@ -7,11 +7,11 @@ if (count _inventory > 0) then {
 	//Add weapons
 	{
 		if (_x == "Crossbow") then { _x = "Crossbow_DZ" }; // Convert Crossbow to Crossbow_DZ
-        if (_x in ["V_PlateCarrier1_rgr_AiA","V_PlateCarrier2_rgr","V_PlateCarrierGL_rgr","V_HarnessO_brn","V_HarnessOGL_brn"]) then {
+        if (_x in ["V_PlateCarrier1_rgr_AiA_DZ","V_PlateCarrier2_rgr_DZ","V_PlateCarrierGL_rgr_DZ","V_HarnessO_brn_DZ","V_HarnessOGL_brn_DZ"]) then {
             player addVest _x;
                     diag_log("Adding Vest (gearSet): " + _x);
         } else {
-            if (_x != "NVGoggles") then {                                                                                                       
+            if ((_x != "NVGoggles") and (_x != "G_Combat_DZ")) then {                                                                                                       
                 //Is item legal?
                 _isOK = 	isClass(configFile >> "CfgWeapons" >> _x);
                 if (_isOK) then {

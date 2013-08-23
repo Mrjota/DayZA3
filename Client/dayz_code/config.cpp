@@ -15,6 +15,23 @@
 
 #include "basicdefines.hpp"
 
+class RoadFlareLight {
+	class Light1 {
+		simulation = "light";
+		type = "RoadFlareLight_red";
+	};
+};
+
+class SmokeShellBio {
+	class SmokeShellBio {
+		simulation = "particles";
+		type = "SmokeShellBio";
+		position[] = {0, 0, 0};
+		intensity = 1;
+		interval = 1;
+	};
+};
+
 class CfgPatches {
 	class dayz_code {
 		units[] = {};
@@ -213,8 +230,10 @@ class RscStructuredTextGUI: RscStructuredText
 };
 //#include "CfgWorlds.hpp"
 #include "cfgMoves.hpp"
+#include "CfgCloudlets.hpp"
 #include "rscTitles.hpp"
 #include "CfgVehicles.hpp"
+#include "CfgLights.hpp"
 #include "CfgGlasses.hpp"
 #include "CfgWeapons.hpp"
 #include "CfgMagazines.hpp"
@@ -230,7 +249,7 @@ class CfgSurvival {
 			weapons[] = {"ItemCompass","ItemWatch"};
 			//backpackWeapon = "";
 			backpack = "DZ_Patrol_Pack_A3";
-            vest = "V_PlateCarrier1_rgr_AiA";
+            vest = "V_PlateCarrier1_rgr_AiA_DZ";
 			//backpack = "";
 		};
 	};
@@ -306,6 +325,7 @@ class CfgBuildingLoot {
 		lootChance = 0.4;
 		lootPos[] = {};
 		itemType[] =	{
+            {"G_Combat_DZ","vest"},
 			{"ItemSodaMdew","magazine"},
 			{"ItemWatch","vest"},
 			{"ItemCompass","vest"},
@@ -338,9 +358,11 @@ class CfgBuildingLoot {
 			{"k98scope_DZ","weapon"},
 			{"k98_DZ","weapon"},
 			{"Skin_SurvivorR_DZ","magazine"},
-			{"Skin_Ranger_DZ","magazine"}
+			{"Skin_Ranger_DZ","magazine"},
+			{"Skin_Sniper2_DZ","magazine"}
 		};
 		itemChance[] =	{
+            0.01,
 			0.01,
 			0.15,
 			0.05,
@@ -373,6 +395,7 @@ class CfgBuildingLoot {
 			0.04,
 			0.05,
             0.03,
+            0.01,
             0.01
 		};		
 	};
@@ -401,7 +424,9 @@ class CfgBuildingLoot {
 			{"ItemKnife","magazine"},
 			{"ItemToolbox","magazine"},
 			{"ItemWire","magazine"},
-			{"ItemTankTrap","magazine"}
+			{"ItemTankTrap","magazine"},
+            {"ItemSandbag","magazine"},
+            {"TrapBear","magazine"}
 		};
 		itemChance[] =	{
 			0.18,
@@ -418,7 +443,9 @@ class CfgBuildingLoot {
 			0.07,
 			0.06,
 			0.01,
-			0.04
+			0.04,
+            0.03,
+            0.01
 		};
 	};
 	class Farm: Default {
@@ -442,7 +469,9 @@ class CfgBuildingLoot {
 			{"hgun_ACPC2_F","weapon"},
 			{"k98scope_DZ","weapon"},
 			{"k98_DZ","weapon"},
-			{"Skin_SurvivorR_DZ","magazine"}
+			{"Skin_SurvivorR_DZ","magazine"},
+            {"ItemSandbag","magazine"},
+            {"TrapBear","magazine"}
 		};
 		itemChance[] =	{
 			0.06,
@@ -459,6 +488,8 @@ class CfgBuildingLoot {
             0.05,
 			0.02,
 			0.03,
+            0.01,
+            0.01,
             0.01
 		};
 	};
@@ -469,6 +500,7 @@ class CfgBuildingLoot {
 		zombieChance = 0.3;
 		zombieClass[] = {"zZombie_Base","zZombie_Base","z_teacher","z_suit1","z_suit2","z_survivor","z_hero"};
 		itemType[] = {
+            {"G_Combat_DZ","vest"},
 			{"ItemWatch","vest"},
 			{"ItemCompass","vest"},
 			{"ItemMap","vest"},
@@ -489,8 +521,8 @@ class CfgBuildingLoot {
 			{"Binocular","weapon"},
 			{"PartWoodPile","magazine"},
 			{"MR43","weapon"},
-			{"V_PlateCarrier2_rgr","vest"}, // 20
-			{"V_PlateCarrierGL_rgr","vest"}, // 21.7
+			{"V_PlateCarrier2_rgr_DZ","vest"}, // 20
+			{"V_PlateCarrierGL_rgr_DZ","vest"}, // 21.7
 			{"DZ_Assault_Pack_A3","backpack"},
 			{"DZ_Czech_Vest_Pouch_A3","backpack"},
 			{"DZ_ALICE_Pack_A3","backpack"},
@@ -499,9 +531,12 @@ class CfgBuildingLoot {
 			{"k98scope_DZ","weapon"},
 			{"k98_DZ","weapon"},
 			{"Skin_SurvivorB_DZ","magazine"},
-			{"Skin_Ranger_DZ","magazine"}
+			{"Skin_Ranger_DZ","magazine"},
+            {"ItemSandbag","magazine"},
+            {"TrapBear","magazine"}
 		};
 		itemChance[] =	{
+            0.03,
 			0.15,
 			0.01,
 			0.05,
@@ -532,7 +567,9 @@ class CfgBuildingLoot {
 			0.01,
 			0.01,
             0.05,
-            0.04
+            0.04,
+            0.03,
+            0.03
 		};
 	};
 	class HeliCrash: Default {
@@ -675,6 +712,7 @@ class CfgBuildingLoot {
 		lootChance = 0.4;
 		lootPos[] = {};
 		itemType[] =	{
+            {"G_Combat_DZ","vest"},
 			{"M9","weapon"},
 			{"M16A2","weapon"},
 			{"M16A2GL","weapon"},
@@ -710,10 +748,10 @@ class CfgBuildingLoot {
 			{"Sa58V_EP1","weapon"},
 			{"BAF_L85A2_RIS_Holo","weapon"},
 			{"NVGoggles","vest"},
-			{"V_PlateCarrier2_rgr","vest"}, // 20
-			{"V_PlateCarrierGL_rgr","vest"}, // 21.7
-			{"V_HarnessO_brn","vest"}, // 25.7
-			{"V_HarnessOGL_brn","vest"}, // 28.6
+			{"V_PlateCarrier2_rgr_DZ","vest"}, // 20
+			{"V_PlateCarrierGL_rgr_DZ","vest"}, // 21.7
+			{"V_HarnessO_brn_DZ","vest"}, // 25.7
+			{"V_HarnessOGL_brn_DZ","vest"}, // 28.6
 			{"DZ_ALICE_Pack_A3","backpack"}, // 16
 			{"DZ_TK_Assault_Pack_A3","backpack"}, // 16
 			{"DZ_British_ACU_A3","backpack"}, // 18
@@ -733,9 +771,11 @@ class CfgBuildingLoot {
 			{"PK","weapon"},
 			{"RPK_74","weapon"},
 			{"Rangefinder","weapon"},
-            {"arifle_MXC_F","weapon"}
+            {"arifle_MXC_F","weapon"},
+			{"Skin_Sniper2_DZ","magazine"}
 		};
 		itemChance[] =	{
+            0.05,
 			0.05,
 			0.05,
 			0.01,
@@ -794,7 +834,8 @@ class CfgBuildingLoot {
             0.005,
             0.01,
             0.01,
-            0.03
+            0.03,
+            0.02
 		};
 	};
 	class MilitarySpecial: Default {
@@ -848,10 +889,10 @@ class CfgBuildingLoot {
 			{"Sa58V_CCO_EP1","weapon"},
 			{"M40A3_DZ","weapon"},
 			{"100Rnd_762x54_PK","magazine"},
-			{"V_PlateCarrier2_rgr","vest"}, // 20
-			{"V_PlateCarrierGL_rgr","vest"}, // 21.7
-			{"V_HarnessO_brn","vest"}, // 25.7
-			{"V_HarnessOGL_brn","vest"}, // 28.6
+			{"V_PlateCarrier2_rgr_DZ","vest"}, // 20
+			{"V_PlateCarrierGL_rgr_DZ","vest"}, // 21.7
+			{"V_HarnessO_brn_DZ","vest"}, // 25.7
+			{"V_HarnessOGL_brn_DZ","vest"}, // 28.6
 			{"DZ_ALICE_Pack_A3","backpack"}, // 16
 			{"DZ_TK_Assault_Pack_A3","backpack"}, // 16
 			{"DZ_British_ACU_A3","backpack"}, // 18
@@ -1171,10 +1212,10 @@ class CfgBuildingLoot {
 			{"Sa58V_EP1","weapon"},
 			{"BAF_L85A2_RIS_Holo","weapon"},
 			{"NVGoggles","vest"},
-			{"V_PlateCarrier2_rgr","vest"}, // 20
-			{"V_PlateCarrierGL_rgr","vest"}, // 21.7
-			{"V_HarnessO_brn","vest"}, // 25.7
-			{"V_HarnessOGL_brn","vest"}, // 28.6
+			{"V_PlateCarrier2_rgr_DZ","vest"}, // 20
+			{"V_PlateCarrierGL_rgr_DZ","vest"}, // 21.7
+			{"V_HarnessO_brn_DZ","vest"}, // 25.7
+			{"V_HarnessOGL_brn_DZ","vest"}, // 28.6
 			{"DZ_ALICE_Pack_A3","backpack"}, // 16
 			{"DZ_TK_Assault_Pack_A3","backpack"}, // 16
 			{"DZ_British_ACU_A3","backpack"}, // 18

@@ -89,7 +89,7 @@ while {(server_totalCrashes <= 8)} do {
 	        
 	        _itemChance = [0.02, 0.05,0.02,0.01,0.5,0.01,0.05,0.02,0.03,0.05,0.01,0.06,0.03,0.02,0.01,0.02,0.02,1,0.5,0.02,0.1,0.1,0.08,0.05,0.08,0.08,0.03,0.04,0.02,0.03,0.01,0.03,0.03,0.03];
 	        _weights = [];
-	        _weights = [_itemType,_itemChance] call fnc_buildWeightedArray;
+	        _weights = [_itemTypes,_itemChance] call fnc_buildWeightedArray;
 	        _cntWeights = count _weights;
 	        _index = _weights call BIS_fnc_selectRandom;
 	        //End NEW mechanism

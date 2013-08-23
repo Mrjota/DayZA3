@@ -53,9 +53,13 @@ class cfgWeapons {
 			maxRange = 600;
 			maxRangeProbab = 0.05;
 		};
+        mass = 30;
+        class WeaponSlotsInfo {
+            mass = 30;
+        }
 		aiDispersionCoefY = 7.0;
 		aiDispersionCoefX = 7.0;
-		magazines[] = {"gms_k98_mag"};
+		magazines[] = {"kar98_mag"};
 		
 		class Library {
 			libTextDesc = $STR_LIB_K98;

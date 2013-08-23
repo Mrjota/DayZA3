@@ -18,7 +18,8 @@ if (!((isNil "_object") OR {(isNull _object)})) then {
 	_objectID = _object getVariable ["ObjectID","0"];
 	_uid = _object getVariable ["ObjectUID","0"];
 };
-
+if (isNil "_objectid") then { _objectid = "0"; };
+if (!isNil "_objectid") then {
 if ((typeName _objectID != "string") || (typeName _uid != "string")) then
 { 
     diag_log(format["Non-string Object: ID %1 UID %2", _objectID, _uid]);
@@ -38,6 +39,7 @@ if (!_parachuteWest) then {
 			_object_position select 2]);
 			_isNotOk = true;
 	};
+};
 };
 
 if (_isNotOk) exitWith { deleteVehicle _object; };

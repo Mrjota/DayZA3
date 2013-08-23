@@ -79,6 +79,7 @@ if (_hasPatient and !r_drag_sqf and !r_action and !_inVehicle and !r_player_unco
 		r_player_actions = r_player_actions + [_action1,_action2];
 	};
 	//Load Vehicle
+    /*
 	if (_hasVehicle and _unconscious) then {
 		_x = 0;
 		r_action = true;
@@ -92,7 +93,7 @@ if (_hasPatient and !r_drag_sqf and !r_action and !_inVehicle and !r_player_unco
 		_action = _unit addAction [format[localize "str_actions_medical_03",_vehType], "\z\addons\dayz_code\medical\load\load_act.sqf",[player,_vehicle,_unit], 0, true, true];
 		r_player_actions set [count r_player_actions,_action];
 	};
-
+    */
 	//Allow player to bandage
 	if(_injured and _hasBandage) then {
 		r_action = true;
@@ -150,6 +151,7 @@ if (_hasPatient and !r_drag_sqf and !r_action and !_inVehicle and !r_player_unco
 		};
         
 		//CAN WE ISSUE ANOTHER KIND OF AMMUNITION?
+        /*
 		if (count weapons _unit > 0) then {
 			//Get mag array
 			_weapon = weapons _unit select 0;
@@ -169,6 +171,7 @@ if (_hasPatient and !r_drag_sqf and !r_action and !_inVehicle and !r_player_unco
 				};
 			} forEach _magTypes;
 		};
+        */
         /*
 		if ((_type in USEC_PackableObjects) and (_classbag == "")) then {
 			r_action = true;

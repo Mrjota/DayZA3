@@ -5,21 +5,16 @@ class CfgVehicles {
 		
 	class Bandit3_DZ : US_Delta_Force_EP1 {
 		displayName = "Reaper";
-		accuracy = 1000;	// accuracy needed to recognize type of this target
+        accuracy = 3.9;
+        camouflage = 0.5;
 		faceType = "Man";
 		scope = public;
 		faction = PMC_BAF;
 		canCarryBackPack = 1;
 		vehicleClass = "Men";
-		camouflage = 0.6;	// how dificult to spot - bigger - better spotable
 		model = "bb_oa_mercs\desert_blackop.p3d";
 		identityTypes[] = {"Language_BAF","Language_EN_EP1","USMC_Glasses","PMC_Glasses_PMC"};
-		hiddenSelections[] = {"Camo"};
-		hiddenSelectionsTextures[] = {"ca\weapons\data\m9_beretta_co"};
 		
-		class EventHandlers {
-			init = "[_this select 0] execvm ""\bb_oa_mercs\scripts\init.sqf""";
-		};
 		enableGPS = 1;
 		
 		Items[] = {};
@@ -44,18 +39,12 @@ class CfgVehicles {
 		faction = PMC_BAF;
 		scope = public;
 		vehicleClass = "Men";
-		camouflage = 0.6;	// how dificult to spot - bigger - better spotable
 		displayName = "Guardian";
 		identityTypes[] = {"Language_BAF","Language_EN_EP1","USMC_Glasses","PMC_Glasses_PMC"};
-		accuracy = 1000;	// accuracy needed to recognize type of this target
+        accuracy = 3.9;
+        camouflage = 0.5;
 		enableGPS = 1;
 		model = "bb_oa_mercs\merc_oa_at.p3d";
-		hiddenSelections[] = {"camo"};
-		hiddenSelectionsTextures[] = {"\ca\weapons\colt1911\data\colt1911_body_co"};
-		
-		class EventHandlers {
-			init = "[_this select 0] execvm ""\bb_oa_mercs\scripts\init.sqf""";
-		};
         
 		Items[] = {};
 		RespawnItems[] = {};

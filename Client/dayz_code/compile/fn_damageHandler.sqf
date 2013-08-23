@@ -44,7 +44,7 @@ if (_isPlayer) then {
 	};
 };
 */
-if (_type != 3) then {
+if (_type < 3) then {
 if (_unitIsPlayer) then {
 	if (_hit == "") then {
 		if ((_source != player) and _isPlayer) then {			
@@ -67,10 +67,10 @@ if (_unitIsPlayer) then {
 };
 
 //PVP Damage
-_scale = 200;
+_scale = 2000;
 if (_damage > 0.1) then {
 	if (_ammo != "zombie") then {
-		_scale = _scale + 1000;
+		_scale = _scale + 1500;
 	};
 	if (_isHeadHit) then {
 		_scale = _scale + 1400;
@@ -90,7 +90,12 @@ if (_damage > 0.1) then {
 		//Cause blood loss
 		//Log Damage
 		//diag_log ("DAMAGE: player hit by " + typeOf _source + " in " + _hit + " with " + _ammo + " for " + str(_damage) + " scaled " + str(_damage * _scale));
-		r_player_blood = r_player_blood - (_damage * _scale);
+		if (_ammo != "zombie") then {
+            _damage = _damage + 0.3;
+        };
+        if (_hit != "") then {
+        r_player_blood = r_player_blood - (_damage * _scale);
+        };
         if (_type == 3) then {
             [player] spawn fnc_usec_tranqvictim;
         };
@@ -129,7 +134,7 @@ if (_damage > 0.1) then {
 		_unit setVariable["medForceUpdate",true,true];
 	};
 };
-if (_damage > 0.1) then {	//0.25
+if ((_damage > 0.1) and (_hit != "")) then {	//0.25
 	/*
 		BLEEDING
 	*/		
@@ -255,5 +260,31 @@ if (!_unconscious and !_isMinor and ((_damage > 2) or ((_damage > 0.5) and _isHe
 	[_unit,_damage] call fnc_usec_damageUnconscious;
 };
 } else {
-    [_victim] spawn fnc_usec_tranqvictim;
+    if (_type == 3) then {
+        if (_unitIsPlayer) then {
+            [player] spawn fnc_usec_tranqvictim;
+        };
+    } else {
+        if (_unitIsPlayer and _isHeadHit) then {
+            [player] spawn {
+                _victim = _this select 0;
+                if (animationState _victim in ["amovppnemrunsnonwnondf","amovppnemstpsnonwnondnon","amovppnemstpsraswrfldnon","amovppnemsprslowwrfldf","aidlppnemstpsnonwnondnon0s","aidlppnemstpsnonwnondnon01"]) then {
+                    _victim switchMove "adthppnemstpsraswpstdnon_2";
+                    dayzSwitchMove = [_victim,"adthppnemstpsraswpstdnon_2"];
+                    publicVariable "dayzSwitchMove";
+                } else {
+                    _fallMove = ["adthpercmstpslowwrfldnon_4","AdthPercMstpSlowWrf_beating"] call BIS_fnc_selectRandom;
+                    _victim switchMove _fallMove;
+                    dayzSwitchMove = [_victim,_fallMove];
+                    publicVariable "dayzSwitchMove";
+                };
+                
+                sleep 1.5;
+                
+                _victim switchMove "amovppnemrunsnonwnondf";
+                dayzSwitchMove = [_victim,"amovppnemrunsnonwnondf"];
+                publicVariable "dayzSwitchMove";
+            };
+        };
+    };
 };

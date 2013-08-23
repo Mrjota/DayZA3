@@ -511,6 +511,7 @@ class cfgWeapons {
 	class Mk_48;	// External class reference
 	
 	class Mk_48_DZ : Mk_48 {
+        picture = "\CA\weapons\data\equip\W_MK48_mod_CA.paa";
 		type = "1";
 	};
 	class M24;	// External class reference
@@ -764,32 +765,36 @@ class cfgMagazines {
 	class TrashJackDaniels : HandGrenade {
 		scope = public;
 		displayName = $STR_EQUIP_NAME_34;
+        displaynameshort = "Empty Bottle";
 		model = "\dayz_equip\models\bottle_jd.p3d";
 		picture = "\dayz_equip\textures\equip_bottle_jd_ca.paa";
-		descriptionShort = $STR_EQUIP_DESC_34;
+		descriptionShort = "Empty Bottle";
 		ammo = "JackDaniels";
 	};
 	
 	class TrashTinCan : HandGrenade {
 		scope = public;
 		displayName = $STR_EQUIP_NAME_33;
+        displaynameshort = "Empty Tin Can";
 		model = "\dayz_equip\models\trash_tincan.p3d";
 		picture = "\dayz_equip\textures\equip_tincan_ca.paa";
-		descriptionShort = $STR_EQUIP_DESC_33;
+		descriptionShort = "Empty Tin Can";
 		ammo = "TinCan";
 	};
 	
 	class ItemSodaEmpty : HandGrenade {
 		scope = public;
 		displayName = $STR_EQUIP_NAME_35;
+        displaynameshort = "Empty Can";
 		model = "\dayz_equip\models\soda_coke_e.p3d";
 		picture = "\dayz_equip\textures\equip_soda_empty_ca.paa";
-		descriptionShort = $STR_EQUIP_DESC_35;
+		descriptionShort = "Empty Can";
 		ammo = "SodaCan";
 	};
 	
 	class HandRoadFlare : HandGrenade {
 		displayName = $STR_MAG_NAME_4;
+        displaynameshort = "Road Flare";
 		picture = "\dayz_weapons\textures\equip_roadflare_ca.paa";
 		model = "\dayz_weapons\models\roadflare";
 		ammo = "RoadFlare";
@@ -1100,16 +1105,6 @@ class GlassSmash {
 class cfgAmmo {
 	class GrenadeHand;	// External class reference
 	
-	class ThrownObjects : GrenadeHand {
-		hit = 0.5;
-		indirectHit = 0.2;
-		indirectHitRange = 1;
-		cost = 1;
-		whistleDist = 0;
-		fuseDistance = 0;
-		initTime = 0;
-		explosive = true;
-	};
 	class Default;	// External class reference
 	
 	class Melee : Default {
@@ -1304,32 +1299,49 @@ class cfgAmmo {
 	class Hatchet_Swing_Ammo : Melee {
 		hit = 9;
 		simulation = "shotBullet";
+		craterEffects = "NoCrater";
 	};
 	
 	class Crowbar_Swing_Ammo : Melee {
 		hit = 5;
 		simulation = "shotBullet";
+		craterEffects = "NoCrater";
 	};
 	
+	class ThrownObjects : GrenadeHand {
+		hit = 9;
+		indirectHit = 0.2;
+		indirectHitRange = 1;
+		cost = 1;
+		whistleDist = 0;
+		fuseDistance = 0;
+		initTime = 0;
+		explosive = true;
+		caliber = 0.5;
+	};
+    
 	class SodaCan : ThrownObjects {
 		model = "\dayz_equip\models\soda_coke_e.p3d";
 		CraterEffects = "NoCrater";
 		explosionEffects = "NoExplosion";
-		soundHit[] = {"dayz_weapons\sounds\can_hit_0", 0.5, 1, 40};
+		soundHit1[] = {"dayz_weapons\sounds\can_hit_0", 0.5, 1, 40};
+        multisoundhit[] = {"soundHit1", 0.2};
 	};
 	
 	class TinCan : ThrownObjects {
 		model = "\dayz_equip\models\trash_tincan.p3d";
 		CraterEffects = "NoCrater";
 		explosionEffects = "NoExplosion";
-		soundHit[] = {"dayz_weapons\sounds\can_hit_1", 0.5, 1, 30};
+		soundHit1[] = {"dayz_weapons\sounds\can_hit_1", 0.5, 1, 30};
+        multisoundhit[] = {"soundHit1", 0.2};
 	};
 	
 	class JackDaniels : ThrownObjects {
 		model = "\dayz_equip\models\bottle_jd.p3d";
 		CraterEffects = "NoCrater";
 		explosionEffects = "GlassSmash";
-		soundHit[] = {"dayz_weapons\sounds\bottle_break_0", 0.5, 1, 60};
+		soundHit1[] = {"dayz_weapons\sounds\bottle_break_0", 0.5, 1, 60};
+        multisoundhit[] = {"soundHit1", 0.2};
 	};
 	
 	class LitObject : GrenadeHand {
@@ -1345,7 +1357,7 @@ class cfgAmmo {
 	class RoadFlare : LitObject {
 		displayName = $STR_MAG_ACTION_4;
 		model = "\dayz_weapons\models\flare_red";
-		simulation = "shotSmoke";
+		simulation = "shotSmokeX";
 		simulationStep = 1;
 		soundFly[] = {"dayz_weapons\sounds\roadflare", 0.316228, 1, 60};
 		cost = 100;
@@ -1356,7 +1368,7 @@ class cfgAmmo {
 		soundHit[] = {"", 0, 1};
 		whistleDist = 0;
 		smokeColor[] = {1, 1, 1, 1};
-		effectsSmoke = "FlareSparks";
+		effectsSmoke = "RoadFlareLight";
 	};
 	
 	class ChemLight : LitObject {

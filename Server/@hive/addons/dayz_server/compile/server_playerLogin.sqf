@@ -80,7 +80,7 @@ if (!_isNew) then {
 	_model =		_primary select 7;
 	_hiveVer =		_primary select 8;
 	
-	if (!(_model in ["SurvivorW2_DZ","Survivor2_DZ","Sniper1_DZ","Soldier1_DZ","Camo1_DZ","BanditW1_DZ","Bandit1_DZ","SurvivorW2_DZ","Survivor4_DZ","Bandit2_DZ"])) then {
+	if (!(_model in ["SurvivorW2_DZ","Survivor2_DZ","Sniper1_DZ","Soldier1_DZ","Camo1_DZ","BanditW1_DZ","Bandit1_DZ","SurvivorW2_DZ","Survivor4_DZ","Survivor3_DZ","Survivor5_DZ","Ranger_DZ","Sniper2_DZ","Survivor_R","Survivor_B","Bandit2_DZ","Bandit3_DZ"])) then {
 		_model = "Survivor2_DZ";
 	};
 	
@@ -93,6 +93,7 @@ if (!_isNew) then {
 	_config = (configFile >> "CfgSurvival" >> "Inventory" >> "Default");
 	_mags = getArray (_config >> "magazines");
 	_wpns = getArray (_config >> "weapons");
+    _inventory = [_wpns, _mags];
 	_bcpk = getText (_config >> "backpack");
 	_vest = getText (_config >> "vest");
 	_randomSpot = true;

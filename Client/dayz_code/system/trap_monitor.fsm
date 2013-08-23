@@ -101,10 +101,11 @@ class FSM
           priority = 0.000000;
           to="wait";
           precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-          condition=/*%FSM<CONDITION""">*/"count (_pos nearEntities 0.5) > 0"/*%FSM</CONDITION""">*/;
-          action=/*%FSM<ACTION""">*/"_ent = (_pos nearEntities 0.5) select 0;" \n
+          condition=/*%FSM<CONDITION""">*/"count (_pos nearEntities 1.0) > 0"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/"_ent = (_pos nearEntities 1.0) select 0;" \n
            "" \n
            "//Sound/Animate" \n
+           "if ((!isNull _trap) and (alive _trap)) then {" \n
            "[nil,_trap,rSAY,[""trap_bear_0"",60]] call RE;" \n
            "_trap animate [""LeftShutter"",1];" \n
            "_trap animate [""RightShutter"",1];" \n
@@ -114,6 +115,10 @@ class FSM
            "} else {" \n
            "	_ent setHit [""legs"",1];" \n
            "	_ent setVariable [""hit_legs"",2,true];" \n
+           "    [name _ent] call fnc_usec_beartrap;" \n
+           "    dayzBearTrap = [name _ent];" \n
+           "    publicVariable 'dayzBearTrap';" \n
+           "};" \n
            "};"/*%FSM</ACTION""">*/;
         };
         /*%FSM</LINK>*/

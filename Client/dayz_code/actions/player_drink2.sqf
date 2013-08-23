@@ -80,15 +80,24 @@ _display = uiNamespace getVariable 'DAYZ_GUI_display';
 
 cutText [format[(localize  "str_player_consumed"),_text], "PLAIN DOWN"];
 
-        player removeAction dayz_thirst2;
-    	dayz_thirst2 = -1;
-        
-        _fatigue = getFatigue player;
-        if (_fatigue >= 0.3) then {
-        player setFatigue (_fatigue - 0.3);
-        };
-        [] spawn {
+player removeAction dayz_thirst2;
+dayz_thirst2 = -1;
+
+_fatigue = getFatigue player;
+if (_fatigue >= 0.3) then {
+    player setFatigue (_fatigue - 0.3);
+};
+
+if (_itemorignal == "ItemSodaLemonade") then {
+    [] spawn {
+        player enableFatigue false;
+        sleep 60;
+        player enableFatigue true;
+    };
+} else {
+    [] spawn {
         player enableFatigue false;
         sleep 7;
         player enableFatigue true;
-        };
+    };
+};

@@ -2,20 +2,22 @@
     _isTranq = _victim getVariable ["isTranq",false];
     
 	if (_isTranq) exitWith { };
-	if (!(isnull _victim) and (alive _victim) and (vehicle _victim == _victim)) then 
-    { 
-		if (animationState _victim in ["amovppnemrunsnonwnondf","amovppnemstpsnonwnondnon","amovppnemstpsraswrfldnon","amovppnemsprslowwrfldf","aidlppnemstpsnonwnondnon0s","aidlppnemstpsnonwnondnon01"]) then {
-            _victim switchMove "adthppnemstpsraswpstdnon_2";
-            dayzSwitchMove = [_victim,"adthppnemstpsraswpstdnon_2"];
-            publicVariable "dayzSwitchMove";
-		} else {
-            _fallMove = ["adthpercmstpslowwrfldnon_4","AdthPercMstpSlowWrf_beating"] call BIS_fnc_selectRandom;
-            _victim switchMove _fallMove;
-            dayzSwitchMove = [_victim,_fallMove];
-            publicVariable "dayzSwitchMove";
-		};
-		
-		[_victim] call unit_dropWeapon;
+	if (!(isnull _victim) and (alive _victim)) then 
+    {
+        if (vehicle _victim == _victim) then {
+            if (animationState _victim in ["amovppnemrunsnonwnondf","amovppnemstpsnonwnondnon","amovppnemstpsraswrfldnon","amovppnemsprslowwrfldf","aidlppnemstpsnonwnondnon0s","aidlppnemstpsnonwnondnon01"]) then {
+                _victim switchMove "adthppnemstpsraswpstdnon_2";
+                dayzSwitchMove = [_victim,"adthppnemstpsraswpstdnon_2"];
+                publicVariable "dayzSwitchMove";
+            } else {
+                _fallMove = ["adthpercmstpslowwrfldnon_4","AdthPercMstpSlowWrf_beating"] call BIS_fnc_selectRandom;
+                _victim switchMove _fallMove;
+                dayzSwitchMove = [_victim,_fallMove];
+                publicVariable "dayzSwitchMove";
+            };
+            
+            [_victim] call unit_dropWeapon;
+        };
 		
 		if (_victim == player) then {
 			[] spawn {
@@ -45,8 +47,9 @@
 		sleep 20;
 		_victim setVariable ["isTranq",false,true];
 		
-        _victim switchMove "amovppnemrunsnonwnondf";
-        dayzSwitchMove = [_victim,"amovppnemrunsnonwnondf"];
-        publicVariable "dayzSwitchMove";
-	
+        if (vehicle _victim == _victim) then {
+            _victim switchMove "amovppnemrunsnonwnondf";
+            dayzSwitchMove = [_victim,"amovppnemrunsnonwnondf"];
+            publicVariable "dayzSwitchMove";
+        };
 	};

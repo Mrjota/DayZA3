@@ -3,16 +3,12 @@ class CfgLoot {
 		{
 			"TrashTinCan",
 			"TrashJackDaniels",
-			"ItemSodaEmpty",
-			"ItemTrashToiletpaper",
-			"ItemTrashRazor"
+			"ItemSodaEmpty"
 		},
 		{
 			1,
 			0.1,
-			0.5,
-			0.4,
-			0.2
+			0.5
 		}
 	};
 	civilian[] = {
@@ -34,7 +30,7 @@ class CfgLoot {
 			"ItemPainkiller",
             "SurvivalPack",
             "9Rnd_45ACP_Mag",
-            "gms_k98"
+            "kar98_mag"
 		},
 		{
 			0.09,
@@ -125,7 +121,9 @@ food[] = {
                         "Chemlight_green",
 			"ItemHeatPack",
             "9Rnd_45ACP_Mag",
-            "gms_k98"
+            "kar98_mag",
+            "2Rnd_9x18_Tranq",
+            "HandRoadFlare"
 		},
 		{
 			0.06,
@@ -157,7 +155,9 @@ food[] = {
             0.01,
 			0.04,
             0.03,
-            0.02
+            0.02,
+            0.01,
+            0.05
 		}
 	};
 	medical[] = {
@@ -251,7 +251,11 @@ food[] = {
             "9Rnd_45ACP_Mag",
             "16Rnd_9x21_Mag",
             "30Rnd_65x39_caseless_mag",
-            "gms_k98"
+            "kar98_mag",
+			"SmokeShellTear",
+            "SmokeShellBio",
+            "2Rnd_9x18_Tranq",
+            "HandRoadFlare"
 		},
 		{
 			0.18,
@@ -300,7 +304,11 @@ food[] = {
             0.05,
             0.01,
             0.03,
-            0.05
+            0.05,
+            0.05,
+            0.02,
+            0.05,
+            0.01
 		}
 	};
 	policeman[] = {
@@ -317,7 +325,9 @@ food[] = {
                         "Chemlight_green",
                         "SurvivalPack",
             "9Rnd_45ACP_Mag",
-            "gms_k98"
+            "kar98_mag",
+            "2Rnd_9x18_Tranq",
+            "HandRoadFlare"
 		},
 		{
 			1,
@@ -331,7 +341,9 @@ food[] = {
             0.01,
             0.01,
             0.03,
-            0.02
+            0.02,
+            0.03,
+            0.01
 		}
 	};
 	hunter[] = {
@@ -346,7 +358,7 @@ food[] = {
 			"FoodMRE",
 			"FoodNutmix",
             "9Rnd_45ACP_Mag",
-            "gms_k98"
+            "kar98_mag"
 		},
 		{
 			1,

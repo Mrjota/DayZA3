@@ -10,19 +10,20 @@ if(_onLadder) exitWith {cutText [localize "str_player_21", "PLAIN DOWN"];};
 if (vehicle player != player) exitWith {cutText ["You may not build while in a vehicle", "PLAIN DOWN"]};
 
 _item =			_this select 3;
+_itemname = 	getText (configFile >> "CfgMagazines" >> _item >> "displayName");
 _classname = 	getText (configFile >> "CfgMagazines" >> _item >> "ItemActions" >> "Build" >> "create");
 _text = 		getText (configFile >> "CfgVehicles" >> _classname >> "displayName");
 
-_hasbuilditem = _this in magazines player;
+_hasbuilditem = _item in magazines player;
 
-if (!_hasbuilditem) exitWith {cutText [format[(localize "str_player_31"),_text,"build"] , "PLAIN DOWN"]};
+if (!_hasbuilditem) exitWith {cutText [format[(localize "str_player_31"),_itemname,"build"] , "PLAIN DOWN"]};
 
 _dir = getDir player;
 player removeMagazine _item;
 
 player playActionNow "Medic";
 r_isBuilding = true;
-if (_item == "BearTrap") then {
+if (_item == "TrapBear") then {
     player removeAction s_doBTrap;
     s_doBTrap = -1;
 };

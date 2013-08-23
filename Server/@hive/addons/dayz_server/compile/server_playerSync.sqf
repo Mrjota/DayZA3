@@ -32,11 +32,15 @@ if (_currentmag != "") then {
 _magArray = _magArray + [_currentmag];
 };
 if (count _secArray > 0) then {
-_magArray = _magArray + [_secmag];
+    if (!isNil "_secmag") then {
+        _magArray = _magArray + [_secmag];
+    };
 };
 _weapons = [primaryWeapon _character, handgunWeapon _character];
-if ((_secmag == _currentMag) and (_currentMag != "")) then {
-    _magArray = [_currentmag];
+if (!isNil "_secmag") then {
+    if ((_secmag == _currentMag) and (_currentMag != "")) then {
+        _magArray = [_currentmag];
+    };
 };
 _force =	_this select 2;
 _force =	true;
@@ -117,7 +121,7 @@ if (_characterID != "0") then {
         _vestMags = vestItems _character;
         waitUntil{!isnil "_vestMags"};
         _arrayM = _magazines + _magArray;
-		_playerGear = [[vest _character] + _weapons + _otheritems + _goggles,_arrayM];		
+		_playerGear = [[vest _character] + _weapons + _otheritems + [_goggles],_arrayM];		
 		diag_log ("playerGear: " +str(_playerGear) + "_backy gear: " +str(_backy));
 		_backpack = unitBackpack _character;
 		_playerBackp = [typeOf _backpack,getWeaponCargo _backpack,getMagazineCargo _backpack];
@@ -126,7 +130,7 @@ if (_characterID != "0") then {
         _vestMags = vestItems _character;
         waitUntil{!isnil "_vestMags"};
         _arrayM = _magazines + _magArray;
-		_playerGear = [[vest _character] + _weapons + _otheritems + _goggles,_arrayM];		
+		_playerGear = [[vest _character] + _weapons + _otheritems + [_goggles],_arrayM];		
 		diag_log ("playerGear: " +str(_playerGear) + "_backy gear: " +str(_backy));
 		_backpack = unitBackpack _character;
 		_playerBackp = [typeOf _backpack,getWeaponCargo _backpack,getMagazineCargo _backpack];
@@ -170,7 +174,7 @@ if (_characterID != "0") then {
 		*/
 		_currentWpn = 	currentMuzzle _character;
 		_currentAnim =	animationState _character;
-        if ((animationState player == "situnarm_l_idleloop_inuh1y") or (animationState player == "amovpsitmstpsnonwnondnon_ground") or (animationState player == "amovpercmstpsnonwnondnon")) then {
+        if ((animationState player == "sitUnarm_L_idleLoop_inUH1Y") or (animationState player == "amovpsitmstpsnonwnondnon_ground") or (animationState player == "amovpercmstpsnonwnondnon")) then {
             _currentAnim = "amovpercmstpsnonwnondnon";
         };
 		_config = 		configFile >> "CfgMovesMaleSdr" >> "States" >> _currentAnim;

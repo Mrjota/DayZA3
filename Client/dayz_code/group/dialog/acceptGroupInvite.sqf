@@ -1,5 +1,7 @@
 private["_inviterUID","_inviter"];
 
+_inviterUID = "0";
+
 //Get the inviters UID
 _groupExists = false;
 {

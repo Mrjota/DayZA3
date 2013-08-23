@@ -106,17 +106,6 @@ if (!canStand player) then {
 		_ctrlFracture ctrlShow true;
 	};
 };
-//Start broken legs fix
-if ((r_fracture_legs) and (vehicle player == player)) then {
-
-				if ([0,0,0] distance (velocity player) > 2.8) then
-				{
-player playMove "amovpercmstpsraswpstdnon_amovppnemstpsraswpstdnon";
-
-				};
-				
-};
-//End broken legs fix
 
 /*
 	Flashing:

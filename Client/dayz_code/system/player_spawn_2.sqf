@@ -77,7 +77,7 @@ while {true} do {
 	};
 	
 	_humanity = player getVariable ["humanity",0];
-	if ((_timeOut > 300) and (_typeOf != "Bandit2_DZ")) then {
+	if ((_timeOut > 300) and (_typeOf != "Bandit2_DZ") and (_typeOf != "Bandit3_DZ")) then {
 		_timeOut = 0;
 		if (_humanity < 2500) then {
 			_humanity = _humanity + 100;
@@ -514,12 +514,12 @@ while {true} do {
                     r_player_tearGasOn = true;
                     [] spawn {
                         while { r_player_tearGasOn } do {
-                            if (r_player_tearGasCount >= 30) exitWith {
+                            if (r_player_tearGasCount >= 10) exitWith {
+                                if (!r_player_tranq) then {
+                                "dynamicBlur" ppEffectEnable true; "dynamicBlur" ppEffectAdjust [0]; "dynamicBlur" ppEffectCommit 2;
+                                };
                                 r_player_tearGasCount = 0;
                                 r_player_tearGasOn = false;
-                                if (!r_player_tranq) then {
-                                "dynamicBlur" ppEffectEnable true; "dynamicBlur" ppEffectAdjust [0]; "dynamicBlur" ppEffectCommit 5;
-                                };
                             };
                             if (!r_player_tranq) then {
                                 "dynamicBlur" ppEffectEnable true; "dynamicBlur" ppEffectAdjust [10]; "dynamicBlur" ppEffectCommit 2; 
@@ -533,7 +533,7 @@ while {true} do {
             };
         } else {
             if ((!r_player_tearGasOn) and (!r_player_tranq)) then {
-                "dynamicBlur" ppEffectEnable true; "dynamicBlur" ppEffectAdjust [0.5]; "dynamicBlur" ppEffectCommit 1; 
+                "dynamicBlur" ppEffectEnable true; "dynamicBlur" ppEffectAdjust [0]; "dynamicBlur" ppEffectCommit 1; 
             };
         };
     } else {

@@ -19,7 +19,7 @@ if (typeOf r_player_currentCar in ["Lada2_TK_CIV_EP1","Lada1_TK_CIV_EP1","Skoda"
 {
     _pos = r_player_currentCar modelToWorld [0,-3,-1.4];
 };
-if (typeOf r_player_currentCar in ["datsun1_civil_3_open","datsun1_civil_1_open","hilux1_civil_3_open_EP1","hilux1_civil_1_open"]) then
+if (typeOf r_player_currentCar in ["datsun1_civil_3_open","datsun1_civil_1_open","hilux1_civil_3_open_EP1","hilux1_civil_1_open","hilux1_civil_3_open"]) then
 {
     _pos = r_player_currentCar modelToWorld [0,-3.5,-1.25];
 };
@@ -27,8 +27,11 @@ detach player;
 player switchCamera "EXTERNAL";
 player setPosATL _pos;
 player setDir (180 + getDir r_player_currentCar);
-[[[player,"AcrgPknlMstpSnonWnonDnon_AmovPercMstpSrasWrflDnon_GetOutHigh"], { if (player != (_this select 0)) then {(_this select 0) switchMove (_this select 1);}; }], "BIS_fnc_spawn", true, false] call BIS_fnc_MP;
+
 player switchMove "AcrgPknlMstpSnonWnonDnon_AmovPercMstpSrasWrflDnon_GetOutHigh";
+dayzSwitchMove = [player,"AcrgPknlMstpSnonWnonDnon_AmovPercMstpSrasWrflDnon_GetOutHigh"];
+publicVariable "dayzSwitchMove";
+
 player setPosATL _pos;
  
 if (r_player_carPosition == 0) then {
@@ -44,3 +47,5 @@ if (r_player_carPosition == 2) then {
 r_player_currentCar = nil;
 r_player_carPosition = 0;
 r_player_onVehicleC = false;
+
+[] spawn { sleep 5; hint ""; };

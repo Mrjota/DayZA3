@@ -27,6 +27,12 @@ _isSaint = _humanity >= 30000;
 _isReaper = _humanity <= -30000;
 
 _itemNew = "Skin_" + _myModel;
+if (_myModel == "Survivor_R") then {
+    _itemNew = "Skin_SurvivorR_DZ";
+};
+if (_myModel == "Survivor_B") then {
+    _itemNew = "Skin_SurvivorB_DZ";
+};
 
 if ( !(isClass(_config >> _itemNew)) ) then {
 	_itemNew = if (!_isFemale) then {"Skin_Survivor2_DZ"} else {"Skin_SurvivorW2_DZ"}; 
@@ -36,6 +42,9 @@ switch (_item) do {
 	case "Skin_Sniper1_DZ": {
 		_model = "Sniper1_DZ";
 	};
+    case "Skin_Sniper2_DZ": {
+        _model = "Sniper2_DZ";
+    };
 	case "Skin_Ranger_DZ": {
 		_model = "Ranger_DZ";
 	};
@@ -46,10 +55,10 @@ switch (_item) do {
 		_model = "Soldier1_DZ";
 	};
 	case "Skin_SurvivorR_DZ": {
-		_model = "SurvivorR_DZ";
+		_model = "Survivor_R";
 	};
 	case "Skin_SurvivorB_DZ": {
-		_model = "SurvivorB_DZ";
+		_model = "Survivor_B";
 	};
 	case "Skin_Survivor2_DZ": {
 		_model = "Survivor2_DZ";
@@ -73,6 +82,8 @@ switch (_item) do {
         };
 	};
 };
+
+if !(_item in magazines player) exitWith {};
 
 if (_model != _myModel) then {
 	player removeMagazine _item;

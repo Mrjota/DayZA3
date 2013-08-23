@@ -72,7 +72,7 @@ removeUniform _agent;
 removeAllAssignedItems _agent;
 //End A3 items fix
 
-_agent addVest "V_PlateCarrier1_rgr_AiA";
+_agent addVest "V_PlateCarrier1_rgr_AiA_DZ";
 //Add some loot
 	_lootType = 		configFile >> "CfgVehicles" >> _type >> "zombieLoot";
 	if (isText _lootType) then {
@@ -83,6 +83,12 @@ _agent addVest "V_PlateCarrier1_rgr_AiA";
 				_agent addMagazine _loot;
 			};
 		};
+        if (_lootType == "military") then {
+            _roll = (floor(random 100)) + 1;
+            if (_roll <= 45) then {
+                _agent addGoggles "G_Combat_DZ";
+            };
+        };
 	};
 
 

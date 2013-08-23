@@ -133,7 +133,9 @@ _canDo = (!r_drag_sqf and !r_player_unconscious and !_onLadder);
 //End off topic functions
 
 if (!isNull cursorTarget and !_inVehicle and (player distance cursorTarget < 4)) then {	//Has some kind of target
-	_isHarvested = cursorTarget getVariable["meatHarvested",false];
+	_isHarvested = true;
+	_isTakeable = false;
+    _isHarvested = cursorTarget getVariable["meatHarvested",false];
 	_isTakeable = cursorTarget getVariable["clothesTaken",false];
 	_isVehicle = cursorTarget isKindOf "AllVehicles";
 	_isVehicletype = typeOf cursorTarget in ["ATV_US_EP1","ATV_CZ_EP1","Old_bike_TK_CIV_EP1","Old_bike_TK_INS_EP1","M1030","TT650_Cib","TT650_Ins","TT650_Gue","TT650_TK_CIV_EP1","TT650_TK_EP1","M1030_US_DES_EP1","Old_moto_TK_Civ_EP1"];
@@ -143,7 +145,7 @@ if (!isNull cursorTarget and !_inVehicle and (player distance cursorTarget < 4))
 	_isDog =  (cursorTarget isKindOf "DZ_Pastor" || cursorTarget isKindOf "DZ_Fin");
 	_isZombie = cursorTarget isKindOf "zZombie_base";
 	_isPlayer = typeOf cursorTarget in AllPlayers_A3;
-	_hasClothes = typeOf cursorTarget in ["Camo1_DZ","Sniper1_DZ","Bandit1_DZ","Survivor2_DZ","Survivor3_DZ","Survivor4_DZ","Bandit2_DZ","Bandit3_DZ","Survivor5_DZ","SurvivorR_DZ","SurvivorB_DZ","Ranger_DZ"];
+	_hasClothes = typeOf cursorTarget in ["Camo1_DZ","Sniper1_DZ","Sniper2_DZ","Bandit1_DZ","Survivor2_DZ","Survivor3_DZ","Survivor4_DZ","Bandit2_DZ","Bandit3_DZ","Survivor5_DZ","Survivor_R","Survivor_B","Ranger_DZ"];
 	_isDestructable = cursorTarget isKindOf "BuiltItems";
 	_isTent = cursorTarget isKindOf "TentStorage";
 	_isFuel = false;
@@ -151,7 +153,8 @@ if (!isNull cursorTarget and !_inVehicle and (player distance cursorTarget < 4))
 	_canmove = canmove cursorTarget;
 	_text = getText (configFile >> "CfgVehicles" >> typeOf cursorTarget >> "displayName");
 
-	
+	if (isNil "_isHarvested") then { _isHarvested = true; };
+	if (isNil "_isTakeable") then { _isTakeable = false; };
 	_rawmeat = meatraw;
 	_hasRawMeat = false;
 		{
@@ -208,7 +211,7 @@ if (!isNull cursorTarget and !_inVehicle and (player distance cursorTarget < 4))
 		s_player_fillfuel = -1;
 	};
 	
-	if (!alive cursorTarget and (_isAnimal or _isZombie or _isPlayer) and _hasKnife and !_isHarvested and _canDo) then {
+	if (!isNull cursorTarget and !alive cursorTarget and (_isAnimal or _isZombie or _isPlayer) and _hasKnife and !_isHarvested and _canDo) then {
 		if (s_player_butcher < 0) then {
 			s_player_butcher = player addAction ["Gut Flesh", "\z\addons\dayz_code\actions\gather_meat.sqf",cursorTarget, 3, true, true, "", ""];
 		};
@@ -217,7 +220,7 @@ if (!isNull cursorTarget and !_inVehicle and (player distance cursorTarget < 4))
 		s_player_butcher = -1;
 	};
     
-	if (!alive cursorTarget and _isPlayer and _hasClothes and !_isTakeable and _canDo) then {
+	if (!isNull cursorTarget and !alive cursorTarget and _isPlayer and _hasClothes and !_isTakeable and _canDo) then {
 		if (s_player_stealclothes < 0) then {
 			s_player_stealclothes = player addAction ["Take Clothes", "\z\addons\dayz_code\actions\gather_clothes.sqf",cursorTarget, 3, true, true, "", ""];
 		};
@@ -254,7 +257,7 @@ if (!isNull cursorTarget and !_inVehicle and (player distance cursorTarget < 4))
 	};
 	
 	//Packing my tent
-	if(cursorTarget isKindOf "TentStorage" and _canDo and _ownerID == dayz_characterID) then {
+	if(!isNull cursorTarget and cursorTarget isKindOf "TentStorage" and _canDo and _ownerID == dayz_characterID) then {
 		if ((s_player_packtent < 0) and (player distance cursorTarget < 3)) then {
 			s_player_packtent = player addAction [localize "str_actions_self_07", "\z\addons\dayz_code\actions\tent_pack.sqf",cursorTarget, 0, false, true, "",""];
 		};

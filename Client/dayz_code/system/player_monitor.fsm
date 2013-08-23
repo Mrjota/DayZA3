@@ -25,7 +25,7 @@ item20[] = {"Hive_Ok",4,218,-175.000000,400.000000,-75.000000,450.000000,0.00000
 item21[] = {"Phase_One",2,250,-75.000000,450.000000,25.000000,500.000000,0.000000,"Phase One"};
 item22[] = {"Response",4,218,-175.000000,500.000000,-75.000000,550.000000,0.000000,"Response"};
 item23[] = {"Phase_Two",2,250,-75.000000,550.000000,25.000000,600.000000,0.000000,"Phase Two"};
-item24[] = {"Dead_Player",4,218,50.000000,550.000000,150.000000,600.000000,0.000000,"Dead" \n "Player"};
+item24[] = {"Dead_Player",4,4314,50.000000,550.000000,150.000000,600.000000,0.000000,"Dead" \n "Player"};
 item25[] = {"ERROR__Player_Already",2,250,175.000000,550.000000,275.000000,600.000000,0.000000,"ERROR:" \n "Player Already" \n "Dead"};
 item26[] = {"Alive",4,218,-175.000000,600.000000,-75.000000,650.000000,0.000000,"Alive"};
 item27[] = {"Position",2,250,-75.000000,650.000000,25.000000,700.000000,0.000000,"Position"};
@@ -34,7 +34,7 @@ item29[] = {"Load_In",2,250,-75.000000,850.000000,25.000000,900.000000,0.000000,
 item30[] = {"Bad_Version",4,218,50.000000,650.000000,150.000000,700.000000,0.000000,"Bad" \n "Version"};
 item31[] = {"ERROR__Bad_Versi",2,250,175.000000,650.000000,275.000000,700.000000,0.000000,"ERROR:" \n "Bad Version"};
 item32[] = {"Display_Ready",4,218,-175.000000,900.000000,-75.000000,950.000000,0.000000,"Display" \n "Ready"};
-item33[] = {"Preload_Display",2,4346,-75.000000,950.000000,25.000000,1000.000000,0.000000,"Preload" \n "Display"};
+item33[] = {"Preload_Display",2,250,-75.000000,950.000000,25.000000,1000.000000,0.000000,"Preload" \n "Display"};
 item34[] = {"Preload_Done",4,218,-175.000000,1000.000000,-75.000000,1050.000000,0.000000,"Preload" \n "Done"};
 item35[] = {"Initialize",2,250,-75.000000,1050.000000,25.000000,1100.000000,0.000000,"Initialize"};
 item36[] = {"Finish",1,250,-75.000000,1150.000000,25.000000,1200.000000,0.000000,"Finish"};
@@ -105,8 +105,8 @@ link51[] = {45,46};
 link52[] = {46,45};
 link53[] = {47,48};
 link54[] = {48,29};
-globals[] = {25.000000,1,0,0,0,640,480,1,81,6316128,1,-249.566452,285.794067,1294.846680,308.655823,494,910,1};
-window[] = {2,-1,-1,-1,-1,858,78,1450,78,3,512};
+globals[] = {25.000000,1,0,0,0,640,480,1,81,6316128,1,-252.341125,266.768433,1245.136963,179.086746,429,881,1};
+window[] = {2,-1,-1,-1,-1,895,84,1456,115,3,447};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -568,7 +568,7 @@ class FSM
        "_mags = _inventory select 1;" \n
        "{" \n
        "if (_x == 'Crossbow') then { _x = 'Crossbow_DZ' };" \n
-       "if (_x in ['V_PlateCarrier1_rgr_AiA','V_PlateCarrier2_rgr','V_PlateCarrierGL_rgr','V_HarnessO_brn','V_HarnessOGL_brn']) then {" \n
+       "if (_x in ['V_PlateCarrier1_rgr_AiA_DZ','V_PlateCarrier2_rgr_DZ','V_PlateCarrierGL_rgr_DZ','V_HarnessO_brn_DZ','V_HarnessOGL_brn_DZ']) then {" \n
        "player addVest _x;" \n
        "diag_log(""Adding Vest (player_monitor): "" + _x);" \n
        "} else {" \n
@@ -614,9 +614,10 @@ class FSM
        "	_backpackWpn = 		_backpack select 1;" \n
        "	_backpackMagTypes = [];" \n
        "	_backpackMagQty = [];" \n
-       "	if (count _backpackWpn > 0) then {" \n
-       "		_backpackMagTypes = (_backpack select 2) select 0;" \n
-       "		_backpackMagQty = 	(_backpack select 2) select 1;" \n
+       "    _backpackMag =      _backpack select 2;" \n
+       "	if (count _backpackMag > 0) then {" \n
+       "		_backpackMagTypes = _backpackMag select 0;" \n
+       "		_backpackMagQty = 	_backpackMag select 1;" \n
        "	};" \n
        "	_countr = 0;" \n
        "	_backpackWater = 0;" \n
@@ -700,6 +701,7 @@ class FSM
       name = "Phase_Two";
       init = /*%FSM<STATEINIT""">*/"dayz_loadScreenMsg =  ""Character Data received from server""; " \n
        "diag_log ""Finished..."";" \n
+       "diag_log ""[SYSTEM] Stage 1 (Inventory) Start..."";" \n
        "" \n
        "_worldspace = 	dayzPlayerLogin2 select 0;" \n
        "_state =			dayzPlayerLogin2 select 1;" \n
@@ -794,7 +796,8 @@ class FSM
        "dayz_hunger = 	_messing select 0;" \n
        "dayz_thirst = 		_messing select 1;" \n
        "" \n
-       "//player setVariable [""humanity"",-3000, true];"/*%FSM</STATEINIT""">*/;
+       "//player setVariable [""humanity"",-3000, true];" \n
+       "diag_log ""[SYSTEM] Stage 1 (Inventory) End..."";"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
       {
@@ -851,6 +854,7 @@ class FSM
       name = "Position";
       init = /*%FSM<STATEINIT""">*/"" \n
        "//Location" \n
+       "diag_log ""[SYSTEM] Stage 2 (Position) Start..."";" \n
        "_myLoc = getPosATL player;" \n
        "" \n
        "dayz_loadScreenMsg = ""Setup Completed, please wait..."";" \n
@@ -877,7 +881,8 @@ class FSM
        "	};" \n
        "};" \n
        "" \n
-       "call ui_changeDisplay;"/*%FSM</STATEINIT""">*/;
+       "call ui_changeDisplay;" \n
+       "diag_log ""[SYSTEM] Stage 2 (Position) End..."";"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
       {
@@ -910,6 +915,7 @@ class FSM
       name = "Load_In";
       init = /*%FSM<STATEINIT""">*/"//Reveal action types" \n
        "" \n
+       "diag_log ""[SYSTEM] Stage 4 (Preload) Start..."";" \n
        "{player reveal _x} forEach (nearestObjects [getPosATL player, [""AllVehicles"",""WeaponHolder"",""TentStorage"",""ACampStorage"",""BuiltItems""], 50]);" \n
        "" \n
        "dayz_clientPreload = true;" \n
@@ -919,7 +925,8 @@ class FSM
        "" \n
        "//Check mission objects" \n
        "{ _id = [_x,0] spawn object_roadFlare } forEach (allMissionObjects ""RoadFlare"");" \n
-       "{ _id = [_x,1] spawn object_roadFlare } forEach (allMissionObjects ""ChemLight"");"/*%FSM</STATEINIT""">*/;
+       "{ _id = [_x,1] spawn object_roadFlare } forEach (allMissionObjects ""ChemLight"");" \n
+       "diag_log ""[SYSTEM] Stage 4 (Preload) End..."";"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
       {
@@ -966,6 +973,7 @@ class FSM
       name = "Preload_Display";
       init = /*%FSM<STATEINIT""">*/"dayz_lastCheckBit = 0;" \n
        "" \n
+       "diag_log ""[SYSTEM] Stage 5 (Display) Start..."";" \n
        "(findDisplay 46) displayAddEventHandler [""KeyDown"",""_this call dayz_spaceInterrupt""];" \n
        "player disableConversation true;" \n
        "" \n
@@ -1040,6 +1048,12 @@ class FSM
        "		sleep 1;" \n
        "	};" \n
        "};" \n
+       "//Medical" \n
+       "dayz_medicalH = 	[] execVM ""\z\addons\dayz_code\medical\init_medical.sqf"";	//Medical Monitor Script (client only)" \n
+       "[player] call fnc_usec_damageHandle;" \n
+       "player allowDamage true;" \n
+       "player enableSimulation true;" \n
+       "diag_log ""[SYSTEM] Stage 5 (Display) End..."";" \n
        "" \n
        ""/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
@@ -1063,16 +1077,12 @@ class FSM
     {
       name = "Initialize";
       init = /*%FSM<STATEINIT""">*/"#define ods(arg1) ""armaperflib"" callextension arg1" \n
+       "diag_log ""[SYSTEM] Stage 6 (Init) Start..."";" \n
        "" \n
-       "//Medical" \n
-       "dayz_medicalH = 	[] execVM ""\z\addons\dayz_code\medical\init_medical.sqf"";	//Medical Monitor Script (client only)" \n
-       "[player] call fnc_usec_damageHandle;" \n
        "if (r_player_unconscious) then {" \n
        "	r_player_timeout = player getVariable[""unconsciousTime"",0];" \n
        "	player playActionNow ""Die"";" \n
        "};" \n
-       "player allowDamage true;" \n
-       "player enableSimulation true;" \n
        "0 cutText ["""", ""BLACK IN"",3];" \n
        "" \n
        "//Add core tools" \n
@@ -1116,7 +1126,7 @@ class FSM
        "" \n
        "dayz_slowCheck = 	[] spawn player_spawn_2;" \n
        "" \n
-       "_world = toUpper(worldName); //toUpper(getText (configFile >> ""CfgWorlds"" >> (worldName) >> ""description""));" \n
+       "_world = toUpper(worldName);" \n
        "_nearestCity = nearestLocations [getPos player, [""NameCityCapital"",""NameCity"",""NameVillage"",""NameLocal""],1000];" \n
        "_town = ""Wilderness"";" \n
        "" \n
@@ -1162,6 +1172,7 @@ class FSM
        "		nul = [_x,2,0,false,false] spawn BIS_Effects_Burn;" \n
        "	};" \n
        "} forEach allMissionObjects ""SpawnableWreck"";" \n
+       "diag_log ""[SYSTEM] Stage 6 (Init) End..."";" \n
        ""/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
@@ -1259,12 +1270,14 @@ class FSM
     {
       name = "Stream";
       init = /*%FSM<STATEINIT""">*/"//stream in location" \n
+       "diag_log ""[SYSTEM] Stage 3 (Check/Stream) Start..."";" \n
        "call stream_locationCheck;" \n
        "" \n
        "_zombies = (getPosATL player) nearEntities [""zZombie_Base"",30];" \n
        "{deleteVehicle _x} forEach _zombies;" \n
        "" \n
-       "//endLoadingScreen;"/*%FSM</STATEINIT""">*/;
+       "//endLoadingScreen;" \n
+       "diag_log ""[SYSTEM] Stage 3 (Check/Stream) End..."";"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
       {

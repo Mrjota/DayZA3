@@ -44,6 +44,7 @@ _hasClothes3 = 		"Skin_Survivor2_DZ" in magazines player; //Survivor
 _hasClothes4 = 		"Skin_SurvivorR_DZ" in magazines player; //Survivor
 _hasClothes5 = 		"Skin_SurvivorB_DZ" in magazines player; //Survivor
 _hasClothes6 = 		"Skin_Ranger_DZ" in magazines player; //Ranger
+_hasClothes7 = 		"Skin_Sniper2_DZ" in magazines player; //Ghillie
 _hasHatchet =       "MeleeHatchet" in weapons player;
 _hasMRE =		"FoodMRE" in magazines player;
 //FOOD
@@ -60,43 +61,50 @@ _nearLightG =   nearestObject [player,"Chemlight_green"];
 _nearLightB =   nearestObject [player,"Chemlight_blue"];
 _nearLightY =   nearestObject [player,"Chemlight_yellow"];
 _nearLightR =   nearestObject [player,"Chemlight_red"];
+_nearLightF =   nearestObject [player,"RoadFlare"];
 _canPickLightG = false;
 _canPickLightY = false;
 _canPickLightB = false;
 _canPickLightR = false;
+_canpicklightF = false;
 
 
 if (!isNull _nearLightG) then {
-  if (_nearLightG distance player < 1) then {
+  if (_nearLightG distance player < 3) then {
     _canPickLightG = isNull (_nearLightG getVariable ["owner",objNull]);
   };
 };
 if (!isNull _nearLightY) then {
-  if (_nearLightY distance player < 1) then {
+  if (_nearLightY distance player < 3) then {
     _canPickLightY = isNull (_nearLightY getVariable ["owner",objNull]);
   };
 };
 if (!isNull _nearLightB) then {
-  if (_nearLightB distance player < 1) then {
+  if (_nearLightB distance player < 3) then {
     _canPickLightB = isNull (_nearLightB getVariable ["owner",objNull]);
   };
 };
 if (!isNull _nearLightR) then {
-  if (_nearLightR distance player < 1) then {
+  if (_nearLightR distance player < 3) then {
     _canPickLightR = isNull (_nearLightR getVariable ["owner",objNull]);
+  };
+};
+if (!isNull _nearLightF) then {
+  if (_nearLightF distance player < 3) then {
+    _canPickLightF = isNull (_nearLightF getVariable ["owner",objNull]);
   };
 };
 
 //End of Code
 _hasKnife = 	"ItemKnife" in magazines player;
 _hasToolbox = 	"ItemToolbox" in magazines player;
-_hasToolbox = 	"ItemToolbox" in magazines player;
+_hasEtool = 	"ItemEtool" in magazines player;
 _hasTent = 		"ItemTent" in magazines player;
 _hasATent = 	"ItemATent" in magazines player;
 _hasSand = 	    "ItemSandbag" in magazines player;
 _hasWire =  	"ItemWire" in magazines player;
 _hasTTrap = 	"ItemTankTrap" in magazines player;
-_hasBTrap = 	"BearTrap" in magazines player;
+_hasBTrap = 	"TrapBear" in magazines player;
 _onLadder =		(getNumber (configFile >> "CfgMovesMaleSdr" >> "States" >> (animationState player) >> "onLadder")) == 1;
 
 _isWater = 		(surfaceIsWater getPosATL player) or dayz_isSwimming;
@@ -195,6 +203,19 @@ if (_canPickLightR and !dayz_hasLight) then {
   player removeAction s_player_removeflare4;
   s_player_grabflare4 = -1;
   s_player_removeflare4 = -1;
+};
+//Grab RoadFlare
+if (_canPickLightF and !dayz_hasLight) then {
+  if (s_player_grabflare5 < 0) then {
+    _text = "Road Flare";
+    s_player_grabflare5 = player addAction [format[localize "str_actions_medical_15",_text], "\z\addons\dayz_code\actions\flare_pickup.sqf",_nearLightF, 1, false, true, "", ""];
+    s_player_removeflare5 = player addAction [format[localize "str_actions_medical_17",_text], "\z\addons\dayz_code\actions\flare_remove.sqf",_nearLightF, 1, false, true, "", ""];
+  };
+} else {
+  player removeAction s_player_grabflare5;
+  player removeAction s_player_removeflare5;
+  s_player_grabflare5 = -1;
+  s_player_removeflare5 = -1;
 };
     //Allow player to use the Survival Pack
     if (_vehicle == player and _hasSPack and ((_legsBroke or _armsBroke) or (r_player_infected) or (_inPain) or (_injured) or (r_player_blood < 12000))) then {
@@ -374,7 +395,7 @@ if (_canPickLightR and !dayz_hasLight) then {
 	};
 	
 	//Allow placing of objects
-	if(_vehicle == player and _hasSand and _canDo and !r_isBuilding) then {
+	if(_vehicle == player and _hasSand and _canDo and !r_isBuilding and _hasEtool) then {
 		if(s_doSand < 0) then {
 			s_doSand = player addAction [format["<t color='#FF0000'>Stack Sandbags%1</t>"], "z\addons\dayz_code\actions\build.sqf", "ItemSandbag"];
 		};
@@ -383,7 +404,7 @@ if (_canPickLightR and !dayz_hasLight) then {
 		s_doSand = -1;
 	};
     
-	if(_vehicle == player and _hasWire and _canDo and !r_isBuilding) then {
+	if(_vehicle == player and _hasWire and _canDo and !r_isBuilding and _hasToolbox and _hasEtool) then {
 		if(s_doWire < 0) then {
 			s_doWire = player addAction [format["<t color='#FF0000'>Build Wire Fence%1</t>"], "z\addons\dayz_code\actions\build.sqf", "ItemWire"];
 		};
@@ -392,7 +413,7 @@ if (_canPickLightR and !dayz_hasLight) then {
 		s_doWire = -1;
 	};
     
-	if(_vehicle == player and _hasTTrap and _canDo and !r_isBuilding) then {
+	if(_vehicle == player and _hasTTrap and _canDo and !r_isBuilding and _hasToolbox) then {
 		if(s_doTTrap < 0) then {
 			s_doTTrap = player addAction [format["<t color='#FF0000'>Set Tank Trap%1</t>"], "z\addons\dayz_code\actions\build.sqf", "ItemTankTrap"];
 		};
@@ -403,7 +424,7 @@ if (_canPickLightR and !dayz_hasLight) then {
     
 	if(_vehicle == player and _hasBTrap and _canDo and !r_isBuilding) then {
 		if(s_doBTrap < 0) then {
-			s_doBTrap = player addAction [format["<t color='#FF0000'>Set Bear Trap%1</t>"], "z\addons\dayz_code\actions\build.sqf", "BearTrap"];
+			s_doBTrap = player addAction [format["<t color='#FF0000'>Set Bear Trap%1</t>"], "z\addons\dayz_code\actions\build.sqf", "TrapBear"];
 		};
 	} else	{
 		player removeAction s_doBTrap;
@@ -411,7 +432,7 @@ if (_canPickLightR and !dayz_hasLight) then {
 	};
 		
 	//Allow changing of clothes
-	if(_vehicle == player and (_hasClothes1 or _hasClothes2 or _hasClothes3 or _hasClothes4 or _hasClothes5 or _hasClothes6) and _canDo) then {
+	if(_vehicle == player and (_hasClothes1 or _hasClothes2 or _hasClothes3 or _hasClothes4 or _hasClothes5 or _hasClothes6 or _hasClothes7) and _canDo) then {
 		if((s_doClothes1 < 0) and (_hasClothes1)) then {
 			s_doClothes1 = player addAction [format["<t color='#FF0000'>Wear Ghillie Suit</t>"], "z\addons\dayz_code\actions\player_wearClothes.sqf", ["Skin_Sniper1_DZ"]];
 		};
@@ -430,6 +451,9 @@ if (_canPickLightR and !dayz_hasLight) then {
 		if((s_doClothes6 < 0) and (_hasClothes6)) then {
 			s_doClothes6 = player addAction [format["<t color='#FF0000'>Wear Ranger Outfit</t>"], "z\addons\dayz_code\actions\player_wearClothes.sqf", ["Skin_Ranger_DZ"]];
 		};
+		if((s_doClothes7 < 0) and (_hasClothes7)) then {
+			s_doClothes7 = player addAction [format["<t color='#FF0000'>Wear Desert Ghillie Suit</t>"], "z\addons\dayz_code\actions\player_wearClothes.sqf", ["Skin_Sniper2_DZ"]];
+		};
 	} else	{
 		player removeAction s_doClothes1;
 		s_doClothes1 = -1;
@@ -443,6 +467,8 @@ if (_canPickLightR and !dayz_hasLight) then {
 		s_doClothes5 = -1;
 		player removeAction s_doClothes6;
 		s_doClothes6 = -1;
+		player removeAction s_doClothes7;
+		s_doClothes7 = -1;
 	};
 	_hasEpi = 		"ItemEpinephrine" in magazines player;
 	//Allow epi adrenaline
@@ -458,7 +484,7 @@ if (_canPickLightR and !dayz_hasLight) then {
 	//Custom Get in Back script
     if (!isNull cursorTarget and (player distance cursorTarget < 4) and !_inVehicle) then {
         _isAlive = alive cursorTarget;
-        _isCustom = typeOf cursorTarget in ["Old_bike_TK_CIV_EP1","Old_bike_TK_INS_EP1","ATV_US_EP1","ATV_CZ_EP1","Tractor","VolhaLimo_TK_CIV_EP1","Volha_2_TK_CIV_EP1","Volha_1_TK_CIV_EP1","car_sedan","car_hatchback","Lada2_TK_CIV_EP1","Lada1_TK_CIV_EP1","Skoda","Lada1","Lada2","LadaLM","SkodaRed","SkodaGreen","SkodaBlue","datsun1_civil_3_open","datsun1_civil_1_open","hilux1_civil_3_open_EP1","hilux1_civil_1_open"];
+        _isCustom = typeOf cursorTarget in ["Old_bike_TK_CIV_EP1","Old_bike_TK_INS_EP1","ATV_US_EP1","ATV_CZ_EP1","Tractor","VolhaLimo_TK_CIV_EP1","Volha_2_TK_CIV_EP1","Volha_1_TK_CIV_EP1","car_sedan","car_hatchback","Lada2_TK_CIV_EP1","Lada1_TK_CIV_EP1","Skoda","Lada1","Lada2","LadaLM","SkodaRed","SkodaGreen","SkodaBlue","datsun1_civil_3_open","datsun1_civil_1_open","hilux1_civil_3_open_EP1","hilux1_civil_3_open","hilux1_civil_1_open"];
         if (_isCustom and _isAlive and !r_player_onVehicleC and alive player) then {
             _seat = 0;
             _text = "";
@@ -481,7 +507,7 @@ if (_canPickLightR and !dayz_hasLight) then {
                 _text = "Get on ";
                 _text2 = " on trunk";
             };
-            if (_type in ["datsun1_civil_3_open","datsun1_civil_1_open","hilux1_civil_3_open_EP1","hilux1_civil_1_open"]) then {
+            if (_type in ["datsun1_civil_3_open","datsun1_civil_1_open","hilux1_civil_3_open_EP1","hilux1_civil_1_open","hilux1_civil_3_open"]) then {
                 _text = "Get in ";
                 _text2 = " in trunk";
             };
@@ -494,7 +520,7 @@ if (_canPickLightR and !dayz_hasLight) then {
                     _seatSide = " (Left)";
                     s_player_getin1 = player addAction [format["%1%2%3%4",_text,_type,_text2,_seatSide], "\z\addons\dayz_code\actions\player_getin.sqf",0, 0, true, true, "", ""];	
                 };
-                if (typeOf cursorTarget in ["datsun1_civil_3_open","datsun1_civil_1_open","hilux1_civil_3_open_EP1","hilux1_civil_1_open"]) then {
+                if (typeOf cursorTarget in ["datsun1_civil_3_open","datsun1_civil_1_open","hilux1_civil_3_open_EP1","hilux1_civil_1_open","hilux1_civil_3_open"]) then {
                     _seatSide = " (Left)";
                     s_player_getin1 = player addAction [format["%1%2%3%4",_text,_type,_text2,_seatSide], "\z\addons\dayz_code\actions\player_getin.sqf",0, 0, true, true, "", ""];	
                 };	
@@ -508,14 +534,14 @@ if (_canPickLightR and !dayz_hasLight) then {
                     _seatSide = " (Right)";
                     s_player_getin2 = player addAction [format["%1%2%3%4",_text,_type,_text2,_seatSide], "\z\addons\dayz_code\actions\player_getin.sqf",1, 0, true, true, "", ""];		
                 };
-                if (typeOf cursorTarget in ["datsun1_civil_3_open","datsun1_civil_1_open","hilux1_civil_3_open_EP1","hilux1_civil_1_open"]) then {
+                if (typeOf cursorTarget in ["datsun1_civil_3_open","datsun1_civil_1_open","hilux1_civil_3_open_EP1","hilux1_civil_1_open","hilux1_civil_3_open"]) then {
                     _seatSide = " (Center)";
                     s_player_getin2 = player addAction [format["%1%2%3%4",_text,_type,_text2,_seatSide], "\z\addons\dayz_code\actions\player_getin.sqf",2, 0, true, true, "", ""];		
                 };
             };	
             if (s_player_getin3 < 0) then {
                 _seatSide = "";
-                if (typeOf cursorTarget in ["datsun1_civil_3_open","datsun1_civil_1_open","hilux1_civil_3_open_EP1","hilux1_civil_1_open"]) then {
+                if (typeOf cursorTarget in ["datsun1_civil_3_open","datsun1_civil_1_open","hilux1_civil_3_open_EP1","hilux1_civil_1_open","hilux1_civil_3_open"]) then {
                     _seatSide = " (Right)";
                     s_player_getin3 = player addAction [format["%1%2%3%4",_text,_type,_text2,_seatSide], "\z\addons\dayz_code\actions\player_getin.sqf",1, 0, true, true, "", ""];		
                 };
@@ -536,7 +562,3 @@ if (_canPickLightR and !dayz_hasLight) then {
         player removeAction s_player_getin3;
         s_player_getin3 = -1;
     };
-    
-//End of A3 Scroll functions
-
-

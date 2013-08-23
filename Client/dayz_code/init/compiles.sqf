@@ -98,8 +98,6 @@ if (!isDedicated) then {
 	player_monitor =			compile preprocessFileLineNumbers "\z\addons\dayz_code\system\player_monitor.sqf";
 	player_spawn_1 =			compile preprocessFileLineNumbers "\z\addons\dayz_code\system\player_spawn_1.sqf";
 	player_spawn_2 =			compile preprocessFileLineNumbers "\z\addons\dayz_code\system\player_spawn_2.sqf";
-	onPreloadStarted 			"dayz_preloadFinished = false;";
-	onPreloadFinished 			"dayz_preloadFinished = true;";
 	
 	// TODO: need move it in player_monitor.fsm
 	// allow player disconnect from server, if loading hang, kicked by BE etc.
@@ -261,7 +259,7 @@ if (!isDedicated) then {
 		if (_dikCode in (actionKeys "GetOver")) then {
 			if (!r_fracture_legs and (time - dayz_lastCheckBit > 1.5)) then {
 				_inBuilding = [player] call fnc_isInsideBuilding;
-				_nearbyObjects = nearestObjects[getPosATL player, ["ACampStorage","TentStorage", "Hedgehog_DZ", "Sandbag1_DZ","TrapBear","Wire_cat1"], 4];
+				_nearbyObjects = nearestObjects[getPosATL player, ["ACampStorage","TentStorage", "Hedgehog_DZ", "Sandbag1_DZ","BearTrap_DZ","Wire_cat1"], 4];
 				
 					dayz_lastCheckBit = time;
 					call player_CombatRoll;
@@ -312,14 +310,14 @@ if (!isDedicated) then {
 	};
 	
     unit_dropWeapon = {
-        _array = _this select 0;
-        _unit = _array select 0;
+        _unit = _this select 0;
         
         _currentGun = currentWeapon _unit;
         _currentMag = currentMagazine _unit;
         
         if (_currentGun != "") then {
-            _item = createVehicle ["WeaponHolder", getPos player, [], 1, "CAN_COLLIDE"];
+            _pos = [getPos player select 0, getPos player select 1, (getPos player select 2) + 0.4];
+            _item = createVehicle ["WeaponHolder", _pos, [], 1, "CAN_COLLIDE"];
             _item addWeaponCargoGlobal [_currentGun,1];
             if (_currentMag != "") then {
                 _item addMagazineCargoGlobal [_currentMag,1];
@@ -437,7 +435,8 @@ if (!isDedicated) then {
 	fnc_usec_damageHandler =	compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\fn_damageHandler.sqf";		//Event handler run on damage
     fnc_usec_tranqvictim =      compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\fn_dropvictim.sqf";          //Knocks the victim of a tranquilizer out
     fnc_usec_switchMove =       compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\fn_switchMove.sqf";
-	// Vehicle damage fix
+	fnc_usec_beartrap =         compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\fn_beartrap.sqf";
+    // Vehicle damage fix
 	vehicle_handleDamage    = compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\vehicle_handleDamage.sqf";
 	vehicle_handleKilled    = compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\vehicle_handleKilled.sqf";
 	fnc_vehicleEventHandler = 	compile preprocessFileLineNumbers "\z\addons\dayz_code\init\vehicle_init.sqf";			//Initialize vehicle
@@ -505,3 +504,4 @@ if (!isDedicated) then {
 	//Start Dynamic Weather
 	execVM "\z\addons\dayz_code\external\DynamicWeatherEffects.sqf";
 	initialized = true;
+    dayz_preloadFinished = true;

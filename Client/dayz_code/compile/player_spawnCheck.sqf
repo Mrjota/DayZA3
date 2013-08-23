@@ -151,10 +151,12 @@ if (_nearbyCount < 1) exitwith
 						//[_radius, _position, _inVehicle, _dateNow, _age, _locationstypes, _nearestCity, _maxZombies] call player_spawnzedCheck;
 						_zombied = (_x getVariable ["zombieSpawn",-0.1]);
                         if (isNil "_zombied") then {
-                            _zombied = -0.1;
+                            _dateNow = (DateToNumber date);
+                            _age = (_dateNow + 0.1) * 525948;
+                        } else {
+                            _dateNow = (DateToNumber date);
+                            _age = (_dateNow - _zombied) * 525948;
                         };
-						_dateNow = (DateToNumber date);
-						_age = (_dateNow - _zombied) * 525948;
 						if (_age > 3) then {
 							_x setVariable ["zombieSpawn",_dateNow,true];
 							[_x] call building_spawnZombies;

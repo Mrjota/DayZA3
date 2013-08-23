@@ -49,7 +49,7 @@ _dir = 0;
         };
     };
    
-    if (typeOf cursorTarget in ["datsun1_civil_3_open","datsun1_civil_1_open","hilux1_civil_3_open_EP1","hilux1_civil_1_open"]) then
+    if (typeOf cursorTarget in ["datsun1_civil_3_open","datsun1_civil_1_open","hilux1_civil_3_open_EP1","hilux1_civil_1_open","hilux1_civil_3_open"]) then
     {
         _carrier = cursorTarget;
         if (_position == 0) then {
@@ -84,12 +84,15 @@ if (_position == 2) then {
 if (!_isOk) exitWith {
 	2 cutText ["Someone is already sitting there!", "PLAIN DOWN"];
 };
-[[[_player,"AmovPercMstpSnonWnonDnon_AcrgPknlMstpSnonWnonDnon_getInLow"], { (_this select 0) switchMove (_this select 1); }], "BIS_fnc_spawn", true, false] call BIS_fnc_MP;
+player switchMove "AmovPercMstpSnonWnonDnon_AcrgPknlMstpSnonWnonDnon_getInLow";
+dayzSwitchMove = [player,"AmovPercMstpSnonWnonDnon_AcrgPknlMstpSnonWnonDnon_getInLow"];
+publicVariable "dayzSwitchMove";
 
 sleep 0.55;
 
-[[[_player,_sitPosture,name player], { if(name player != (_this select 2) then { (_this select 0) switchMove (_this select 1); }; }], "BIS_fnc_spawn", true, false] call BIS_fnc_MP;
 player switchMove _sitPosture;
+dayzSwitchMove = [player,_sitPosture];
+publicVariable "dayzSwitchMove";
 
 _player attachTo [_carrier,_modelArray];
 _player setDir _dir;

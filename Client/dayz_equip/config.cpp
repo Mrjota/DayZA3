@@ -657,8 +657,9 @@ class cfgWeapons {
 		};
 	};
 	class Pistol;	// External class reference
+	class Pistol_Base_F;	// External class reference
 	
-	class MeleeFlashlight : Pistol {
+	class MeleeFlashlight2 : Pistol_Base_F {
 		scope = public;
 		canDrop = false;
 		model = "\dayz_equip\models\flashlight.p3d";
@@ -684,6 +685,57 @@ class cfgWeapons {
 		class FlashLight {
 			color[] = {0.9, 0.9, 0.7, 0.9};
 			ambient[] = {0.1, 0.1, 0.1, 1};
+			position = "Usti hlavne";
+			direction = "Konec hlavne";
+			angle = 30;
+			size = 1;
+			intensity = 1500;
+			scale[] = {1, 1, 0.5};
+			brightness = 0.7;
+		};
+		
+		class ItemActions {
+			class Toolbelt {
+				text = "Add to toolbelt";
+				script = "spawn player_addToolbelt;";
+				use[] = {"MeleeFlashlight"};
+				output[] = {"ItemFlashlight"};
+			};
+		};
+		minRange = 0;
+		minRangeProbab = 0.1;
+		midRange = 30;
+		midRangeProbab = 0.3;
+		maxRange = 50;
+		maxRangeProbab = 0.04;
+	};
+	class MeleeFlashlight : Pistol {
+		scope = public;
+		canDrop = false;
+		model = "\dayz_equip\models\flashlight.p3d";
+		modelOptics = "-";
+		picture = "\dayz_equip\textures\equip_flashlight_ca.paa";
+		magazines[] = {};
+		displayName = $STR_EQUIP_NAME_5;
+		begin1[] = {};
+		begin2[] = {};
+		soundBegin[] = {"begin1", 0.5, "begin2", 0.5};
+		reloadMagazineSound[] = {};
+		recoil = "recoil_single_pistol_2outof3";
+		recoilProne = "recoil_single_pistol_prone_2outof3";
+		distanceZoomMin = 50;
+		distanceZoomMax = 50;
+		
+		class Library {
+			libTextDesc = "A flashlight (or torch in British English) is a hand-held portable electric-powered light source. Usually the light source is a small incandescent light bulb or light-emitting diode (LED).";
+		};
+		descriptionShort = $STR_EQUIP_DESC_5;
+		autoFire = false;
+		
+            
+		class FlashLight {
+			color[] = {0.9, 0.9, 0.7, 0.9};
+			ambient[] = {0.1, 0.1, 0.1, 1};
 			position = "flash dir";
 			direction = "flash";
 			angle = 30;
@@ -692,16 +744,11 @@ class cfgWeapons {
 			outerAngle = 80;
 			coneFadeCoef = 8;
 			intensity = 1500;
-			scale[] = {0};
+			scale[] = {1, 1, 0.5};
 			useFlare = 1;
 			dayLight = 0;
 			flareSize = 0.75;
-			class Attenuation {
-				start = 1.0;
-				constant = 2;
-				linear = 0;
-				quadratic = 15.0;
-			};
+			brightness = 0.7;
 		};
 		
 		class ItemActions {
@@ -1064,6 +1111,12 @@ class CfgMagazines {
 		scope = public;
 		displayName = $STR_EQUIP_NAME_43;
 		descriptionShort = $STR_EQUIP_DESC_43;
+	};
+	
+	class Skin_Sniper2_DZ : SkinBase {
+		scope = public;
+		displayName = "Desert Ghillie Suit";
+		descriptionShort = "A type of desert camouflage clothing designed to resemble heavy foliage. Can be unpacked and worn.";
 	};
     
     class Skin_Ranger_DZ : SkinBase {

@@ -92,6 +92,9 @@ fnc_usec_damageType = {
     if (_ammo isKindOf "B_9x18_Tranq") then {
         _type = 3;
     };
+    if ((_ammo isKindOf "ThrownObjects") or (_ammo isKindof "RoadFlare")) then {
+        _type = 4;
+    };
 	_type;
 };
 
