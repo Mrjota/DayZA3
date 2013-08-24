@@ -93,7 +93,6 @@ if (!_isNew) then {
 	_config = (configFile >> "CfgSurvival" >> "Inventory" >> "Default");
 	_mags = getArray (_config >> "magazines");
 	_wpns = getArray (_config >> "weapons");
-    _inventory = [_wpns, _mags];
 	_bcpk = getText (_config >> "backpack");
 	_vest = getText (_config >> "vest");
 	_randomSpot = true;

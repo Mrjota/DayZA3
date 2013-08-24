@@ -225,7 +225,7 @@ if (_characterID != "0") then {
 			} forEach (_playerPos select 1);
 			_playerPos set [1,_array];
 		};
-		
+		if (!isNull _character) then {
 		if (alive _character) then {
 				//Wait for HIVE to be free
 				//Send request
@@ -233,7 +233,7 @@ if (_characterID != "0") then {
 				diag_log ("HIVE: WRITE: "+ str(_key) + " / " + _characterID);
 				_key call server_hiveWrite;
 		};
-		
+		};
 		// If player is in a vehicle, keep its position updated
 		if (vehicle _character != _character) then {
 			[vehicle _character, "position"] call server_updateObject;
