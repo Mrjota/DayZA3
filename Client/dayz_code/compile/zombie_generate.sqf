@@ -83,7 +83,7 @@ _agent addVest "V_PlateCarrier1_rgr_AiA_DZ";
 				_agent addMagazine _loot;
 			};
 		};
-        if (_lootType == "military") then {
+        if (getText(_lootType) == "military") then {
             _roll = (floor(random 100)) + 1;
             if (_roll <= 45) then {
                 _agent addGoggles "G_Combat_DZ";

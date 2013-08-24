@@ -491,8 +491,8 @@ class CfgMagazines {
 		scope = public;
 		count = 1;
 		displayName = $STR_FOODCOOKED_EQIP_CODE_NAME_5;
-		model = "z\addons\dayz_communityassets\models\buiscits_box.p3d";
-		picture = "z\addons\dayz_communityassets\pictures\i_buiscit_ca.paa";
+        model = "\A3\weapons_F\ammo\mag_univ.p3d";
+		picture = "";
 		descriptionShort = $STR_FOODCOOKED_EQUIP_CODE_DESC_5;
 		bloodRegen = 6000;
 	};

@@ -226,5 +226,4 @@ private ["_currentmag","_secmag","_magArray","_vestClass","_magazines","_otherit
         _newUnit addItem _x;
         _newUnit assignItem _x;
     } forEach _otheritems;
-    removeGoggles _newUnit;
     _newUnit addGoggles _goggles;

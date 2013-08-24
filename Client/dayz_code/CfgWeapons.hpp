@@ -7,14 +7,17 @@ class CfgWeapons {
         model = "\A3\Characters_F\BLUFOR\equip_b_vest02";
         picture = "\A3\characters_f\Data\UI\icon_V_plate_carrier_1_CA.paa";
         scope = 2;
-        class VestItem;
-        class ItemInfo : VestItem
+        class ItemInfo
         {
             armor = "5*0.5";
             containerclass = "Supply100";
             mass = 40;
             passthrough = 0.7;
             uniformmodel = "\A3\Characters_F\BLUFOR\equip_b_vest02";
+            hiddenselections[] = {};
+            hitpointname = "HitBody";
+            type = 701;
+            uniformtype = "Default";
         };
     };
     class V_PlateCarrier2_rgr_DZ : Vest_NoCamo_Base 
@@ -23,14 +26,17 @@ class CfgWeapons {
         model = "\A3\Characters_F\BLUFOR\equip_b_vest01.p3d";
         picture = "\A3\characters_f\Data\UI\icon_V_plate_carrier_2_CA.paa";
         scope = 2;
-        class VestItem;
-        class ItemInfo : VestItem
+        class ItemInfo
         {
             armor = "5*0.6";
             containerclass = "Supply140";
             mass = 50;
             passthrough = 0.75;
             uniformmodel = "\A3\Characters_F\BLUFOR\equip_b_vest01.p3d";
+            hiddenselections[] = {};
+            hitpointname = "HitBody";
+            type = 701;
+            uniformtype = "Default";
         };
     };
     class V_PlateCarrierGL_rgr_DZ : Vest_NoCamo_Base 
@@ -39,14 +45,17 @@ class CfgWeapons {
         model = "\A3\Characters_F\BLUFOR\equip_b_vest01.p3d";
         picture = "\A3\characters_f\Data\UI\icon_V_plate_carrier_2_CA.paa";
         scope = 2;
-        class VestItem;
-        class ItemInfo : VestItem
+        class ItemInfo
         {
             armor = "5*0.6";
             containerclass = "Supply150";
             mass = 60;
             passthrough = 0.75;
             uniformmodel = "\A3\Characters_F\BLUFOR\equip_b_vest01.p3d";
+            hiddenselections[] = {};
+            hitpointname = "HitBody";
+            type = 701;
+            uniformtype = "Default";
         };
     };
     class V_HarnessO_brn_DZ : Vest_NoCamo_Base 
@@ -55,14 +64,17 @@ class CfgWeapons {
         model = "\A3\Characters_F\OPFOR\equip_o_vest01";
         picture = "\A3\characters_f\Data\UI\icon_V_HarnessO_brn_CA.paa";
         scope = 2;
-        class VestItem;
-        class ItemInfo : VestItem
+        class ItemInfo
         {
             armor = "5*0.4";
             containerclass = "Supply180";
             mass = 80;
             passthrough = 0.8;
             uniformmodel = "\A3\Characters_F\OPFOR\equip_o_vest01";
+            hiddenselections[] = {};
+            hitpointname = "HitBody";
+            type = 701;
+            uniformtype = "Default";
         };
     };
     class V_HarnessOGL_brn_DZ : Vest_NoCamo_Base 
@@ -71,14 +83,17 @@ class CfgWeapons {
         model = "\A3\Characters_F\OPFOR\equip_o_vest_gl";
         picture = "\A3\characters_f\Data\UI\icon_V_HarnessOGL_brn_CA.paa";
         scope = 2;
-        class VestItem;
-        class ItemInfo : VestItem
+        class ItemInfo
         {
             armor = "5*0.5";
             containerclass = "Supply200";
             mass = 90;
             passthrough = 0.8;
             uniformmodel = "\A3\Characters_F\OPFOR\equip_o_vest_gl";
+            hiddenselections[] = {};
+            hitpointname = "HitBody";
+            type = 701;
+            uniformtype = "Default";
         };
     };
 	class ItemCore;
