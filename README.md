@@ -15,4 +15,4 @@ We are aware that the mod is opensource, but we only use it for the progress tra
 
 If you would like to use our code for another port please contact us for permission. If permission is given, you must include all of our credits in your port.
 
-This pertains to the code WE wrote, not the DayZMod Development Team.
+This pertains to the code WE wrote, not what the DayZMod Development Team has done.
