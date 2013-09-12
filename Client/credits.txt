@@ -8,8 +8,9 @@ Pwnoz0r (Project Lead)
 hungoverfurball (Project Management)
 MistaD (Head Developer)
 
-Community Contributors:
-rotcehdnih (Inventory fix)
+Community Contributors (Many Thanks for your effort!):
+rotcehdnih
+Hans
 
 Project sponsored by HFBServers.com
 If you would like to buy a server, do so here: http://hfbservers.com/games/arma3

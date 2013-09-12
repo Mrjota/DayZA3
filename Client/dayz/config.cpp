@@ -32815,6 +32815,11 @@ class CfgMovesZombie: CfgMovesBasic
 {
 	skeletonName = "OFP2_ManSkeleton";
 	gestures = "CfgGesturesMale";
+	class Actions : Actions {
+		class ZombieCrouchActions : CivilStandActions {
+			die = "AdthPknlMstpSnonWnonDnon_2";
+		};
+	};
 	class States
 	{
 		class DeadState: Default

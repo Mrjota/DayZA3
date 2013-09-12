@@ -972,8 +972,9 @@ class FSM
     {
       name = "Preload_Display";
       init = /*%FSM<STATEINIT""">*/"dayz_lastCheckBit = 0;" \n
-       "" \n
+       "1 cutText [""To avoid bugs, please wait until you spawn to hit escape. Thank you!"", ""PLAIN""];" \n
        "diag_log ""[SYSTEM] Stage 5 (Display) Start..."";" \n
+	   "" \n
        "(findDisplay 46) displayAddEventHandler [""KeyDown"",""_this call dayz_spaceInterrupt""];" \n
        "player disableConversation true;" \n
        "" \n
@@ -1053,6 +1054,38 @@ class FSM
        "[player] call fnc_usec_damageHandle;" \n
        "player allowDamage true;" \n
        "player enableSimulation true;" \n
+       "//load in medical details" \n
+       "" \n
+       "r_player_unconscious = 	player getVariable[""NORRN_unconscious"", false];" \n
+       "r_player_infected =		player getVariable[""USEC_infected"",false];" \n
+       "r_player_injured = 		player getVariable[""USEC_injured"",false];" \n
+       "r_player_inpain = 		player getVariable[""USEC_inPain"",false];" \n
+       "r_player_cardiac = 		player getVariable[""USEC_isCardiac"",false];" \n
+       "r_player_lowblood =		player getVariable[""USEC_lowBlood"",false];" \n
+       "r_player_blood = 		player getVariable[""USEC_BloodQty"",r_player_bloodTotal];" \n
+       "" \n
+       """colorCorrections"" ppEffectEnable true;" \n
+       """colorCorrections"" ppEffectAdjust [1, 1, 0, [1, 1, 1, 0.0], [1, 1, 1, (r_player_blood/r_player_bloodTotal)],  [1, 1, 1, 0.0]];" \n
+       """colorCorrections"" ppEffectCommit 0;" \n
+       "" \n
+       "dayz_gui = [] spawn {" \n
+       "	private[""_distance""];" \n
+       "	dayz_musicH = [] spawn player_music;" \n
+       "	while {true} do {" \n
+       "		_array = player call world_surfaceNoise;" \n
+       "		dayz_surfaceNoise = _array select 1;" \n
+       "		dayz_surfaceType = 	_array select 0;" \n
+       "" \n
+       "		call player_checkStealth;" \n
+       "		dayz_statusArray = [] call player_updateGui;" \n
+       "		if (!isNull cursorTarget and !dayz_heartBeat) then {" \n
+       "			if (alive cursorTarget) then {" \n
+       "				_id = cursorTarget spawn dayz_lowHumanity;" \n
+       "			};" \n
+       "		};" \n
+       "		sleep 0.2;" \n
+       "	};" \n
+       "};" \n
        "diag_log ""[SYSTEM] Stage 5 (Display) End..."";" \n
        "" \n
        ""/*%FSM</STATEINIT""">*/;
@@ -1089,38 +1122,6 @@ class FSM
        "player addWeapon ""Loot"";" \n
        "player addWeapon ""Flare"";" \n
        "" \n
-       "//load in medical details" \n
-       "" \n
-       "r_player_unconscious = 	player getVariable[""NORRN_unconscious"", false];" \n
-       "r_player_infected =		player getVariable[""USEC_infected"",false];" \n
-       "r_player_injured = 		player getVariable[""USEC_injured"",false];" \n
-       "r_player_inpain = 		player getVariable[""USEC_inPain"",false];" \n
-       "r_player_cardiac = 		player getVariable[""USEC_isCardiac"",false];" \n
-       "r_player_lowblood =		player getVariable[""USEC_lowBlood"",false];" \n
-       "r_player_blood = 		player getVariable[""USEC_BloodQty"",r_player_bloodTotal];" \n
-       "" \n
-       """colorCorrections"" ppEffectEnable true;" \n
-       """colorCorrections"" ppEffectAdjust [1, 1, 0, [1, 1, 1, 0.0], [1, 1, 1, (r_player_blood/r_player_bloodTotal)],  [1, 1, 1, 0.0]];" \n
-       """colorCorrections"" ppEffectCommit 0;" \n
-       "" \n
-       "dayz_gui = [] spawn {" \n
-       "	private[""_distance""];" \n
-       "	dayz_musicH = [] spawn player_music;" \n
-       "	while {true} do {" \n
-       "		_array = player call world_surfaceNoise;" \n
-       "		dayz_surfaceNoise = _array select 1;" \n
-       "		dayz_surfaceType = 	_array select 0;" \n
-       "" \n
-       "		call player_checkStealth;" \n
-       "		dayz_statusArray = [] call player_updateGui;" \n
-       "		if (!isNull cursorTarget and !dayz_heartBeat) then {" \n
-       "			if (alive cursorTarget) then {" \n
-       "				_id = cursorTarget spawn dayz_lowHumanity;" \n
-       "			};" \n
-       "		};" \n
-       "		sleep 0.2;" \n
-       "	};" \n
-       "};" \n
        "" \n
        "dayzGearSave = true;" \n
        "" \n

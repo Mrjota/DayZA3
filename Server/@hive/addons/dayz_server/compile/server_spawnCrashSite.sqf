@@ -14,7 +14,7 @@ _fadeFire	= _this select 8;
 
 diag_log("CRASHSPAWNER: Starting spawn logic for Crash Spawner");
 
-while {(server_totalCrashes > 8)} do {
+while {(server_totalCrashes < 8)} do {
 	private["_timeAdjust","_timeToSpawn","_spawnRoll","_crash","_hasAdjustment","_newHeight","_adjustedPos"];
 	// Allows the variance to act as +/- from the spawn frequency timer
 	_timeAdjust = round(random(_variance * 2) - _variance);
@@ -45,6 +45,7 @@ while {(server_totalCrashes > 8)} do {
 		diag_log(format["CRASHSPAWNER: Spawning '%1' with loot table '%2' NOW! (%3) at: %4 - (%5)", _crashName, _lootTable, time, str(_position),mapGridPosition _position]);
 
 		_crash = createVehicle [_crashModel,_position, [], 0, "CAN_COLLIDE"];
+        if (server_totalCrashes >= 8) exitWith { diag_log "CRASHSPAWNER: DONE! };
         server_totalCrashes = server_totalCrashes + 1;
 		
   		//Grass clear system uncomment for clear areas around choppers.
