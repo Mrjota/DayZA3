@@ -85,21 +85,22 @@ if (_hasToolbox) then {
 			if (_isOK) then {
 				if(_brokenPart) then {
 					//Failed!
+					_selection = getText(configFile >> "cfgVehicles" >> _type >> "HitPoints" >> _hitpoint >> "name");
 					systemChat format["You have destroyed the %1 while attempting to remove from the %2",_namePart,_nameType];
 					dayzSetFix = [_vehicle,_selection,1];
 					publicVariable "dayzSetFix";
-					if (local _vehicle) then {
+					//if (local _vehicle) then {
 						dayzSetFix call object_setFixServer;
-					};
+					//};
 				} else {
 					//Success!
 					_selection = getText(configFile >> "cfgVehicles" >> _type >> "HitPoints" >> _hitpoint >> "name");
 			
 					dayzSetFix = [_vehicle,_selection,0.85];
 					publicVariable "dayzSetFix";
-					if (local _vehicle) then {
+					//if (local _vehicle) then {
 						dayzSetFix call object_setFixServer;
-					};
+					//};
 
 					_vehicle setvelocity [0,0,1];
 					

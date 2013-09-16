@@ -80,34 +80,13 @@ if (_section and _hasToolbox) then {
 			
 			dayzSetFix = [_vehicle,_selection,0];
 			publicVariable "dayzSetFix";
-			if (local _vehicle) then {
+			//if (local _vehicle) then {
 				dayzSetFix call object_setFixServer;
-			};
+			//};
 			
 			_vehicle setVelocity [0,0,1];
 			
 			systemChat format["You have successfully attached %1 to the %2",_namePart,_nameType];
-		};
-	};
-
-	//check if repaired fully
-	_hitpoints = _vehicle call vehicle_getHitpoints;
-	_allFixed = true;
-	{
-		_damage = [_vehicle,_x] call object_getHit;
-		if (_damage > 0) exitWith {
-			_allFixed = false;
-		};
-	} forEach _hitpoints;
-
-	//update if repaired
-	if (_allFixed) then {
-		_vehicle setDamage 0;
-		//["dayzUpdateVehicle",[_vehicle,"repair"]] call callRpcProcedure;
-		dayzSetFix = [_vehicle,_selection,0];
-		publicVariable "dayzSetFix";
-		if (local _vehicle) then {
-			dayzSetFix call object_setFixServer;
 		};
 	};
 };
