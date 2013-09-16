@@ -11,12 +11,7 @@ hungoverfurball (Project Management)
 MistaD (Head Developer)
 rotcehdnih (Developer)
 
-<<<<<<< HEAD
 Community Contributors:
-=======
-Community Contributors (Many Thanks for your effort!):
-rotcehdnih
->>>>>>> f66d997960619e6776433e2c2cb33007b2caeeb2
 Hans
 
 Project sponsored by HFBServers.com
