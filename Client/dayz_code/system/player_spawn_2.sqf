@@ -13,9 +13,12 @@ _isSaint = false;
 _isReaper = false;
 
 player setVariable ["temperature",dayz_temperatur,true];
-
+if (isNil "dayz_myBackpackMags") then { dayz_myBackpackMags = []; };
+if (isNil "dayz_myBackpackWpns") then { dayz_myBackpackWpns = []; };
+if (isNil "dayz_myMagazines") then { dayz_myMagazines = []; };
+if (isNil "dayz_myWeapons") then { dayz_myWeapons = []; };
 dayz_myLoad = (((count dayz_myBackpackMags) * 0.2) + (count dayz_myBackpackWpns)) +  (((count dayz_myMagazines) * 0.1) + (count dayz_myWeapons * 0.5));
-
+if (isNil "dayz_myload") then { dayz_myload = 0; };
 	//player addMagazine "Hatchet_swing";
 	//player addWeapon "MeleeHatchet";
 
@@ -198,9 +201,9 @@ while {true} do {
 
 	//Hunger
 	if ((_refObj == player) and (!r_player_onVehicleC)) then {
-	_hunger = +((((r_player_bloodTotal - r_player_blood) / r_player_bloodTotal) * 5) + _speed + dayz_myLoad);
+		_hunger = +((((r_player_bloodTotal - r_player_blood) / r_player_bloodTotal) * 5) + _speed + dayz_myLoad);
     } else {
-	_hunger = +((((r_player_bloodTotal - r_player_blood) / r_player_bloodTotal) * 5));
+		_hunger = +((((r_player_bloodTotal - r_player_blood) / r_player_bloodTotal) * 5));
     };
 	if (time - dayz_panicCooldown < 120) then {
 		_hunger = _hunger * 2;

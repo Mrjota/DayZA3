@@ -58,7 +58,7 @@ class CfgMods
 		hidePicture = 0;
 		hideName = 0;
 		action = "http://www.zoombiesmod.com";
-		version = "0.1.6.2";
+		version = "0.1.7";
 		hiveVersion = 0.96; //0.93
 	};
 	class DZ_InitWorld
@@ -244,13 +244,19 @@ class RscStructuredTextGUI: RscStructuredText
 class CfgSurvival {
 	class Inventory {
 		class Default {
+		/*
 			magazines[] = {"ItemBandage","ItemPainkiller","Chemlight_green"};
 			//weapons[] = {"Makarov"};
 			weapons[] = {"ItemCompass"};
-			//backpackWeapon = "";
+		*/
+			magazines[] = {"ItemBandage","ItemPainkiller","Chemlight_blue"};
+			utilities[] = {"ItemCompass","ItemMap"};
+			primaryWep = "";
+			primaryMags = 0; //Number of magazines to spawn for primaryWep
+			secondaryWep = "";
+			secondaryMags = 0;  //Number of magazines to spawn for secondaryWep
 			backpack = "DZ_Patrol_Pack_A3";
             vest = "V_PlateCarrier1_rgr_AiA_DZ";
-			//backpack = "";
 		};
 	};
 	class Meat {

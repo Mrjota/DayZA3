@@ -7,15 +7,12 @@ if (!isDedicated) then {
 	_config1 = 	configFile >> "CfgMagazines" >> "FoodEdible";
 	_config2 = 	configFile >> "CfgWeapons" >> "Loot";
 
-	"filmic" setToneMappingParams [0.07, 0.31, 0.23, 0.37, 0.011, 3.750, 6, 4]; setToneMapping "Filmic";
-
 	BIS_Effects_Burn = 			compile preprocessFile "\ca\Data\ParticleEffects\SCRIPTS\destruction\burn.sqf"; 
 	player_zombieCheck = 		compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_zombieCheck.sqf";	//Run on a players computer, checks if the player is near a zombie
 	player_zombieAttack = 		compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_zombieAttack.sqf";	//Run on a players computer, causes a nearby zombie to attack them
 	fnc_usec_damageActions =	compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\fn_damageActions.sqf";		//Checks which actions for nearby casualty
 	fnc_inAngleSector =			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\fn_inAngleSector.sqf";		//Checks which actions for nearby casualty
 	fnc_usec_selfActions =		compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\fn_selfActions.sqf";		//Checks which actions for self
-	fnc_usec_selfActionsA3 =	compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\fn_selfActionsA3.sqf";		//Checks which actions for self A3
 	fnc_usec_unconscious =		compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\fn_unconscious.sqf";
 	player_temp_calculation	=	compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\fn_temperatur.sqf";		//Temperatur System	//TeeChange
 	player_weaponFiredNear =	compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_weaponFiredNear.sqf";
@@ -93,6 +90,7 @@ if (!isDedicated) then {
 	player_gearSet	=			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_gearSet.sqf";
 	ui_changeDisplay = 			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\ui_changeDisplay.sqf";
 	all_force_gearSave =		compile preprocessFileLineNumbers "\z\addons\dayz_code\system\forceGearSave.sqf"; //Forcing the gear saving due to A3's change in inventory. Slots vs. Tree.
+	fnc_setLoadout = 				compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\fn_setLoadout.sqf";
 	
 	//System
 	player_monitor =			compile preprocessFileLineNumbers "\z\addons\dayz_code\system\player_monitor.sqf";

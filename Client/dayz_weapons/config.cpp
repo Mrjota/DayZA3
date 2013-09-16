@@ -1116,7 +1116,7 @@ class cfgAmmo {
 		midRangeProbab = 0.8;
 		maxRange = 4;
 		maxRangeProbab = 0;
-		explosive = "true";
+		explosive = "false";
 		simulationStep = 0.001;
 		timeToLive = 0.04;
 		soundFly[] = {"", 0, 1};

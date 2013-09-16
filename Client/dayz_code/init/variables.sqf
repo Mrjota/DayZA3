@@ -179,6 +179,7 @@ Dayz_GUI_B = 0.26; // -0.26
 //Player self-action handles
 dayz_resetSelfActions = {
 	s_player_fire =			-1;
+	s_player_repair_ctrl =	-1;
 	s_player_cook =			-1;
 	s_player_boil =			-1;
 	s_player_fireout =		-1;
@@ -303,6 +304,8 @@ r_action_targets = 		[];
 r_pitchWhine = 			false;
 r_isBandit =			false;
 r_isBuilding =          false;
+repairInProgress =		false;
+
 
 //ammo routine
 r_player_actions2 = [];
@@ -379,6 +382,9 @@ dayz_zombieTargetList = [
 dayzHit = [];
 dayzPublishObj = [];		//used for eventhandler to spawn a mirror of players tent
 dayzHideBody = objNull;
+
+dayz_refuelVehicle = 	objNull;
+dayz_refuelAction = 0;
 
 //DayZ settings
 dayz_dawn = 6;

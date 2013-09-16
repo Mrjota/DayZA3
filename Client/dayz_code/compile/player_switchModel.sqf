@@ -22,84 +22,11 @@ private ["_playerUID"];
 	} else {
 		_playerUID = getPlayerUID player;
 	};
-
-//BackUp Weapons and Mags
-private ["_primweapon","_secweapon"];
-
-//	if ( (_playerUID == dayz_playerUID) && (count _magazines == 0) && (count (magazines player) > 0 )) exitWith {cutText ["can't count magazines!", "PLAIN DOWN"]};
-
-
-//	if ( count _magazines == 0 ) exitWith {cutText ["can't count magazines!", "PLAIN DOWN"]};
-
-	_primweapon	= primaryWeapon player;
-	_secweapon	= handgunWeapon player;
-    _weapons = [];
-
-	//Checks
-	if(!(_primweapon in _weapons) && _primweapon != "") then {
-		_weapons = _weapons + [_primweapon];
-	};
-
-	if(!(_secweapon in _weapons) && _secweapon != "") then {
-		_weapons = _weapons + [_secweapon];
-	};
-
 	
-//	if(count _magazines == 0) then {
-//		_magazines = magazines player;
-//	};
+	_oldInventory = [player,["ammo"]] call fnc_getLoadout;
 
-//BackUp Backpack
-private ["_newBackpackType","_backpackWpn","_backpackMag"];
-	dayz_myBackpack = unitBackpack player;
-	_newBackpackType = (typeOf dayz_myBackpack);
-	if(_newBackpackType != "") then {
-		_backpackWpn = getWeaponCargo unitBackpack player;
-		_backpackMag = getMagazineCargo unitBackpack player;
-	};
-
-//Get Muzzle
-	_currentWpn = currentWeapon player;
-	_muzzles = getArray(configFile >> "cfgWeapons" >> _currentWpn >> "muzzles");
-	if (count _muzzles > 1) then {
-		_currentWpn = currentMuzzle player;
-	};
-
-//Get Current Ammo
-private ["_currentmag","_secmag","_magArray","_vestClass","_magazines","_otheritems","_goggles"];
-    _currentmag = currentMagazine player;
-    _secmag = (handgunMagazine player) select 0;
-    _magArray = [];
-    if (_currentmag != "") then {
-    _magArray = _magArray + [_currentmag];
-    };
-    if (!isNil "_secmag") then {
-        if (_secmag != "") then {
-            _magArray = _magArray + [_secmag];
-            if ((_secmag == _currentMag) and (_currentMag != "")) then {
-                _magArray = [_currentmag];
-            };
-        };
-    };
-    
-//Get Vest and magazines
-    _vestClass = vest player;
-	_magazines = vestItems player;
-    
-//Get Utilities
-    _otheritems = assignedItems player;
-    
-//Get Goggles
-    _goggles = goggles player;
-    
-//Debug Message
 	diag_log "Attempting to switch model";
-	diag_log str(_weapons);
-	diag_log str(_magArray);
-	diag_log str(_vestClass);
-	diag_log str(_magazines);
-	diag_log (str(_backpackWpn));
-	diag_log (str(_backpackMag));
+	diag_log str(_oldInventory);
 
 //Secure Player for Transformation
 	player setPosATL dayz_spawnPos;
@@ -118,6 +45,7 @@ private ["_currentmag","_secmag","_magArray","_vestClass","_magazines","_otherit
 
 	_newUnit 	setPosATL _position;
 	_newUnit 	setDir _dir;
+	_newInventory = _oldInventory;
 
 //Clear New Character
 	{_newUnit removeMagazine _x;} forEach  magazines _newUnit;
@@ -128,73 +56,12 @@ private ["_currentmag","_secmag","_magArray","_vestClass","_magazines","_otherit
     removeVest _newUnit;
     removeAllAssignedItems _newUnit;
 
-//Equip New Charactar
-
-	{
-		_newUnit addWeapon _x;
-		//sleep 0.05;
-	} forEach _weapons;
+//Equip New Character
+	[_newUnit,_newInventory,["ammo"]] spawn fnc_setLoadout;
 	
-	if(_primweapon !=  (primaryWeapon _newUnit)) then {
-		_newUnit addWeapon _primweapon;		
-	};
-
-	if(_secweapon != (handgunWeapon _newUnit) && _secweapon != "") then {
-		_newUnit addWeapon _secweapon;		
-	};
-    
-//Add and Fill Vest
-	if(!isNil "_vestClass") then {
-        if(_vestClass != "") then {
-            _newUnit addVest _vestClass;
-            _newVest = vest _newUnit;
-            WaitUntil{!isNil "_newVest"};
-            {
-                if (typeName _x == "ARRAY") then {_newUnit addMagazine [_x select 0,_x select 1]; } else { _newUnit addMagazine _x; };
-            } forEach _magazines;
-        };
-	};
-//Add and Fill BackPack
-	if (!isNil "_newBackpackType") then {
-		if (_newBackpackType != "") then {
-			_newUnit addBackpack _newBackpackType;
-			_oldBackpack = dayz_myBackpack;
-			dayz_myBackpack = unitBackpack _newUnit;
-
-
-			//Fill backpack contents
-			//Weapons
-			_backpackWpnTypes = [];
-			_backpackWpnQtys = [];
-			if (count _backpackWpn > 0) then {
-				_backpackWpnTypes = _backpackWpn select 0;
-				_backpackWpnQtys = 	_backpackWpn select 1;
-			};
-			_countr = 0;
-			{
-				dayz_myBackpack addWeaponCargoGlobal [_x,(_backpackWpnQtys select _countr)];
-				_countr = _countr + 1;
-			} forEach _backpackWpnTypes;
-			//magazines
-			_backpackmagTypes = [];
-			_backpackmagQtys = [];
-			if (count _backpackmag > 0) then {
-				_backpackmagTypes = _backpackMag select 0;
-				_backpackmagQtys = 	_backpackMag select 1;
-			};
-			_countr = 0;
-			{
-				dayz_myBackpack addmagazineCargoGlobal [_x,(_backpackmagQtys select _countr)];
-				_countr = _countr + 1;
-			} forEach _backpackmagTypes;
-		};
-	};
 //Debug Message
 	diag_log "Swichtable Unit Created. Equipment:";
-	diag_log str(weapons _newUnit);
-	diag_log str(magazines _newUnit);
-	diag_log str(getWeaponCargo unitBackpack _newUnit);
-	diag_log str(getMagazineCargo unitBackpack _newUnit);
+	diag_log str(_newInventory);
 
 //Make New Unit Playable
 	addSwitchableUnit _newUnit;
@@ -206,14 +73,9 @@ private ["_currentmag","_secmag","_magArray","_vestClass","_magazines","_otherit
 	{_oldUnit removeMagazine _x;} forEach  magazines _oldUnit;
 		
 	deleteVehicle _oldUnit;
-
-//Move player inside
-
-//	player switchCamera = _currentCamera;
-	if(_currentWpn != "") then {_newUnit selectWeapon _currentWpn;};
+	
 	[[[player, _currentanim], { (_this select 0) switchMove (_this select 1); }], "BIS_fnc_spawn", true, false] call BIS_fnc_MP;
     player switchMove _currentanim;
-	//dayz_originalPlayer attachTo [_newUnit];
 	player disableConversation true;
 	
 	player setVariable ["bodyName",dayz_playerName,true];
@@ -222,8 +84,3 @@ private ["_currentmag","_secmag","_magArray","_vestClass","_magazines","_otherit
 	_playerObjName = format["player%1",_playerUID];
 	call compile format["%1 = player;",_playerObjName];
 	publicVariable _playerObjName;
-    {
-        _newUnit addItem _x;
-        _newUnit assignItem _x;
-    } forEach _otheritems;
-    _newUnit addGoggles _goggles;
