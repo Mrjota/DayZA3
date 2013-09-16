@@ -1,21 +1,28 @@
+9/15/2013:
+----------------------------------------------------------------
 Zoombies and submods of it were made by the Zoombies Development Team. All Rights Reserved
 All in ArmA(AiA) was created by kju. If you would like to learn more about AiA please do so here: http://forums.bistudio.com/showthread.php?152706-All-in-Arma-(AiA)-TKOH-OA-A2-A1-merge-with-A3
 ----------------------------------------------------------------
-Launcher created by Pwnoz0r
+DayZA3: Zoombies Universal Launcher created by Pwnoz0r
 
-Team:
+DayZA3: Zoombies Development Team:
 Pwnoz0r (Project Lead)
 hungoverfurball (Project Management)
 MistaD (Head Developer)
+rotcehdnih (Developer)
 
-Community Contributors (Many Thanks for your effort!):
-rotcehdnih
+Community Contributors:
 Hans
 
 Project sponsored by HFBServers.com
 If you would like to buy a server, do so here: http://hfbservers.com/games/arma3
 
-Credits:
-Dean Hall and the DayZMod Team for developing "DayZ".
+Dean Hall and the DayZMod Team for developing "DayZMod" for ArmA2.
 ----------------------------------------------------------------
-5/1/13
+During the development of the port, GSP server hosting is NOT allowed.
+
+We are aware that the mod is opensource, but we only use it for the progress tracking. If this is abused (code being taken without permission, etc.) we will no longer have it on GitHub.
+
+If you would like to use our code for another port please contact us for permission. If permission is given, you must include all of our credits in your port.
+
+This pertains to the code WE wrote, not what the DayZMod Development Team has done.
