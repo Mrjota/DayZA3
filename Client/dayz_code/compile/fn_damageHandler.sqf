@@ -68,24 +68,38 @@ if (_unitIsPlayer) then {
 
 //PVP Damage
 _scale = 1000;
-if (_damage > 0.1) then {
+_cw = "";
+_hw = "";
+if (_damage > 0.005) then {
+	if (_isPlayer) then {
+		_cw = currentWeapon _source;
+		_hw = handgunWeapon _source;
+	};
 	if (_ammo != "zombie") then {
-		_scale = _scale + 1500;
+		if (_cw != "") then {
+			if (_cw != _hw) then {
+				_scale = _scale + 700;
+			} else {
+				_scale = _scale + 500;
+			};
+		} else {
+			_scale = _scale + 200;
+		};
 	} else {
-        _scale = 400;
+        _scale = _scale + 800;
     };
 	if (_isHeadHit) then {
 		_scale = _scale + 1400;
 	};
 	if ((isPlayer _source) and !(player == _source)) then {
-		_scale = _scale + 1000;
+		_scale = _scale + 500;
 		if (_isHeadHit) then {
 			_scale = _scale + 500;
 		};
 	};
 	switch (_type) do {
 		case 1: {_scale = _scale + 500};
-		case 2: {_scale = _scale + 800};
+		case 2: {_scale = _scale + 900};
 		case 3: {_scale = 0};
 	};
 	if (_unitIsPlayer) then {
@@ -93,10 +107,10 @@ if (_damage > 0.1) then {
 		//Log Damage
 		//diag_log ("DAMAGE: player hit by " + typeOf _source + " in " + _hit + " with " + _ammo + " for " + str(_damage) + " scaled " + str(_damage * _scale));
 		if (_ammo != "zombie") then {
-            _damage = _damage + 0.3;
+            _damage = _damage + 0.2;
         };
-        if (_hit != "") then {
-        r_player_blood = r_player_blood - (_damage * _scale);
+        if (_hw != "TranqSD") then {
+			r_player_blood = r_player_blood - (_damage * _scale);
         };
         if (_type == 3) then {
             [player] spawn fnc_usec_tranqvictim;
@@ -136,7 +150,10 @@ if (_damage > 0.1) then {
 		_unit setVariable["medForceUpdate",true,true];
 	};
 };
-if ((_damage > 0.15) and (_hit != "")) then {	//0.25
+
+if ((_ammo == "zombie") and (_damage > 0.25)) then {
+
+if (_hw != "TranqSD") then {	//0.25
 	/*
 		BLEEDING
 	*/		
@@ -167,7 +184,6 @@ if ((_damage > 0.15) and (_hit != "")) then {	//0.25
 			if (_unitIsPlayer) then {
 				r_player_blood = r_player_blood - 50;
 				[] spawn fnc_usec_selfActions;
-                [] spawn fnc_usec_selfActionsA3;
 			};
 		};
 		if (_hitInfection) then {
@@ -240,6 +256,113 @@ if ((_damage > 0.15) and (_hit != "")) then {	//0.25
             };
         };
     };
+};
+};
+if ((_ammo != "zombie") and (_damage > 0.1)) then {
+if (_hw != "TranqSD") then {	//0.25
+	/*
+		BLEEDING
+	*/		
+	_wound = _hit call fnc_usec_damageGetWound;
+    if (!isNil "_wound") then {
+        if (typeName _wound != "STRING") then {
+            _wound = "Pelvis";
+        } else {
+            if !(_wound in USEC_woundHit) then {
+                _wound = "Pelvis";
+            };
+        }
+    } else {
+        _wound = "Pelvis";
+    };
+	_isHit = _unit getVariable[_wound,false];
+	if (_unitIsPlayer) then {	
+		_rndPain = 		(random 10);
+		_rndInfection = (random 500);
+		_hitPain = 		(_rndPain < _damage);
+		if ((_isHeadHit) or (_damage > 1.2 and _hitPain)) then {
+			_hitPain = true;
+		};
+		_hitInfection = (_rndInfection < 1);
+		//player sidechat format["HitPain: %1, HitInfection %2 (Damage: %3)",_rndPain,_rndInfection,_damage]; //r_player_infected
+		if (_isHit) then {
+			//Make hit worse
+			if (_unitIsPlayer) then {
+				r_player_blood = r_player_blood - 50;
+				[] spawn fnc_usec_selfActions;
+			};
+		};
+		if (_hitInfection) then {
+			//Set Infection if not already
+			if (_unitIsPlayer) then {
+				r_player_infected = true;
+				player setVariable["USEC_infected",true,true];
+			};
+			
+		};
+		if (_hitPain) then {
+			//Set Pain if not already
+			if (_unitIsPlayer) then {
+				r_player_inpain = true;
+				player setVariable["USEC_inPain",true,true];
+			};
+		};
+		if ((_damage > 1.5) and _isHeadHit) then {
+			_id = [_source,"shothead"] spawn player_death;
+		};
+	};
+    if (_ammo == "zombie") then {
+        if(!_isHit and ((_damage > 0.7) or _isHeadHit)) then {
+            //Create Wound
+            _unit setVariable[_wound,true,true];
+            [_unit,_wound,_hit] spawn fnc_usec_damageBleed;
+            usecBleed = [_unit,_wound,_hit];
+            publicVariable "usecBleed";
+
+            //Set Injured if not already
+            _isInjured = _unit getVariable["USEC_injured",false];
+            if (!_isInjured) then {
+                _unit setVariable["USEC_injured",true,true];
+                if ((_unitIsPlayer) and (_ammo != "zombie")) then {
+                    dayz_sourceBleeding = _source;
+                };
+            };
+            //Set ability to give blood
+            _lowBlood = _unit getVariable["USEC_lowBlood",false];
+            if (!_lowBlood) then {
+                _unit setVariable["USEC_lowBlood",true,true];
+            };
+            if (_unitIsPlayer) then {
+                r_player_injured = true;
+            };
+        };
+    } else {
+        if(!_isHit) then {
+            //Create Wound
+            _unit setVariable[_wound,true,true];
+            [_unit,_wound,_hit] spawn fnc_usec_damageBleed;
+            usecBleed = [_unit,_wound,_hit];
+            publicVariable "usecBleed";
+
+            //Set Injured if not already
+            _isInjured = _unit getVariable["USEC_injured",false];
+            if (!_isInjured) then {
+                _unit setVariable["USEC_injured",true,true];
+                if ((_unitIsPlayer) and (_ammo != "zombie")) then {
+                    dayz_sourceBleeding = _source;
+                };
+            };
+            //Set ability to give blood
+            _lowBlood = _unit getVariable["USEC_lowBlood",false];
+            if (!_lowBlood) then {
+                _unit setVariable["USEC_lowBlood",true,true];
+            };
+            if (_unitIsPlayer) then {
+                r_player_injured = true;
+            };
+        };
+    };
+};
 };
 if (_type == 1) then {
 	/*

@@ -74,33 +74,39 @@ if (_hasToolbox) then {
 		if (_damage < 1) then {
 		
 			_findPercent = (1 - _damage) * 10;
+			_isOK = true; //Force isOK
+			//Random break part chance
 			if(ceil (random _findPercent) == 1) then {
-				_isOK = true;
 				_brokenPart = true;
 			} else {
-				_isOK = [player,_part] call BIS_fnc_invAdd;
 				_brokenPart = false;
 			};
 		
-			if (_isOK) then {	
-
-				//break the part
-				_selection = getText(configFile >> "cfgVehicles" >> _type >> "HitPoints" >> _hitpoint >> "name");
-		
-				dayzSetFix = [_vehicle,_selection,1];
-				publicVariable "dayzSetFix";
-				if (local _vehicle) then {
-					dayzSetFix call object_setFixServer;
-				};
-
-				_vehicle setvelocity [0,0,1];
-
+			if (_isOK) then {
 				if(_brokenPart) then {
 					//Failed!
-					cutText [format["You have destroyed %1 while attempting to remove from %2",_namePart,_nameType], "PLAIN DOWN"];
+					systemChat format["You have destroyed the %1 while attempting to remove from the %2",_namePart,_nameType];
+					dayzSetFix = [_vehicle,_selection,1];
+					publicVariable "dayzSetFix";
+					if (local _vehicle) then {
+						dayzSetFix call object_setFixServer;
+					};
 				} else {
 					//Success!
-					cutText [format["You have successfully removed %1 from the %2",_namePart,_nameType], "PLAIN DOWN"];
+					_selection = getText(configFile >> "cfgVehicles" >> _type >> "HitPoints" >> _hitpoint >> "name");
+			
+					dayzSetFix = [_vehicle,_selection,0.85];
+					publicVariable "dayzSetFix";
+					if (local _vehicle) then {
+						dayzSetFix call object_setFixServer;
+					};
+
+					_vehicle setvelocity [0,0,1];
+					
+					systemChat format["You have successfully removed the %1 from the %2",_namePart,_nameType];
+					
+					_stack = createVehicle ["GroundWeaponHolder", position player, [], 0, "CAN_COLLIDE"];
+					_stack addMagazineCargoGlobal [_part, 1];
 				};
 
 			} else {
@@ -112,7 +118,7 @@ if (_hasToolbox) then {
 	};
 			
 } else {
-	cutText [format["You need %1 to remove this part.",_namePart], "PLAIN DOWN"];
+	systemChat format["You need [a(n)] %1 to remove this part.",_namePart];
 };
 
 dayz_myCursorTarget = objNull;

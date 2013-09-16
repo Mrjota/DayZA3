@@ -136,17 +136,17 @@ if (!_canFill) then {
 };
 
 // Auto-Refuel
-_refuelVehicle = 	objNull;
-_refuelDist = 		15;
-_refuelAmount =		0.01;
+_refuelDist = 		3;
+_refuelAmount =		0.004;
 _countFuel = (count ((position _vehicle) nearObjects ["Land_Ind_TankSmall", _refuelDist]));
 _countFuel = _countFuel + (count ((position _vehicle) nearObjects ["Land_fuel_tank_big", _refuelDist]));
 _countFuel = _countFuel + (count ((position _vehicle) nearObjects ["Land_fuel_tank_stairs", _refuelDist]));
 _countFuel = _countFuel + (count ((position _vehicle) nearObjects ["Land_wagon_tanker", _refuelDist]));
+_countFuel = _countFuel + (count ((position _vehicle) nearObjects ["Land_A_FuelStation_Feed", _refuelDist]));
 _isNearFeed = _countFuel > 0;
 
-if (!isNull _cursorTarget and !_inVehicle and (player distance _cursorTarget < 4)) then {	//Has some kind of target
-	_cursorTarget = _cursorTarget;
+if (!isNull cursorTarget and !_inVehicle and (player distance cursorTarget < 4)) then {	//Has some kind of target
+	_cursorTarget = cursorTarget;
 	_isHarvested = true;
 	_isTakeable = false;
     _isHarvested = _cursorTarget getVariable["meatHarvested",false];
@@ -288,7 +288,7 @@ if (!isNull _cursorTarget and !_inVehicle and (player distance _cursorTarget < 4
 		s_player_sleep = -1;
 	};
 	
-	//New Repair System ---
+	//New Repair/Salvage System ---
 	if ((dayz_myCursorTarget != _cursorTarget) and _isVehicle and !_isMan and _hasToolbox and (damage _cursorTarget < 1)) then {
 		if (s_player_repair_ctrl < 0) then {
 			dayz_myCursorTarget = _cursorTarget;
@@ -755,7 +755,7 @@ if(_vehicle == player and _hasMRE) then {
 //Allow placing of tents
 if(_vehicle == player and _hasTent and _canDo and !r_isBuilding) then {
 	if(s_doTent < 0) then {
-		s_doTent = player addAction [format["<t color='#FF0000'>Pitch Tent%1</t>"], "z\addons\dayz_code\actions\tent_pitch.sqf"];
+		s_doTent = player addAction [format["<t color='#FF0000'>Pitch Tent%1</t>"], "z\addons\dayz_code\actions\tent_pitch.sqf",[], 1, false, true];
 	};
 } else	{
 	player removeAction s_doTent;
@@ -765,7 +765,7 @@ if(_vehicle == player and _hasTent and _canDo and !r_isBuilding) then {
 //Allow placing of tents
 if(_vehicle == player and _hasATent and _canDo and !r_isBuilding) then {
 	if(s_doATent < 0) then {
-	s_doATent = player addAction [format["<t color='#FF0000'>Pitch Tent (Large)%1</t>"], "z\addons\dayz_code\actions\atent_pitch.sqf"];
+	s_doATent = player addAction [format["<t color='#FF0000'>Pitch Tent (Large)%1</t>"], "z\addons\dayz_code\actions\atent_pitch.sqf",[], 1, false, true];
 	};
 } else	{
 	player removeAction s_doATent;
@@ -775,7 +775,7 @@ if(_vehicle == player and _hasATent and _canDo and !r_isBuilding) then {
 //Allow placing of Sandbags
 if(_vehicle == player and _hasSand and _canDo and !r_isBuilding and _hasEtool) then {
 	if(s_doSand < 0) then {
-		s_doSand = player addAction [format["<t color='#FF0000'>Stack Sandbags%1</t>"], "z\addons\dayz_code\actions\build.sqf", "ItemSandbag"];
+		s_doSand = player addAction [format["<t color='#FF0000'>Stack Sandbags%1</t>"], "z\addons\dayz_code\actions\build.sqf", "ItemSandbag", 1, false, true];
 	};
 } else	{
 	player removeAction s_doSand;
@@ -785,7 +785,7 @@ if(_vehicle == player and _hasSand and _canDo and !r_isBuilding and _hasEtool) t
 //Allow placing of Wire    
 if(_vehicle == player and _hasWire and _canDo and !r_isBuilding and _hasToolbox and _hasEtool) then {
 	if(s_doWire < 0) then {
-		s_doWire = player addAction [format["<t color='#FF0000'>Build Wire Fence%1</t>"], "z\addons\dayz_code\actions\build.sqf", "ItemWire"];
+		s_doWire = player addAction [format["<t color='#FF0000'>Build Wire Fence%1</t>"], "z\addons\dayz_code\actions\build.sqf", "ItemWire", 1, false, true];
 	};
 } else	{
 	player removeAction s_doWire;
@@ -795,7 +795,7 @@ if(_vehicle == player and _hasWire and _canDo and !r_isBuilding and _hasToolbox 
 //Allow placing of TTraps
 if(_vehicle == player and _hasTTrap and _canDo and !r_isBuilding and _hasToolbox) then {
 	if(s_doTTrap < 0) then {
-		s_doTTrap = player addAction [format["<t color='#FF0000'>Set Tank Trap%1</t>"], "z\addons\dayz_code\actions\build.sqf", "ItemTankTrap"];
+		s_doTTrap = player addAction [format["<t color='#FF0000'>Set Tank Trap%1</t>"], "z\addons\dayz_code\actions\build.sqf", "ItemTankTrap", 1, false, true];
 	};
 } else	{
 	player removeAction s_doTTrap;
@@ -805,7 +805,7 @@ if(_vehicle == player and _hasTTrap and _canDo and !r_isBuilding and _hasToolbox
 //Allow placing of bear traps 
 if(_vehicle == player and _hasBTrap and _canDo and !r_isBuilding) then {
 	if(s_doBTrap < 0) then {
-		s_doBTrap = player addAction [format["<t color='#FF0000'>Set Bear Trap%1</t>"], "z\addons\dayz_code\actions\build.sqf", "TrapBear"];
+		s_doBTrap = player addAction [format["<t color='#FF0000'>Set Bear Trap%1</t>"], "z\addons\dayz_code\actions\build.sqf", "TrapBear", 1, false, true];
 	};
 } else	{
 	player removeAction s_doBTrap;
@@ -815,25 +815,25 @@ if(_vehicle == player and _hasBTrap and _canDo and !r_isBuilding) then {
 //Allow changing of clothes
 if(_vehicle == player and (_hasClothes1 or _hasClothes2 or _hasClothes3 or _hasClothes4 or _hasClothes5 or _hasClothes6 or _hasClothes7) and _canDo) then {
 	if((s_doClothes1 < 0) and (_hasClothes1)) then {
-		s_doClothes1 = player addAction [format["<t color='#FF0000'>Wear Ghillie Suit</t>"], "z\addons\dayz_code\actions\player_wearClothes.sqf", ["Skin_Sniper1_DZ"]];
+		s_doClothes1 = player addAction [format["<t color='#FF0000'>Wear Ghillie Suit</t>"], "z\addons\dayz_code\actions\player_wearClothes.sqf", ["Skin_Sniper1_DZ"], 1, false, true];
 	};
 	if((s_doClothes2 < 0) and (_hasClothes2)) then {
-		s_doClothes2 = player addAction [format["<t color='#FF0000'>Wear Camo Clothing</t>"], "z\addons\dayz_code\actions\player_wearClothes.sqf", ["Skin_Camo1_DZ"]];
+		s_doClothes2 = player addAction [format["<t color='#FF0000'>Wear Camo Clothing</t>"], "z\addons\dayz_code\actions\player_wearClothes.sqf", ["Skin_Camo1_DZ"], 1, false, true];
 	};
 	if((s_doClothes3 < 0) and (_hasClothes3)) then {
-		s_doClothes3 = player addAction [format["<t color='#FF0000'>Wear Civilian Clothing</t>"], "z\addons\dayz_code\actions\player_wearClothes.sqf", ["Skin_Survivor2_DZ"]];
+		s_doClothes3 = player addAction [format["<t color='#FF0000'>Wear Civilian Clothing</t>"], "z\addons\dayz_code\actions\player_wearClothes.sqf", ["Skin_Survivor2_DZ"], 1, false, true];
 	};
 	if((s_doClothes4 < 0) and (_hasClothes4)) then {
-		s_doClothes4 = player addAction [format["<t color='#FF0000'>Wear Veteran Clothing (Red)</t>"], "z\addons\dayz_code\actions\player_wearClothes.sqf", ["Skin_SurvivorR_DZ"]];
+		s_doClothes4 = player addAction [format["<t color='#FF0000'>Wear Veteran Clothing (Red)</t>"], "z\addons\dayz_code\actions\player_wearClothes.sqf", ["Skin_SurvivorR_DZ"], 1, false, true];
 	};
 	if((s_doClothes5 < 0) and (_hasClothes5)) then {
-		s_doClothes5 = player addAction [format["<t color='#FF0000'>Wear Veteran Clothing (Blue)</t>"], "z\addons\dayz_code\actions\player_wearClothes.sqf", ["Skin_SurvivorB_DZ"]];
+		s_doClothes5 = player addAction [format["<t color='#FF0000'>Wear Veteran Clothing (Blue)</t>"], "z\addons\dayz_code\actions\player_wearClothes.sqf", ["Skin_SurvivorB_DZ"], 1, false, true];
 	};
 	if((s_doClothes6 < 0) and (_hasClothes6)) then {
-		s_doClothes6 = player addAction [format["<t color='#FF0000'>Wear Ranger Outfit</t>"], "z\addons\dayz_code\actions\player_wearClothes.sqf", ["Skin_Ranger_DZ"]];
+		s_doClothes6 = player addAction [format["<t color='#FF0000'>Wear Ranger Outfit</t>"], "z\addons\dayz_code\actions\player_wearClothes.sqf", ["Skin_Ranger_DZ"], 1, false, true];
 	};
 	if((s_doClothes7 < 0) and (_hasClothes7)) then {
-		s_doClothes7 = player addAction [format["<t color='#FF0000'>Wear Desert Ghillie Suit</t>"], "z\addons\dayz_code\actions\player_wearClothes.sqf", ["Skin_Sniper2_DZ"]];
+		s_doClothes7 = player addAction [format["<t color='#FF0000'>Wear Desert Ghillie Suit</t>"], "z\addons\dayz_code\actions\player_wearClothes.sqf", ["Skin_Sniper2_DZ"], 1, false, true];
 	};
 } else	{
 	player removeAction s_doClothes1;
@@ -853,7 +853,8 @@ if(_vehicle == player and (_hasClothes1 or _hasClothes2 or _hasClothes3 or _hasC
 };
     
 //Custom Get in Back script
-if (!isNull _cursorTarget and (player distance _cursorTarget < 4) and !_inVehicle) then {
+if (!isNull cursorTarget and (player distance cursorTarget < 4) and !_inVehicle) then {
+	_cursorTarget = cursorTarget;
     _isAlive = alive _cursorTarget;
     _isCustom = typeOf _cursorTarget in ["Old_bike_TK_CIV_EP1","Old_bike_TK_INS_EP1","ATV_US_EP1","ATV_CZ_EP1","Tractor","VolhaLimo_TK_CIV_EP1","Volha_2_TK_CIV_EP1","Volha_1_TK_CIV_EP1","car_sedan","car_hatchback","Lada2_TK_CIV_EP1","Lada1_TK_CIV_EP1","Skoda","Lada1","Lada2","LadaLM","SkodaRed","SkodaGreen","SkodaBlue","datsun1_civil_3_open","datsun1_civil_1_open","hilux1_civil_3_open_EP1","hilux1_civil_3_open","hilux1_civil_1_open"];
     if (_isCustom and _isAlive and !r_player_onVehicleC and alive player) then {
@@ -885,36 +886,36 @@ if (!isNull _cursorTarget and (player distance _cursorTarget < 4) and !_inVehicl
         _type = getText (configFile >> "CfgVehicles" >> _type >> "displayname");
         if (s_player_getin1 < 0) then {
             if (typeOf _cursorTarget in ["ATV_US_EP1","ATV_CZ_EP1","Old_bike_TK_CIV_EP1","Old_bike_TK_INS_EP1"]) then {
-                s_player_getin1 = player addAction [format["%1%2%3%4",_text,_type,_text2,_seatSide], "\z\addons\dayz_code\actions\player_getin.sqf",0, 0, true, true, "", ""];	
+                s_player_getin1 = player addAction [format["%1%2%3%4",_text,_type,_text2,_seatSide], "\z\addons\dayz_code\actions\player_getin.sqf",0, 0, false, true, "", ""];	
             };
             if (typeOf _cursorTarget in ["Lada2_TK_CIV_EP1","Lada1_TK_CIV_EP1","Skoda","Lada1","Lada2","LadaLM","SkodaRed","SkodaGreen","SkodaBlue","VolhaLimo_TK_CIV_EP1","Volha_2_TK_CIV_EP1","Volha_1_TK_CIV_EP1","car_sedan","car_hatchback"]) then {
                 _seatSide = " (Left)";
-                s_player_getin1 = player addAction [format["%1%2%3%4",_text,_type,_text2,_seatSide], "\z\addons\dayz_code\actions\player_getin.sqf",0, 0, true, true, "", ""];	
+                s_player_getin1 = player addAction [format["%1%2%3%4",_text,_type,_text2,_seatSide], "\z\addons\dayz_code\actions\player_getin.sqf",0, 0, false, true, "", ""];	
             };
             if (typeOf _cursorTarget in ["datsun1_civil_3_open","datsun1_civil_1_open","hilux1_civil_3_open_EP1","hilux1_civil_1_open","hilux1_civil_3_open"]) then {
                 _seatSide = " (Left)";
-                s_player_getin1 = player addAction [format["%1%2%3%4",_text,_type,_text2,_seatSide], "\z\addons\dayz_code\actions\player_getin.sqf",0, 0, true, true, "", ""];	
+                s_player_getin1 = player addAction [format["%1%2%3%4",_text,_type,_text2,_seatSide], "\z\addons\dayz_code\actions\player_getin.sqf",0, 0, false, true, "", ""];	
             };	
             if (typeOf _cursorTarget in ["Tractor"]) then {
-                s_player_getin1 = player addAction [format["%1%2%3%4",_text,_type,_text2,_seatSide], "\z\addons\dayz_code\actions\player_getin.sqf",0, 0, true, true, "", ""];	
+                s_player_getin1 = player addAction [format["%1%2%3%4",_text,_type,_text2,_seatSide], "\z\addons\dayz_code\actions\player_getin.sqf",0, 0, false, true, "", ""];	
             };	
         };	
         if (s_player_getin2 < 0) then {
             _seatSide = "";
             if (typeOf _cursorTarget in ["Lada2_TK_CIV_EP1","Lada1_TK_CIV_EP1","Skoda","Lada1","Lada2","LadaLM","SkodaRed","SkodaGreen","SkodaBlue","VolhaLimo_TK_CIV_EP1","Volha_2_TK_CIV_EP1","Volha_1_TK_CIV_EP1","car_sedan","car_hatchback"]) then {
                 _seatSide = " (Right)";
-                s_player_getin2 = player addAction [format["%1%2%3%4",_text,_type,_text2,_seatSide], "\z\addons\dayz_code\actions\player_getin.sqf",1, 0, true, true, "", ""];		
+                s_player_getin2 = player addAction [format["%1%2%3%4",_text,_type,_text2,_seatSide], "\z\addons\dayz_code\actions\player_getin.sqf",1, 0, false, true, "", ""];		
             };
             if (typeOf _cursorTarget in ["datsun1_civil_3_open","datsun1_civil_1_open","hilux1_civil_3_open_EP1","hilux1_civil_1_open","hilux1_civil_3_open"]) then {
                 _seatSide = " (Center)";
-                s_player_getin2 = player addAction [format["%1%2%3%4",_text,_type,_text2,_seatSide], "\z\addons\dayz_code\actions\player_getin.sqf",2, 0, true, true, "", ""];		
+                s_player_getin2 = player addAction [format["%1%2%3%4",_text,_type,_text2,_seatSide], "\z\addons\dayz_code\actions\player_getin.sqf",2, 0, false, true, "", ""];		
             };
         };	
         if (s_player_getin3 < 0) then {
             _seatSide = "";
             if (typeOf _cursorTarget in ["datsun1_civil_3_open","datsun1_civil_1_open","hilux1_civil_3_open_EP1","hilux1_civil_1_open","hilux1_civil_3_open"]) then {
                 _seatSide = " (Right)";
-                s_player_getin3 = player addAction [format["%1%2%3%4",_text,_type,_text2,_seatSide], "\z\addons\dayz_code\actions\player_getin.sqf",1, 0, true, true, "", ""];		
+                s_player_getin3 = player addAction [format["%1%2%3%4",_text,_type,_text2,_seatSide], "\z\addons\dayz_code\actions\player_getin.sqf",1, 0, false, true, "", ""];		
             };
         };	
     } else {
@@ -935,13 +936,13 @@ if (!isNull _cursorTarget and (player distance _cursorTarget < 4) and !_inVehicl
 };
 
 //New Auto-Refuel ---
-if (_refuelVehicle != _vehicle) then {
-	if (_vehicle != player and _isNearFeed and !(_vehicle isKindOf "Bicycle")) then {
-		_refuelVehicle = _vehicle;
-		_vehicle_refuel_id = _refuelVehicle addAction ["Refuel", "\z\addons\dayz_code\actions\vehicle_refuel.sqf", [_refuelAmount], -1, false, true, "", "true"];
+if (dayz_refuelVehicle != _vehicle) then {
+	if (_inVehicle and _isNearFeed and !(_vehicle isKindOf "Bicycle")) then {
+		dayz_refuelVehicle = _vehicle;
+		dayz_refuelAction = dayz_refuelVehicle addAction ["Refuel", "\z\addons\dayz_code\actions\refuel_vehicle.sqf", [_refuelAmount], -1, false, true, "", "vehicle _this == _target && local _target"];
 	};
 };
-if (((!_isNearFeed) or (_vehicle == player) or (_vehicle isKindOf "Bicycle")) and (!isNull _refuelVehicle)) then {
-	_refuelVehicle removeAction _vehicle_refuel_id;
-	_refuelVehicle = objNull;
+if ((!isNull dayz_refuelVehicle) and (!_inVehicle or !_isNearFeed)) then {
+	dayz_refuelVehicle removeAction dayz_refuelAction;
+	dayz_refuelVehicle = objNull;
 };

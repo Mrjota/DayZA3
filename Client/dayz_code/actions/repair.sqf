@@ -26,7 +26,7 @@ if (!_hasToolbox) then {
 };
 
 if (!_section) then {
-	systemChat format["You must have a(n) %1 to repair this!",_namePart];
+	systemChat format["You must have [a(n)] %1 to repair this!",_namePart];
 };
 
 if (_section and _hasToolbox) then {
@@ -74,21 +74,19 @@ if (_section and _hasToolbox) then {
 		_vehicle removeAction _id;
 		
 		if (_damage > 0) then {
-			_num_removed = ([player,_part] call BIS_fnc_invRemove);
+			_num_removed = player removeMagazine _part;
+		
+			_selection = getText (configFile >> "cfgVehicles" >> _type >> "HitPoints" >> _hitpoint >> "name");
 			
-			if (_num_removed == 1) then {
-				_selection = getText (configFile >> "cfgVehicles" >> _type >> "HitPoints" >> _hitpoint >> "name");
-				
-				dayzSetFix = [_vehicle,_selection,0];
-				publicVariable "dayzSetFix";
-				if (local _vehicle) then {
-					dayzSetFix call object_setFixServer;
-				};
-				
-				_vehicle setVelocity [0,0,1];
-				
-				systemChat format["You have successfully attached %1 to the %2",_namePart,_nameType];
+			dayzSetFix = [_vehicle,_selection,0];
+			publicVariable "dayzSetFix";
+			if (local _vehicle) then {
+				dayzSetFix call object_setFixServer;
 			};
+			
+			_vehicle setVelocity [0,0,1];
+			
+			systemChat format["You have successfully attached %1 to the %2",_namePart,_nameType];
 		};
 	};
 

@@ -5,6 +5,11 @@ _vehicle = _this select 3;
 {dayz_myCursorTarget removeAction _x} forEach s_player_repairActions;s_player_repairActions = [];
 
 _hitpoints = _vehicle call vehicle_getHitpoints;
+
+if(count _hitpoints > 0 ) then {
+	_cancel = dayz_myCursorTarget addAction ["Cancel", "\z\addons\dayz_code\actions\repair_cancel.sqf",[], 0, true, false, "",""];
+	s_player_repairActions set [count s_player_repairActions,_cancel];
+};
 {			
 	_damage = [_vehicle,_x] call object_getHit;
 	_part = "PartGeneric";
@@ -37,17 +42,18 @@ _hitpoints = _vehicle call vehicle_getHitpoints;
 	};
 
 	// allow removal of any lightly damaged parts
-	if (_damage < 1 and _damage > 0) then {
+	if (_damage < 1) then {
 		
 		// Do not allow removal of scrap metal
 		if( _part == "PartGlass" or _part == "PartWheel" or _part == "PartEngine" or _part == "PartFueltank" or _part == "PartVRotor") then {
 
-			_color = "color='#ffff00'"; //yellow
-			if (_damage >= 0.5) then {_color = "color='#ff8800'";}; //orange
-			if (_damage >= 0.9) then {_color = "color='#ff0000'";}; //red
+			_color = "color='#47E3F5'"; //cyan
+			if (_damage >= 0.3) then {_color = "color='#3098E3'";}; //dark blue
+			if (_damage >= 0.6) then {_color = "color='#EB2626'";}; //light red
+			if (_damage >= 0.85) then {_color = "color='#CF3E3E'";}; //dark red
 
 			_percent = round(_damage*100);
-			_string = format["<t %2>Salvage%1 (%3 %4)</t>",_cmpt,_color,_percent,"%"]; //Remove - Part
+			_string = format["<t %2>Salvage%1 (%3%4)</t>",_cmpt,_color,_percent,"%"]; //Remove - Part
 			_handle = dayz_myCursorTarget addAction [_string, "\z\addons\dayz_code\actions\salvage.sqf",[_vehicle,_part,_x], 0, false, true, "",""];
 			s_player_repairActions set [count s_player_repairActions,_handle];
 			
@@ -55,10 +61,3 @@ _hitpoints = _vehicle call vehicle_getHitpoints;
 	};
 
 } forEach _hitpoints;
-
-if(count _hitpoints > 0 ) then {
-	
-	_cancel = dayz_myCursorTarget addAction ["Cancel", "\z\addons\dayz_code\actions\repair_cancel.sqf","repair", 0, true, false, "",""];
-	s_player_repairActions set [count s_player_repairActions,_cancel];
-	s_player_repair_ctrl = 1;
-};

@@ -90,6 +90,7 @@ if (!isDedicated) then {
 	player_gearSet	=			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_gearSet.sqf";
 	ui_changeDisplay = 			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\ui_changeDisplay.sqf";
 	all_force_gearSave =		compile preprocessFileLineNumbers "\z\addons\dayz_code\system\forceGearSave.sqf"; //Forcing the gear saving due to A3's change in inventory. Slots vs. Tree.
+	fnc_setLoadout = 				compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\fn_setLoadout.sqf";
 	
 	//System
 	player_monitor =			compile preprocessFileLineNumbers "\z\addons\dayz_code\system\player_monitor.sqf";

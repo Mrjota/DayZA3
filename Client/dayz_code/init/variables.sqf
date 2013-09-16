@@ -383,6 +383,9 @@ dayzHit = [];
 dayzPublishObj = [];		//used for eventhandler to spawn a mirror of players tent
 dayzHideBody = objNull;
 
+dayz_refuelVehicle = 	objNull;
+dayz_refuelAction = 0;
+
 //DayZ settings
 dayz_dawn = 6;
 dayz_dusk = 18;
