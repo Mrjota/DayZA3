@@ -56,7 +56,7 @@ class cfgWeapons {
         mass = 30;
         class WeaponSlotsInfo {
             mass = 30;
-        }
+        };
 		aiDispersionCoefY = 7.0;
 		aiDispersionCoefX = 7.0;
 		magazines[] = {"kar98_mag"};
