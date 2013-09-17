@@ -545,7 +545,7 @@ class FSM
        "" \n
        "waitUntil{!isNil ""dayz_hasOkHive""};" \n
        "dayz_playerName = name player;" \n
-       "_model call player_switchModel;" \n
+       "[_model, 0, ""player_monitor""] call player_switchModel;" \n
        "" \n
        "player allowDamage false;" \n
        "_lastAte = _survival select 1;" \n
@@ -563,9 +563,10 @@ class FSM
        "player_gearSet = {" \n
        "private['_inventory'];" \n
        "_inventory = _this;" \n
-       "[player,_inventory,[""ammo""]] spawn fnc_setLoadout;" \n
+       "[player,_inventory,[""ammo""],""player_monitor""] spawn fnc_setLoadout;" \n
        "};" \n
        "};" \n
+	   "waitUntil{!isNil ""dayz_finishedSwitch""};" \n
        "_inventory call player_gearSet;" \n
        "diag_log(""(2) inventory Value (player_monitor): "" + str _inventory);" \n
        "" \n

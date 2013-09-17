@@ -1,6 +1,12 @@
 private["_class","_position","_dir","_group","_oldUnit","_newUnit","_currentWpn","_muzzles","_currentAnim","_currentCamera"];
-_class 			= _this;
-
+_class 			= _this select 0;
+_doLoadout			= _this select 1;
+_source = "DEFAULT";
+if (count _this > 2) then {
+_source = _this select 2;
+};
+_oldInventory	= [];
+_newInventory 	= [];
 _position 		= getPosATL player;
 _dir 			= getDir player;
 _currentAnim 	= animationState player;
@@ -22,11 +28,13 @@ private ["_playerUID"];
 	} else {
 		_playerUID = getPlayerUID player;
 	};
-	
-	_oldInventory = [player,["ammo"]] call fnc_getLoadout;
+	if (_doLoadout > 0) then {
+		_oldInventory = [player,["ammo"]] call fnc_getLoadout;
 
-	diag_log "Attempting to switch model";
-	diag_log str(_oldInventory);
+		diag_log str(_oldInventory);
+	};
+	
+	diag_log format["Attempting to switch model - %1", _source];
 
 //Secure Player for Transformation
 	player setPosATL dayz_spawnPos;
@@ -45,7 +53,9 @@ private ["_playerUID"];
 
 	_newUnit 	setPosATL _position;
 	_newUnit 	setDir _dir;
-	_newInventory = _oldInventory;
+	if (_doLoadout > 0) then {
+		_newInventory = _oldInventory;
+	};
 
 //Clear New Character
 	{_newUnit removeMagazine _x;} forEach  magazines _newUnit;
@@ -57,11 +67,13 @@ private ["_playerUID"];
     removeAllAssignedItems _newUnit;
 
 //Equip New Character
-	[_newUnit,_newInventory,["ammo"]] spawn fnc_setLoadout;
+	if (_doLoadout > 0) then {
+		[_newUnit,_newInventory,["ammo"],"player_switchModel"] spawn fnc_setLoadout;
+		//Debug Message
+		diag_log "Swichtable Unit Created. Equipment:";
+		diag_log str(_newInventory);
+	};
 	
-//Debug Message
-	diag_log "Swichtable Unit Created. Equipment:";
-	diag_log str(_newInventory);
 
 //Make New Unit Playable
 	addSwitchableUnit _newUnit;
@@ -84,3 +96,4 @@ private ["_playerUID"];
 	_playerObjName = format["player%1",_playerUID];
 	call compile format["%1 = player;",_playerObjName];
 	publicVariable _playerObjName;
+	dayz_finishedSwitch = true;

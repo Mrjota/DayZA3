@@ -305,6 +305,7 @@ r_pitchWhine = 			false;
 r_isBandit =			false;
 r_isBuilding =          false;
 repairInProgress =		false;
+dayz_finishedSwitch =	nil;
 
 
 //ammo routine

@@ -249,8 +249,8 @@ class CfgSurvival {
 			//weapons[] = {"Makarov"};
 			weapons[] = {"ItemCompass"};
 		*/
-			magazines[] = {"ItemBandage","ItemPainkiller","Chemlight_blue"};
-			utilities[] = {"ItemCompass","ItemMap"};
+			magazines[] = {"ItemBandage","ItemPainkiller","Chemlight_blue","Chemlight_blue"};
+			utilities[] = {"ItemCompass"};
 			primaryWep = "";
 			primaryMags = 0; //Number of magazines to spawn for primaryWep
 			secondaryWep = "";

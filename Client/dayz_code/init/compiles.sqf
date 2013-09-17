@@ -329,7 +329,7 @@ if (!isDedicated) then {
 		_object = _this select 0;
 		_model = _this select 1;
 		if (_object == player) then {
-			_model call player_switchModel;
+			[_model, 0, "player_serverModelChange"] call player_switchModel;
 		};
 	};
 	

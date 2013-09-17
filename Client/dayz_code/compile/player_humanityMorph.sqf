@@ -25,7 +25,7 @@ _humanKills 	= player getVariable ["humanKills",0];
 _banditKills 	= player getVariable ["banditKills",0];
 
 //Switch
-	_model call player_switchModel;
+	[_model, 1, "player_humanityMorph"] call player_switchModel;
 
 //Login
 

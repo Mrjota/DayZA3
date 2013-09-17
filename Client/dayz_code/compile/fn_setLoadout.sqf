@@ -28,14 +28,15 @@
 */
 
 private ["_target","_options","_loadMagsAmmo","_data","_loadedMagazines","_placeholderCount","_add","_outfit","_weapon","_muzzles","_magazines","_magazine","_currentWeapon","_currentMode"];
-
+_source = _this select 3;
+diag_log (format["SetLoadout Source: %1", _source]);
 _options = [];
 _data = [];
 
 // addAction support
-if(count _this < 4) then {
+if(count _this < 5) then {
 	private ["_PARAM_INDEX"]; _PARAM_INDEX=0;
-	#define PARAMREQ(A) if (count _this <= _PARAM_INDEX) exitWith { systemChat format["required param '%1' not supplied in file:'%2' at line:%3", #A ,__FILE__,__LINE__]; }; A = _this select _PARAM_INDEX; _PARAM_INDEX=_PARAM_INDEX+1;
+	#define PARAMREQ(A) if (count _this <= _PARAM_INDEX) exitWith { diag_log format["required param '%1' not supplied in file:'%2' at line:%3", #A ,__FILE__,__LINE__]; }; A = _this select _PARAM_INDEX; _PARAM_INDEX=_PARAM_INDEX+1;
 	#define PARAM(A,B) A = B; if (count _this > _PARAM_INDEX) then { A = _this select _PARAM_INDEX; }; _PARAM_INDEX=_PARAM_INDEX+1;
 	PARAMREQ(_target)
 	PARAMREQ(_data)
@@ -45,13 +46,16 @@ if(count _this < 4) then {
 	_data = loadout;
 };
 
-if(count _data <= 0) then {
-	systemChat "[SYSTEM] Your character data is empty!";
+if(isNil{_data}) exitWith {
+	diag_log "[SYSTEM] Your character data is null!";
 };
+if(count _data <= 0) exitWith {
+	diag_log "[SYSTEM] Your character data is empty!";
+};
+diag_log(format["Data: %1",_data]);
 if(count _data < 13) exitWith {
-	systemChat "[SYSTEM] Your character data is corrupted!";
+	diag_log "[SYSTEM] Your character data is corrupted!";
 };
-
 _loadMagsAmmo = "ammo" in _options;
 _loadedMagazines = [];
 if(count _data > 13) then {
@@ -98,7 +102,6 @@ _add = {
 		};
 	};
 };
-
 // remove clothes to prevent incorrect mag loading
 removeUniform _target;
 removeVest _target;
@@ -109,13 +112,12 @@ _target addBackpack _outfit;
 //waitUntil { backpack _target == _outfit };
 
 removeAllAssignedItems _target;
-
 // add assigned items
 { 
 	[_target,_x] call _add;
 	_target assignItem _x;
+	diag_log _x;
 } forEach (_data select 0);
-
 // add primary weapon, add primary weapon loaded magazine, add primary weapon items
 _target removeWeapon (primaryWeapon _target);
 _weapon = _data select 1;      
@@ -138,7 +140,7 @@ if(_weapon != "") then {
 			}; 
 		} foreach (_data select 2);
 	} else {
-		systemchat format["[SYSTEM] Primary %1 doesn't exist",_weapon];
+		diag_log format["[SYSTEM] Primary %1 doesn't exist",_weapon];
 		if (_currentWeapon == _weapon) then {
 			_currentWeapon = "";
 			_currentMode = "";
@@ -168,7 +170,7 @@ if(_weapon != "") then {
 			}; 
 		} foreach (_data select 4);
 	} else {
-		systemchat format["[SYSTEM] Handgun %1 doesn't exist",_weapon];
+		diag_log format["[SYSTEM] Handgun %1 doesn't exist",_weapon];
 		if (_currentWeapon == _weapon) then {
 			_currentWeapon = "";
 			_currentMode = "";
@@ -198,7 +200,7 @@ if(_weapon != "") then {
 			}; 
 		} foreach (_data select 6);
 	} else {
-		systemchat format["[SYSTEM] Secondary %1 doesn't exist",_weapon];
+		diag_log format["[SYSTEM] Secondary %1 doesn't exist",_weapon];
 		if (_currentWeapon == _weapon) then {
 			_currentWeapon = "";
 			_currentMode = "";
@@ -214,7 +216,7 @@ if ( vehicle _target == _target && _currentWeapon != "" && _currentMode != "" ) 
 		_muzzles = _muzzles + 1;
 	};
 	if(_muzzles >= 100) then {
-		systemchat format["[SYSTEM] Mode %1 for %2 doesn't exist", _currentMode, _currentWeapon];
+		diag_log format["[SYSTEM] Mode %1 for %2 doesn't exist", _currentMode, _currentWeapon];
 		_currentMode = "";		
 	};
 } else {
@@ -242,7 +244,7 @@ if(_outfit != "") then {
 			};	
 		};
 	} else {
-		systemchat format["[SYSTEM] Uniform %1 doesn't exist",_outfit];
+		diag_log format["[SYSTEM] Uniform %1 doesn't exist",_outfit];
 	};		
 };
 
@@ -263,7 +265,7 @@ if(_outfit != "") then {
 			};
 		};
 	} else {
-		systemchat format["[SYSTEM] Vest %1 doesn't exist",_outfit];
+		diag_log format["[SYSTEM] Vest %1 doesn't exist",_outfit];
 	};
 };      
  
@@ -311,7 +313,7 @@ if(_outfit != "") then {
 			[_target, _x] call _add;
 		} foreach (_data select 12);
 	} else {
-		systemchat format["[SYSTEM] Backpack %1 doesn't exist",_outfit];
+		diag_log format["[SYSTEM] Backpack %1 doesn't exist",_outfit];
 	};
 };
 
