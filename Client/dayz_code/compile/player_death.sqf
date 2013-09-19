@@ -77,6 +77,7 @@ terminate dayz_animalCheck;
 terminate dayz_monitor1;
 terminate dayz_medicalH;
 terminate dayz_gui;
+terminate dayz_surfaceNoise;
 terminate dayz_locationCheck;
 terminate dayz_spawnCheck;
 

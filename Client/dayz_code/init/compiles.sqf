@@ -291,7 +291,7 @@ if (!isDedicated) then {
 			dayz_lastCheckBit = time;
 			[player,15,false,(getPosATL player)] spawn player_alertZombies;
 		};
-		if (_dikCode in actionKeys "User20" and (time - dayz_lastCheckBit > 5)) then {
+		if (_dikCode in actionKeys "User20" and (time - dayz_lastCheckBit > 1.5)) then {
 			dayz_lastCheckBit = time;
 			_nill = execvm "\z\addons\dayz_code\actions\playerstats.sqf";
 		};
@@ -393,6 +393,7 @@ if (!isDedicated) then {
 			_humanity = _unit getVariable["humanity",0];
 			dayz_heartBeat = true;
 			if (_humanity < -3000) then {
+				if (_humanity < -10000) then { _humanity = -10000; };
 				_delay = ((10000 + _humanity) / 5500) + 0.3;
 				playSound "heartbeat_1";
 				sleep _delay;
@@ -407,7 +408,12 @@ if (!isDedicated) then {
 		_meleeNum = ({_x == _magType} count magazines player);
 		if (_meleeNum < 1) then {
             if (player hasWeapon _wpnType) then {
-                player addMagazine _magType;
+				_loadedSwingArr = primaryWeaponMagazine player;
+				_loadedSwing = "";
+				if (count _loadedSwingArr > 0) then { _loadedSwing = _loadedSwingArr select 0; };
+				if (_loadedSwing != _magType) then {
+					player addMagazine _magType;
+				};
 			};
 		};
 	};

@@ -58,10 +58,6 @@ while {true} do {
 		sleep 0.2;
 		[] spawn fnc_med_publicBlood;
 	};
-
-	//Add player actions
-	[] spawn fnc_usec_damageActions;
-	[] spawn fnc_usec_selfActions;
 	
 	//Low Blood Effects
 	if (!r_player_unconscious) then {

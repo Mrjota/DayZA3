@@ -69,10 +69,10 @@ if ((random 15 < 1) and (_itemorignal == "ItemWaterbottle")) then {
     player setVariable["USEC_infected",true,true];
 };
 
-player setVariable ["messing",[dayz_hunger,dayz_thirst],true];
-
 dayz_lastDrink = time;
 dayz_thirst = 0;
+
+player setVariable ["messing",[dayz_hunger,dayz_thirst],true];
 
 //Ensure Control is visible
 _display = uiNamespace getVariable 'DAYZ_GUI_display';

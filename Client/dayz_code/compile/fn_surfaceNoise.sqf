@@ -12,7 +12,11 @@ _test = 	0;
 //diag_log ("FINDME: " + _type);
 
 _soundType = 	getText (configFile >> "CfgSurfaces" >> _type >> "soundEnviron");
-_soundVal =		parseNumber format["%1",(((getArray (configFile >> "CfgVehicles" >> "CAManBase" >> "SoundEnvironExt" >> _soundType) select 0) select 1) select 3)];
+_valArray = getArray (configFile >> "CfgVehicles" >> "CAManBase" >> "SoundEnvironExt" >> _soundType);
+if (count _valArray > 0) then { _valArray = _valArray select 0; };
+if (count _valArray > 0) then { _valArray = _valArray select 1; };
+if (typeName _valArray == "ARRAY") then { if (count _valArray > 0) then { _valArray = _valArray select 3; }; };
+_soundVal =		parseNumber format["%1", _valArray];
 if (_soundVal == 0) then {
 	_soundVal = 25;
 };

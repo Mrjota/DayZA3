@@ -44,7 +44,7 @@ _hasSPack =      	"SurvivalPack" in _magazinesPlayer;
 _hasBandage = 		"ItemBandage" in _magazinesPlayer;
 _hasEpi = 			"ItemEpinephrine" in _magazinesPlayer;
 _hasMorphine = 		"ItemMorphine" in _magazinesPlayer;
-_hasHeatpack = 		"ItemHeatpack" in _magazinesPlayer;
+_hasHeatpack = 		"ItemHeatPack" in _magazinesPlayer;
 _hasPainkillers = 	"ItemPainkiller" in _magazinesPlayer;
 _hasAntibiotic =	"ItemAntibiotic" in _magazinesPlayer;
 _hasClothes1 = 		"Skin_Sniper1_DZ" in _magazinesPlayer; //Ghillie
@@ -152,7 +152,7 @@ if (!isNull cursorTarget and !_inVehicle and (player distance cursorTarget < 4))
     _isHarvested = _cursorTarget getVariable["meatHarvested",false];
 	_isTakeable = _cursorTarget getVariable["clothesTaken",false];
 	_isVehicle = _cursorTarget isKindOf "AllVehicles";
-	_isVehicletype = typeOf _cursorTarget in ["ATV_US_EP1","ATV_CZ_EP1","Old_bike_TK_CIV_EP1","Old_bike_TK_INS_EP1","M1030","TT650_Cib","TT650_Ins","TT650_Gue","TT650_TK_CIV_EP1","TT650_TK_EP1","M1030_US_DES_EP1","Old_moto_TK_Civ_EP1"];
+	_isVehicletype = typeOf _cursorTarget in ["TT650_Civ","ATV_US_EP1","ATV_CZ_EP1","Old_bike_TK_CIV_EP1","Old_bike_TK_INS_EP1","M1030","TT650_Cib","TT650_Ins","TT650_Gue","TT650_TK_CIV_EP1","TT650_TK_EP1","M1030_US_DES_EP1","Old_moto_TK_Civ_EP1"];
 	_isMan = _cursorTarget isKindOf "Man";
 	_ownerID = _cursorTarget getVariable ["characterID","0"];
 	_isAnimal = _cursorTarget isKindOf "Animal";
@@ -193,9 +193,9 @@ if (!isNull cursorTarget and !_inVehicle and (player distance cursorTarget < 4))
 	};
 	
 	//flip vehicle
-	if ((_isVehicletype) and !_canmove and _isAlive and (player distance _cursorTarget >= 2) and (count (crew _cursorTarget))== 0 and ((vectorUp _cursorTarget) select 2) < 0.5) then {
+	if ((_isVehicletype) and !_canmove and _isAlive and (player distance _cursorTarget < 6) and (count (crew _cursorTarget))== 0 and ((vectorUp _cursorTarget) select 2) < 0.5) then {
 		if (s_player_flipveh  < 0) then {
-			s_player_flipveh = player addAction [format[localize "str_actions_flipveh",_text], "\z\addons\dayz_code\actions\player_flipvehicle.sqf",_cursorTarget, 1, true, true, "", ""];		
+			s_player_flipveh = player addAction [format[localize "str_actions_flipveh",_text], "\z\addons\dayz_code\actions\player_flipvehicle.sqf",[_cursorTarget, 1], 1, true, true, "", ""];		
 		};	
 	} else {
 		player removeAction s_player_flipveh;
@@ -269,7 +269,7 @@ if (!isNull cursorTarget and !_inVehicle and (player distance cursorTarget < 4))
 		};
 	
 	//Packing my ACampStorage
-	if(_cursorTarget isKindOf "ACampStorage" and _canDo and _ownerID == dayz_characterID) then {
+	if(!isNull _cursorTarget and _cursorTarget isKindOf "ACampStorage" and _canDo and _ownerID == dayz_characterID) then {
 		if ((s_player_packatent < 0) and (player distance _cursorTarget < 3)) then {
 			s_player_packatent = player addAction [localize "str_actions_self_07", "\z\addons\dayz_code\actions\atent_pack.sqf",_cursorTarget, 0, false, true, "",""];
 		};
@@ -278,8 +278,9 @@ if (!isNull cursorTarget and !_inVehicle and (player distance cursorTarget < 4))
 		s_player_packatent = -1;
 		};
 	
+	/*
 	//Sleep
-	if(_cursorTarget isKindOf "TentStorage" and _canDo and _ownerID == dayz_characterID) then {
+	if(!isNull _cursorTarget and _cursorTarget isKindOf "TentStorage" and _canDo and _ownerID == dayz_characterID) then {
 		if ((s_player_sleep < 0) and (player distance _cursorTarget < 3)) then {
 			s_player_sleep = player addAction [localize "str_actions_self_sleep", "\z\addons\dayz_code\actions\player_sleep.sqf",_cursorTarget, 0, false, true, "",""];
 		};
@@ -287,15 +288,22 @@ if (!isNull cursorTarget and !_inVehicle and (player distance cursorTarget < 4))
 		player removeAction s_player_sleep;
 		s_player_sleep = -1;
 	};
+	*/
 	
-	//New Repair/Salvage System ---
-	if ((dayz_myCursorTarget != _cursorTarget) and _isVehicle and !_isMan and _hasToolbox and (damage _cursorTarget < 1)) then {
+	//New Repair/Salvage System/Object Saving ---
+	if ((dayz_myCursorTarget != _cursorTarget) and _canDo and !_isMan and (damage _cursorTarget < 1) and ((_isVehicle) or ((_cursorTarget isKindOf "ACampStorage") or (_cursorTarget isKindOf "TentStorage")))) then {
 		if (s_player_repair_ctrl < 0) then {
 			dayz_myCursorTarget = _cursorTarget;
-			_rMenu = dayz_myCursorTarget addAction ["Repair Vehicle", "\z\addons\dayz_code\actions\repair_vehicle.sqf", _cursorTarget, 0, true, false, "", ""];
-			_sMenu = dayz_myCursorTarget addAction ["Salvage Vehicle", "\z\addons\dayz_code\actions\salvage_vehicle.sqf", _cursorTarget, 0, true, false, "", ""];
-			s_player_repairActions set [count s_player_repairActions, _rMenu];
-			s_player_repairActions set [count s_player_repairActions, _sMenu];
+			if (_isVehicle) then {
+				_rMenu = dayz_myCursorTarget addAction ["Repair Vehicle", "\z\addons\dayz_code\actions\repair_vehicle.sqf", _cursorTarget, 0, false, false, "", ""];
+				_sMenu = dayz_myCursorTarget addAction ["Salvage Vehicle", "\z\addons\dayz_code\actions\salvage_vehicle.sqf", _cursorTarget, 0, false, false, "", ""];
+				s_player_repairActions set [count s_player_repairActions, _rMenu];
+				s_player_repairActions set [count s_player_repairActions, _sMenu];
+			};
+			if ((_cursorTarget isKindOf "ACampStorage") or (_cursorTarget isKindOf "TentStorage")) then {
+				_saveObject = dayz_myCursorTarget addAction ["<t color='#FAA543'>Save Object</t>", "\z\addons\dayz_code\actions\savevehicle.sqf", _cursorTarget, 0, false, true, "", ""];
+				s_player_repairActions = [_saveObject] + s_player_repairActions;
+			};
 			s_player_repair_ctrl = 1;
 		} else {
 			{dayz_myCursorTarget removeAction _x} forEach s_player_repairActions;
@@ -511,6 +519,19 @@ if (_dogHandle > 0) then {
 
 //Arma 3 Scroll Functions
 
+//Flip Current Vehicle
+_flipTypes = ["TT650_Civ","ATV_US_EP1","ATV_CZ_EP1","Old_bike_TK_CIV_EP1","Old_bike_TK_INS_EP1","M1030","TT650_Cib","TT650_Ins","TT650_Gue","TT650_TK_CIV_EP1","TT650_TK_EP1","M1030_US_DES_EP1","Old_moto_TK_Civ_EP1"];
+_isAliveVeh = alive _vehicle;
+_playersNear = (count ((position _vehicle) nearEntities ["Man", 3]));
+if (_inVehicle and (_vehicle in _flipTypes) and _isAliveVeh and (_playersNear <= 0) and ((vectorUp _cursorTarget) select 2) < 0.5) then {
+	if (s_player_flipveh2  < 0) then {
+		s_player_flipveh2 = player addAction ["Flip Upright", "\z\addons\dayz_code\actions\player_flipvehicle.sqf",[_vehicle, 0], 1, true, true, "", ""];		
+	};	
+} else {
+	player removeAction s_player_flipveh2;
+	s_player_flipveh2 = -1;
+};
+
 //Grab GChem
 if (_canPickLightG and !dayz_hasLight) then {
   if (s_player_grabflare < 0) then {
@@ -584,7 +605,7 @@ if (_canPickLightF and !dayz_hasLight) then {
 //Allow player to use the Survival Pack
 if (_vehicle == player and _hasSPack and ((_legsBroke or _armsBroke) or (r_player_infected) or (_inPain) or (_injured) or (r_player_blood < 12000))) then {
     if (s_player_survivalpackA3 < 0) then {
-    s_player_survivalpackA3 = player addAction [format["<t color='#FF0000'>Use Survival Pack%1</t>"], "\z\addons\dayz_code\medical\spack.sqf",[_unit], 1, true, true, "", "'SurvivalPack' in magazines player"];
+    s_player_survivalpackA3 = player addAction [format["<t color='#FF0000'>Use Survival Pack%1</t>"], "\z\addons\dayz_code\medical\spack.sqf",[_unit], 1, true, true, "", ""];
     };
 } else {
     player removeAction s_player_survivalpackA3;
@@ -594,7 +615,7 @@ if (_vehicle == player and _hasSPack and ((_legsBroke or _armsBroke) or (r_playe
 //Allow player to use heatpacks
 if (_vehicle == player and (dayz_temperatur < 35.5) and _hasHeatpack) then {
 	if (s_player_heatpackA3 < 0) then {
-	s_player_heatpackA3 = player addAction [format["<t color='#FF0000'>Use Heatpack%1</t>"], "\z\addons\dayz_code\medical\heatpack.sqf",[_unit], 1, true, true, "", "'ItemHeatpack' in magazines player"];
+		s_player_heatpackA3 = player addAction [format["<t color='#FF0000'>Use Heatpack%1</t>"], "\z\addons\dayz_code\medical\heatpack.sqf",[_unit], 1, true, true, "", ""];
 	};
 } else {
 	player removeAction s_player_heatpackA3;
@@ -604,7 +625,7 @@ if (_vehicle == player and (dayz_temperatur < 35.5) and _hasHeatpack) then {
 //Allow player to use Morphine
 if (_vehicle == player and (_legsBroke or _armsBroke) and _hasMorphine) then {
 	if (s_player_morphineA3 < 0) then {
-	s_player_morphineA3 = player addAction [format["<t color='#FF0000'>Use Morphine%1</t>"], "\z\addons\dayz_code\medical\morphine.sqf",[_unit], 1, true, true, "", "'ItemMorphine' in magazines player"];
+	s_player_morphineA3 = player addAction [format["<t color='#FF0000'>Use Morphine%1</t>"], "\z\addons\dayz_code\medical\morphine.sqf",[_unit], 1, true, true, "", ""];
 	};
 } else {
 	player removeAction s_player_morphineA3;
@@ -614,7 +635,7 @@ if (_vehicle == player and (_legsBroke or _armsBroke) and _hasMorphine) then {
 //Allow player to use Antibiotics
 if (_vehicle == player and _hasAntibiotic and r_player_infected) then {
 	if (s_player_antibioticA3 < 0) then {
-	s_player_antibioticA3 = player addAction [format["<t color='#FF0000'>Use Antibiotics%1</t>"], "\z\addons\dayz_code\medical\antibiotics.sqf",[_unit], 1, true, true, "", "'ItemAntibiotic' in magazines player"];
+	s_player_antibioticA3 = player addAction [format["<t color='#FF0000'>Use Antibiotics%1</t>"], "\z\addons\dayz_code\medical\antibiotics.sqf",[_unit], 1, true, true, "", ""];
 	};
 } else {
 	player removeAction s_player_antibioticA3;
@@ -624,7 +645,7 @@ if (_vehicle == player and _hasAntibiotic and r_player_infected) then {
 //Allow player to use Painkillers
 if (_vehicle == player and _inPain and _hasPainkillers) then {
 	if (s_player_painkillerA3 < 0) then {
-	s_player_painkillerA3 = player addAction [format["<t color='#FF0000'>Use Painkillers%1</t>"], "\z\addons\dayz_code\medical\painkiller.sqf",[_unit], 1, true, true, "", "'ItemPainkiller' in magazines player"];
+	s_player_painkillerA3 = player addAction [format["<t color='#FF0000'>Use Painkillers%1</t>"], "\z\addons\dayz_code\medical\painkiller.sqf",[_unit], 1, true, true, "", ""];
 	};
 } else {
 	player removeAction s_player_painkillerA3;
@@ -634,7 +655,7 @@ if (_vehicle == player and _inPain and _hasPainkillers) then {
 //Allow player to bandage
 if (_vehicle == player and _injured and _hasBandage) then {
 	if (s_player_bandageA3 < 0) then {
-	s_player_bandageA3 = player addAction [format["<t color='#FF0000'>Use Bandage%1</t>"], "\z\addons\dayz_code\medical\bandageSelf.sqf",[_unit], 1, true, true, "", "'ItemBandage' in magazines player"];
+	s_player_bandageA3 = player addAction [format["<t color='#FF0000'>Use Bandage%1</t>"], "\z\addons\dayz_code\medical\bandageSelf.sqf",[_unit], 1, true, true, "", ""];
 	};
 } else {
 	player removeAction s_player_bandageA3;
@@ -644,7 +665,7 @@ if (_vehicle == player and _injured and _hasBandage) then {
 //Allow epi adrenaline
 if(_vehicle == player and _hasEpi and (!r_player_adren)) then {
 	if(s_player_adren < 0) then {
-		s_player_adren = player addAction [format["<t color='#FF0000'>Inject Epinephrine</t>"], "z\addons\dayz_code\medical\adren.sqf",[_unit], 1, true, true, "", "'ItemEpinephrine' in magazines player"];
+		s_player_adren = player addAction [format["<t color='#FF0000'>Inject Epinephrine</t>"], "z\addons\dayz_code\medical\adren.sqf",[_unit], 1, true, true, "", ""];
 	};
 } else	{
 	player removeAction s_player_adren;
@@ -684,14 +705,14 @@ if(_vehicle == player and _hasFood) then {
 	if ((r_player_blood < 10000) and (dayz_hunger3 < 0)) then {	
 		player removeAction dayz_hunger2;
 		dayz_hunger2 = -1;
-		dayz_hunger3 = player addAction [format["<t color='#FF0000'>Eat%1</t>"], "\z\addons\dayz_code\actions\player_eat.sqf",[], 1, false, true, "", "player == player"];		
+		dayz_hunger3 = player addAction [format["<t color='#FF0000'>Eat%1</t>"], "\z\addons\dayz_code\actions\player_eat.sqf",[], 1, false, true, "", ""];		
 	};
 
 	if ((r_player_blood >= 10000) and (dayz_hunger2 < 0)) then {
 		player removeAction dayz_hunger3;
 		dayz_hunger3 = -1;
 		if(dayz_hunger >= 270) then {
-			dayz_hunger2 = player addAction [format["<t color='#FF0000'>Eat%1</t>"], "\z\addons\dayz_code\actions\player_eat.sqf",[], 1, false, true, "", "player == player"];
+			dayz_hunger2 = player addAction [format["<t color='#FF0000'>Eat%1</t>"], "\z\addons\dayz_code\actions\player_eat.sqf",[], 1, false, true, "", ""];
 		};
 	};
 } else	{
@@ -712,17 +733,27 @@ _hasDrink = false;
 //Allow player to drink
 if(_vehicle == player and _hasDrink) then {
     	if((dayz_thirst >= 180) and (dayz_thirst2 < 0)) then {
-        	dayz_thirst2 = player addAction [format["<t color='#FF0000'>Drink%1</t>"], "\z\addons\dayz_code\actions\player_drink2.sqf",[], 1, false, true, "", "player == player"];
+        	dayz_thirst2 = player addAction [format["<t color='#FF0000'>Drink%1</t>"], "\z\addons\dayz_code\actions\player_drink2.sqf",[], 1, false, true, "", ""];
     	};
 } else {
     	player removeAction dayz_thirst2;
     	dayz_thirst2 = -1;
 };
 
+//Allow player to drink from fountain
+if(_vehicle == player and _canFill) then {
+    	if((dayz_thirst >= 180) and (dayz_drinkFromFountain < 0)) then {
+        	dayz_drinkFromFountain = player addAction [format["<t color='#FF0000'>Drink (Fountain)</t>"], "\z\addons\dayz_code\actions\player_drinkfountain.sqf",[], 1, false, true, "", ""];
+    	};
+} else {
+    	player removeAction dayz_drinkFromFountain;
+    	dayz_drinkFromFountain = -1;
+};
+
 //Allow player to fill water bottles
 if(_vehicle == player and _canFill and _hasbottleitemE) then {
     	if((s_player_fillwater2 < 0)) then {
-        	s_player_fillwater2 = player addAction [format["<t color='#FF0000'>Fill Bottle%1</t>"], "\z\addons\dayz_code\actions\water_fill.sqf",[], 1, false, true, "", "player == player"];
+        	s_player_fillwater2 = player addAction [format["<t color='#FF0000'>Fill Bottle%1</t>"], "\z\addons\dayz_code\actions\water_fill.sqf",[], 1, false, true, "", ""];
     	};
 } else {
     	player removeAction s_player_fillwater2;
@@ -735,14 +766,14 @@ if(_vehicle == player and _hasMRE) then {
 
 		player removeAction dayz_mre;
 		dayz_mre = -1;
-		dayz_mre2 = player addAction [format["<t color='#FF0000'>Use MRE%1</t>"], "\z\addons\dayz_code\actions\player_mre.sqf",[], 1, false, true, "", "player == player"];
+		dayz_mre2 = player addAction [format["<t color='#FF0000'>Use MRE%1</t>"], "\z\addons\dayz_code\actions\player_mre.sqf",[], 1, false, true, "", ""];
 
 	};
     if ((r_player_blood >= 10000) and (dayz_mre < 0)) then {
 		player removeAction dayz_mre2;
 		dayz_mre2 = -1;
 		if((dayz_hunger >= 270) or (dayz_thirst >= 180)) then {
-			dayz_mre = player addAction [format["<t color='#FF0000'>Use MRE%1</t>"], "\z\addons\dayz_code\actions\player_mre.sqf",[], 1, false, true, "", "player == player"];
+			dayz_mre = player addAction [format["<t color='#FF0000'>Use MRE%1</t>"], "\z\addons\dayz_code\actions\player_mre.sqf",[], 1, false, true, "", ""];
 		};
 	};
 } else {

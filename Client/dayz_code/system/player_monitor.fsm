@@ -986,16 +986,6 @@ class FSM
        "	};" \n
        "};" \n
        "" \n
-       "if (player hasWeapon ""MeleeCrowbar"") then {" \n
-       "	player addMagazine 'crowbar_swing';" \n
-       "};" \n
-       "if (player hasWeapon ""MeleeHatchet"") then {" \n
-       "	player addMagazine 'hatchet_swing';" \n
-       "};" \n
-       "if (player hasWeapon ""MeleeMachete"") then {" \n
-       "	player addMagazine 'machete_swing';" \n
-       "};" \n
-       "" \n
        "removeHeadgear player;" \n
        "reload player;" \n
        "" \n
@@ -1057,10 +1047,6 @@ class FSM
        "	private[""_distance""];" \n
        "	dayz_musicH = [] spawn player_music;" \n
        "	while {true} do {" \n
-       "		_array = player call world_surfaceNoise;" \n
-       "		dayz_surfaceNoise = _array select 1;" \n
-       "		dayz_surfaceType = 	_array select 0;" \n
-       "" \n
        "		call player_checkStealth;" \n
        "		dayz_statusArray = [] call player_updateGui;" \n
        "		if (!isNull cursorTarget and !dayz_heartBeat) then {" \n
@@ -1071,6 +1057,15 @@ class FSM
        "		sleep 0.2;" \n
        "	};" \n
        "};" \n
+	   "dayz_surfaceNoise = [] spawn {" \n
+	   "	while {true} do {" \n
+       "		_array = player call world_surfaceNoise;" \n
+	   "		if (count _array == 2) then {" \n
+       "			dayz_surfaceNoise = _array select 1;" \n
+       "			dayz_surfaceType = 	_array select 0;" \n
+	   "		};" \n
+	   "	};"\n
+	   "};" \n
        "diag_log ""[SYSTEM] Stage 5 (Display) End..."";" \n
        "" \n
        ""/*%FSM</STATEINIT""">*/;

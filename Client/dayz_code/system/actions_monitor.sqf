@@ -1,4 +1,5 @@
-while { true } do {
-	[] execVM "\z\addons\dayz_code\compile\fn_selfActions.sqf";
-    sleep 5;
+while {true} do {
+	[] spawn fnc_usec_damageActions;
+	[] spawn fnc_usec_selfActions;
+	sleep 0.2;
 };
