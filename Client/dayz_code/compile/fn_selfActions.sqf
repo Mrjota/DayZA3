@@ -5,7 +5,8 @@ scriptName "Functions\misc\fn_selfActions.sqf";
 	- [] call fnc_usec_selfActions;
 	
 	CREDITS
-	- ORIGINAL: Papzzz & Pwnoz0r
+	- DayZA2 ORIGINAL: DayZ Team
+	- DayZA3 ORIGINAL: Papzzz & Pwnoz0r
 	- 1st OVERHAUL: MistaD
 	- 2nd OVERHAUL: Hans
 ************************************************************/
@@ -301,7 +302,7 @@ if (!isNull cursorTarget and !_inVehicle and (player distance cursorTarget < 4))
 				s_player_repairActions set [count s_player_repairActions, _sMenu];
 			};
 			if ((_cursorTarget isKindOf "ACampStorage") or (_cursorTarget isKindOf "TentStorage")) then {
-				_saveObject = dayz_myCursorTarget addAction ["<t color='#FAA543'>Save Object</t>", "\z\addons\dayz_code\actions\savevehicle.sqf", _cursorTarget, 0, false, true, "", ""];
+				_saveObject = dayz_myCursorTarget addAction [format["<t color='#FAA543'>Save %1</t>",getText(configFile >> "CfgVehicles" >> typeOf _cursorTarget >> "displayname")], "\z\addons\dayz_code\actions\savevehicle.sqf", _cursorTarget, 0, false, true, "", ""];
 				s_player_repairActions = [_saveObject] + s_player_repairActions;
 			};
 			s_player_repair_ctrl = 1;

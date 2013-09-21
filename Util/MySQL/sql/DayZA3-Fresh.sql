@@ -553,6 +553,13 @@ BEGIN
 			AND object_data.CharacterID = character_data.CharacterID
 			AND character_data.Alive = 0
 			AND DATE(character_data.last_updated) < CURDATE() - INTERVAL 4 DAY;
+	DELETE
+		FROM object_data
+		USING object_data, character_data
+		WHERE object_data.Classname = 'ACampStorage'
+			AND object_data.CharacterID = character_data.CharacterID
+			AND character_data.Alive = 0
+			AND DATE(character_data.last_updated) < CURDATE() - INTERVAL 4 DAY;
 
 #remove empty tents older than seven days
 	DELETE
@@ -564,6 +571,17 @@ BEGIN
 	DELETE
 		FROM object_data
 		WHERE Classname = 'TentStorage'
+			AND DATE(last_updated) < CURDATE() - INTERVAL 7 DAY
+			AND Inventory = '[]';		
+	DELETE
+		FROM object_data
+		WHERE Classname = 'ACampStorage'
+			AND DATE(last_updated) < CURDATE() - INTERVAL 7 DAY
+			AND Inventory = '[[[],[]],[[],[]],[[],[]]]';
+	
+	DELETE
+		FROM object_data
+		WHERE Classname = 'ACampStorage'
 			AND DATE(last_updated) < CURDATE() - INTERVAL 7 DAY
 			AND Inventory = '[]';		
 

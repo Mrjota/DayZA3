@@ -213,7 +213,7 @@ while {true} do {
 	//Thirst
 	_thirst = 27;
 	if ((_refObj == player) and (!r_player_onVehicleC)) then {
-		_thirst = (_speed + 4) * 3;
+		_thirst = (_speed + 4);
 	};
 	dayz_thirst = dayz_thirst + (_thirst / 60) * (dayz_temperatur / dayz_temperaturnormal);	//TeeChange Temperatur effects added Max Effects: -25% and + 16.6% waterloss
 
@@ -332,7 +332,8 @@ while {true} do {
 	if (dayz_unsaved) then {
 		if ((time - dayz_lastSave) > _saveTime) then {
 			//["dayzPlayerSave",[player,dayz_Magazines,false]] call callRpcProcedure;
-			
+			//Save vehicles and tents around the player along with the player himself.
+			call player_gearSync; 
 			dayzPlayerSave = [player,dayz_Magazines,false];
 			publicVariableServer "dayzPlayerSave";
 			
@@ -342,15 +343,13 @@ while {true} do {
 						
 			dayz_lastSave = time;
 			dayz_Magazines = [];
+			//Comment out to force save every few seconds without checking for movement.
+			//dayz_unsaved = false;
 		};
 		_lastSave = _lastSave + 2;
 	} else {
 		dayz_lastSave = time;
 		_lastSave = 0;
-	};
-
-	if (!dayz_unsaved) then {
-		dayz_lastSave = time;
 	};
 
 	//Attach Trigger Current Object
@@ -384,6 +383,14 @@ while {true} do {
 		_combatdisplay = uiNamespace getVariable 'DAYZ_GUI_display';
 		_combatcontrol = 	_combatdisplay displayCtrl 1307;
 		_combatcontrol ctrlShow true;
+	};
+	
+	_brokenLegs = player getVariable["brokenLegs",0];
+	if ((_brokenLegs == 0) and (r_fracture_legs)) then {
+		player setVariable["brokenLegs",1,true];
+	};
+	if ((_brokenLegs == 1) and (!r_fracture_legs)) then {
+		player setVariable["brokenLegs",0,true];
 	};
 	
 	/*

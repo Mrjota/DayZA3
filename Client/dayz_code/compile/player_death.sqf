@@ -16,6 +16,8 @@ _id = [player,20,true,getPosATL player] spawn player_alertZombies;
 
 sleep 0.5;
 
+(owner player) setVariable["isDead", 1, true];
+
 player setDamage 1;
 0.1 fadeSound 0;
 
@@ -96,7 +98,6 @@ r_player_dead = true;
 3 fadeSound 0;
 0 cutText ["", "BLACK",10];
 dayz_DeathActioned = true;
-r_player_dead = true;
 sleep 1;
 
 TitleText[localize "str_player_12","PLAIN DOWN",5];
@@ -106,7 +107,6 @@ dayz_originalPlayer enableSimulation true;
 addSwitchableUnit dayz_originalPlayer;
 setPlayable dayz_originalPlayer;
 selectPlayer dayz_originalPlayer;
-r_player_dead = true;
 
 _myGroup = group _body;
 [_body] joinSilent dayz_firstGroup;

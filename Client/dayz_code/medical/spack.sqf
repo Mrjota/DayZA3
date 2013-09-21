@@ -58,6 +58,7 @@ while {r_doLoop} do {
 r_doLoop = false;
 
 if (_finished) then {
+	hint "";
 	if (_unit == player) then {
 		//Self Healing
 		_id = [player,player] execVM "\z\addons\dayz_code\medical\publicEH\medMorphine.sqf";
@@ -130,5 +131,7 @@ if (!_isDead) then {
 } else {
 	r_interrupt = false;
 	[[[player], { (_this select 0) switchMove ''; }], "BIS_fnc_spawn", true, false] call BIS_fnc_MP;
-	player playActionNow "stop";
+	player switchMove "";
+	player playActionNow "Gear";
+	hint "";
 };

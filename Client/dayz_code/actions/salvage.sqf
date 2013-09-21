@@ -1,6 +1,7 @@
 private ["_vehicle","_part","_hitpoint","_type","_selection","_array","_started","_finished","_animState","_isMedic","_isOK","_brokenPart","_findPercent","_damage","_hasToolbox","_nameType","_namePart"];
 
-if(repairInProgress) exitWith { systemChat "Salvage already in progress."; };
+// Credits to DayZ Epoch!
+if(repairInProgress) exitWith { systemChat "[SYSTEM] Character currently busy..."; };
 repairInProgress = true;
 
 //_id = _this select 2;
@@ -24,7 +25,7 @@ _namePart = 		getText(configFile >> "cfgMagazines" >> _part >> "displayName");
 s_player_repair_ctrl = 1;
 
 if (!_hasToolbox) then {
-	systemChat "You must have a toolbox to salvage!";
+	systemChat "[SYSTEM] You must have a toolbox to salvage!";
 };
 
 if (_hasToolbox) then {
@@ -60,9 +61,11 @@ if (_hasToolbox) then {
 	if (s_player_repair_ctrl == -1) then {
 		r_interrupt = false;
 		if (vehicle player == player) then {
-			player playActionNow "stop";
+			[[player, { _this switchMove ''; }], "BIS_fnc_spawn", true, false] call BIS_fnc_MP;
+			player switchMove "";
+			player playActionNow "Gear";
 		};
-		systemChat "Salvage was canceled...";
+		systemChat "[SYSTEM] Salvage was canceled...";
 		_finished = false;
 	};
 
@@ -104,7 +107,7 @@ if (_hasToolbox) then {
 
 					_vehicle setvelocity [0,0,1];
 					
-					systemChat format["You have successfully removed the %1 from the %2",_namePart,_nameType];
+					systemChat format["[SYSTEM] You have successfully removed the %1 from the %2",_namePart,_nameType];
 					
 					_stack = createVehicle ["GroundWeaponHolder", position player, [], 0, "CAN_COLLIDE"];
 					_stack addMagazineCargoGlobal [_part, 1];
@@ -119,7 +122,7 @@ if (_hasToolbox) then {
 	};
 			
 } else {
-	systemChat format["You need [a(n)] %1 to remove this part.",_namePart];
+	systemChat format["[SYSTEM] You need [a(n)] %1 to remove this part.",_namePart];
 };
 
 dayz_myCursorTarget = objNull;

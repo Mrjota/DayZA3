@@ -11,8 +11,7 @@ _newObject removeAllEventHandlers "MPHit";
 _newObjectName = _newObject getVariable["bodyName", "nil"];
 _killer = _newObject getVariable["AttackedBy", "nil"];
 _killerName = _newObject getVariable["AttackedByName", "nil"];
-r_player_sendDead = [_newObjectName];
-publicVariable "r_player_sendDead";
+
 if ((_killerName != "nil") and (_newObjectName != "nil")) then
 {
 	_weapon = _newObject getVariable["AttackedByWeapon", "nil"];
@@ -23,13 +22,13 @@ if ((_killerName != "nil") and (_newObjectName != "nil")) then
             _distance = round _distanceNum;
             if (_newObjectName == _killerName) then 
             {
-                _message = format["%1 killed himself",_newObjectName];
+                _message = format["\n\n\n%1 killed himself",_newObjectName];
                 _loc_message = format["PKILL: %1 killed himself", _newObjectName];
             }
             else 
             {
                 _killerPlayerID = getPlayerUID _killer;
-                _message = format["%1 was killed by %2 ( %3 | %4m )",_newObjectName, _killerName, _displayname, str _distance];
+                _message = format["\n\n\n%1 was killed by %2 ( %3 | %4m )",_newObjectName, _killerName, _displayname, str _distance];
                 _loc_message = format["PKILL: %1 (%5) was killed by %2 (%6) with weapon %3 from %4m", _newObjectName, _killerName, _weapon, _distance, _playerID, _killerPlayerID];
             };
 

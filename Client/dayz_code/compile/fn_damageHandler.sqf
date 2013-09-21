@@ -86,7 +86,7 @@ if (_damage > 0.005) then {
 			_scale = _scale + 200;
 		};
 	} else {
-        _scale = _scale + 800;
+        _scale = _scale + 300;
     };
 	if (_isHeadHit) then {
 		_scale = _scale + 1400;
@@ -107,7 +107,7 @@ if (_damage > 0.005) then {
 		//Log Damage
 		//diag_log ("DAMAGE: player hit by " + typeOf _source + " in " + _hit + " with " + _ammo + " for " + str(_damage) + " scaled " + str(_damage * _scale));
 		if (_ammo != "zombie") then {
-            _damage = _damage + 0.2;
+            _damage = _damage + 0.1;
         };
         if (_hw != "TranqSD") then {
 			r_player_blood = r_player_blood - (_damage * _scale);

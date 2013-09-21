@@ -56,5 +56,6 @@ if (_finished) then {
 } else {
 	r_interrupt = false;
 	[objNull, player, rSwitchMove,""] call RE;
-	player playActionNow "stop";
+	player switchMove "";
+	player playActionNow "Gear";
 };

@@ -286,7 +286,6 @@ r_player_loaded = 		false;
 r_player_cardiac = 		false;
 r_fracture_legs =		false;
 r_player_dead =         false;
-r_player_isDead =       false;
 r_fracture_arms =		false;
 r_player_vehicle =		player;
 r_player_currentCar =	nil;

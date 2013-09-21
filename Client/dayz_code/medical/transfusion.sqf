@@ -49,6 +49,7 @@ if (_finished) then {
 	[player,250] call player_humanityChange;
 } else {
 	r_interrupt = false;
+	[[[player], { (_this select 0) switchMove ''; }], "BIS_fnc_spawn", true, false] call BIS_fnc_MP;
 	player switchMove "";
-	player playActionNow "stop";
+	player playActionNow "Gear";
 };

@@ -1,6 +1,6 @@
 private["_vehicle","_part","_hitpoint","_type","_selection","_array"];
-
-if (repairInProgress) exitWith { systemChat "Repair already in progress."; };
+// Credits to DayZ Epoch!
+if (repairInProgress) exitWith { systemChat "[SYSTEM] Character currently busy..."; };
 repairInProgress = true;
 
 _id = _this select 2;
@@ -22,11 +22,11 @@ _namePart = 		getText(configFile >> "cfgMagazines" >> _part >> "displayName");
 s_player_repair_ctrl = 1;
 
 if (!_hasToolbox) then {
-	systemChat "You must have a toolbox to repair this!";
+	systemChat "[SYSTEM] You must have a toolbox to repair this!";
 };
 
 if (!_section) then {
-	systemChat format["You must have [a(n)] %1 to repair this!",_namePart];
+	systemChat format["[SYSTEM] You must have [a(n)] %1 to repair this!",_namePart];
 };
 
 if (_section and _hasToolbox) then {
@@ -62,9 +62,11 @@ if (_section and _hasToolbox) then {
 	if (s_player_repair_ctrl == -1) then {
 		r_interrupt = false;
 		if (vehicle player == player) then {
-			player playActionNow "stop";
+			[[player, { _this switchMove ''; }], "BIS_fnc_spawn", true, false] call BIS_fnc_MP;
+			player switchMove "";
+			player playActionNow "Gear";
 		};
-		systemChat "Repair was canceled...";
+		systemChat "[SYSTEM] Repair was canceled...";
 		_finished = false;
 	};
 	
@@ -86,7 +88,7 @@ if (_section and _hasToolbox) then {
 			
 			_vehicle setVelocity [0,0,1];
 			
-			systemChat format["You have successfully attached %1 to the %2",_namePart,_nameType];
+			systemChat format["[SYSTEM] You have successfully attached %1 to the %2",_namePart,_nameType];
 		};
 	};
 };
