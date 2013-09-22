@@ -18,6 +18,7 @@ Project sponsored by HFBServers.com
 If you would like to buy a server, do so here: http://hfbservers.com/games/arma3
 
 Dean Hall and the DayZMod Team for developing "DayZMod" for ArmA2.
+DayZEpoch for ideas on base building and the chop wood script.
 ----------------------------------------------------------------
 During the development of the port, GSP server hosting is NOT allowed.
 
