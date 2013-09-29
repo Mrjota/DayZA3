@@ -77,7 +77,7 @@ class CfgMissions
 	 {
 	  class ChernarusIntro1
 		  {
-			directory = "z\addons\dayz_code\cfgworlds\intro.Chernarus";
+			directory = "z\addons\dayz_code\cfgworlds\intro.chernarus";
 		  };
 	 };
 };
