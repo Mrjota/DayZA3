@@ -21,12 +21,14 @@ if (_unit == player) then {
 
 player removeMagazine "ItemPainkiller";
 
-sleep 1;
+_curTime = time;
+waitUntil {time - _curTime >= 1};
 	usecPainK = [_unit,player];
 	publicVariable "usecPainK";
 
         [] spawn {
         player enableFatigue false;
-        sleep 5;
+		_curTime = time;
+		waitUntil {time - _curTime >= 5};
         player enableFatigue true;
         };

@@ -1,12 +1,9 @@
 private["_flare"];
-_flare = _this select 3;
-_red = _flare in ["Chemlight_blue"];
-_green = _flare in ["Chemlight_green"];
-_yellow = _flare in ["Chemlight_yellow"];
-_blue = _flare in ["Chemlight_blue"];
-_text = "Flare";
+_flare = (_this select 3) select 0;
+_text = (_this select 3) select 1;
 player playActionNow "PutDown";
-sleep 2;
+_curTime = time;
+waitUntil {time - _curTime >= 2};
 _flare attachTo [player,[0,0,0],"granat2"];
 [_flare, -90, -10] call object_setpitchbank;
 _flare setPos (getPos _flare);
@@ -24,14 +21,11 @@ player removeAction s_player_removeflare5;
 dayz_hasLight = true;
 
 //Add Drop Action
-if (_red) then { _text = "Red Chemlight"; };
-if (_blue) then { _text = "Blue Chemlight"; };
-if (_green) then { _text = "Green Chemlight"; };
-if (_yellow) then { _text = "Yellow Chemlight"; };
 s_player_dropflare = player addAction [format["Drop %1",_text], "\z\addons\dayz_code\actions\flare_drop.sqf",_flare, 1, false, true, "", ""];
 
 while {(alive _flare) and dayz_hasLight} do {
-	sleep 1;
+	_curTime = time;
+	waitUntil {time - _curTime >= 1};
 };
 if (dayz_hasLight) then {
 	dayz_hasLight = false;

@@ -93,7 +93,8 @@ player setVariable["USEC_infected",false,true];
                 r_isHealing = false;
                 player setVariable["USEC_BloodQty",r_player_blood,true];
             };
-            sleep 1;
+			_curTime = time;
+			waitUntil {time - _curTime >= 1};
         };
     };
 	} else {
@@ -125,7 +126,8 @@ if (!_isDead) then {
     
         [] spawn {
         player enableFatigue false;
-        sleep 10;
+		_curTime = time;
+		waitUntil {time - _curTime >= 10};
         player enableFatigue true;
         };
 } else {

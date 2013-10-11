@@ -186,7 +186,7 @@ if (!isNull cursorTarget and !_inVehicle and (player distance cursorTarget < 4))
 	//Allow player to delete objects
 	if(_isDestructable and _hasToolbox and _canDo) then {
 		if (s_player_deleteBuild < 0) then {
-			s_player_deleteBuild = player addAction [format[localize "str_actions_delete",_text], "\z\addons\dayz_code\actions\remove.sqf",_cursorTarget, 1, true, true, "", ""];
+			s_player_deleteBuild = player addAction [format[localize "str_actions_delete",_text], "\z\addons\dayz_code\actions\remove.sqf",_cursorTarget, 1, false, true, "", ""];
 		};
 	} else {
 		player removeAction s_player_deleteBuild;
@@ -196,7 +196,7 @@ if (!isNull cursorTarget and !_inVehicle and (player distance cursorTarget < 4))
 	//flip vehicle
 	if ((_isVehicletype) and !_canmove and _isAlive and (player distance _cursorTarget < 6) and (count (crew _cursorTarget))== 0 and ((vectorUp _cursorTarget) select 2) < 0.5) then {
 		if (s_player_flipveh  < 0) then {
-			s_player_flipveh = player addAction [format[localize "str_actions_flipveh",_text], "\z\addons\dayz_code\actions\player_flipvehicle.sqf",[_cursorTarget, 1], 1, true, true, "", ""];		
+			s_player_flipveh = player addAction [format[localize "str_actions_flipveh",_text], "\z\addons\dayz_code\actions\player_flipvehicle.sqf",[_cursorTarget, 1], 1, false, true, "", ""];		
 		};	
 	} else {
 		player removeAction s_player_flipveh;
@@ -216,7 +216,7 @@ if (!isNull cursorTarget and !_inVehicle and (player distance cursorTarget < 4))
 	
 	if (!isNull _cursorTarget and !alive _cursorTarget and (_isAnimal or _isZombie or _isPlayer) and _hasKnife and !_isHarvested and _canDo) then {
 		if (s_player_butcher < 0) then {
-			s_player_butcher = player addAction ["Gut Flesh", "\z\addons\dayz_code\actions\gather_meat.sqf",_cursorTarget, 3, true, true, "", ""];
+			s_player_butcher = player addAction ["Gut Flesh", "\z\addons\dayz_code\actions\gather_meat.sqf",_cursorTarget, 3, false, true, "", ""];
 		};
 	} else {
 		player removeAction s_player_butcher;
@@ -225,7 +225,7 @@ if (!isNull cursorTarget and !_inVehicle and (player distance cursorTarget < 4))
     
 	if (!isNull _cursorTarget and !alive _cursorTarget and _isPlayer and _hasClothes and !_isTakeable and _canDo) then {
 		if (s_player_stealclothes < 0) then {
-			s_player_stealclothes = player addAction ["Take Clothes", "\z\addons\dayz_code\actions\gather_clothes.sqf",_cursorTarget, 3, true, true, "", ""];
+			s_player_stealclothes = player addAction ["Take Clothes", "\z\addons\dayz_code\actions\gather_clothes.sqf",_cursorTarget, 3, false, true, "", ""];
 		};
 	} else {
 		player removeAction s_player_stealclothes;
@@ -235,7 +235,7 @@ if (!isNull cursorTarget and !_inVehicle and (player distance cursorTarget < 4))
 	//Fireplace Actions check
 	if (inflamed _cursorTarget and _hasRawMeat and _canDo) then {
 		if (s_player_cook < 0) then {
-			s_player_cook = player addAction [localize "str_actions_self_05", "\z\addons\dayz_code\actions\cook.sqf",_cursorTarget, 3, true, true, "", ""];
+			s_player_cook = player addAction [localize "str_actions_self_05", "\z\addons\dayz_code\actions\cook.sqf",_cursorTarget, 3, false, true, "", ""];
 		};
 	} else {
 		player removeAction s_player_cook;
@@ -243,7 +243,7 @@ if (!isNull cursorTarget and !_inVehicle and (player distance cursorTarget < 4))
 	};
 	if (inflamed _cursorTarget and (_hasbottleitem and _hastinitem) and _canDo) then {
 		if (s_player_boil < 0) then {
-			s_player_boil = player addAction [localize "str_actions_boilwater", "\z\addons\dayz_code\actions\boil.sqf",_cursorTarget, 3, true, true, "", ""];
+			s_player_boil = player addAction [localize "str_actions_boilwater", "\z\addons\dayz_code\actions\boil.sqf",_cursorTarget, 3, false, true, "", ""];
 		};
 	} else {
 		player removeAction s_player_boil;
@@ -526,7 +526,7 @@ _isAliveVeh = alive _vehicle;
 _playersNear = (count ((position _vehicle) nearEntities ["Man", 3]));
 if (_inVehicle and (_vehicle in _flipTypes) and _isAliveVeh and (_playersNear <= 0) and ((vectorUp _cursorTarget) select 2) < 0.5) then {
 	if (s_player_flipveh2  < 0) then {
-		s_player_flipveh2 = player addAction ["Flip Upright", "\z\addons\dayz_code\actions\player_flipvehicle.sqf",[_vehicle, 0], 1, true, true, "", ""];		
+		s_player_flipveh2 = player addAction ["Flip Upright", "\z\addons\dayz_code\actions\player_flipvehicle.sqf",[_vehicle, 0], 1, false, true, "", ""];		
 	};	
 } else {
 	player removeAction s_player_flipveh2;
@@ -537,7 +537,7 @@ if (_inVehicle and (_vehicle in _flipTypes) and _isAliveVeh and (_playersNear <=
 if (_canPickLightG and !dayz_hasLight) then {
   if (s_player_grabflare < 0) then {
     _text = "Green Chemlight";
-    s_player_grabflare = player addAction [format[localize "str_actions_medical_15",_text], "\z\addons\dayz_code\actions\flare_pickup.sqf",_nearLightG, 1, false, true, "", ""];
+    s_player_grabflare = player addAction [format[localize "str_actions_medical_15",_text], "\z\addons\dayz_code\actions\flare_pickup.sqf",[_nearLightG,_text], 1, false, true, "", ""];
     s_player_removeflare = player addAction [format[localize "str_actions_medical_17",_text], "\z\addons\dayz_code\actions\flare_remove.sqf",_nearLightG, 1, false, true, "", ""];
   };
 } else {
@@ -551,7 +551,7 @@ if (_canPickLightG and !dayz_hasLight) then {
 if (_canPickLightB and !dayz_hasLight) then {
   if (s_player_grabflare2 < 0) then {
     _text = "Blue Chemlight";
-    s_player_grabflare2 = player addAction [format[localize "str_actions_medical_15",_text], "\z\addons\dayz_code\actions\flare_pickup.sqf",_nearLightB, 1, false, true, "", ""];
+    s_player_grabflare2 = player addAction [format[localize "str_actions_medical_15",_text], "\z\addons\dayz_code\actions\flare_pickup.sqf",[_nearLightB,_text], 1, false, true, "", ""];
     s_player_removeflare2 = player addAction [format[localize "str_actions_medical_17",_text], "\z\addons\dayz_code\actions\flare_remove.sqf",_nearLightB, 1, false, true, "", ""];
   };
 } else {
@@ -565,7 +565,7 @@ if (_canPickLightB and !dayz_hasLight) then {
 if (_canPickLightY and !dayz_hasLight) then {
   if (s_player_grabflare3 < 0) then {
     _text = "Yellow Chemlight";
-    s_player_grabflare3 = player addAction [format[localize "str_actions_medical_15",_text], "\z\addons\dayz_code\actions\flare_pickup.sqf",_nearLightY, 1, false, true, "", ""];
+    s_player_grabflare3 = player addAction [format[localize "str_actions_medical_15",_text], "\z\addons\dayz_code\actions\flare_pickup.sqf",[_nearLightY,_text], 1, false, true, "", ""];
     s_player_removeflare3 = player addAction [format[localize "str_actions_medical_17",_text], "\z\addons\dayz_code\actions\flare_remove.sqf",_nearLightY, 1, false, true, "", ""];
   };
 } else {
@@ -579,7 +579,7 @@ if (_canPickLightY and !dayz_hasLight) then {
 if (_canPickLightR and !dayz_hasLight) then {
   if (s_player_grabflare4 < 0) then {
     _text = "Red Chemlight";
-    s_player_grabflare4 = player addAction [format[localize "str_actions_medical_15",_text], "\z\addons\dayz_code\actions\flare_pickup.sqf",_nearLightR, 1, false, true, "", ""];
+    s_player_grabflare4 = player addAction [format[localize "str_actions_medical_15",_text], "\z\addons\dayz_code\actions\flare_pickup.sqf",[_nearLightR,_text], 1, false, true, "", ""];
     s_player_removeflare4 = player addAction [format[localize "str_actions_medical_17",_text], "\z\addons\dayz_code\actions\flare_remove.sqf",_nearLightR, 1, false, true, "", ""];
   };
 } else {
@@ -593,7 +593,7 @@ if (_canPickLightR and !dayz_hasLight) then {
 if (_canPickLightF and !dayz_hasLight) then {
   if (s_player_grabflare5 < 0) then {
     _text = "Road Flare";
-    s_player_grabflare5 = player addAction [format[localize "str_actions_medical_15",_text], "\z\addons\dayz_code\actions\flare_pickup.sqf",_nearLightF, 1, false, true, "", ""];
+    s_player_grabflare5 = player addAction [format[localize "str_actions_medical_15",_text], "\z\addons\dayz_code\actions\flare_pickup.sqf",[_nearLightF,_text], 1, false, true, "", ""];
     s_player_removeflare5 = player addAction [format[localize "str_actions_medical_17",_text], "\z\addons\dayz_code\actions\flare_remove.sqf",_nearLightF, 1, false, true, "", ""];
   };
 } else {
@@ -606,7 +606,7 @@ if (_canPickLightF and !dayz_hasLight) then {
 //Allow player to use the Survival Pack
 if (_vehicle == player and _hasSPack and ((_legsBroke or _armsBroke) or (r_player_infected) or (_inPain) or (_injured) or (r_player_blood < 12000))) then {
     if (s_player_survivalpackA3 < 0) then {
-    s_player_survivalpackA3 = player addAction [format["<t color='#FF0000'>Use Survival Pack%1</t>"], "\z\addons\dayz_code\medical\spack.sqf",[_unit], 1, true, true, "", ""];
+    s_player_survivalpackA3 = player addAction [format["<t color='#FF0000'>Use Survival Pack%1</t>"], "\z\addons\dayz_code\medical\spack.sqf",[_unit], 1, false, true, "", ""];
     };
 } else {
     player removeAction s_player_survivalpackA3;
@@ -616,7 +616,7 @@ if (_vehicle == player and _hasSPack and ((_legsBroke or _armsBroke) or (r_playe
 //Allow player to use heatpacks
 if (_vehicle == player and (dayz_temperatur < 35.5) and _hasHeatpack) then {
 	if (s_player_heatpackA3 < 0) then {
-		s_player_heatpackA3 = player addAction [format["<t color='#FF0000'>Use Heatpack%1</t>"], "\z\addons\dayz_code\medical\heatpack.sqf",[_unit], 1, true, true, "", ""];
+		s_player_heatpackA3 = player addAction [format["<t color='#FF0000'>Use Heatpack%1</t>"], "\z\addons\dayz_code\medical\heatpack.sqf",[_unit], 1, false, true, "", ""];
 	};
 } else {
 	player removeAction s_player_heatpackA3;
@@ -626,7 +626,7 @@ if (_vehicle == player and (dayz_temperatur < 35.5) and _hasHeatpack) then {
 //Allow player to use Morphine
 if (_vehicle == player and (_legsBroke or _armsBroke) and _hasMorphine) then {
 	if (s_player_morphineA3 < 0) then {
-	s_player_morphineA3 = player addAction [format["<t color='#FF0000'>Use Morphine%1</t>"], "\z\addons\dayz_code\medical\morphine.sqf",[_unit], 1, true, true, "", ""];
+	s_player_morphineA3 = player addAction [format["<t color='#FF0000'>Use Morphine%1</t>"], "\z\addons\dayz_code\medical\morphine.sqf",[_unit], 1, false, true, "", ""];
 	};
 } else {
 	player removeAction s_player_morphineA3;
@@ -636,7 +636,7 @@ if (_vehicle == player and (_legsBroke or _armsBroke) and _hasMorphine) then {
 //Allow player to use Antibiotics
 if (_vehicle == player and _hasAntibiotic and r_player_infected) then {
 	if (s_player_antibioticA3 < 0) then {
-	s_player_antibioticA3 = player addAction [format["<t color='#FF0000'>Use Antibiotics%1</t>"], "\z\addons\dayz_code\medical\antibiotics.sqf",[_unit], 1, true, true, "", ""];
+	s_player_antibioticA3 = player addAction [format["<t color='#FF0000'>Use Antibiotics%1</t>"], "\z\addons\dayz_code\medical\antibiotics.sqf",[_unit], 1, false, true, "", ""];
 	};
 } else {
 	player removeAction s_player_antibioticA3;
@@ -646,7 +646,7 @@ if (_vehicle == player and _hasAntibiotic and r_player_infected) then {
 //Allow player to use Painkillers
 if (_vehicle == player and _inPain and _hasPainkillers) then {
 	if (s_player_painkillerA3 < 0) then {
-	s_player_painkillerA3 = player addAction [format["<t color='#FF0000'>Use Painkillers%1</t>"], "\z\addons\dayz_code\medical\painkiller.sqf",[_unit], 1, true, true, "", ""];
+	s_player_painkillerA3 = player addAction [format["<t color='#FF0000'>Use Painkillers%1</t>"], "\z\addons\dayz_code\medical\painkiller.sqf",[_unit], 1, false, true, "", ""];
 	};
 } else {
 	player removeAction s_player_painkillerA3;
@@ -656,7 +656,7 @@ if (_vehicle == player and _inPain and _hasPainkillers) then {
 //Allow player to bandage
 if (_vehicle == player and _injured and _hasBandage) then {
 	if (s_player_bandageA3 < 0) then {
-	s_player_bandageA3 = player addAction [format["<t color='#FF0000'>Use Bandage%1</t>"], "\z\addons\dayz_code\medical\bandageSelf.sqf",[_unit], 1, true, true, "", ""];
+	s_player_bandageA3 = player addAction [format["<t color='#FF0000'>Use Bandage%1</t>"], "\z\addons\dayz_code\medical\bandageSelf.sqf",[_unit], 1, false, true, "", ""];
 	};
 } else {
 	player removeAction s_player_bandageA3;
@@ -666,7 +666,7 @@ if (_vehicle == player and _injured and _hasBandage) then {
 //Allow epi adrenaline
 if(_vehicle == player and _hasEpi and (!r_player_adren)) then {
 	if(s_player_adren < 0) then {
-		s_player_adren = player addAction [format["<t color='#FF0000'>Inject Epinephrine</t>"], "z\addons\dayz_code\medical\adren.sqf",[_unit], 1, true, true, "", ""];
+		s_player_adren = player addAction [format["<t color='#FF0000'>Inject Epinephrine</t>"], "\z\addons\dayz_code\medical\adren.sqf",[_unit], 1, false, true, "", ""];
 	};
 } else	{
 	player removeAction s_player_adren;
@@ -676,7 +676,7 @@ if(_vehicle == player and _hasEpi and (!r_player_adren)) then {
 //Allow player to chop trees
 if (_vehicle == player and (["forest",dayz_surfaceType] call fnc_inString) and _hasHatchet) then {
 	if (s_player_chopA3 < 0) then {
-	s_player_chopA3 = player addAction [format["<t color='#FF0000'>Chop Wood%1</t>"], "\z\addons\dayz_code\actions\player_chopWood.sqf",[_unit], 1, true, true, "", ""];
+	s_player_chopA3 = player addAction [format["<t color='#FF0000'>Chop Wood%1</t>"], "\z\addons\dayz_code\actions\player_chopWood.sqf",[_unit], 1, false, true, "", ""];
 	};
 } else {
 	player removeAction s_player_chopA3;
@@ -686,7 +686,7 @@ if (_vehicle == player and (["forest",dayz_surfaceType] call fnc_inString) and _
 //Allow player to setup a camp fire
 if (_vehicle == player and _hasWood) then {
 	if (s_player_makefireA3 < 0) then {
-	s_player_makefireA3 = player addAction [format["<t color='#FF0000'>Place Campfire%1</t>"], "\z\addons\dayz_code\actions\player_makefire.sqf",[_unit], 1, true, true, "", ""];
+	s_player_makefireA3 = player addAction [format["<t color='#FF0000'>Place Campfire%1</t>"], "\z\addons\dayz_code\actions\player_makefire.sqf",[_unit], 1, false, true, "", ""];
 	};
 } else {
 	player removeAction s_player_makefireA3;
@@ -753,7 +753,7 @@ if(_vehicle == player and _canFill) then {
 
 //Allow player to fill water bottles
 if(_vehicle == player and _canFill and _hasbottleitemE) then {
-    	if((s_player_fillwater2 < 0)) then {
+    	if (s_player_fillwater2 < 0) then {
         	s_player_fillwater2 = player addAction [format["<t color='#FF0000'>Fill Bottle%1</t>"], "\z\addons\dayz_code\actions\water_fill.sqf",[], 1, false, true, "", ""];
     	};
 } else {
@@ -920,7 +920,7 @@ if (!isNull cursorTarget and (player distance cursorTarget < 4) and !_inVehicle)
             if (typeOf _cursorTarget in ["ATV_US_EP1","ATV_CZ_EP1","Old_bike_TK_CIV_EP1","Old_bike_TK_INS_EP1"]) then {
                 s_player_getin1 = player addAction [format["%1%2%3%4",_text,_type,_text2,_seatSide], "\z\addons\dayz_code\actions\player_getin.sqf",0, 0, false, true, "", ""];	
             };
-            if (typeOf _cursorTarget in ["Lada2_TK_CIV_EP1","Lada1_TK_CIV_EP1","Skoda","Lada1","Lada2","LadaLM","SkodaRed","SkodaGreen","SkodaBlue","VolhaLimo_TK_CIV_EP1","Volha_2_TK_CIV_EP1","Volha_1_TK_CIV_EP1","car_sedan","car_hatchback"]) then {
+            if (typeOf _cursorTarget in ["Lada2_TK_CIV_EP1","Lada1_TK_CIV_EP1","Skoda","Lada1","Lada2","LadaLM","SkodaRed","SkodaGreen","SkodaBlue"]) then {
                 _seatSide = " (Left)";
                 s_player_getin1 = player addAction [format["%1%2%3%4",_text,_type,_text2,_seatSide], "\z\addons\dayz_code\actions\player_getin.sqf",0, 0, false, true, "", ""];	
             };
@@ -928,13 +928,13 @@ if (!isNull cursorTarget and (player distance cursorTarget < 4) and !_inVehicle)
                 _seatSide = " (Left)";
                 s_player_getin1 = player addAction [format["%1%2%3%4",_text,_type,_text2,_seatSide], "\z\addons\dayz_code\actions\player_getin.sqf",0, 0, false, true, "", ""];	
             };	
-            if (typeOf _cursorTarget in ["Tractor"]) then {
+            if (typeOf _cursorTarget in ["Tractor","VolhaLimo_TK_CIV_EP1","Volha_2_TK_CIV_EP1","Volha_1_TK_CIV_EP1","car_sedan","car_hatchback"]) then {
                 s_player_getin1 = player addAction [format["%1%2%3%4",_text,_type,_text2,_seatSide], "\z\addons\dayz_code\actions\player_getin.sqf",0, 0, false, true, "", ""];	
             };	
         };	
         if (s_player_getin2 < 0) then {
             _seatSide = "";
-            if (typeOf _cursorTarget in ["Lada2_TK_CIV_EP1","Lada1_TK_CIV_EP1","Skoda","Lada1","Lada2","LadaLM","SkodaRed","SkodaGreen","SkodaBlue","VolhaLimo_TK_CIV_EP1","Volha_2_TK_CIV_EP1","Volha_1_TK_CIV_EP1","car_sedan","car_hatchback"]) then {
+            if (typeOf _cursorTarget in ["Lada2_TK_CIV_EP1","Lada1_TK_CIV_EP1","Skoda","Lada1","Lada2","LadaLM","SkodaRed","SkodaGreen","SkodaBlue"]) then {
                 _seatSide = " (Right)";
                 s_player_getin2 = player addAction [format["%1%2%3%4",_text,_type,_text2,_seatSide], "\z\addons\dayz_code\actions\player_getin.sqf",1, 0, false, true, "", ""];		
             };

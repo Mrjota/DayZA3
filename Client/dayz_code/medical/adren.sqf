@@ -57,7 +57,8 @@ if (_finished) then {
             playSound 'breath_1';
             10 fadeSound 1;
             };
-            sleep 1;
+			_curTime = time;
+			waitUntil {time - _curTime >= 1};
         };
         r_player_adren = false;
         r_player_clear = true;

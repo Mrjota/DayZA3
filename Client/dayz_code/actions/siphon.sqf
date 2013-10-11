@@ -17,7 +17,8 @@ _sfx = "refuel";
 [player,_sfx,0,false,_dis] call dayz_zombieSpeak;  
 [player,_dis,true,(getPosATL player)] spawn player_alertZombies;
 
-sleep 6;
+_curTime = time;
+waitUntil {time - _curTime >= 6};
 
 player removeMagazine "ItemJerrycanEmpty";
 player addMagazine "ItemJerrycan";
@@ -27,7 +28,8 @@ dayzSetFuel spawn local_setFuel;
 publicVariable "dayzSetFuel";
 
 cutText ["20 liters of Fuel has been siphoned.", "PLAIN DOWN"];
-sleep 1;
+_curTime = time;
+waitUntil {time - _curTime >= 1};
 
 call fnc_usec_medic_removeActions;
 r_action = false;

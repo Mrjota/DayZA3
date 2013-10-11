@@ -15,7 +15,8 @@ if (!_hasfooditem) exitWith {cutText [format[(localize "str_player_31"),_text,"c
 
 player playActionNow "Medic";
 player removeMagazine "FoodMRE";
-sleep 1;
+_curTime = time;
+waitUntil {time - _curTime >= 1};
 
 _dis=6;
 _sfx = "eat";

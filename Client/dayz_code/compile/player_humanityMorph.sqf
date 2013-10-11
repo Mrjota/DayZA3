@@ -2,7 +2,7 @@ private["_updates","_playerUID","_charID","_humanity","_worldspace","_model"];
 _playerUID 	= _this select 0;
 _charID 	= _this select 1;
 _model 		= _this select 2;
-
+r_player_morphingNow = true;
 _old = player;
 player allowDamage false;
 
@@ -88,3 +88,4 @@ player addWeapon "Flare";
 
 sleep 0.1;
 deleteVehicle _old;
+r_player_morphingNow = false;

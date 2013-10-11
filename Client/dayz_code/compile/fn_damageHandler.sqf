@@ -68,6 +68,9 @@ if (_unitIsPlayer) then {
 
 //PVP Damage
 _scale = 1000;
+if (_ammo == "zombie") then {
+	_scale = 500;
+};
 _cw = "";
 _hw = "";
 if (_damage > 0.005) then {
@@ -86,10 +89,14 @@ if (_damage > 0.005) then {
 			_scale = _scale + 200;
 		};
 	} else {
-        _scale = _scale + 300;
+        _scale = _scale + 150;
     };
 	if (_isHeadHit) then {
-		_scale = _scale + 1400;
+		if (_ammo != "zombie") then {
+			_scale = _scale + 1400;
+		} else { 
+			_scale = _scale + 800;
+		};
 	};
 	if ((isPlayer _source) and !(player == _source)) then {
 		_scale = _scale + 500;
@@ -431,7 +438,8 @@ if (!_unconscious and !_isMinor and ((_damage > 2) or ((_damage > 0.5) and _isHe
                     publicVariable "dayzSwitchMove";
                 };
                 
-                sleep 1.5;
+				_curTime = time;
+				waitUntil {time - _curTime >= 2};
                 
                 _victim switchMove "amovppnemrunsnonwnondf";
                 dayzSwitchMove = [_victim,"amovppnemrunsnonwnondf"];

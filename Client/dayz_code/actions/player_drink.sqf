@@ -25,7 +25,8 @@ if (!_hasdrinkitem) exitWith {cutText [format[(localize "str_player_31"),_text,"
 
 player playActionNow "PutDown";
 player removeMagazine _itemorignal;
-sleep 1;
+_curTime = time;
+waitUntil {time - _curTime >= 1};
 
 if (["ItemWaterbottle",_itemorignal] call fnc_inString) then {
     //low alert and sound radius
@@ -45,7 +46,8 @@ if (_hasoutput) then{
     // Selecting output
     _itemtodrop = drink_output select (drink_with_output find _itemorignal);
 
-    sleep 3;
+	_curTime = time;
+	waitUntil {time - _curTime >= 3};
     _nearByPile= nearestObjects [(position player), ["WeaponHolder","WeaponHolderBase"],2];
     if (count _nearByPile ==0) then { 
         _item = createVehicle ["WeaponHolder", position player, [], 0.0, "CAN_COLLIDE"];

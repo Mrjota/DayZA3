@@ -223,7 +223,8 @@ if (_inVehicle) then {
 			if (!r_action_unload) then {
 				r_action_unload = true;
 				_vehType = typeOf _vehicle;
-				_action = _vehicle addAction [format[localize "str_actions_medical_14",_vehType], "\z\addons\dayz_code\medical\load\unLoad_act.sqf",[player,_vehicle], 0, false, true];
+				_configVeh = getText(configFile >> "cfgVehicles" >> _vehType >> "displayName");
+				_action = _vehicle addAction [format[localize "str_actions_medical_14",_configVeh], "\z\addons\dayz_code\medical\load\unLoad_act.sqf",[player,_vehicle], 0, false, true];
 				r_player_actions set [count r_player_actions,_action];
 			};
 		} else {

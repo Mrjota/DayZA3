@@ -71,7 +71,9 @@ if (!isDedicated) then {
 	player_tentPitch =			compile preprocessFileLineNumbers "\z\addons\dayz_code\actions\tent_pitch.sqf";
 	player_atentPitch =			compile preprocessFileLineNumbers "\z\addons\dayz_code\actions\atent_pitch.sqf";
 	player_drink =				compile preprocessFileLineNumbers "\z\addons\dayz_code\actions\player_drink.sqf";
+	player_drink2 =				compile preprocessFileLineNumbers "\z\addons\dayz_code\actions\player_drink3.sqf";
 	player_eat =				compile preprocessFileLineNumbers "\z\addons\dayz_code\actions\player_eat.sqf";
+	player_eat2 =				compile preprocessFileLineNumbers "\z\addons\dayz_code\actions\player_eat2.sqf";
 	player_useMeds =			compile preprocessFileLineNumbers "\z\addons\dayz_code\actions\player_useMeds.sqf";
 	player_fillWater = 			compile preprocessFileLineNumbers "\z\addons\dayz_code\actions\water_fill.sqf";
 	player_makeFire =			compile preprocessFileLineNumbers "\z\addons\dayz_code\actions\player_makefire.sqf";
@@ -83,6 +85,13 @@ if (!isDedicated) then {
 	object_pickup = 			compile preprocessFileLineNumbers "\z\addons\dayz_code\actions\object_pickup.sqf";
 	player_flipvehicle = 		compile preprocessFileLineNumbers "\z\addons\dayz_code\actions\player_flipvehicle.sqf";
 	player_sleep = 				compile preprocessFileLineNumbers "\z\addons\dayz_code\actions\player_sleep.sqf";
+	player_spack =				compile preprocessFileLineNumbers "\z\addons\dayz_code\medical\spack.sqf";
+	player_bandageSelf = 		compile preprocessFileLineNumbers "\z\addons\dayz_code\medical\bandageSelf.sqf";
+	player_adrenSelf = 			compile preprocessFileLineNumbers "\z\addons\dayz_code\medical\adren.sqf";
+	player_morphineSelf = 		compile preprocessFileLineNumbers "\z\addons\dayz_code\medical\morphine.sqf";
+	player_heatSelf =			compile preprocessFileLineNumbers "\z\addons\dayz_code\medical\heatpack.sqf";
+	player_painkillerSelf =		compile preprocessFileLineNumbers "\z\addons\dayz_code\medical\painkiller.sqf";
+	player_antibioticSelf =		compile preprocessFileLineNumbers "\z\addons\dayz_code\medical\antibiotics.sqf";
 	
 	//ui
 	player_selectSlot =			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\ui_selectSlot.sqf";
@@ -396,7 +405,8 @@ if (!isDedicated) then {
 				if (_humanity < -10000) then { _humanity = -10000; };
 				_delay = ((10000 + _humanity) / 5500) + 0.3;
 				playSound "heartbeat_1";
-				sleep _delay;
+				_curTime = time;
+				waitUntil {time - _curTime >= _delay};
 			};
 			dayz_heartBeat = false;
 		};

@@ -16,7 +16,8 @@ if (_object == player) then {
 			};
 			player setVariable ["freeTarget",true,true];
 			_timeStart = time;
-			sleep _wait;
+			_curTime = time;
+			waitUntil {time - _curTime >= _wait};
 			player setVariable ["freeTarget",false,true];
 		};
 	} else {

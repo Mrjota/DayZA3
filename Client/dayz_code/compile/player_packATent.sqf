@@ -23,7 +23,8 @@ if(_ownerID == dayz_characterID) then {
 	[player,_sfx,0,false,_dis] call dayz_zombieSpeak;  
 	[player,_dis,true,(getPosATL player)] spawn player_alertZombies;
 	
-	sleep 3;
+	_curTime = time;
+	waitUntil {time - _curTime >= 3};
 
 	//place tent (local)
 	_bag = createVehicle ["WeaponHolder",_pos,[], 0, "CAN_COLLIDE"];

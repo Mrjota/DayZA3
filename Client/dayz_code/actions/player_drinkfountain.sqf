@@ -24,7 +24,8 @@ dayz_drinkFromFountain = -1;
 
 [] spawn {
 	player enableFatigue false;
-	sleep 7;
+	_curTime = time;
+	waitUntil {time - _curTime >= 7};
 	player enableFatigue true;
 };
 

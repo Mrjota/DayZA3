@@ -50,7 +50,8 @@ if (_finished) then {
     
         [] spawn {
         player enableFatigue false;
-        sleep 5;
+		_curTime = time;
+		waitUntil {time - _curTime >= 5};
         player enableFatigue true;
         };
 } else {

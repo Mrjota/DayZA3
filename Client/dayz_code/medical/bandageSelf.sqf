@@ -24,7 +24,8 @@ if (_unit == player) then {
 
 player removeMagazine "ItemBandage";
 
-sleep 1;
+_curTime = time;
+waitUntil {time - _curTime >= 1};
 //clear the healed player's vision
 //["usecPainK",[_unit,player]] call broadcastRpcCallAll;
 	usecPainK = [_unit,player];

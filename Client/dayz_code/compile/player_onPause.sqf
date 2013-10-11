@@ -39,6 +39,7 @@ private["_display","_btnRespawn","_btnAbort","_timeOut","_timeMax","_isDead"];
 					_btnAbort ctrlSetText _btnAbortText;		
 				};
 			};
-			sleep 1;
+			_curTime = time;
+			waitUntil {time - _curTime >= 1};
 			_timeOut = _timeOut + 1;
 		};

@@ -98,7 +98,8 @@ r_player_dead = true;
 3 fadeSound 0;
 0 cutText ["", "BLACK",10];
 dayz_DeathActioned = true;
-sleep 1;
+_curTime = time;
+waitUntil {time - _curTime >= 1};
 
 TitleText[localize "str_player_12","PLAIN DOWN",5];
 
@@ -120,7 +121,8 @@ _body setVariable["combattimeout", 0, true];
 //["dayzFlies",player] call broadcastRpcCallAll;
 		dayzFlies = [player];
 		publicVariable "dayzFlies";
-sleep 2;
+	_curTime = time;
+	waitUntil {time - _curTime >= 2};
 
 1 cutRsc ["DeathScreen","BLACK OUT",3];
 

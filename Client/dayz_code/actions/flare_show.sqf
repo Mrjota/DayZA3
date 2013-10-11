@@ -4,7 +4,8 @@ player removeAction s_player_showflare;
 s_player_hideflare = player addAction [format["Hide Chemlight"], "\z\addons\dayz_code\actions\flare_hide.sqf",_flare, 1, false, true, "", ""];
 [] spawn {
 	player playAction "Gear";
-    sleep 1;
+	_curTime = time;
+	waitUntil {time - _curTime >= 1};
     player playAction 'Stand';
     };
     detach _flare;

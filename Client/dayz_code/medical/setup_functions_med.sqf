@@ -23,7 +23,8 @@ fnc_usec_pitchWhine = {
 	};
 	r_pitchWhine = true;
 	[] spawn {
-		sleep 32;
+		_curTime = time;
+		waitUntil {time - _curTime >= 32};
 		r_pitchWhine = false;
 	};
 };
@@ -50,7 +51,8 @@ fnc_usec_damageUnconscious = {
 			if (r_player_unconscious) then {
 				_unit action ["eject", _veh];
 				waitUntil{((vehicle _this) != _this)};
-				sleep 1;
+				_curTime = time;
+				waitUntil {time - _curTime >= 1};
 				_unit setVariable ["NORRN_unconscious", true, true];
 				_unit playActionNow "Die";
 			};
@@ -131,7 +133,8 @@ fnc_med_publicBlood = {
 	while {(r_player_injured or r_player_infected) and r_player_blood > 0} do {
 		player setVariable["USEC_BloodQty",r_player_blood,true];
 		player setVariable["medForceUpdate",true];
-		sleep 5;
+		_curTime = time;
+		waitUntil {time - _curTime >= 5};
 	};
 };
 
@@ -156,7 +159,8 @@ fnc_usec_playerBleed = {
 			{player setVariable[_x,false,true];} forEach USEC_woundHit;
 			player setVariable ["USEC_injured",false,true];
 		};
-		sleep 1;
+		_curTime = time;
+		waitUntil {time - _curTime >= 1};
 	};
 };
 
@@ -216,14 +220,16 @@ fnc_usec_damageBleed = {
 			_source setDropInterval 0.02;
 			_point attachTo [_unit,_modelPos,_wound];
 			
-			sleep 5;
+			_curTime = time;
+			waitUntil {time - _curTime >= 5};
 			
 			while {((_unit getVariable["USEC_injured",true]) and (alive _unit))} do {
 				scopeName "loop";
 				if (vehicle _unit != _unit) then {
 					BreakOut "loop";
 				};
-				sleep 1;
+				_curTime = time;
+				waitUntil {time - _curTime >= 1};
 			};
 			deleteVehicle _source;
 			deleteVehicle _point;
@@ -243,11 +249,13 @@ fnc_usec_recoverUncons = {
 	player setVariable ["unconsciousTime", 0, true];
 	player setVariable ["USEC_isCardiac",false,true];
 	player setVariable["medForceUpdate",true,true];
-	sleep 1;
+	_curTime = time;
+	waitUntil {time - _curTime >= 1};
 	usecEpi = [player,player];
 	publicVariable "usecEpi";
 	r_player_unconscious = false;
-	sleep 1;
+	_curTime = time;
+	waitUntil {time - _curTime >= 1};
 	r_player_cardiac = false;
 	r_player_handler1 = false;
 	player switchMove "AmovPpneMstpSnonWnonDnon_healed";

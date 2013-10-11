@@ -7,7 +7,8 @@ if (_isOk) then {
 	_dir = getDir player;
 	_classname = "Land_Fire";
 	player playActionNow "Medic";
-	sleep 6;
+	_curTime = time;
+	waitUntil {time - _curTime >= 6};
 	dayz_hasFire = createVehicle [_classname, _location, [], 0, "CAN_COLLIDE"];
 	dayz_hasFire setDir _dir;
 	player reveal dayz_hasFire;

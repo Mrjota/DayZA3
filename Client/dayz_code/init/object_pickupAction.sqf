@@ -47,7 +47,8 @@ actionMonitor = {
 			_timeout = 0;
 			_run = false;
 		};
-		sleep _timeout;
+		_curTime = time;
+		waitUntil {time - _curTime >= _timeout};
 	};
 };
 

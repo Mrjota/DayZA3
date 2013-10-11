@@ -15,6 +15,7 @@ Camo1_DZ = 		"Camo1_DZ";
 Soldier1_DZ = 	"Soldier1_DZ";
 Rocket_DZ = 	"Rocket_DZ";
 
+AllSwitchables_A3 = ["Sniper1_DZ","Sniper2_DZ","Camo1_DZ","Rocket_DZ","Survivor_R","Survivor_B","Ranger_DZ"];
 AllPlayers_A3 = ["Bandit1_DZ","BanditW1_DZ","Survivor2_DZ","SurvivorW2_DZ","Sniper1_DZ","Sniper2_DZ","Camo1_DZ","Rocket_DZ","Survivor3_DZ","Bandit2_DZ","Survivor4_DZ","Survivor5_DZ","Bandit3_DZ","Survivor_R","Survivor_B","Ranger_DZ"];
 AllPlayers = ["Soldier_Crew_PMC","Sniper1_DZ","Camo1_DZ","Soldier1_DZ","Rocket_DZ"];
 AllPlayersVehicles = ["Soldier_Crew_PMC","Sniper1_DZ","Camo1_DZ","Soldier1_DZ","Rocket_DZ","AllVehicles"];
@@ -276,6 +277,7 @@ r_player_handler = 		false;
 r_player_handler1 = 	false;
 r_player_unconscious = 	false;
 r_player_infected =		false;
+r_player_morphingNow =	false;
 r_player_tranq =        false;
 r_player_tearGasOn =    false;
 r_player_clear =        true;
@@ -303,6 +305,7 @@ r_handlerCount = 		0;
 r_action_repair = 		false;
 r_action_targets = 		[];
 r_pitchWhine = 			false;
+r_intro =				true;
 r_isBandit =			false;
 r_isBuilding =          false;
 repairInProgress =		false;
@@ -391,13 +394,13 @@ dayz_refuelAction = 0;
 //DayZ settings
 dayz_dawn = 6;
 dayz_dusk = 18;
-dayz_maxAnimals = 5;
+dayz_maxAnimals = 30;
 DAYZ_agentnumber = 0;
-dayz_animalDistance = 800;
+dayz_animalDistance = 1500;
 dayz_zSpawnDistance = 1000;
 dayz_maxLocalZombies = 40;
 dayz_maxGlobalZombies = 30;
-dayz_maxZeds = 500;
+dayz_maxZeds = 350;
 dayz_spawnPos = getPosATL player;
 
 //init global arrays for Loot Chances

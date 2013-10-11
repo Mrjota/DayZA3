@@ -11,21 +11,21 @@ Bindings_A3 =
     
 	switch (_key) do 
 	{
-		case 211:
+		case 41: //TILDE
+		{
+            createDialog "menuDiag";
+		};
+		/*
+		case 211: // DELETE
 		{
             [] execVM "\z\addons\dayz_code\group\dialog\groupMenu.sqf";
 		};
-		case 199:
+		case 199: //HOME
 		{
             [] execVM "\z\addons\dayz_code\ammo\listB.sqf";
 		};
-		case 38:
-		{
-            if ((currentWeapon player) == "MeleeFlashlight") then {
-                dayz_lightOn = !dayz_lightOn;
-            };
-		};
-        case 14:
+		*/
+        case 14: //BACKSPACE
         {
             if (r_player_onVehicleC and alive player) then {
                 [] execVM "\z\addons\dayz_code\actions\player_getout.sqf";

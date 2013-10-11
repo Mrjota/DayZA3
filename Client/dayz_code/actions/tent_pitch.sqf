@@ -39,13 +39,15 @@ _objectsPond = 		nearestObjects [_playerPos, [], 10];
 	player removeMagazine "ItemTent";
 	player playActionNow "Medic";
     r_isBuilding = true;
-	sleep 1;
+	_curTime = time;
+	waitUntil {time - _curTime >= 1};
 	
 	_dis=20;
 	_sfx = "tentunpack";
 	[player,_sfx,0,false,_dis] call dayz_zombieSpeak;  
 	[player,_dis,true,(getPosATL player)] spawn player_alertZombies;
-	sleep 5;
+	_curTime = time;
+	waitUntil {time - _curTime >= 5};
 	//place tent (local)
 	_tent = createVehicle ["TentStorage", _location, [], 0, "CAN_COLLIDE"];
 	_tent setdir _dir;

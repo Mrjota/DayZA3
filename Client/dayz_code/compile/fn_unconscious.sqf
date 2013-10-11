@@ -24,7 +24,8 @@ if ((!r_player_handler1) and (r_handlerCount == 0)) then {
 		_ctrl1 ctrlSetPosition [(_ctrl1Pos select 0),(_ctrl1Pos select 1),(_ctrl1Pos select 2),((0.136829 * safezoneH) * (1 -(r_player_timeout / _totalTimeout)))];
 		_ctrl1 ctrlCommit 1;
 		playSound "heartbeat_1";
-		sleep 1;
+		_curTime = time;
+		waitUntil {time - _curTime >= 1};
 		_isOnDeck = false; //getPos player in LHA_Deck;
 		_isInLocation = false; //getPos player in LHA_Location;
 		_inVehicle = (vehicle player != player);
@@ -57,7 +58,8 @@ if ((!r_player_handler1) and (r_handlerCount == 0)) then {
 			waitUntil {!(player getVariable ["NORRN_unit_dragged", false])};
 		
 			cutText[localize "str_medical_healing", "PLAIN", 2];
-			sleep 5;
+			_curTime = time;
+			waitUntil {time - _curTime >= 5};
 		
 			r_player_inpain = false;
 			r_player_dead = false;
@@ -76,7 +78,8 @@ if ((!r_player_handler1) and (r_handlerCount == 0)) then {
 			{player setVariable[_x,false,true];} forEach USEC_woundHit;
 			player setVariable ["USEC_injured",false,true];
 			
-			sleep 1;
+			_curTime = time;
+			waitUntil {time - _curTime >= 1};
 			r_player_handler = false;
 			nul = [] spawn fnc_usec_recoverUncons;
 		};
