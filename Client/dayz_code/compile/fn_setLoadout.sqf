@@ -93,7 +93,7 @@ _add = {
 			if(isClass(configFile>>"CfgMagazines">>_item)) then {
 				_target addMagazine _item;
 			} else {
-				if(isClass(configFile>>"CfgWeapons">>_item>>"WeaponSlotsInfo") && getNumber(configFile>>"CfgWeapons">>_item>>"showempty")==1 && _item != "NVGoggles") then {
+				if(isClass(configFile>>"CfgWeapons">>_item>>"WeaponSlotsInfo") && getNumber(configFile>>"CfgWeapons">>_item>>"showempty")==1 && !(_item in ["NVGoggles","Binoculars","ItemGPS","ItemCompass","ItemMap","ItemWatch"])) then {
 					_target addWeapon _item;  
 				} else {
 					_target addItem _item;

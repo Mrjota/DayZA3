@@ -290,7 +290,6 @@ if (!isNull cursorTarget and !_inVehicle and (player distance cursorTarget < 4))
 		s_player_sleep = -1;
 	};
 	*/
-	
 	//New Repair/Salvage System/Object Saving ---
 	if ((dayz_myCursorTarget != _cursorTarget) and _canDo and !_isMan and (damage _cursorTarget < 1) and ((_isVehicle) or ((_cursorTarget isKindOf "ACampStorage") or (_cursorTarget isKindOf "TentStorage")))) then {
 		if (s_player_repair_ctrl < 0) then {
@@ -301,7 +300,7 @@ if (!isNull cursorTarget and !_inVehicle and (player distance cursorTarget < 4))
 				s_player_repairActions set [count s_player_repairActions, _rMenu];
 				s_player_repairActions set [count s_player_repairActions, _sMenu];
 			};
-			if ((_cursorTarget isKindOf "ACampStorage") or (_cursorTarget isKindOf "TentStorage")) then {
+			if ((_cursorTarget isKindOf "ACampStorage") or (_cursorTarget isKindOf "TentStorage") or (_cursorTarget isKindOf "Ship") or (_cursorTarget isKindOf "Car") or (_cursorTarget isKindOf "Helicopter") or (_cursorTarget isKindOf "Motorcycle")) then {
 				_saveObject = dayz_myCursorTarget addAction [format["<t color='#FAA543'>Save %1</t>",getText(configFile >> "CfgVehicles" >> typeOf _cursorTarget >> "displayname")], "\z\addons\dayz_code\actions\savevehicle.sqf", _cursorTarget, 0, false, true, "", ""];
 				s_player_repairActions = [_saveObject] + s_player_repairActions;
 			};
@@ -524,7 +523,7 @@ if (_dogHandle > 0) then {
 _flipTypes = ["TT650_Civ","ATV_US_EP1","ATV_CZ_EP1","Old_bike_TK_CIV_EP1","Old_bike_TK_INS_EP1","M1030","TT650_Cib","TT650_Ins","TT650_Gue","TT650_TK_CIV_EP1","TT650_TK_EP1","M1030_US_DES_EP1","Old_moto_TK_Civ_EP1"];
 _isAliveVeh = alive _vehicle;
 _playersNear = (count ((position _vehicle) nearEntities ["Man", 3]));
-if (_inVehicle and (_vehicle in _flipTypes) and _isAliveVeh and (_playersNear <= 0) and ((vectorUp _cursorTarget) select 2) < 0.5) then {
+if (_inVehicle and (typeOf _vehicle in _flipTypes) and _isAliveVeh and (_playersNear <= 0)) then {
 	if (s_player_flipveh2  < 0) then {
 		s_player_flipveh2 = player addAction ["Flip Upright", "\z\addons\dayz_code\actions\player_flipvehicle.sqf",[_vehicle, 0], 1, false, true, "", ""];		
 	};	
@@ -714,6 +713,9 @@ if(_vehicle == player and _hasFood) then {
 		dayz_hunger3 = -1;
 		if(dayz_hunger >= 270) then {
 			dayz_hunger2 = player addAction [format["<t color='#FF0000'>Eat%1</t>"], "\z\addons\dayz_code\actions\player_eat.sqf",[], 1, false, true, "", ""];
+		} else {
+			player removeAction dayz_hunger2;
+			dayz_hunger2 = -1;
 		};
 	};
 } else	{
@@ -732,8 +734,8 @@ _hasDrink = false;
 } forEach _drinkItems; 
 
 //Allow player to drink
-if(_vehicle == player and _hasDrink) then {
-    	if((dayz_thirst >= 180) and (dayz_thirst2 < 0)) then {
+if(_vehicle == player and _hasDrink and (dayz_thirst >= 180)) then {
+    	if(dayz_thirst2 < 0) then {
         	dayz_thirst2 = player addAction [format["<t color='#FF0000'>Drink%1</t>"], "\z\addons\dayz_code\actions\player_drink2.sqf",[], 1, false, true, "", ""];
     	};
 } else {
@@ -742,8 +744,8 @@ if(_vehicle == player and _hasDrink) then {
 };
 
 //Allow player to drink from fountain
-if(_vehicle == player and _canFill) then {
-    	if((dayz_thirst >= 180) and (dayz_drinkFromFountain < 0)) then {
+if(_vehicle == player and _canFill and (dayz_thirst >= 180)) then {
+    	if(dayz_drinkFromFountain < 0) then {
         	dayz_drinkFromFountain = player addAction [format["<t color='#FF0000'>Drink (Fountain)</t>"], "\z\addons\dayz_code\actions\player_drinkfountain.sqf",[], 1, false, true, "", ""];
     	};
 } else {
@@ -776,6 +778,10 @@ if(_vehicle == player and _hasMRE) then {
 		if((dayz_hunger >= 270) or (dayz_thirst >= 180)) then {
 			dayz_mre = player addAction [format["<t color='#FF0000'>Use MRE%1</t>"], "\z\addons\dayz_code\actions\player_mre.sqf",[], 1, false, true, "", ""];
 		};
+		if ((dayz_hunger < 270) and (dayz_thirst < 180)) then {
+			player removeAction dayz_mre;
+			dayz_mre = -1;
+		};
 	};
 } else {
     	player removeAction dayz_mre;
@@ -797,7 +803,7 @@ if(_vehicle == player and _hasTent and _canDo and !r_isBuilding) then {
 //Allow placing of tents
 if(_vehicle == player and _hasATent and _canDo and !r_isBuilding) then {
 	if(s_doATent < 0) then {
-	s_doATent = player addAction [format["<t color='#FF0000'>Pitch Tent (Large)%1</t>"], "z\addons\dayz_code\actions\atent_pitch.sqf",[], 1, false, true];
+		s_doATent = player addAction [format["<t color='#FF0000'>Pitch Tent (Large)%1</t>"], "z\addons\dayz_code\actions\atent_pitch.sqf",[], 1, false, true];
 	};
 } else	{
 	player removeAction s_doATent;

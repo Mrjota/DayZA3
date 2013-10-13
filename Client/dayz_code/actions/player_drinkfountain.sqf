@@ -17,7 +17,7 @@ player setVariable ["messing",[dayz_hunger,dayz_thirst],true];
 _display = uiNamespace getVariable 'DAYZ_GUI_display';
 (_display displayCtrl 1302) ctrlShow true;
 
-cutText [format[(localize  "str_player_consumed"),_text], "PLAIN DOWN"];
+cutText ["You drank from the fountain.", "PLAIN DOWN"];
 
 player removeAction dayz_drinkFromFountain;
 dayz_drinkFromFountain = -1;

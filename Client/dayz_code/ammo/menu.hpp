@@ -9,7 +9,7 @@ class menuDiag {
 	idd = 2500;
 	movingEnable = true;
 	enableSimulation = true;
-    onLoad = "breakActive = false; combineActive = false; breakActive2 = false; combineActive2 = false;";
+    onLoad = "breakActive = false; combineActive = false; breakActive2 = false; combineActive2 = false; [] spawn fnc_usec_selfActions;";
     
 	class controlsBackground {
 		class RscTitleBackground:a_RscText {
@@ -70,7 +70,7 @@ class menuDiag {
             idc = 55523;
             text = "Use"; //--- ToDo: Localize;
 			colorBackground[] = {"(profilenamespace getvariable ['GUI_BCG_RGB_R',0.3843])", "(profilenamespace getvariable ['GUI_BCG_RGB_G',0.7019])", "(profilenamespace getvariable ['GUI_BCG_RGB_B',0.8862])", 0.5};
-            onButtonClick = "closeDialog 0; [] execVM 'VAS\listU.sqf';";
+            onButtonClick = "closeDialog 0; [] execVM '\z\addons\dayz_code\ammo\listU.sqf';";
             x = 17.5 * GUI_GRID_W + GUI_GRID_X;
             y = 11 * GUI_GRID_H + GUI_GRID_Y;
             w = 4.5 * GUI_GRID_W;
@@ -243,7 +243,7 @@ class useManagement {
 			text = "    Eat";
             style = 2;
 			colorBackground[] = {"(profilenamespace getvariable ['GUI_BCG_RGB_R',0.3843])", "(profilenamespace getvariable ['GUI_BCG_RGB_G',0.7019])", "(profilenamespace getvariable ['GUI_BCG_RGB_B',0.8862])", 0.5};
-			onButtonClick = "[0] execVM 'VAS\use.sqf';";
+			onButtonClick = "[0] spawn player_useU;";
 			x = 0.12875; y = 0.67;
 			w = 0.1375;
 			h = (1 / 25);
@@ -265,7 +265,7 @@ class useManagement {
 			text = "   Drink";
             style = 2;
 			colorBackground[] = {"(profilenamespace getvariable ['GUI_BCG_RGB_R',0.3843])", "(profilenamespace getvariable ['GUI_BCG_RGB_G',0.7019])", "(profilenamespace getvariable ['GUI_BCG_RGB_B',0.8862])", 0.5};
-			onButtonClick = "[1] execVM 'VAS\use.sqf';";
+			onButtonClick = "[1] spawn player_useU;";
 			x = 0.72875; y = 0.67;
 			w = 0.1375;
 			h = (1 / 25);
@@ -287,7 +287,7 @@ class useManagement {
 			text = " Administer";
             style = 2;
 			colorBackground[] = {"(profilenamespace getvariable ['GUI_BCG_RGB_R',0.3843])", "(profilenamespace getvariable ['GUI_BCG_RGB_G',0.7019])", "(profilenamespace getvariable ['GUI_BCG_RGB_B',0.8862])", 0.5};
-			onButtonClick = "[2] execVM 'VAS\use.sqf';";
+			onButtonClick = "[2] spawn player_useU;";
 			x = 0.42875; y = 0.67;
 			w = 0.1375;
 			h = (1 / 25);
@@ -319,7 +319,7 @@ class useManagement {
 			idc = -1;
 			text = "Refresh";
             style = 2;
-			onButtonClick = "[0] execVM 'VAS\refreshU.sqf';";
+			onButtonClick = "[0] spawn player_refreshU;";
 			x = 0.955 - (6.25 / 40);
 			y = 0.77 - (1 / 25);
 			w = (6.25 / 40);

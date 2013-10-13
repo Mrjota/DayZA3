@@ -68,9 +68,6 @@ if (_unitIsPlayer) then {
 
 //PVP Damage
 _scale = 1000;
-if (_ammo == "zombie") then {
-	_scale = 500;
-};
 _cw = "";
 _hw = "";
 if (_damage > 0.005) then {
@@ -89,13 +86,13 @@ if (_damage > 0.005) then {
 			_scale = _scale + 200;
 		};
 	} else {
-        _scale = _scale + 150;
+        _scale = _scale + 500;
     };
 	if (_isHeadHit) then {
 		if (_ammo != "zombie") then {
 			_scale = _scale + 1400;
 		} else { 
-			_scale = _scale + 800;
+			_scale = _scale + 1000;
 		};
 	};
 	if ((isPlayer _source) and !(player == _source)) then {

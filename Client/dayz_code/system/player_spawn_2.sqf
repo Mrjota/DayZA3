@@ -337,10 +337,10 @@ while {true} do {
 	};
 	
 	_brokenLegs = player getVariable["brokenLegs",0];
-	if ((_brokenLegs == 0) and (r_fracture_legs)) then {
+	if ((_brokenLegs == 0) and (!canStand player)) then {
 		player setVariable["brokenLegs",1,true];
 	};
-	if ((_brokenLegs == 1) and (!r_fracture_legs)) then {
+	if ((_brokenLegs == 1) and (canStand player)) then {
 		player setVariable["brokenLegs",0,true];
 	};
 	

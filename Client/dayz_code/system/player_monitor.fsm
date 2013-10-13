@@ -1057,7 +1057,7 @@ class FSM
        "		sleep 0.2;" \n
        "	};" \n
        "};" \n
-       "dayz_surfaceNoise = [] spawn {" \n
+       "dayz_surfaceFnc = [] spawn {" \n
        "	while {true} do {" \n
        "		_array = player call world_surfaceNoise;" \n
        "		if (count _array == 2) then {" \n
@@ -1144,7 +1144,7 @@ class FSM
        "	if (count _nearestCity > 0) then {_town = text (_nearestCity select 0)};" \n
        "	_strTime = call curTimeStr;" \n
        "	_strDate = date;" \n
-       "	_first = [_world,_town,localize (""str_player_06"") + "" "" + str(_days)] spawn BIS_fnc_infoText;" \n
+       "	_first = [_world,_town,localize (""str_player_06"") + "" "" + str(dayz_skilllevel)] spawn BIS_fnc_infoText;" \n
        "	sleep 0.9;" \n
        "	playSound ""breath_1"";" \n
        "	addCamShake [1, 1, 25];" \n

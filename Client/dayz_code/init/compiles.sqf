@@ -92,6 +92,8 @@ if (!isDedicated) then {
 	player_heatSelf =			compile preprocessFileLineNumbers "\z\addons\dayz_code\medical\heatpack.sqf";
 	player_painkillerSelf =		compile preprocessFileLineNumbers "\z\addons\dayz_code\medical\painkiller.sqf";
 	player_antibioticSelf =		compile preprocessFileLineNumbers "\z\addons\dayz_code\medical\antibiotics.sqf";
+	player_refreshU =			compile preprocessFileLineNumbers "\z\addons\dayz_code\ammo\refreshU.sqf";
+	player_useU =				compile preprocessFileLineNumbers "\z\addons\dayz_code\ammo\use.sqf";
 	
 	//ui
 	player_selectSlot =			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\ui_selectSlot.sqf";

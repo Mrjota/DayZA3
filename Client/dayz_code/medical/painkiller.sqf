@@ -1,6 +1,12 @@
 // bleed.sqf
-_unit = (_this select 3) select 0;
-
+_unit = objNull;
+if (typeName (_this select 0) != 'STRING') then {
+	_unit = (_this select 3) select 0;
+} else {
+	if ((_this select 0) == "use") then {
+		_unit = player;
+	};
+};
 _unit setVariable ["USEC_inPain", false, true];
 
 call fnc_usec_medic_removeActions;

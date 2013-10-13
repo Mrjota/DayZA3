@@ -116,8 +116,13 @@ if (_isPlayerInside) then {
 	_scaleLight = 1;
 };
 
+_audial = 0;
 //Work out result
-_audial = 			round(_speed * dayz_surfaceNoise * _scaleMvmt * _scaleSound);
+if (typeName dayz_surfaceNoise == 'SCALAR') then {
+	_audial = 			round(_speed * dayz_surfaceNoise * _scaleMvmt * _scaleSound);
+} else {
+	_audial = 			round(_speed * 25 * _scaleMvmt * _scaleSound);
+};
 if ((_audial > DAYZ_disAudial) or ((time - dayz_firedCooldown) > 0.3)) then {
 	DAYZ_disAudial = _audial;
 };

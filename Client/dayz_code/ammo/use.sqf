@@ -13,14 +13,16 @@ switch (_type) do {
 	case 0:
 	{
 		_item = lbData [flist, (lbCurSel flist)];
-		[_item] spawn player_eat2;
-		[1] execVM 'VAS\refreshU.sqf';
+		_handle = [_item] spawn player_eat2;
+		waitUntil {scriptDone _handle};
+		[1] spawn player_refreshU;
 	};
 	case 1:
 	{
 		_item = lbData [dlist, (lbCurSel dlist)];
-		[_item] spawn player_drink2;
-		[2] execVM 'VAS\refreshU.sqf';
+		_handle = [_item] spawn player_drink2;
+		waitUntil {scriptDone _handle};
+		[2] spawn player_refreshU;
 	};
 	case 2:
 	{
@@ -28,33 +30,46 @@ switch (_type) do {
 		switch (_item) do {
 			case "SurvivalPack":
 			{
-				[] spawn player_spack;
+				_handle = ["use"] spawn player_spack;
+				waitUntil {scriptDone _handle};
+				[3] spawn player_refreshU;
 			};
 			case "ItemBandage":
 			{
-				[] spawn player_bandageSelf;
+				_handle = ["use"] spawn player_bandageSelf;
+				waitUntil {scriptDone _handle};
+				[3] spawn player_refreshU;
 			};
 			case "ItemEpinephrine":
 			{
-				[] spawn player_adrenSelf;
+				_handle = ["use"] spawn player_adrenSelf;
+				waitUntil {scriptDone _handle};
+				[3] spawn player_refreshU;
 			};
 			case "ItemMorphine":
 			{
-				[] spawn player_morphineSelf;
+				_handle = ["use"] spawn player_morphineSelf;
+				waitUntil {scriptDone _handle};
+				[3] spawn player_refreshU;
 			};
 			case "ItemHeatPack":
 			{
-				[] spawn player_heatSelf;
+				_handle = [] spawn player_heatSelf;
+				waitUntil {scriptDone _handle};
+				[3] spawn player_refreshU;
 			};
 			case "ItemPainkiller":
 			{
-				[] spawn player_painkillerSelf;
+				_handle = ["use"] spawn player_painkillerSelf;
+				waitUntil {scriptDone _handle};
+				[3] spawn player_refreshU;
 			};
 			case "ItemAntibiotic":
 			{
-				[] spawn player_antibioticSelf;
+				_handle = [] spawn player_antibioticSelf;
+				waitUntil {scriptDone _handle};
+				[3] spawn player_refreshU;
 			};
 		};
-		[3] execVM 'VAS\refreshU.sqf';
 	};
 };
