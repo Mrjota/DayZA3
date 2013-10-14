@@ -24,7 +24,7 @@ private["_display","_btnRespawn","_btnAbort","_timeOut","_timeMax","_isDead"];
 			switch true do {
 				case (_isDead == 1) : {
 					_btnAbort ctrlEnable true;
-					_btnRespawn ctrlEnable true;
+					_btnRespawn ctrlEnable false;
 					_btnAbort ctrlSetText _btnAbortText;		
 				};
 				case (_timeOut < _timeMax && (_brokenLegs == 1)) : {

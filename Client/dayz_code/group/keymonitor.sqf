@@ -36,4 +36,4 @@ Bindings_A3 =
 };
 
 waituntil {!isnull (finddisplay 46)};
-Press_A3 = (findDisplay 46) displayAddEventHandler ["KeyDown", "_this call Bindings_A3; false;"];
+Press_A3 = (findDisplay 46) displayAddEventHandler ["KeyDown", "_this call Bindings_A3; _this call dayz_spaceInterrupt; false;"];

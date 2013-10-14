@@ -960,8 +960,9 @@ class FSM
        "//1 cutText [""To avoid bugs, please wait until you spawn to hit escape. Thank you!"", ""PLAIN""];" \n
        "diag_log ""[SYSTEM] Stage 5 (Display) Start..."";" \n
        "" \n
-       "(findDisplay 46) displayAddEventHandler [""KeyDown"",""_this call dayz_spaceInterrupt""];" \n
-       "player disableConversation true;" \n
+       "//(findDisplay 46) displayAddEventHandler [""KeyDown"",""_this call dayz_spaceInterrupt""];" \n
+       "[] execVM ""\z\addons\dayz_code\group\keymonitor.sqf"";" \n
+	   "player disableConversation true;" \n
        "" \n
        "eh_player_killed = player addeventhandler [""FiredNear"",{_this call player_weaponFiredNear;} ];" \n
        "//_eh_combat_projectilenear = player addEventHandler [""IncomingFire"",{_this call player_projectileNear;}];" \n

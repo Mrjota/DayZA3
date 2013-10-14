@@ -277,8 +277,9 @@ if (!isDedicated) then {
 		};
 		//if (_dikCode == 57) then {_handled = true}; // space
 		//if (_dikCode in actionKeys 'MoveForward' or _dikCode in actionKeys 'MoveBack') then {r_interrupt = true};
-		if (_dikCode == 210) then //SCROLL LOCK
+		if (_dikCode == 210 and (time - dayz_lastCheckBit > 1)) then //SCROLL LOCK
 		{
+			dayz_lastCheckBit = time;
 			_nill = execvm "\z\addons\dayz_code\actions\playerstats.sqf";
 		};
 		if (_dikCode in actionKeys "MoveLeft") then {r_interrupt = true};
@@ -286,15 +287,15 @@ if (!isDedicated) then {
 		if (_dikCode in actionKeys "MoveForward") then {r_interrupt = true};
 		if (_dikCode in actionKeys "MoveBack") then {r_interrupt = true};
 		if (_dikCode in actionKeys "ForceCommandingMode") then {_handled = true};
-		if (_dikCode in actionKeys "PushToTalk" and (time - dayz_lastCheckBit > 10)) then {
+		if (_dikCode in actionKeys "PushToTalk" and (time - dayz_lastCheckBit > 3)) then {
 			dayz_lastCheckBit = time;
-			[player,50,true,(getPosATL player)] spawn player_alertZombies;
+			[player,15,true,(getPosATL player)] spawn player_alertZombies;
 		};
-		if (_dikCode in actionKeys "VoiceOverNet" and (time - dayz_lastCheckBit > 10)) then {
+		if (_dikCode in actionKeys "VoiceOverNet" and (time - dayz_lastCheckBit > 3)) then {
 			dayz_lastCheckBit = time;
-			[player,50,true,(getPosATL player)] spawn player_alertZombies;
+			[player,25,true,(getPosATL player)] spawn player_alertZombies;
 		};
-		if (_dikCode in actionKeys "PushToTalkDirect" and (time - dayz_lastCheckBit > 10)) then {
+		if (_dikCode in actionKeys "PushToTalkDirect" and (time - dayz_lastCheckBit > 3)) then {
 			dayz_lastCheckBit = time;
 			[player,15,false,(getPosATL player)] spawn player_alertZombies;
 		};
@@ -302,7 +303,7 @@ if (!isDedicated) then {
 			dayz_lastCheckBit = time;
 			[player,15,false,(getPosATL player)] spawn player_alertZombies;
 		};
-		if (_dikCode in actionKeys "User20" and (time - dayz_lastCheckBit > 1.5)) then {
+		if (_dikCode in actionKeys "User20" and (time - dayz_lastCheckBit > 1)) then {
 			dayz_lastCheckBit = time;
 			_nill = execvm "\z\addons\dayz_code\actions\playerstats.sqf";
 		};
@@ -448,7 +449,6 @@ if (!isDedicated) then {
 		_objName
 	};
 	dayz_originalPlayer =		player;
-    [] execVM "\z\addons\dayz_code\group\keymonitor.sqf";
 };
 
 	progressLoadingScreen 0.8;
