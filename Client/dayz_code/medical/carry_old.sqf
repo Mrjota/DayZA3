@@ -29,7 +29,9 @@ _dragee switchMove "ainjpfalmstpsnonwrfldnon_carried_up";
 norrnRAPicUp = _unit;
 publicVariable "norrnRAPicUp";
 _unit switchMove "acinpknlmstpsraswrfldnon_acinpercmrunsraswrfldnon";
-sleep 10;
+
+_curTime = time;
+waitUntil {time - _curTime >= 10};
 _dragee switchmove "ainjpfalmstpsnonwrfldnon_carried_still";
 _dragee attachto [_unit,[-0.2, 0.2, 0]];
 

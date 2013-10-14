@@ -5,12 +5,6 @@ _messTimer = 0;
 _lastSave = 0;
 _lastTemp = dayz_temperatur;
 _debug = getMarkerpos "respawn_west";
-_isBandit = false;
-_isHero = false;
-_isAssassin = false;
-_isGuardian = false;
-_isSaint = false;
-_isReaper = false;
 
 player setVariable ["temperature",dayz_temperatur,true];
 if (isNil "dayz_myBackpackMags") then { dayz_myBackpackMags = []; };
@@ -75,11 +69,8 @@ while {true} do {
 	};
 	*/
 	
-	if (_speed > 0.1) then {
-		_timeOut = _timeOut + 1;
-	};
-	
 	_humanity = player getVariable ["humanity",0];
+	/*
 	if ((_timeOut > 300) and (_typeOf != "Bandit2_DZ") and (_typeOf != "Bandit3_DZ")) then {
 		_timeOut = 0;
 		if (_humanity < 2500) then {
@@ -88,97 +79,57 @@ while {true} do {
 			player setVariable ["humanity",_humanity,true];
 		};
 	};
+	*/
 	
-	if (_humanity <= -12000 and _humanity > -30000 and !_isAssassin) then {
-		_isBandit = false;
-        _isHero = false;
-        _isGuardian = false;
-        _isAssassin = true;
-        _isSaint = false;
-        _isReaper = false;
-		_model = typeOf player;
-		if ((_model == "Survivor2_DZ") or (_model == "Survivor4_DZ") or (_model == "Bandit1_DZ") or (_model == "Bandit3_DZ") or (_model == "Survivor3_DZ") or (_model == "Survivor5_DZ")) then {
+	//Reaper
+	if (_humanity <= -30000 and !r_player_morphingNow and !(_typeOf in AllSwitchables_A3)) then { 
+		if (_typeOf != "Bandit3_DZ") then {
+			[dayz_playerUID,dayz_characterID,"Bandit3_DZ"] spawn player_humanityMorph;
+		};
+	};
+	
+	//Assassin
+	if (_humanity < -12000 and _humanity > -30000 and !r_player_morphingNow and !(_typeOf in AllSwitchables_A3)) then { 
+		if (_typeOf != "Bandit2_DZ") then {
 			[dayz_playerUID,dayz_characterID,"Bandit2_DZ"] spawn player_humanityMorph;
 		};
 	};
 	
-	if (_humanity > -12000 and _humanity <= -2000 and !_isBandit) then {
-		_isBandit = true;
-        _isHero = false;
-        _isGuardian = false;
-        _isAssassin = false;
-        _isSaint = false;
-        _isReaper = false;
-		_model = typeOf player;
-		if ((_model == "Survivor2_DZ") or (_model == "Survivor4_DZ") or (_model == "Bandit2_DZ") or (_model == "Bandit3_DZ") or (_model == "Survivor3_DZ") or (_model == "Survivor5_DZ")) then {
+	//Bandit
+	if (_humanity >= -12000 and _humanity < -2000 and !r_player_morphingNow and !(_typeOf in AllSwitchables_A3)) then { 
+		if (_typeOf != "Bandit1_DZ") then {
 			[dayz_playerUID,dayz_characterID,"Bandit1_DZ"] spawn player_humanityMorph;
 		};
 	};
 	
-	if (_humanity > -2000 and _humanity < 5000 and (_isBandit or _isAssassin or _isReaper or _isSaint or _isGuardian or _isHero)) then {
-		_isBandit = false;
-        _isAssassin = false;
-        _isReaper = false;
-        _isSaint = false;
-        _isHero = true;
-        _isGuardian = false;
-		_model = typeOf player;
-		if ((_model == "Survivor4_DZ") or (_model == "Bandit1_DZ") or (_model == "Bandit2_DZ") or (_model == "Bandit3_DZ") or (_model == "Survivor3_DZ") or (_model == "Survivor5_DZ")) then {
+	//Survivor
+	if (_humanity >= -2000 and _humanity < 5000 and !r_player_morphingNow and !(_typeOf in AllSwitchables_A3)) then { 
+		if (_typeOf != "Survivor2_DZ") then {
 			[dayz_playerUID,dayz_characterID,"Survivor2_DZ"] spawn player_humanityMorph;
 		};
 	};
 	
-	if (_humanity < 15000 and _humanity >= 5000 and !_isHero) then {
-		_isBandit = false;
-        _isHero = true;
-        _isGuardian = false;
-        _isAssassin = false;
-        _isSaint = false;
-        _isReaper = false;
-		_model = typeOf player;
-		if ((_model == "Survivor2_DZ") or (_model == "Bandit1_DZ") or (_model == "Bandit2_DZ") or (_model == "Bandit3_DZ") or (_model == "Survivor4_DZ") or (_model == "Survivor5_DZ")) then {
+	//Hero
+	if (_humanity < 15000 and _humanity >= 5000 and !r_player_morphingNow and !(_typeOf in AllSwitchables_A3)) then { 
+		if (_typeOf != "Survivor3_DZ") then {
 			[dayz_playerUID,dayz_characterID,"Survivor3_DZ"] spawn player_humanityMorph;
 		};
 	};
 	
-	if (_humanity >= 15000 and _humanity < 30000 and !_isGuardian) then {
-		_isBandit = false;
-        _isHero = false;
-        _isGuardian = true;
-        _isAssassin = false;
-        _isSaint = false;
-        _isReaper = false;
-		_model = typeOf player;
-		if ((_model == "Survivor2_DZ") or (_model == "Bandit1_DZ") or (_model == "Bandit2_DZ") or (_model == "Bandit3_DZ") or (_model == "Survivor3_DZ") or (_model == "Survivor5_DZ")) then {
+	//Guardian
+	if (_humanity >= 15000 and _humanity < 30000 and !r_player_morphingNow and !(_typeOf in AllSwitchables_A3)) then { 
+		if (_typeOf != "Survivor4_DZ") then {
 			[dayz_playerUID,dayz_characterID,"Survivor4_DZ"] spawn player_humanityMorph;
 		};
 	};
 	
-	if (_humanity >= 30000 and !_isSaint) then {
-		_isBandit = false;
-        _isHero = false;
-        _isGuardian = false;
-        _isAssassin = false;
-        _isSaint = true;
-        _isReaper = false;
-		_model = typeOf player;
-		if ((_model == "Survivor2_DZ") or (_model == "Bandit1_DZ") or (_model == "Bandit2_DZ") or (_model == "Bandit3_DZ") or (_model == "Survivor3_DZ") or (_model == "Survivor4_DZ")) then {
+	//Saint
+	if (_humanity >= 30000 and !r_player_morphingNow and !(_typeOf in AllSwitchables_A3)) then {
+		if (_typeOf != "Survivor5_DZ") then {
 			[dayz_playerUID,dayz_characterID,"Survivor5_DZ"] spawn player_humanityMorph;
 		};
 	};
     
-	if (_humanity <= -30000 and !_isReaper) then {
-		_isBandit = false;
-        _isHero = false;
-        _isGuardian = false;
-        _isAssassin = false;
-        _isSaint = false;
-        _isReaper = true;
-		_model = typeOf player;
-		if ((_model == "Survivor2_DZ") or (_model == "Survivor4_DZ") or (_model == "Bandit1_DZ") or (_model == "Bandit2_DZ") or (_model == "Survivor3_DZ") or (_model == "Survivor5_DZ")) then {
-			[dayz_playerUID,dayz_characterID,"Bandit3_DZ"] spawn player_humanityMorph;
-		};
-	};
 	
 	//Has infection?
 	//if (r_player_infected) then {
@@ -386,10 +337,10 @@ while {true} do {
 	};
 	
 	_brokenLegs = player getVariable["brokenLegs",0];
-	if ((_brokenLegs == 0) and (r_fracture_legs)) then {
+	if ((_brokenLegs == 0) and (!canStand player)) then {
 		player setVariable["brokenLegs",1,true];
 	};
-	if ((_brokenLegs == 1) and (!r_fracture_legs)) then {
+	if ((_brokenLegs == 1) and (canStand player)) then {
 		player setVariable["brokenLegs",0,true];
 	};
 	
@@ -401,7 +352,8 @@ while {true} do {
     if (_bloodVal > 1) then { _bloodVal = 1; };
 	"colorCorrections" ppEffectAdjust [1, 1, 0, [1, 1, 1, 0.0], [1, 1, 1, _bloodVal],  [1, 1, 1, 0.0]];
 	"colorCorrections" ppEffectCommit 0;
-	sleep 1;
+	_curTime = time;
+	waitUntil {time - _curTime >= 1};
 	
 	_myPos = player getVariable["lastPos",[]];
 	if (count _myPos > 0) then {
@@ -536,7 +488,8 @@ while {true} do {
                                 addCamShake [5, 0.5, 25];
                                 r_player_tearGasCount = r_player_tearGasCount + 1;
                             };
-                            sleep 2;
+							_curTime = time;
+							waitUntil {time - _curTime >= 2};
                         };
                     };
                 };

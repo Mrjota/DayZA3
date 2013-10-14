@@ -3,7 +3,8 @@ _unit = (_this select 3);
 _isDead = _unit getVariable["USEC_isDead",false];
 _isCardiac = _unit getVariable["USEC_isCardiac",false];
 
-sleep 1;
+_curTime = time;
+waitUntil {time - _curTime >= 1};
 if (_isDead) then {
 	TitleText["Pulse is extremely weak","PLAIN DOWN",3];
 } else {

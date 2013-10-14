@@ -25,7 +25,7 @@ item20[] = {"Hive_Ok",4,218,-175.000000,400.000000,-75.000000,450.000000,0.00000
 item21[] = {"Phase_One",2,250,-75.000000,450.000000,25.000000,500.000000,0.000000,"Phase One"};
 item22[] = {"Response",4,218,-175.000000,500.000000,-75.000000,550.000000,0.000000,"Response"};
 item23[] = {"Phase_Two",2,250,-75.000000,550.000000,25.000000,600.000000,0.000000,"Phase Two"};
-item24[] = {"Dead_Player",4,4314,50.000000,550.000000,150.000000,600.000000,0.000000,"Dead" \n "Player"};
+item24[] = {"Dead_Player",4,218,50.000000,550.000000,150.000000,600.000000,0.000000,"Dead" \n "Player"};
 item25[] = {"ERROR__Player_Already",2,250,175.000000,550.000000,275.000000,600.000000,0.000000,"ERROR:" \n "Player Already" \n "Dead"};
 item26[] = {"Alive",4,218,-175.000000,600.000000,-75.000000,650.000000,0.000000,"Alive"};
 item27[] = {"Position",2,250,-75.000000,650.000000,25.000000,700.000000,0.000000,"Position"};
@@ -36,7 +36,7 @@ item31[] = {"ERROR__Bad_Versi",2,250,175.000000,650.000000,275.000000,700.000000
 item32[] = {"Display_Ready",4,218,-175.000000,900.000000,-75.000000,950.000000,0.000000,"Display" \n "Ready"};
 item33[] = {"Preload_Display",2,250,-75.000000,950.000000,25.000000,1000.000000,0.000000,"Preload" \n "Display"};
 item34[] = {"Preload_Done",4,218,-175.000000,1000.000000,-75.000000,1050.000000,0.000000,"Preload" \n "Done"};
-item35[] = {"Initialize",2,250,-75.000000,1050.000000,25.000000,1100.000000,0.000000,"Initialize"};
+item35[] = {"Initialize",2,4346,-75.000000,1050.000000,25.000000,1100.000000,0.000000,"Initialize"};
 item36[] = {"Finish",1,250,-75.000000,1150.000000,25.000000,1200.000000,0.000000,"Finish"};
 item37[] = {"True",8,218,25.000000,1100.000000,125.000000,1150.000000,0.000000,"True"};
 item38[] = {"Too_Long",4,218,300.000000,150.000000,400.000000,200.000000,0.000000,"Too" \n "Long"};
@@ -105,8 +105,8 @@ link51[] = {45,46};
 link52[] = {46,45};
 link53[] = {47,48};
 link54[] = {48,29};
-globals[] = {25.000000,1,0,0,0,640,480,1,81,6316128,1,-252.341125,266.768433,1245.136963,179.086746,429,881,1};
-window[] = {2,-1,-1,-1,-1,895,84,1456,115,3,447};
+globals[] = {25.000000,1,0,0,0,640,480,1,81,6316128,1,-214.936981,229.364136,1212.474854,259.328796,296,635,1};
+window[] = {0,-1,-1,-1,-1,997,-1502,-130,217,1,314};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -566,7 +566,7 @@ class FSM
        "[player,_inventory,[""ammo""],""player_monitor""] spawn fnc_setLoadout;" \n
        "};" \n
        "};" \n
-	   "waitUntil{!isNil ""dayz_finishedSwitch""};" \n
+       "waitUntil{!isNil ""dayz_finishedSwitch""};" \n
        "_inventory call player_gearSet;" \n
        "diag_log(""(2) inventory Value (player_monitor): "" + str _inventory);" \n
        "" \n
@@ -700,31 +700,31 @@ class FSM
        "	//player is new, add initial loadout" \n
        "	_config = (configFile >> ""CfgSurvival"" >> ""Inventory"" >> ""Default"");" \n
        "	_mags = getArray (_config >> ""magazines"");" \n
-	   " 	_utilities = getArray (_config >> ""utilities"");" \n
+       " 	_utilities = getArray (_config >> ""utilities"");" \n
        "	_primaryWep = getArray (_config >> ""primaryWep"");" \n
        "	_secondaryWep = getArray (_config >> ""secondaryWep"");" \n
        "	_bcpk = getText (_config >> ""backpack"");" \n
        "	_vest = getText (_config >> ""vest"");" \n
-	   "	_pMagAmount = getNumber (_config >> ""primaryMags"");" \n
-	   "	_sMagAmount = getNumber (_config >> ""secondaryMags"");" \n		
-	   "	_spawnPMags = (_pMagAmount > 0);" \n
-	   "	_spawnSMags = (_sMagAmount > 0);" \n
-	   "	if (_spawnPMags) then {" \n
-	   "   		_magArray = getArray (configFile >> ""CfgWeapons"" >> _primaryWep >> ""magazines"");" \n
-	   "   		_mag = _magArray select 0;" \n
-	   "   		for ""_i"" from 1 to _pMagAmount do" \n
-	   "   		{" \n
-	   "		   _primaryMags = _primaryMags + [_mag];" \n
-	   "   		};" \n
-	   "	};" \n
-	   "	if (_spawnSMags) then {" \n
-	   "   		_mag = _magArray select 0;" \n
-	   "  	 	_magArray = getArray (configFile >> ""CfgWeapons"" >> _secondaryWep >> ""magazines"");" \n
-	   "   		for ""_i"" from 1 to _sMagAmount do" \n
-	   "  	 	{" \n
-	   "		   _secondaryMags = _secondaryMags + [_mag];" \n
-	   "   		};" \n
-	   "	};" \n
+       "	_pMagAmount = getNumber (_config >> ""primaryMags"");" \n
+       "	_sMagAmount = getNumber (_config >> ""secondaryMags"");" \n
+       "	_spawnPMags = (_pMagAmount > 0);" \n
+       "	_spawnSMags = (_sMagAmount > 0);" \n
+       "	if (_spawnPMags) then {" \n
+       "   		_magArray = getArray (configFile >> ""CfgWeapons"" >> _primaryWep >> ""magazines"");" \n
+       "   		_mag = _magArray select 0;" \n
+       "   		for ""_i"" from 1 to _pMagAmount do" \n
+       "   		{" \n
+       "		   _primaryMags = _primaryMags + [_mag];" \n
+       "   		};" \n
+       "	};" \n
+       "	if (_spawnSMags) then {" \n
+       "   		_mag = _magArray select 0;" \n
+       "  	 	_magArray = getArray (configFile >> ""CfgWeapons"" >> _secondaryWep >> ""magazines"");" \n
+       "   		for ""_i"" from 1 to _sMagAmount do" \n
+       "  	 	{" \n
+       "		   _secondaryMags = _secondaryMags + [_mag];" \n
+       "   		};" \n
+       "	};" \n
        "	" \n
        "	//Add inventory" \n
        "	{" \n
@@ -959,9 +959,10 @@ class FSM
       init = /*%FSM<STATEINIT""">*/"dayz_lastCheckBit = 0;" \n
        "//1 cutText [""To avoid bugs, please wait until you spawn to hit escape. Thank you!"", ""PLAIN""];" \n
        "diag_log ""[SYSTEM] Stage 5 (Display) Start..."";" \n
-	   "" \n
-       "(findDisplay 46) displayAddEventHandler [""KeyDown"",""_this call dayz_spaceInterrupt""];" \n
-       "player disableConversation true;" \n
+       "" \n
+       "//(findDisplay 46) displayAddEventHandler [""KeyDown"",""_this call dayz_spaceInterrupt""];" \n
+       "[] execVM ""\z\addons\dayz_code\group\keymonitor.sqf"";" \n
+	   "player disableConversation true;" \n
        "" \n
        "eh_player_killed = player addeventhandler [""FiredNear"",{_this call player_weaponFiredNear;} ];" \n
        "//_eh_combat_projectilenear = player addEventHandler [""IncomingFire"",{_this call player_projectileNear;}];" \n
@@ -1057,15 +1058,15 @@ class FSM
        "		sleep 0.2;" \n
        "	};" \n
        "};" \n
-	   "dayz_surfaceNoise = [] spawn {" \n
-	   "	while {true} do {" \n
+       "dayz_surfaceFnc = [] spawn {" \n
+       "	while {true} do {" \n
        "		_array = player call world_surfaceNoise;" \n
-	   "		if (count _array == 2) then {" \n
+       "		if (count _array == 2) then {" \n
        "			dayz_surfaceNoise = _array select 1;" \n
        "			dayz_surfaceType = 	_array select 0;" \n
-	   "		};" \n
-	   "	};"\n
-	   "};" \n
+       "		};" \n
+       "	};" \n
+       "};" \n
        "diag_log ""[SYSTEM] Stage 5 (Display) End..."";" \n
        "" \n
        ""/*%FSM</STATEINIT""">*/;
@@ -1096,48 +1097,88 @@ class FSM
        "	r_player_timeout = player getVariable[""unconsciousTime"",0];" \n
        "	player playActionNow ""Die"";" \n
        "};" \n
-       "0 cutText ["""", ""BLACK IN"",3];" \n
+       "//0 cutText ["""", ""BLACK IN"",3];" \n
        "" \n
        "//Add core tools" \n
        "player addWeapon ""Loot"";" \n
        "player addWeapon ""Flare"";" \n
        "" \n
+       "[] spawn {" \n
+       "	_pos = getpos Player;" \n
+       "	_time = time;" \n
+       "	waituntil {!(IsNull (findDisplay 46))};" \n
+       "	r_intro = true;" \n
+       "	enableEnvironment false;" \n
+       "	showHUD false;" \n
+       "	disableUserInput true;" \n
+       "	_hndl = ppEffectCreate [""colorCorrections"", 1501];" \n
+       "	_hndl ppEffectEnable true;" \n
+       "	_hndl ppEffectAdjust [0, 1.0, 0.0, [1.0, 1.0, 1.0, 0], [0.0, 1.0, 1.0, 0],[0, 1, 0, 0]];" \n
+       "	_hndl ppEffectCommit 0;" \n
+       "	0 fadeSound 0.1;" \n
+       "	sleep 0.1;" \n
+       "	playSound ""heartbeat_1"";" \n
+       "	0.5 fadeSound 1;" \n
+       "	sleep 0.5;" \n
+       "	playSound ""breath_1"";" \n
+       "	_curTime = time;" \n
+       "	waitUntil {time - _curTime >= 1};" \n
+       "	playSound ""breath_1"";" \n
+       "	0 fadeSound 0.1;" \n
+       "	_curTime = time;" \n
+       "	waitUntil {time - _curTime >= 1};" \n
+       "	3 fadeSound 1;" \n
+       "	_num = round(random 35);" \n
+       "	_sound = ""z_suspense_"" + str(_num);" \n
+       "	playMusic _sound;" \n
+       "	waitUntil {time - _time > 3};" \n
+       "	enableEnvironment true;" \n
+       "	disableUserInput false;" \n
+       "	showHUD true;" \n
+       "	ppEffectDestroy _hndl;" \n
+       "	[1,""BLACK"",4,1] call BIS_fnc_fadeEffect;" \n
+       "	r_intro = false;" \n
+       "" \n
+       "	_world = toUpper(worldName);" \n
+       "	_nearestCity = nearestLocations [getPos player, [""NameCityCapital"",""NameCity"",""NameVillage"",""NameLocal""],1000];" \n
+       "	_town = ""Wilderness"";" \n
+       "	if (count _nearestCity > 0) then {_town = text (_nearestCity select 0)};" \n
+       "	_strTime = call curTimeStr;" \n
+       "	_strDate = date;" \n
+       "	_first = [_world,_town,localize (""str_player_06"") + "" "" + str(dayz_skilllevel)] spawn BIS_fnc_infoText;" \n
+       "	sleep 0.9;" \n
+       "	playSound ""breath_1"";" \n
+       "	addCamShake [1, 1, 25];" \n
+       "};" \n
        "" \n
        "dayzGearSave = true;" \n
        "" \n
        "dayz_slowCheck = 	[] spawn player_spawn_2;" \n
        "" \n
-       "_world = toUpper(worldName);" \n
-       "_nearestCity = nearestLocations [getPos player, [""NameCityCapital"",""NameCity"",""NameVillage"",""NameLocal""],1000];" \n
-       "_town = ""Wilderness"";" \n
-       "" \n
-       "if (count _nearestCity > 0) then {_town = text (_nearestCity select 0)};" \n
-       "" \n
-       "_strTime = call curTimeStr;" \n
-       "_strDate = date;" \n
-       "" \n
-       "_first = [_world,_town,localize (""str_player_06"") + "" "" + str(_days)] spawn BIS_fnc_infoText;" \n
        "" \n
        "dayz_animalCheck = 	[] spawn player_spawn_1;" \n
        "" \n
        "dayz_spawnCheck = [] spawn {" \n
        "	while {true} do {" \n
        "		[""both""] call player_spawnCheck;" \n
-       "		sleep 8;" \n
+       "		_curTime = time;" \n
+       "		waitUntil {time - _curTime >= 8};" \n
        "	};" \n
        "};" \n
        "" \n
        "dayz_locationCheck = [] spawn {" \n
        "	while {true} do {" \n
        "		call stream_locationCheck;" \n
-       "		sleep 2;" \n
+       "		_curTime = time;" \n
+       "		waitUntil {time - _curTime >= 2};" \n
        "	};" \n
        "};" \n
        "" \n
        "dayz_Totalzedscheck = [] spawn {" \n
        "	while {true} do {" \n
        "		dayz_maxCurrentZeds = {alive _x} count entities ""zZombie_Base"";" \n
-       "		sleep 60;" \n
+       "		_curTime = time;" \n
+       "		waitUntil {time - _curTime >= 60};" \n
        "	};" \n
        "};" \n
        "//Removed for now" \n
@@ -1154,9 +1195,9 @@ class FSM
        "	};" \n
        "} forEach allMissionObjects ""SpawnableWreck"";" \n
        "diag_log ""[SYSTEM] Stage 6 (Init) End..."";" \n
-	   "//Force open and close the inventory to make getLoadout work properly"\n
-	   "createGearDialog [player, ""RscDisplayInventory""];" \n
-	   "closeDialog 0;" \n
+       "//Force open and close the inventory to make getLoadout work properly" \n
+       "createGearDialog [player, ""RscDisplayInventory""];" \n
+       "closeDialog 0;" \n
        ""/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links

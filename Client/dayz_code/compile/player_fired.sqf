@@ -10,7 +10,11 @@ _audible = getNumber (configFile >> "CfgAmmo" >> _ammo >> "audibleFire");
 _caliber = getNumber (configFile >> "CfgAmmo" >> _ammo >> "caliber");
 _distance = round(_audible * 10 * _caliber);
 
-dayz_disAudial = _distance;
+if (_ammo isKindOf "Melee") then {
+	dayz_disAudial = 4;
+} else {
+	dayz_disAudial = _distance;
+};
 dayz_firedCooldown = time;
 // Color in the combat icon
 dayz_combat = 1;

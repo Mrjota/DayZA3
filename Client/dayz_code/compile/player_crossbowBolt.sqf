@@ -43,7 +43,7 @@ if (_height < 100) then {
 		_countr = _countr + 1;
 		sleep 0.1;
 	};
-
+	
 	if (count _hitArray > 0) then {
 		_hitObject = _hitArray select 0;
 		_hitSelection = _hitArray select 1;
@@ -55,6 +55,10 @@ if (_height < 100) then {
 		_dir = ([_hitObject,_unit] call BIS_fnc_relativeDirTo) + 180;
 		_bolt setDir (_dir);
 		_bolt setPos (getPos _bolt);
+		if ((vest _hitObject) != "") then {
+			deleteVehicle _bolt;
+			_hitObject addMagazine "WoodenArrow";
+		};
 		_unit setVariable["firedHit",[]];
 		_unit setVariable["firedDamage",0,true];
 	};

@@ -106,7 +106,8 @@ if (count(_findNearestTree) >= 1) then {
 			if(_counter == _countOut) exitWith {
 				_isOk = false;
 				_proceed = true;
-				sleep 1;
+				_curTime = time;
+				waitUntil {time - _curTime >= 1};
 			};
 			hintSilent parseText format ["<t size='1.20' font='Bitstream' color='#F20C0C'>[SYSTEM]</t><br/><t size='1' font='Bitstream'>Chopping the tree...<br/>To cancel,<br/>Walk away at anytime.<br/>(%1/%2)</t><br/>", _counter + 1,  _countOut];
 		};

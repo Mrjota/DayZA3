@@ -19,7 +19,8 @@ player removeMagazine _item;
 _location = getPosATL player;
 
 player playActionNow "PutDown";
-sleep 1;
+_curTime = time;
+waitUntil {time - _curTime >= 1};
 
 _object = createVehicle [_classname, _location, [], 0, "CAN_COLLIDE"];
 _object setDir _dir;

@@ -13,13 +13,15 @@ if (local _animalbody) then {
 		_timer = _this select 0; 
 		_body = _this select 1; 
 		while {(count magazines _body >0) and (time - _timer < 300) } do { 
-			sleep 5;
+			_curTime = time;
+			waitUntil {time - _curTime >= 5};
 		}; 
 		//["dayzHideBody",_body] call broadcastRpcCallAll;
 		dayzHideBody = _body;
 		hideBody _body; // local player
 		publicVariable "dayzHideBody"; // remote player
-		sleep 5;
+		_curTime = time;
+		waitUntil {time - _curTime >= 5};
 		deleteVehicle _body;
 		true;
 	};

@@ -1,5 +1,12 @@
 // bleed.sqf
-_unit = (_this select 3) select 0;
+_unit = objNull;
+if (typeName (_this select 0) != 'STRING') then {
+	_unit = (_this select 3) select 0;
+} else {
+	if ((_this select 0) == "use") then {
+		_unit = player;
+	};
+};
 
 call fnc_usec_medic_removeActions;
 r_action = false;
@@ -24,7 +31,8 @@ if (_unit == player) then {
 
 player removeMagazine "ItemBandage";
 
-sleep 1;
+_curTime = time;
+waitUntil {time - _curTime >= 1};
 //clear the healed player's vision
 //["usecPainK",[_unit,player]] call broadcastRpcCallAll;
 	usecPainK = [_unit,player];

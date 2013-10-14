@@ -48,4 +48,4 @@ r_player_currentCar = nil;
 r_player_carPosition = 0;
 r_player_onVehicleC = false;
 
-[] spawn { sleep 5; hint ""; };
+[] spawn { _curTime = time; waitUntil {time - _curTime >= 5}; hint ""; };

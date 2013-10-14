@@ -93,7 +93,7 @@ _add = {
 			if(isClass(configFile>>"CfgMagazines">>_item)) then {
 				_target addMagazine _item;
 			} else {
-				if(isClass(configFile>>"CfgWeapons">>_item>>"WeaponSlotsInfo") && getNumber(configFile>>"CfgWeapons">>_item>>"showempty")==1) then {
+				if(isClass(configFile>>"CfgWeapons">>_item>>"WeaponSlotsInfo") && getNumber(configFile>>"CfgWeapons">>_item>>"showempty")==1 && !(_item in ["NVGoggles","Binoculars","ItemGPS","ItemCompass","ItemMap","ItemWatch"])) then {
 					_target addWeapon _item;  
 				} else {
 					_target addItem _item;
@@ -283,6 +283,37 @@ _add = {
 			};
 		};
 	} else {
+		if(_item != "") then {
+			if(getNumber(configFile>>"CfgVehicles">>_item>>"isbackpack")==1) then {
+				(unitBackpack _target) addBackpackCargo [_item,1];  
+			} else {
+				if(isClass(configFile>>"CfgMagazines">>_item)) then {
+					_target addMagazine _item;
+				} else {
+					if(isClass(configFile>>"CfgWeapons">>_item>>"WeaponSlotsInfo") && getNumber(configFile>>"CfgWeapons">>_item>>"showempty")==1) then {
+						(unitBackpack _target) addWeaponCargo [_item,1]; 
+					} else {
+						_target addItem _item;
+					};
+				};
+			};
+		};
+	};
+};
+/*
+_add = {
+	private ["_target","_item"];
+	_target = _this select 0;
+	_item = _this select 1;
+	if(typename _item == "ARRAY") then {
+		if(_item select 0 != "") then {
+			if(_loadMagsAmmo) then {
+				_target addMagazine _item;
+			} else {
+				_target addMagazine (_item select 0);
+			};
+		};
+	} else {
 		if(isClass(configFile>>"CfgMagazines">>_item)) then {
 			_target addMagazine _item;
 		} else {
@@ -299,7 +330,8 @@ _add = {
 			};
 		};
 	};
-};     
+};   
+*/  
 
 
 // add backpack and add backpack items

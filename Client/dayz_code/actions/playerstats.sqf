@@ -19,8 +19,7 @@ if (_fps < 30) then { _colorFPS = " color='#E8E843'"; };
 if (_fps < 20) then { _colorFPS = " color='#EBA72A'"; };
 if (_fps < 10) then { _colorFPS = " color='#EB7A2A'"; };
 if (_fps < 5) then { _colorFPS = " color='#F24616'"; };
-hintSilent parseText format ["
-	<t size='1.20' font='Bitstream' color='#5882FA'>%1</t><br/><br/>
+_hint = "<t size='1.20' font='Bitstream' color='#5882FA'>%1</t><br/><br/>
 	<t size='1.20' font='Bitstream' color='#5882FA'>Survived %7 Days</t><br/><br/>
 	<t size='1.15' font='Bitstream' align='left'>Blood: </t><t size='1.15' font='Bitstream' align='right'>%8</t><br/><br/>
 	<t size='1.15' font='Bitstream' align='left'>Humanity: </t><t size='1.15' font='Bitstream' align='right'>%6</t><br/><br/>
@@ -28,8 +27,21 @@ hintSilent parseText format ["
 	<t size='1.1' font='Bitstream' align='left'>Bandits Killed: </t><t size='1.1' font='Bitstream' align='right'>%5</t><br/>
 	<t size='1.1' font='Bitstream' align='left'>Zombies Killed: </t><t size='1.1' font='Bitstream' align='right'>%2</t><br/>
 	<t size='1.1' font='Bitstream' align='left'>Headshots: </t><t size='1.1' font='Bitstream' align='right'>%3</t><br/><br/>
-	<t size='1.1' font='Bitstream' align='left'>FPS: </t><t size='1.1' font='Bitstream' align='right'%11>%9</t><br/>
-	<t size='1.1' font='Bitstream' align='left'>Next Restart: </t><t size='1.1' font='Bitstream' align='right'%12>%10</t><br/><br/>",
+	<t size='1.1' font='Bitstream' align='left'>FPS: </t><t size='1.1' font='Bitstream' align='right'%11>%9</t><br/><br/>";
+if (!isNil "dayz_isOfficial") then {
+	_hint = "<t size='1.20' font='Bitstream' color='#5882FA'>%1</t><br/><br/>
+			<t size='1.20' font='Bitstream' color='#5882FA'>Survived %7 Days</t><br/><br/>
+			<t size='1.15' font='Bitstream' align='left'>Blood: </t><t size='1.15' font='Bitstream' align='right'>%8</t><br/><br/>
+			<t size='1.15' font='Bitstream' align='left'>Humanity: </t><t size='1.15' font='Bitstream' align='right'>%6</t><br/><br/>
+			<t size='1.1' font='Bitstream' align='left'>Murders: </t><t size='1.1' font='Bitstream' align='right'>%4</t><br/>
+			<t size='1.1' font='Bitstream' align='left'>Bandits Killed: </t><t size='1.1' font='Bitstream' align='right'>%5</t><br/>
+			<t size='1.1' font='Bitstream' align='left'>Zombies Killed: </t><t size='1.1' font='Bitstream' align='right'>%2</t><br/>
+			<t size='1.1' font='Bitstream' align='left'>Headshots: </t><t size='1.1' font='Bitstream' align='right'>%3</t><br/><br/>
+			<t size='1.1' font='Bitstream' align='left'>FPS: </t><t size='1.1' font='Bitstream' align='right'%11>%9</t><br/>
+			<t size='1.1' font='Bitstream' align='left'>Next Restart: </t><t size='1.1' font='Bitstream' align='right'%12>%10</t><br/><br/>";
+};
+hintSilent parseText format [
+	_hint,
 	(name player),
 	(player getVariable['zombieKills', 0]),
 	(player getVariable['headShots', 0]),

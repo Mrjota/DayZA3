@@ -15,7 +15,8 @@ if (_hasMatch) then {
 			_dir = getDir player;
 			_classname = "Land_Fire_DZ";
 			player playActionNow "Medic";
-			sleep 6;
+			_curTime = time;
+			waitUntil {time - _curTime >= 6};
 			_fire = createVehicle [_classname, _location, [], 0, "CAN_COLLIDE"];
 			_fire setDir _dir;
 			player reveal _fire;

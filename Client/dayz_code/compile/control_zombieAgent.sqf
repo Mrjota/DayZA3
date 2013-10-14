@@ -27,7 +27,8 @@ while {_isAlive and _isSomeone} do {
 			[_agent,_position] call zombie_loiter;
 		};
 		_agent forceSpeed 2;
-		sleep 1;
+		_curTime = time;
+		waitUntil {time - _curTime >= 1};
 	};
 	
 //CHASE TARGET
@@ -43,14 +44,17 @@ while {_isAlive and _isSomeone} do {
 		//Move to target
 		_agent moveTo _targetPos;
 		_agent forceSpeed 8;
-		sleep 1;
+		_curTime = time;
+		waitUntil {time - _curTime >= 1};
 	};
 //LOOP
 	_agent setVariable ["targets",[],true];
 	_isAlive = alive _agent;
-	sleep 1;
+	_curTime = time;
+	waitUntil {time - _curTime >= 1};
 };
 
 //Wait for a while then cleanup
-sleep 5;
+_curTime = time;
+waitUntil {time - _curTime >= 5};
 deleteVehicle _agent;

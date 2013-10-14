@@ -1,5 +1,12 @@
 // bleed.sqf
-_unit = (_this select 3) select 0;
+_unit = objNull;
+if (typeName (_this select 0) != 'STRING') then {
+	_unit = (_this select 3) select 0;
+} else {
+	if ((_this select 0) == "use") then {
+		_unit = player;
+	};
+};
 
 _unit setVariable ["hit_legs",0];
 _unit setVariable ["hit_hands",0];
@@ -50,7 +57,8 @@ if (_finished) then {
     
         [] spawn {
         player enableFatigue false;
-        sleep 5;
+		_curTime = time;
+		waitUntil {time - _curTime >= 5};
         player enableFatigue true;
         };
 } else {

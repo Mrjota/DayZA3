@@ -1,6 +1,12 @@
 // bleed.sqf
-_unit = (_this select 3) select 0;
-
+_unit = objNull;
+if (typeName (_this select 0) != 'STRING') then {
+	_unit = (_this select 3) select 0;
+} else {
+	if ((_this select 0) == "use") then {
+		_unit = player;
+	};
+};
 _unit setVariable ["USEC_inPain", false, true];
 
 call fnc_usec_medic_removeActions;
@@ -21,12 +27,14 @@ if (_unit == player) then {
 
 player removeMagazine "ItemPainkiller";
 
-sleep 1;
+_curTime = time;
+waitUntil {time - _curTime >= 1};
 	usecPainK = [_unit,player];
 	publicVariable "usecPainK";
 
         [] spawn {
         player enableFatigue false;
-        sleep 5;
+		_curTime = time;
+		waitUntil {time - _curTime >= 5};
         player enableFatigue true;
         };

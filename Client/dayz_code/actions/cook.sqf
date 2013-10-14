@@ -20,7 +20,8 @@ _cookedmeat = meatcooked;
 		[player,_sfx,0,false,_dis] call dayz_zombieSpeak;  
 		[player,_dis,true,(getPosATL player)] spawn player_alertZombies;
 		
-		sleep _qty;
+		_curTime = time;
+		waitUntil {time - _curTime >= _qty};
 		for "_x" from 1 to _qty do {
 			player removeMagazine _meat;
 			player addMagazine _meatcooked;

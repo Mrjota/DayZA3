@@ -71,7 +71,9 @@ if (!isDedicated) then {
 	player_tentPitch =			compile preprocessFileLineNumbers "\z\addons\dayz_code\actions\tent_pitch.sqf";
 	player_atentPitch =			compile preprocessFileLineNumbers "\z\addons\dayz_code\actions\atent_pitch.sqf";
 	player_drink =				compile preprocessFileLineNumbers "\z\addons\dayz_code\actions\player_drink.sqf";
+	player_drink2 =				compile preprocessFileLineNumbers "\z\addons\dayz_code\actions\player_drink3.sqf";
 	player_eat =				compile preprocessFileLineNumbers "\z\addons\dayz_code\actions\player_eat.sqf";
+	player_eat2 =				compile preprocessFileLineNumbers "\z\addons\dayz_code\actions\player_eat2.sqf";
 	player_useMeds =			compile preprocessFileLineNumbers "\z\addons\dayz_code\actions\player_useMeds.sqf";
 	player_fillWater = 			compile preprocessFileLineNumbers "\z\addons\dayz_code\actions\water_fill.sqf";
 	player_makeFire =			compile preprocessFileLineNumbers "\z\addons\dayz_code\actions\player_makefire.sqf";
@@ -83,6 +85,15 @@ if (!isDedicated) then {
 	object_pickup = 			compile preprocessFileLineNumbers "\z\addons\dayz_code\actions\object_pickup.sqf";
 	player_flipvehicle = 		compile preprocessFileLineNumbers "\z\addons\dayz_code\actions\player_flipvehicle.sqf";
 	player_sleep = 				compile preprocessFileLineNumbers "\z\addons\dayz_code\actions\player_sleep.sqf";
+	player_spack =				compile preprocessFileLineNumbers "\z\addons\dayz_code\medical\spack.sqf";
+	player_bandageSelf = 		compile preprocessFileLineNumbers "\z\addons\dayz_code\medical\bandageSelf.sqf";
+	player_adrenSelf = 			compile preprocessFileLineNumbers "\z\addons\dayz_code\medical\adren.sqf";
+	player_morphineSelf = 		compile preprocessFileLineNumbers "\z\addons\dayz_code\medical\morphine.sqf";
+	player_heatSelf =			compile preprocessFileLineNumbers "\z\addons\dayz_code\medical\heatpack.sqf";
+	player_painkillerSelf =		compile preprocessFileLineNumbers "\z\addons\dayz_code\medical\painkiller.sqf";
+	player_antibioticSelf =		compile preprocessFileLineNumbers "\z\addons\dayz_code\medical\antibiotics.sqf";
+	player_refreshU =			compile preprocessFileLineNumbers "\z\addons\dayz_code\ammo\refreshU.sqf";
+	player_useU =				compile preprocessFileLineNumbers "\z\addons\dayz_code\ammo\use.sqf";
 	
 	//ui
 	player_selectSlot =			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\ui_selectSlot.sqf";
@@ -266,8 +277,9 @@ if (!isDedicated) then {
 		};
 		//if (_dikCode == 57) then {_handled = true}; // space
 		//if (_dikCode in actionKeys 'MoveForward' or _dikCode in actionKeys 'MoveBack') then {r_interrupt = true};
-		if (_dikCode == 210) then //SCROLL LOCK
+		if (_dikCode == 210 and (time - dayz_lastCheckBit > 1)) then //SCROLL LOCK
 		{
+			dayz_lastCheckBit = time;
 			_nill = execvm "\z\addons\dayz_code\actions\playerstats.sqf";
 		};
 		if (_dikCode in actionKeys "MoveLeft") then {r_interrupt = true};
@@ -275,15 +287,15 @@ if (!isDedicated) then {
 		if (_dikCode in actionKeys "MoveForward") then {r_interrupt = true};
 		if (_dikCode in actionKeys "MoveBack") then {r_interrupt = true};
 		if (_dikCode in actionKeys "ForceCommandingMode") then {_handled = true};
-		if (_dikCode in actionKeys "PushToTalk" and (time - dayz_lastCheckBit > 10)) then {
+		if (_dikCode in actionKeys "PushToTalk" and (time - dayz_lastCheckBit > 3)) then {
 			dayz_lastCheckBit = time;
-			[player,50,true,(getPosATL player)] spawn player_alertZombies;
+			[player,15,true,(getPosATL player)] spawn player_alertZombies;
 		};
-		if (_dikCode in actionKeys "VoiceOverNet" and (time - dayz_lastCheckBit > 10)) then {
+		if (_dikCode in actionKeys "VoiceOverNet" and (time - dayz_lastCheckBit > 3)) then {
 			dayz_lastCheckBit = time;
-			[player,50,true,(getPosATL player)] spawn player_alertZombies;
+			[player,25,true,(getPosATL player)] spawn player_alertZombies;
 		};
-		if (_dikCode in actionKeys "PushToTalkDirect" and (time - dayz_lastCheckBit > 10)) then {
+		if (_dikCode in actionKeys "PushToTalkDirect" and (time - dayz_lastCheckBit > 3)) then {
 			dayz_lastCheckBit = time;
 			[player,15,false,(getPosATL player)] spawn player_alertZombies;
 		};
@@ -291,7 +303,7 @@ if (!isDedicated) then {
 			dayz_lastCheckBit = time;
 			[player,15,false,(getPosATL player)] spawn player_alertZombies;
 		};
-		if (_dikCode in actionKeys "User20" and (time - dayz_lastCheckBit > 1.5)) then {
+		if (_dikCode in actionKeys "User20" and (time - dayz_lastCheckBit > 1)) then {
 			dayz_lastCheckBit = time;
 			_nill = execvm "\z\addons\dayz_code\actions\playerstats.sqf";
 		};
@@ -396,7 +408,8 @@ if (!isDedicated) then {
 				if (_humanity < -10000) then { _humanity = -10000; };
 				_delay = ((10000 + _humanity) / 5500) + 0.3;
 				playSound "heartbeat_1";
-				sleep _delay;
+				_curTime = time;
+				waitUntil {time - _curTime >= _delay};
 			};
 			dayz_heartBeat = false;
 		};
@@ -436,7 +449,6 @@ if (!isDedicated) then {
 		_objName
 	};
 	dayz_originalPlayer =		player;
-    [] execVM "\z\addons\dayz_code\group\keymonitor.sqf";
 };
 
 	progressLoadingScreen 0.8;

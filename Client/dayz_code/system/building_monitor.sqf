@@ -11,7 +11,8 @@ while {_run} do {
 		if (_x distance _building < 500) then {_nearby = true};
 	} forEach (call BIS_fnc_listPlayers);
 	if (!_nearby) then {_run = false};
-	sleep 5;
+	_curTime = time;
+	waitUntil {time - _curTime >= 5};
 };
 {deleteVehicle _x;} forEach _items;
 

@@ -13,15 +13,17 @@ if (_isPlayer) then {
 };
 
 if (_isPlayer) then {
-	_item = createVehicle ["WeaponHolder", position player, [], 0, "CAN_COLLIDE"];
+	_item = createVehicle ["WeaponHolder", getPosATL player, [], 0, "CAN_COLLIDE"];
 	for "_x" from 1 to _qty do {
 		_item addMagazineCargoGlobal [_rawfoodtype, 1];
 	};
+	player reveal _item;
 } else {
-	_item = createVehicle ["WeaponHolder", position _animalbody, [], 0, "CAN_COLLIDE"];
+	_item = createVehicle ["WeaponHolder", getPosATL _animalbody, [], 0, "CAN_COLLIDE"];
 	for "_x" from 1 to _qty do {
 		_item addMagazineCargoGlobal [_rawfoodtype, 1];
 	};
+	player reveal _item;
     
     deleteVehicle _animalbody;
 };

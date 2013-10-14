@@ -20,7 +20,8 @@ if (!_unconscious) exitWith {};
 //player assumes dragging posture
 _dragee setVariable ["NORRN_unit_dragged", true, true]; 
 _unit playActionNow "grabDrag";
-sleep 2;
+_curTime = time;
+waitUntil {time - _curTime >= 2};
 
 //unconscious unit assumes dragging posture
 //public EH 
@@ -41,6 +42,8 @@ call fnc_usec_medic_removeActions;
 
 NORRN_dropAction = player addAction ["Drop body", "\z\addons\dayz_code\medical\drop_body.sqf",_dragee, 0, false, true];
 //NORRN_carryAction = player addAction ["Carry body", "\z\addons\dayz_code\medical\carry.sqf",_dragee, 0, false, true];
-sleep 1;
+
+_curTime = time;
+waitUntil {time - _curTime >= 1};
 
 if (true) exitWith {};

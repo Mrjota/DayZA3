@@ -1,4 +1,12 @@
-_unit = (_this select 3) select 0;
+
+_unit = objNull;
+if (typeName (_this select 0) != 'STRING') then {
+	_unit = (_this select 3) select 0;
+} else {
+	if ((_this select 0) == "use") then {
+		_unit = player;
+	};
+};
 
 if (vehicle player == player) then {
 	player playActionNow "Medic";
@@ -57,7 +65,8 @@ if (_finished) then {
             playSound 'breath_1';
             10 fadeSound 1;
             };
-            sleep 1;
+			_curTime = time;
+			waitUntil {time - _curTime >= 1};
         };
         r_player_adren = false;
         r_player_clear = true;

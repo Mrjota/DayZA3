@@ -1,5 +1,12 @@
 // bleed.sqf
-_unit = (_this select 3) select 0;
+_unit = objNull;
+if (typeName (_this select 0) != 'STRING') then {
+	_unit = (_this select 3) select 0;
+} else {
+	if ((_this select 0) == "use") then {
+		_unit = player;
+	};
+};
 _isDead = false;
 if (_unit != player) then {
 _isDead = _unit getVariable["USEC_isDead",false];
@@ -93,7 +100,8 @@ player setVariable["USEC_infected",false,true];
                 r_isHealing = false;
                 player setVariable["USEC_BloodQty",r_player_blood,true];
             };
-            sleep 1;
+			_curTime = time;
+			waitUntil {time - _curTime >= 1};
         };
     };
 	} else {
@@ -125,7 +133,8 @@ if (!_isDead) then {
     
         [] spawn {
         player enableFatigue false;
-        sleep 10;
+		_curTime = time;
+		waitUntil {time - _curTime >= 10};
         player enableFatigue true;
         };
 } else {

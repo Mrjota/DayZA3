@@ -16,7 +16,7 @@ _id = [player,20,true,getPosATL player] spawn player_alertZombies;
 
 sleep 0.5;
 
-(owner player) setVariable["isDead", 1, true];
+player setVariable["isDead", 1, true];
 
 player setDamage 1;
 0.1 fadeSound 0;
@@ -79,7 +79,7 @@ terminate dayz_animalCheck;
 terminate dayz_monitor1;
 terminate dayz_medicalH;
 terminate dayz_gui;
-terminate dayz_surfaceNoise;
+terminate dayz_surfaceFnc;
 terminate dayz_locationCheck;
 terminate dayz_spawnCheck;
 
@@ -98,7 +98,8 @@ r_player_dead = true;
 3 fadeSound 0;
 0 cutText ["", "BLACK",10];
 dayz_DeathActioned = true;
-sleep 1;
+_curTime = time;
+waitUntil {time - _curTime >= 1};
 
 TitleText[localize "str_player_12","PLAIN DOWN",5];
 
@@ -120,7 +121,8 @@ _body setVariable["combattimeout", 0, true];
 //["dayzFlies",player] call broadcastRpcCallAll;
 		dayzFlies = [player];
 		publicVariable "dayzFlies";
-sleep 2;
+	_curTime = time;
+	waitUntil {time - _curTime >= 2};
 
 1 cutRsc ["DeathScreen","BLACK OUT",3];
 
@@ -132,3 +134,4 @@ playMusic "dayz_track_death_1";
 "colorCorrections" ppEffectAdjust [1, 1, 0, [1, 1, 1, 0.0], [1, 1, 1, 1],  [1, 1, 1, 1]];"colorCorrections" ppEffectCommit 5;
 };
 r_player_clear = true;
+player setVariable["isDead", 1, true];

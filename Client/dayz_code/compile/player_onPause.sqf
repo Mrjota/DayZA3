@@ -8,7 +8,8 @@ private["_display","_btnRespawn","_btnAbort","_timeOut","_timeMax","_isDead"];
 		_btnAbort = _display displayCtrl 104;
 		_btnRespawn ctrlEnable false;
 		_btnAbort ctrlEnable false;
-		_btnAbortText = ctrlText _btnAbort;
+		_btnAbortText = "LEAVE";
+		_btnRespawn ctrlSetText "SUICIDE";
 		_timeOut = 0;
 		_timeMax = 10;
 		dayz_lastCheckBit = time;
@@ -18,18 +19,20 @@ private["_display","_btnRespawn","_btnAbort","_timeOut","_timeMax","_isDead"];
 		};			
 				
 		while {!isNull _display} do {
+			_isDead = player getVariable ["isDead",0];
+			_brokenLegs = player getVariable ["brokenLegs",0];
 			switch true do {
-				case ((owner player) getVariable["isDead",0] == 1) : {
+				case (_isDead == 1) : {
 					_btnAbort ctrlEnable true;
-					_btnRespawn ctrlEnable true;
+					_btnRespawn ctrlEnable false;
 					_btnAbort ctrlSetText _btnAbortText;		
 				};
-				case (_timeOut < _timeMax && (player getVariable["brokenLegs",0] == 1)) : {
+				case (_timeOut < _timeMax && (_brokenLegs == 1)) : {
 					_btnRespawn ctrlEnable true;
 					_btnAbort ctrlEnable false;
 					_btnAbort ctrlSetText format["%1 (%2)", _btnAbortText, (_timeMax - _timeOut)];
 				};
-				case (_timeOut < _timeMax && (player getVariable["brokenLegs",0] == 0)) : {
+				case (_timeOut < _timeMax && (_brokenLegs == 0)) : {
 					_btnAbort ctrlEnable false;
 					_btnAbort ctrlSetText format["%1 (%2)", _btnAbortText, (_timeMax - _timeOut)];
 				};
@@ -39,6 +42,7 @@ private["_display","_btnRespawn","_btnAbort","_timeOut","_timeMax","_isDead"];
 					_btnAbort ctrlSetText _btnAbortText;		
 				};
 			};
-			sleep 1;
+			_curTime = time;
+			waitUntil {time - _curTime >= 1};
 			_timeOut = _timeOut + 1;
 		};

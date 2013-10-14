@@ -25,5 +25,6 @@ if (count _list < dayz_maxAnimals) then {
 		_agent setpos _Pos;
 		_id = [_pos,_agent] execFSM "\z\addons\dayz_code\system\animal_agent.fsm";
 	};
-	sleep 1;
+	_curTime = time;
+	waitUntil {time - _curTime >= 1};
 };

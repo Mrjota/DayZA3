@@ -83,6 +83,9 @@ if (["grass",dayz_surfaceType] call fnc_inString) then {
 			if (["rock",dayz_surfaceType] call fnc_inString) then {
 				_initial = _initial * 1.1;
 				_scaleMvmt = _scaleMvmt + 0.05;
+			} else {
+				_initial = _initial * 0.5;
+				_scaleMvmt = _scaleMvmt - 0.1;
 			};
 		};
 	};
@@ -110,11 +113,17 @@ _building = nearestObject [(vehicle player), "Building"];
 _isPlayerInside = [(vehicle player),_building] call fnc_isInsideBuilding;
 if (_isPlayerInside) then {
 	_initial = 5;
+	_scaleLight = 1;
 };
 
+_audial = 0;
 //Work out result
-_audial = 			round(_speed * dayz_surfaceNoise * _scaleMvmt * _scaleSound);
+if (typeName dayz_surfaceNoise == 'SCALAR') then {
+	_audial = 			round(_speed * dayz_surfaceNoise * _scaleMvmt * _scaleSound);
+} else {
+	_audial = 			round(_speed * 25 * _scaleMvmt * _scaleSound);
+};
 if ((_audial > DAYZ_disAudial) or ((time - dayz_firedCooldown) > 0.3)) then {
 	DAYZ_disAudial = _audial;
 };
-DAYZ_disVisual = 	(round((_initial + (_speed * 3)) * _scalePose * _scaleLight)) * 1.5;
+DAYZ_disVisual = 	(round((_initial + (_speed * 2)) * _scalePose * _scaleLight)) * 1.5;

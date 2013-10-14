@@ -57,5 +57,6 @@ while {true} do {
 	};
 
 	//wait
-	sleep 5;
+	_curTime = time;
+	waitUntil {time - _curTime >= 5};
 };

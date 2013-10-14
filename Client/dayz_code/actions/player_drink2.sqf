@@ -91,13 +91,15 @@ if (_fatigue >= 0.3) then {
 if (_itemorignal == "ItemSodaLemonade") then {
     [] spawn {
         player enableFatigue false;
-        sleep 60;
+		_curTime = time;
+		waitUntil {time - _curTime >= 60};
         player enableFatigue true;
     };
 } else {
     [] spawn {
         player enableFatigue false;
-        sleep 7;
+		_curTime = time;
+		waitUntil {time - _curTime >= 7};
         player enableFatigue true;
     };
 };

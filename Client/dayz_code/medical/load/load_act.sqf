@@ -19,7 +19,8 @@ if ((_vcl emptyPositions "cargo") > 0) then
 	detach _wounded;
 	_dragger  switchMove "";
 	_wounded setVariable ["NORRN_LoadVcl", _vcl, true];
-	sleep 1;
+	_curTime = time;
+	waitUntil {time - _curTime >= 1};
 	//["norrnRLact",_wounded] call broadcastRpcCallAll;
 	norrnRLact = [_wounded];
 	publicVariable "norrnRLact";

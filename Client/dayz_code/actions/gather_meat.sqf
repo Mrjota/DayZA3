@@ -49,7 +49,8 @@ if ((_hasKnife or _hasKnifeBlunt) and !_hasHarvested) then {
 	
 	_array = [_item,_qty];
     
-	sleep 6;
+	_curTime = time;
+	waitUntil {time - _curTime >= 6};
 	_string = format[localize "str_success_gutted_animal",_text,_qty];
 	cutText [_string, "PLAIN DOWN"];
 		_array spawn local_gutAnimal;

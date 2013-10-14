@@ -27,15 +27,18 @@
                 "dynamicBlur" ppEffectEnable true;
                 "dynamicBlur" ppEffectAdjust [15];
                 "dynamicBlur" ppEffectCommit 5;
-                sleep 5;
+				_curTime = time;
+				waitUntil {time - _curTime >= 5};
                 "dynamicBlur" ppEffectEnable true;
                 "dynamicBlur" ppEffectAdjust [10];
                 "dynamicBlur" ppEffectCommit 10;
-                sleep 10;
+				_curTime = time;
+				waitUntil {time - _curTime >= 10};
                 "dynamicBlur" ppEffectEnable true;
                 "dynamicBlur" ppEffectAdjust [5];
                 "dynamicBlur" ppEffectCommit 5;
-                sleep 5;
+				_curTime = time;
+				waitUntil {time - _curTime >= 5};
                 "dynamicBlur" ppEffectEnable true;
                 "dynamicBlur" ppEffectAdjust [0];
                 "dynamicBlur" ppEffectCommit 5;
@@ -44,7 +47,8 @@
 			};
 		};
 		_victim setVariable ["isTranq",true,true];
-		sleep 20;
+		_curTime = time;
+		waitUntil {time - _curTime >= 20};
 		_victim setVariable ["isTranq",false,true];
 		
         if (vehicle _victim == _victim) then {

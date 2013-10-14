@@ -25,11 +25,11 @@ if (!_hasToolbox) then {
 	systemChat "[SYSTEM] You must have a toolbox to repair this!";
 };
 
-if (!_section) then {
+if (!_part in magazines player) then {
 	systemChat format["[SYSTEM] You must have [a(n)] %1 to repair this!",_namePart];
 };
 
-if (_section and _hasToolbox) then {
+if ((_part in magazines player) and _hasToolbox) then {
 
 	player playActionNow "Medic";
 	
@@ -70,12 +70,21 @@ if (_section and _hasToolbox) then {
 		_finished = false;
 	};
 	
+	if (!(_part in magazines player)) exitWith {
+		systemChat format["[SYSTEM] You must have [a(n)] %1 to repair this!",_namePart];
+	};
 	if (_finished) then {
-	
+		
+		if (!(_part in magazines player)) exitWith {
+			systemChat format["[SYSTEM] You must have [a(n)] %1 to repair this!",_namePart];
+		};
 		_damage = [_vehicle,_hitpoint] call object_getHit;
 		_vehicle removeAction _id;
 		
 		if (_damage > 0) then {
+			if (!(_part in magazines player)) exitWith {
+				systemChat format["[SYSTEM] You must have [a(n)] %1 to repair this!",_namePart];
+			};
 			_num_removed = player removeMagazine _part;
 		
 			_selection = getText (configFile >> "cfgVehicles" >> _type >> "HitPoints" >> _hitpoint >> "name");
