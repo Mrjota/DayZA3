@@ -818,12 +818,12 @@ class CfgWeapons {
 	//class Launcher: FakeWeapon {};
 	class ksvk: FakeWeapon {};
 	class M136: FakeWeapon {};
-	class Javelin: FakeWeapon {};
-	class Stinger: FakeWeapon {};
-	class RPG7V: FakeWeapon {};
-	class Strela: FakeWeapon {};
-	class Igla: FakeWeapon {};
-	class MetisLauncher: FakeWeapon {};
+	//class Javelin: FakeWeapon {};
+	//class Stinger: FakeWeapon {};
+	//class RPG7V: FakeWeapon {};
+	//class Strela: FakeWeapon {};
+	//class Igla: FakeWeapon {};
+	//class MetisLauncher: FakeWeapon {};
 	//class Binocular: FakeWeapon {};
 	class Laserdesignator: FakeWeapon {};
 	class Laserdesignator_mounted: FakeWeapon {};
