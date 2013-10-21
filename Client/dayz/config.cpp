@@ -52682,6 +52682,7 @@ class CfgVehicles {
 		respawnMagazines[] = {};
 		linkedItems[] = {"V_PlateCarrier1_rgr_AiA_DZ"};
 		respawnLinkedItems[] = {};
+		uniformclass = "";
 		
 		class TalkTopics {};
 		languages[] = {};

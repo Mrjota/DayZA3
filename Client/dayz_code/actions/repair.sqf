@@ -12,7 +12,6 @@ _type = typeOf _vehicle;
 
 //
 _hasToolbox = 	"ItemToolbox" in magazines player;
-_section = _part in magazines player;
 
 //moving this here because we need to know which part needed if we don't have it
 _nameType = 		getText(configFile >> "cfgVehicles" >> _type >> "displayName");
@@ -20,16 +19,32 @@ _namePart = 		getText(configFile >> "cfgMagazines" >> _part >> "displayName");
 
 {_vehicle removeAction _x} forEach s_player_repairActions;s_player_repairActions = [];
 s_player_repair_ctrl = 1;
+_resetActions = {
+	{dayz_myCursorTarget removeAction _x} forEach s_player_repairActions;s_player_repairActions = [];
+	dayz_myCursorTarget = objNull;
 
-if (!_hasToolbox) then {
+	s_player_repair_ctrl = -1;
+
+	repairInProgress = false;
+};
+if (!_hasToolbox) exitWith {
 	systemChat "[SYSTEM] You must have a toolbox to repair this!";
+	call _resetActions;
 };
 
-if (!_part in magazines player) then {
+_section = _part in magazines player;
+if (!_section) exitWith {
 	systemChat format["[SYSTEM] You must have [a(n)] %1 to repair this!",_namePart];
+	call _resetActions;
 };
 
-if ((_part in magazines player) and _hasToolbox) then {
+if (!local _vehicle) exitWith {
+	systemChat format["[SYSTEM] You must get in the driver seat right before repairing (claiming ownership)!",_namePart];
+	call _resetActions;
+};
+
+_section = _part in magazines player;
+if (_section and _hasToolbox) then {
 
 	player playActionNow "Medic";
 	
@@ -70,20 +85,26 @@ if ((_part in magazines player) and _hasToolbox) then {
 		_finished = false;
 	};
 	
-	if (!(_part in magazines player)) exitWith {
+	_section = _part in magazines player;
+	if (!_section) exitWith {
 		systemChat format["[SYSTEM] You must have [a(n)] %1 to repair this!",_namePart];
+		call _resetActions;
 	};
 	if (_finished) then {
 		
-		if (!(_part in magazines player)) exitWith {
+		_section = _part in magazines player;
+		if (!_section) exitWith {
 			systemChat format["[SYSTEM] You must have [a(n)] %1 to repair this!",_namePart];
+			call _resetActions;
 		};
 		_damage = [_vehicle,_hitpoint] call object_getHit;
 		_vehicle removeAction _id;
 		
 		if (_damage > 0) then {
-			if (!(_part in magazines player)) exitWith {
+			_section = _part in magazines player;
+			if (!_section) exitWith {
 				systemChat format["[SYSTEM] You must have [a(n)] %1 to repair this!",_namePart];
+				call _resetActions;
 			};
 			_num_removed = player removeMagazine _part;
 		

@@ -238,8 +238,10 @@ if(_outfit != "") then {
 			{ 
 				[_target,_x] call _add; 
 			} foreach (_data select 8);
-			while { loadUniform _target < 1 } do {
+			while { true } do {
+				_loadBeforeAdd = loadUniform _target;
 				_target addItem "ItemWatch";
+				if (loadUniform _target == _loadBeforeAdd) exitWith {};
 				_placeholderCount = _placeholderCount + 1;
 			};	
 		};
@@ -259,8 +261,10 @@ if(_outfit != "") then {
 			{ 
 				[_target,_x] call _add;
 			} foreach (_data select 10);
-			while { loadVest _target < 1 } do {
+			while { true } do {
+				_loadBeforeAdd = loadVest _target;
 				_target addItem "ItemWatch";
+				if (loadVest _target == _loadBeforeAdd) exitWith {};
 				_placeholderCount = _placeholderCount + 1;
 			};
 		};
@@ -268,7 +272,6 @@ if(_outfit != "") then {
 		diag_log format["[SYSTEM] Vest %1 doesn't exist",_outfit];
 	};
 };      
- 
 // more complex add function intended for use with backpack
 _add = {
 	private ["_target","_item"];
