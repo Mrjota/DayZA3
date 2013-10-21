@@ -260,8 +260,8 @@ if (!isNull cursorTarget and !_inVehicle and (player distance cursorTarget < 4))
 	};
 	
 	//Packing my tent
-	if(!isNull _cursorTarget and _cursorTarget isKindOf "TentStorage" and _canDo and _ownerID == dayz_characterID) then {
-		if ((s_player_packtent < 0) and (player distance _cursorTarget < 3)) then {
+	if(!isNull _cursorTarget and _cursorTarget isKindOf "TentStorage" and _canDo and _ownerID == dayz_characterID and (player distance _cursorTarget < 3)) then {
+		if (s_player_packtent < 0) then {
 			s_player_packtent = player addAction [localize "str_actions_self_07", "\z\addons\dayz_code\actions\tent_pack.sqf",_cursorTarget, 0, false, true, "",""];
 		};
 	} else {
@@ -270,8 +270,8 @@ if (!isNull cursorTarget and !_inVehicle and (player distance cursorTarget < 4))
 		};
 	
 	//Packing my ACampStorage
-	if(!isNull _cursorTarget and _cursorTarget isKindOf "ACampStorage" and _canDo and _ownerID == dayz_characterID) then {
-		if ((s_player_packatent < 0) and (player distance _cursorTarget < 3)) then {
+	if(!isNull _cursorTarget and _cursorTarget isKindOf "ACampStorage" and _canDo and _ownerID == dayz_characterID and (player distance _cursorTarget < 3)) then {
+		if (s_player_packatent < 0) then {
 			s_player_packatent = player addAction [localize "str_actions_self_07", "\z\addons\dayz_code\actions\atent_pack.sqf",_cursorTarget, 0, false, true, "",""];
 		};
 	} else {
