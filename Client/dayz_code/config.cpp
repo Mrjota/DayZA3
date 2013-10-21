@@ -58,7 +58,7 @@ class CfgMods
 		hidePicture = 0;
 		hideName = 0;
 		action = "http://www.zoombiesmod.com";
-		version = "0.1.7.1";
+		version = "0.1.7.2";
 		hiveVersion = 0.96; //0.93
 	};
 	class DZ_InitWorld
@@ -365,7 +365,8 @@ class CfgBuildingLoot {
 			{"k98_DZ","weapon"},
 			{"Skin_SurvivorR_DZ","magazine"},
 			{"Skin_Ranger_DZ","magazine"},
-			{"Skin_Sniper2_DZ","magazine"}
+			{"Skin_Sniper2_DZ","magazine"},
+			{"TranqSD","weapon"}
 		};
 		itemChance[] =	{
             0.01,
@@ -402,7 +403,8 @@ class CfgBuildingLoot {
 			0.05,
             0.03,
             0.01,
-            0.01
+            0.01,
+			0.005
 		};		
 	};
 	class Office: Residential {
@@ -539,7 +541,8 @@ class CfgBuildingLoot {
 			{"Skin_SurvivorB_DZ","magazine"},
 			{"Skin_Ranger_DZ","magazine"},
             {"ItemSandbag","magazine"},
-            {"TrapBear","magazine"}
+            {"TrapBear","magazine"},
+			{"TranqSD","weapon"}
 		};
 		itemChance[] =	{
             0.03,
@@ -575,7 +578,8 @@ class CfgBuildingLoot {
             0.05,
             0.04,
             0.03,
-            0.03
+            0.03,
+			0.005
 		};
 	};
 	class HeliCrash: Default {
@@ -778,7 +782,8 @@ class CfgBuildingLoot {
 			{"RPK_74","weapon"},
 			{"Rangefinder","weapon"},
             {"arifle_MXC_F","weapon"},
-			{"Skin_Sniper2_DZ","magazine"}
+			{"Skin_Sniper2_DZ","magazine"},
+			{"TranqSD","weapon"}
 		};
 		itemChance[] =	{
             0.05,
@@ -841,7 +846,8 @@ class CfgBuildingLoot {
             0.01,
             0.01,
             0.03,
-            0.02
+            0.02,
+			0.02
 		};
 	};
 	class MilitarySpecial: Default {
@@ -1007,7 +1013,8 @@ class CfgBuildingLoot {
 			{"","hunter"},
 			{"DZ_DJ_Pack_A3","backpack"}, // 24
 			{"hgun_ACPC2_F","weapon"},
-			{"Skin_Ranger_DZ","magazine"}
+			{"Skin_Ranger_DZ","magazine"},
+			{"TranqSD","weapon"}
 		};
 		itemChance[] =	{
 			0.08,
@@ -1021,7 +1028,8 @@ class CfgBuildingLoot {
 			3.00,
             0.004,
             0.05,
-            0.02
+            0.02,
+			0.02
 		};
 	};	
 	class Church: Residential {
