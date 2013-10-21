@@ -6,13 +6,18 @@ All in ArmA(AiA) was created by kju. If you would like to learn more about AiA p
 DayZA3: Zoombies Universal Launcher created by Pwnoz0r
 
 DayZA3: Zoombies Development Team:
-Pwnoz0r (Project Lead)
-hungoverfurball (Project Management)
-MistaD (Head Developer)
-rotcehdnih (Developer)
+Pwnoz0r (Project Leader of DayZA3: Zoombies)
+hungoverfurball (Server Relations, Technician, and Host)
+MistaD (Head Admin and Developer)
 
 Community Contributors:
-Hans
+Hans (Short-Term Developer) - Assistance with overhaul and idea implementation
+rotcehdnih (Short-Term Developer) - Assistance with inventory saving and Recustomizing Database
+
+Many thanks to these special fellows:
+Illuminist (Assistant Admin and Head of Support)
+Gambl3 (Head Moderator)
+Phoenix (Retired Head of Public Relations)
 
 Project sponsored by HFBServers.com
 If you would like to buy a server, do so here: http://hfbservers.com/games/arma3
@@ -20,6 +25,7 @@ If you would like to buy a server, do so here: http://hfbservers.com/games/arma3
 Dean Hall and the DayZMod Team for developing "DayZMod" for ArmA2.
 DayZEpoch for ideas on base building and the chop wood script.
 Skaronator for the intro on the main menu.
+Mrflay for the long bow addon.
 ----------------------------------------------------------------
 During the development of the port, GSP server hosting is NOT allowed.
 
